@@ -10,8 +10,7 @@ gem "sqlite3"
 
 gem "sprockets-rails"
 
-gem "rspec", "~> 3.0"
-gem "rspec-rails"
+gem 'simplecov', require: false, group: :test
 
 
 # Start debugger with binding.b [https://github.com/ruby/debug]
