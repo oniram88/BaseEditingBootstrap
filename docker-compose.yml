@@ -1,0 +1,18 @@
+services:
+  app:
+    command: bin/rails s -b 0.0.0.0
+    build:
+      context: .
+    user: ${CMPS_UID_GID}
+    volumes:
+      - '.:/app'
+      - 'bundle:/bundle'
+      - '~/.gitconfig:/home/nobody/.gitconfig'
+      - '~/.gnupg:/home/nobody/.gnupg'
+    environment:
+      RAILS_ENV: development
+    ports:
+      - 3000:3000
+
+volumes:
+  bundle:
