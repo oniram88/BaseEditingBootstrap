@@ -11,6 +11,7 @@ gem "sqlite3"
 gem "sprockets-rails"
 
 gem 'simplecov', require: false, group: :test
+gem 'rails-i18n', '~> 7.0.0' # For 7.0.0
 
 
 # Start debugger with binding.b [https://github.com/ruby/debug]

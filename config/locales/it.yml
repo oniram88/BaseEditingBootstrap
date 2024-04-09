@@ -1,0 +1,67 @@
+it:
+  search: "Esegui ricerca"
+  save: "Salva"
+  back: "Indietro"
+  new: "Nuovo"
+  newa: "Nuova"
+  edit: "Modifica"
+  del: "Cancella"
+  wait: "Wait..."
+  are_you_sure: "Confermi la cancellazione?"
+  undo: "Annulla"
+  error: "Errore"
+  notice: "Informazione"
+  alert: "Attenzione"
+
+  #serve per intestazioni tabelle
+  created_at: "Data creazione"
+  updated_at: "Data aggiornamento"
+  name: "Nome"
+  id: "Id"
+  user_create: "Utente creazione"
+  user_update: "Utente modifica"
+
+  male: "Maschio"
+  female: "Femmina"
+  other: "Altro"
+
+  download: "Download"
+  delete: "Elimina"
+  
+  impersonate: "Impersona"
+  configure: "Configura"
+  execute_commands: "Esegui Comandi"
+  assigned_to: "Assegnato a %{user}"
+
+  pundit:
+    default: 'Non sei autorizzato ad eseguire questa azione.'
+#    #MEMO nel caso si volesse dare messaggi specifici per le policy
+#    post_policy:
+#      update?: 'You cannot edit this post!'
+#      create?: 'You cannot create posts!'
+  activerecord:
+    successful:
+      messages:
+        created: "%{model} creato correttamente."
+        updated: "%{model} aggiornato correttamente."
+        destroyed: "%{model} è stato correttamente cancellato."
+    unsuccessful:
+      messages:
+        created: "Ci sono errori che impediscono la creazione di %{model}"
+        updated: "Ci sono errori che impediscono l'aggiornamento di %{model}"
+    errors:
+      messages:
+        record_invalid: "Record non valido"
+        blank: "non può essere lasciato in bianco"
+        required: "richiesto"
+        taken: "già presente"
+    attributes:
+      application_record: #serve per ransack default
+        created_at: "Data creazione"
+        updated_at: "Data aggiornamento"
+        id: "Id"
+  menu:
+    items: []
+  ransack:
+    predicates:
+      i_cont: "contiene"
