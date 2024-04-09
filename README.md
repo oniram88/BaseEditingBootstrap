@@ -26,8 +26,12 @@ Then Install dependency (WIP TO TRANSLATE IN INSTALLATION TASK):
 ```bash
 
 bundle exec rails g pundit:install
-
 ```
+
+Installare bootstrap e questo dipende dal sistema scelto di assets bundling.  
+La versione più semplice è attraverso: https://github.com/rails/cssbundling-rails  
+Una volta installato basta lanciare bin/rails css:install:bootstrap come da
+documentazione e avrete la vostra versione di boostrap installata.
 
 
 
