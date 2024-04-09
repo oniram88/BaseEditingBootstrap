@@ -1,0 +1,15 @@
+<%
+  # LOCALS disponibili per rendering del flag dell'unità di misura
+  # object: classe active_model che mi serve per cercare la traduzione dell'unità
+  # field: campo che dobbiamo tradurre
+%>
+<%# locals: (object:,field:) -%>
+<%
+  translation = object.class.human_attribute_name("#{field}/unit", default: "")
+  unless translation.blank?
+%>
+  <span class="input-group-text"><%= translation %></span>
+<%
+  end
+%>
+

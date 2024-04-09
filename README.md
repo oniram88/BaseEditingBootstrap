@@ -21,6 +21,17 @@ Or install it yourself as:
 $ gem install base_editing_bootstrap
 ```
 
+### TODO generators
+Then Install dependency (WIP TO TRANSLATE IN INSTALLATION TASK):
+```bash
+
+bundle exec rails g pundit:install
+
+```
+
+
+
+
 ## Contributing
 Contribution directions go here.
 

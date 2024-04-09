@@ -1,0 +1,17 @@
+<div class="card">
+  <% if @search_instance.search_fields.count > 0 %>
+    <div class="card-header">
+      <%= render partial: "search" %>
+    </div>
+  <% end %>
+
+  <% if @search_instance.results.count > 0 %>
+    <div class="card-body table-responsive p-0">
+      <%= render partial: "search_result" %>
+    </div>
+
+    <div class="card-footer clearfix">
+      <%= render partial: "search_footer" %>
+    </div>
+  <% end %>
+</div>

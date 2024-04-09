@@ -1,8 +1,8 @@
 require_relative "lib/base_editing_bootstrap/version"
 
 Gem::Specification.new do |spec|
-  spec.name        = "base_editing_bootstrap"
-  spec.version     = BaseEditingBootstrap::VERSION
+  spec.name = "base_editing_bootstrap"
+  spec.version = BaseEditingBootstrap::VERSION
   spec.authors = ["Marino Bonetti"]
   spec.email = ["marinobonetti@gmail.com"]
   spec.summary = "BaseEditing: funzionalità di base per cms rails"
@@ -10,7 +10,6 @@ Gem::Specification.new do |spec|
   spec.homepage = "https://www.TODO.todo"
   spec.license = "MIT"
   spec.required_ruby_version = ">= 3.0"
-
 
   # Prevent pushing this gem to RubyGems.org. To allow pushes either set the "allowed_push_host"
   # to allow pushing to a single host or delete this section to allow pushing to any host.
@@ -30,6 +29,12 @@ Gem::Specification.new do |spec|
   end
 
   spec.add_dependency "rails", ">= 7.0"
+  spec.add_dependency "pundit", ">= 2.3.1"
+
+  # Search
+  spec.add_dependency 'ransack', '>= 4.0.0'
+  # Pagination
+  spec.add_dependency 'kaminari', '>= 1.2.2'
 
   spec.add_development_dependency "rspec-rails"
   spec.add_development_dependency "factory_bot_rails"

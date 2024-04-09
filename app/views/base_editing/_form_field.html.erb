@@ -1,0 +1,6 @@
+<%= form.label(form_field, class: "form-label") %>
+<div class="input-group mb-2 <%= form.object.validated? ? "has-validation" : "" %>">
+  <%= render partial: "editing_form_measure_unit", locals: {object: form.object, field: form_field} %>
+  <%= editing_form_print_field(form, form_field) %>
+  <%= error_messages_for(form.object, form_field) %>
+</div>

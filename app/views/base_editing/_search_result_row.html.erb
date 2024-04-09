@@ -1,0 +1,8 @@
+<tr>
+  <% @search_instance.search_result_fields.each do |srf| %>
+    <%= render_cell_field(obj, srf) %>
+  <% end %>
+  <td>
+    <%= search_result_buttons(obj) %>
+  </td>
+</tr>
