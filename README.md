@@ -27,6 +27,10 @@ Then Install dependency (WIP TO TRANSLATE IN INSTALLATION TASK):
 
 bundle exec rails g pundit:install
 ```
+Aggiungere ad ApplicationController 
+```ruby
+  include Pundit::Authorization
+```
 
 Installare bootstrap e questo dipende dal sistema scelto di assets bundling.  
 La versione più semplice è attraverso: https://github.com/rails/cssbundling-rails  
