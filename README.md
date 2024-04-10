@@ -48,6 +48,7 @@ end
 ## Usage
 Utilizzo per modello base, in questo esempio prendiamo come modello Post come esempio del dummy.
 
+- Creare il Modello ed includere `include BaseEditingBootstrap::BaseModel`
 - Creare Controller:
   ```ruby
     class PostsController < BaseEditingController
