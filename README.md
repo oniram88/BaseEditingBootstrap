@@ -62,6 +62,40 @@ config.generators do |g|
 end
 ```
 
+## Usage
+Utilizzo per modello base, in questo esempio prendiamo come modello Post come esempio del dummy.
+
+- Creare Controller:
+  ```ruby
+    class PostsController < BaseEditingController
+    end
+  ```
+- Aggiungere la rotta: `resources :posts`
+- Creare la policy:
+  ```ruby
+  class PostPolicy < BaseModelPolicy
+  
+  def editable_attributes
+  [
+  :title,
+  :description
+  ]
+  end
+  
+  def permitted_attributes
+  [
+  :title,
+  :description
+  ]
+  end
+  
+  def search_result_fields
+  [:title]
+  end
+  end
+
+  ```
+
 ## Contributing
 Contribution directions go here.
 
