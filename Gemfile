@@ -15,6 +15,7 @@ gem 'rails-i18n', '~> 7.0.0' # For 7.0.0
 gem "cssbundling-rails"
 gem "rspec-parameterized", ">= 1.0.0" # https://github.com/tomykaira/rspec-parameterized
 gem 'rspec-html-matchers' # https://github.com/kucaahbe/rspec-html-matchers
+gem 'rails-controller-testing'
 
 
 # Start debugger with binding.b [https://github.com/ruby/debug]

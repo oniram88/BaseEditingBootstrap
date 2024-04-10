@@ -5,7 +5,7 @@ class AuthenticationController < ApplicationController
   private
 
   def current_user
-    User.new
+    @_user ||= User.last
   end
 
 end
