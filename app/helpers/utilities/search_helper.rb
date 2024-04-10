@@ -53,19 +53,19 @@ module Utilities::SearchHelper
     btns = ActiveSupport::SafeBuffer.new
 
     if policy(rec).edit?
-      btns << link_to(icon(:fas, :edit),
+      btns << link_to(icon("pencil-square"),
                       edit_custom_polymorphic_path(rec),
                       class: "btn btn-sm btn-primary me-1")
     end
 
     if policy(rec).show?
-      btns << link_to(icon(:fas, :eye),
+      btns << link_to(icon(:eye),
                       show_custom_polymorphic_path(rec),
                       class: "btn btn-sm btn-primary me-1")
     end
 
     if policy(rec).destroy?
-      btns << link_to(icon(:fas, :trash),
+      btns << link_to(icon(:trash),
                       destroy_custom_polymorphic_path(rec),
                       data: {
                         turbo_method: :delete,

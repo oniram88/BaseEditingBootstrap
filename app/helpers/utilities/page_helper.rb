@@ -27,9 +27,9 @@ module Utilities::PageHelper
   # @param [TrueClass, FalseClass] valore
   def boolean_to_icon(valore)
     if valore
-      icon("fas", "check", class: "text-success")
+      icon("check-lg", class: "text-success")
     else
-      icon("fas", "x", class: "text-danger")
+      icon("x-lg", class: "text-danger")
     end
   end
 
@@ -37,7 +37,7 @@ module Utilities::PageHelper
   # @param [Hash] options
   def new_button(path, options = {})
     options.merge!({class: 'btn btn-success btn-sm'})
-    link_to icon("fas", "plus", I18n.t(:new)), path, options
+    link_to icon("plus-lg", I18n.t(:new)), path, options
   end
 
   # @param [BaseModel] obj instance
@@ -45,7 +45,7 @@ module Utilities::PageHelper
   def error_messages_for(obj, field)
     if obj.errors.include?(field)
       msg = obj.errors.full_messages_for(field).join(",")
-      content_tag(:div, icon("fas", "times-circle", msg), class: "invalid-feedback")
+      content_tag(:div, icon("x-circle-fill", msg), class: "invalid-feedback")
     end
   end
 end
