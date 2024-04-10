@@ -53,9 +53,14 @@ e Aggiungere all'inizializzatore degli assets
 ```ruby
 Rails.application.config.assets.paths << Rails.root.join("node_modules/@fortawesome/fontawesome-free/webfonts")
 ```
-
-
-
+Installare `gem "factory_bot_rails"` e configurarlo correttamente in application.rb
+```ruby
+config.generators do |g|
+  g.test_framework :rspec
+  g.fixture_replacement :factory_bot
+  g.factory_bot dir: 'spec/factories'
+end
+```
 
 ## Contributing
 Contribution directions go here.
