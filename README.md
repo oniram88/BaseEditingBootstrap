@@ -79,6 +79,20 @@ Utilizzo per modello base, in questo esempio prendiamo come modello Post come es
   end
 
   ```
+- [OPTIONAL] nel caso si volesse fare override dei campi della form:
+  Creare un nuovo file nella cartella del controller `app/views/posts/_form_print_field.html.erb`  
+  al cui interno inserire questo codice specificando i campi differenti:
+  ```erbruby
+    <%# locals: (form:, field:) -%>
+    <%=
+    case field
+      when :description
+        form.text_area
+      else
+        render "base_editing/form_print_field", form:, field:
+    end
+    %>
+  ```
 
 ## Contributing
 Contribution directions go here.
