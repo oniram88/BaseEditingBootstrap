@@ -38,7 +38,7 @@ RSpec.describe BaseEditingBootstrap::Forms::Base, :type => :helper do
                                                                 )
       }
       it "overrides class" do
-        expect(builder.public_send(field_helper, :surname, {class: "custom_class"})).to have_tag(
+        expect(builder.public_send(field_helper, :username, {class: "custom_class"})).to have_tag(
                                                                                           tag,
                                                                                           with: {class: "form-control custom_class"}.merge(more_attributes)
                                                                                         )
@@ -133,14 +133,14 @@ RSpec.describe BaseEditingBootstrap::Forms::Base, :type => :helper do
   end
 
   describe "collection_check_boxes" do
-    let(:customer_list) { create_list(:customer, 5) }
+    let(:list) { create_list(:post, 5) }
     it do
-      rendered = builder.collection_check_boxes(:customers, customer_list, :id, :name)
+      rendered = builder.collection_check_boxes(:posts, list, :id, :title)
       expect(rendered).to have_tag("div.form-check", count: 5) do
         with_tag(:input, with: {type: "checkbox", class: "form-check-input"})
         with_tag("label.form-check-label")
       end
-      expect(rendered).to have_tag("label.form-check-label", text: customer_list.first.name)
+      expect(rendered).to have_tag("label.form-check-label", text: list.first.title)
     end
   end
 

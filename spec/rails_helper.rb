@@ -1,5 +1,13 @@
 require 'simplecov'
-SimpleCov.start 'rails'
+SimpleCov.start 'rails' do
+  enable_coverage :branch
+  enable_coverage_for_eval
+
+  project_name "Base Editing Bootstrp"
+
+  add_filter "spec"
+
+end
 
 # This file is copied to spec/ when you run 'rails generate rspec:install'
 require 'spec_helper'

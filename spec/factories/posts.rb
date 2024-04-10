@@ -1,6 +1,6 @@
 FactoryBot.define do
   factory :post do
-    title { "MyString" }
+    sequence(:title) { |n| "title_#{n}" }
     description { "MyString" }
   end
 end

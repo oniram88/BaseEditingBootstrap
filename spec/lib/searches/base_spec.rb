@@ -9,8 +9,8 @@ module BaseEditingBootstrap
     let(:simulated_list) {
       # Utilizziamo un modello a caso per testare con un active record relation reale
       create_list([
-                    :customer,
-                    :device_group,
+                    :user,
+                    :post,
                   ].sample, 5)
     }
     let(:model_klass) {
