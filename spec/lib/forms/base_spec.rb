@@ -80,7 +80,7 @@ RSpec.describe BaseEditingBootstrap::Forms::Base, :type => :helper do
     it "" do
       expect(builder.select(:username, [])).to have_tag(
                                                  :select,
-                                                 with: {class: "form-control"}
+                                                 with: {class: "form-control form-select"}
                                                )
     end
     it "overrides class" do

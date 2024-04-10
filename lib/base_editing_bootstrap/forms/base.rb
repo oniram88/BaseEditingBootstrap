@@ -45,6 +45,7 @@ module BaseEditingBootstrap::Forms
     end
 
     def select(method, choices = nil, options = {}, html_options = {}, &block)
+      html_options[:class] = "form-select #{html_options[:class]}"
       super(method, choices, options, html_options.merge(class: form_style_class_for(method, html_options)), &block)
     end
 
