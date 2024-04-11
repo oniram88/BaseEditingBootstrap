@@ -149,3 +149,52 @@ RSpec.shared_examples "fail with unauthorized" do |request: default_unathorized_
     expect(flash[:error]).not_to be_nil
   end
 end
+
+RSpec.shared_examples "a base model" do
+  describe "ransackables" do
+    where(:base_model_method, :policy_method, :result) do
+      [
+        [
+          :ransackable_attributes, :permitted_attributes_for_ransack, ["elenco", "attributi"]
+        ],
+        [
+          :ransackable_associations, :permitted_associations_for_ransack, ["elenco", "attributi"]
+        ]
+      ]
+    end
+
+    with_them do
+      describe ".ransackable_attributes" do
+        subject { described_class.send(base_model_method, auth_object) }
+
+        let(:simulated_instance_class) { instance_double("BaseModel") }
+        let(:simulated_user_instance) { instance_double("User") }
+        before do
+          allow(described_class).to receive(:new).and_return(simulated_instance_class)
+          allow(User).to receive(:new).and_return(simulated_user_instance)
+        end
+        let(:auth_object) { nil }
+        let(:policy) {
+          instance_double("BaseModelPolicy", policy_method => result)
+        }
+        it "new user" do
+          expect(Pundit).to receive(:policy).with(simulated_user_instance,
+                                                  simulated_instance_class)
+                                            .and_return(policy)
+
+          is_expected.to match_array(result)
+        end
+
+        context "with auth_object" do
+          let(:auth_object) { :auth_object }
+          it do
+            expect(Pundit).to receive(:policy).with(auth_object, simulated_instance_class)
+                                              .and_return(policy)
+
+            is_expected.to match_array(result)
+          end
+        end
+      end
+    end
+  end
+end
