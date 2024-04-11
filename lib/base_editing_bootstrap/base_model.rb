@@ -6,18 +6,19 @@ module BaseEditingBootstrap
 
     included do
       include IsValidated
+      delegate :ransackable_attributes, :ransackable_associations, to: :@class
+    end
 
-      def self.ransackable_attributes(auth_object = nil)
+    class_methods do
+      def ransackable_attributes(auth_object = nil)
         if auth_object
           Pundit.policy(auth_object, self.new).permitted_attributes_for_ransack
         else
           Pundit.policy(User.new, self.new).permitted_attributes_for_ransack
         end
-      end
-
-      delegate :ransackable_attributes, :ransackable_associations, to: :@class
-
-      def self.ransackable_associations(auth_object = nil)
+      end 
+      
+      def ransackable_associations(auth_object = nil)
         if auth_object
           Pundit.policy(auth_object, self.new).permitted_associations_for_ransack.map(&:to_s)
         else
