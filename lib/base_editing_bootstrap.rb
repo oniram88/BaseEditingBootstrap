@@ -3,7 +3,11 @@ require "kaminari"
 require "pundit"
 
 if ENV['RAILS_ENV'] == 'test'
-  require File.expand_path('../spec/support/base_editing_controller_helpers.rb', __dir__)
+
+  dir_path = File.expand_path('../spec/support/external_shared', __dir__)
+  Dir["#{dir_path}/*.rb"].each do |file|
+    require file
+  end
 end
 
 require "zeitwerk"

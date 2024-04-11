@@ -27,7 +27,7 @@ Gem::Specification.new do |spec|
         f.start_with?(*%w[bin/ test/ spec/ features/ .git .gitlab-ci.yml appveyor Gemfile])
     end
   end
-  spec.files += ["spec/support/base_editing_controller_helpers.rb"]
+  spec.files += Dir['spec/support/external_shared/*.rb']
 
   spec.add_dependency "rails", ">= 7.0"
   spec.add_dependency "pundit", ">= 2.3.1"
