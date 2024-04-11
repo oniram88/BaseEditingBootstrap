@@ -16,15 +16,25 @@ module Utilities::SearchHelper
     end
   end
 
+  ##
+  # Renderizza la cella della tabella nella pagina della index
   # @param [BaseModel] obj
   # @param [Symbol] field
   # @return [ActiveSupport::SafeBuffer]
   def render_cell_field(obj, field)
     case field
-    when :created_at, :updated_at, :id
-      content_tag(:td, render_raw_field(obj, field), {class: "action_col"})
+    when :created_at, :updated_at
+      template = "base_editing/cell_field/timestamps"
+      template = "#{obj.to_partial_path}/cell_field/timestamps" if lookup_context.exists?("base", ["#{obj.to_partial_path}/timestamps"], true)
+
+      render template, obj:, field:
     else
-      content_tag(:td, render_raw_field(obj, field))
+
+      template = "base_editing/cell_field/base"
+      template = "#{obj.to_partial_path}/cell_field/base" if lookup_context.exists?("base", ["#{obj.to_partial_path}/cell_field"], true)
+      template = "#{obj.to_partial_path}/cell_field/#{field}" if lookup_context.exists?(field, ["#{obj.to_partial_path}/cell_field"], true)
+
+      render template, obj:, field:
     end
   end
 
@@ -38,8 +48,7 @@ module Utilities::SearchHelper
   end
 
   ##
-  # Restituisce il valore che vogliamo mostrare, lo usiamo sia nella visualizzazione all'interno della tabella
-  # in html che nel risultato xls
+  # Restituisce il valore che vogliamo mostrare
   def render_raw_field(obj, field)
     case field
     when :created_at, :updated_at
@@ -48,6 +57,19 @@ module Utilities::SearchHelper
       obj[field]
     end
   end
+
+  deprecate render_raw_field: <<-MESSAGE
+Abbiamo migrato ad un sistema di rendering tramite views, 
+è stato lasciato come memo per una migrazione semplificata
+nel caso si voglia renderizzare un determinato campo in modo differente dal normale dato del DB
+creare nalla path del modello la cartella cell_field e creare al suo interno il file con il nome
+del _campo.html.erb e quindi inserire li il rendering (ES modello User, campo :name):
+app/views/users/user/cell_field/_campo.html.erb
+```
+<%# locals: (obj:,field:)  -%>
+<td><%= obj.name.upcase %></td>
+```
+MESSAGE
 
   def search_result_buttons(rec)
     btns = ActiveSupport::SafeBuffer.new
