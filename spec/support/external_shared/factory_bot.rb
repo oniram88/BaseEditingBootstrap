@@ -3,6 +3,9 @@
 # 
 # Helper per la generazione dati per la creazione di un hash utile alla creazione di un record
 # completo di associazioni
+# USAGE:
+# like attributes_for
+# nested_attributes_for(:factory_name)
 module FactoryBot::Syntax::Methods
   def nested_attributes_for(*args)
     attributes = attributes_for(*args)
