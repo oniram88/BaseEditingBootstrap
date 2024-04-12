@@ -25,17 +25,13 @@ module Utilities::SearchHelper
     case field
     when :created_at, :updated_at
       template = "base_editing/cell_field/timestamps"
-      template = "#{obj.to_partial_path}/cell_field/timestamps" if lookup_context.exists?("base", ["#{obj.to_partial_path}/timestamps"], true)
-
-      render template, obj:, field:
+      template = "#{obj.to_partial_path}/cell_field/timestamps" if lookup_context.exists?("timestamps", ["#{obj.to_partial_path}/cell_field"], true)
     else
-
       template = "base_editing/cell_field/base"
       template = "#{obj.to_partial_path}/cell_field/base" if lookup_context.exists?("base", ["#{obj.to_partial_path}/cell_field"], true)
       template = "#{obj.to_partial_path}/cell_field/#{field}" if lookup_context.exists?(field, ["#{obj.to_partial_path}/cell_field"], true)
-
-      render template, obj:, field:
     end
+    render template, obj:, field:
   end
 
   ##

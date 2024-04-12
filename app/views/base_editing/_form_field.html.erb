@@ -1,30 +1,6 @@
 <%= form.label(form_field, class: "form-label") %>
 <div class="input-group mb-2 <%= form.object.validated? ? "has-validation" : "" %>">
   <%= render partial: "editing_form_measure_unit", locals: {object: form.object, field: form_field} %>
-  <%=
-    # Questo pezzo di codice serve per eseguire una transizione facilitata verso
-    # il sistema senza helpers
-    if respond_to? :editing_form_print_field
-      Rails.logger.warn <<-TEXT
-        DEPRECATION WARNING: editing_form_print_field
-        Non vogliamo utilizzare più il sistema degli helpers ma direttamente le view,
-        creare nella cartella del controller un partial con il nome _form_print_field.html
-        a cui vengono passati i parametri form e field
-
-        <\%\# \locals: (form:, field:) -%\>
-        <\%\=
-          case field
-          when :field_name
-            form.check_box(:field_name, class: "form-control")
-          else
-            render "base_editing/form_print_field", form:, field:
-          end
-        \%\>
-        TEXT
-      editing_form_print_field(form, form_field)
-    else
-      render "form_print_field", form:, field: form_field
-    end
-  %>
+  <%= form_print_field(form, form_field) %>
   <%= error_messages_for(form.object, form_field) %>
 </div>
