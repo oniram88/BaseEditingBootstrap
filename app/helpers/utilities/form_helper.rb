@@ -1,31 +1,37 @@
-module Utilities::FormHelper
-  ##
-  # Metodo su cui eseguire override per i campi specifici rispetto all'oggetto gestito dal controller
-  # @deprecated Utilizza form_print_field(form, field) senza sovrascriverlo
-  # @param [Forms::Base] form
-  # @param [Symbol] field
-  def editing_form_print_field(form, field)
-    form_print_field(form, field)
-  end
-
-  ##
-  # Metodo per il partial corretto per eseguire il render del campo della form
-  #
-  # @param [Forms::Base] form
-  # @param [Symbol] field
-  def form_print_field(form, field)
-    case field
-    when :created_at, :updated_at
-      template = "base_editing/form_field/timestamps"
-      template = "#{form.object.to_partial_path}/form_field/timestamps" if lookup_context.exists?("timestamps", ["#{form.object.to_partial_path}/form_field"], true)
-    else
-      template = "base_editing/form_field/base"
-      template = "#{form.object.to_partial_path}/form_field/base" if lookup_context.exists?("base", ["#{form.object.to_partial_path}/form_field"], true)
-      template = "#{form.object.to_partial_path}/form_field/#{field}" if lookup_context.exists?(field, ["#{form.object.to_partial_path}/form_field"], true)
+module Utilities
+  module FormHelper
+    include TemplateHelper
+    ##
+    # Metodo su cui eseguire override per i campi specifici rispetto all'oggetto gestito dal controller
+    # @deprecated Utilizza form_print_field(form, field) senza sovrascriverlo
+    # @param [Forms::Base] form
+    # @param [Symbol] field
+    def editing_form_print_field(form, field)
+      form_print_field(form, field)
     end
-    render template, form:, field:
-  end
 
+    ##
+    # Metodo per il partial corretto per eseguire il render del campo della form
+    #
+    # @param [Forms::Base] form
+    # @param [Symbol] field
+    def form_print_field(form, field)
+      generic_field = case field
+                      when :created_at, :updated_at
+                        "timestamps"
+                      else
+                        "base"
+                      end
+      template = find_template_with_fallbacks(
+        form.object,
+        field,
+        "form_field",
+        generic_field
+      )
+      render template, form:, field:
+    end
+
+  end
 end
 
 BaseEditingBootstrap.deprecator.deprecate_methods(Utilities::FormHelper, editing_form_print_field: <<-MESSAGE
