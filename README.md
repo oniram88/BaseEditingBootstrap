@@ -79,20 +79,31 @@ Utilizzo per modello base, in questo esempio prendiamo come modello Post come es
   end
 
   ```
-- [OPTIONAL] nel caso si volesse fare override dei campi della form:
-  Creare un nuovo file nella cartella del controller `app/views/posts/_form_print_field.html.erb`  
-  al cui interno inserire questo codice specificando i campi differenti:
+- [OPTIONAL] nel caso si volesse fare override dei campi della form:  
+  Per il campo che si vuole fare override creare un nuovo file nella cartella 
+  del modello `app/views/posts/post/form_field/_NOME_CAMPO.html.erb`  
+  al cui interno renderizzare il campo come si preferisce:
   ```erbruby
     <%# locals: (form:, field:) -%>
-    <%=
-    case field
-      when :description
-        form.text_area
-      else
-        render "base_editing/form_print_field", form:, field:
-    end
-    %>
+    <%= form.text_field(field) %>
   ```
+- [OPTIONAL] la medesima cosa è possibile fare con il rendering dei campi
+  delle celle della tabella della pagina index.  
+  La cartella da generare in questo caso sarà: `app/views/posts/post/cell_field/_NOME_CAMPO.html.erb`
+  ```erbruby
+  <%# locals: (obj:,field:)  -%>
+  <td><%= obj.read_attribute(field) %></td>
+  ```
+- [OPTIONAL] Base overrides:  
+  E' possibile anche fare un override generico dei campi, sono previsti questi tipi di partial
+  legati al tipo di dati:  
+
+  - created_at => timestamps.html.erb
+  - updated_at => timestamps.html.erb
+  - default    => base.html.erb
+  
+  In futuro si prevede di aggiungere automatismi per renderizzare senza 
+  l'intervento dell'utente dei campi.
 
 ## Contributing
 Contribution directions go here.
