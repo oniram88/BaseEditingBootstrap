@@ -54,19 +54,6 @@ module Utilities::SearchHelper
     end
   end
 
-  deprecate render_raw_field: <<-MESSAGE
-Abbiamo migrato ad un sistema di rendering tramite views, 
-è stato lasciato come memo per una migrazione semplificata
-nel caso si voglia renderizzare un determinato campo in modo differente dal normale dato del DB
-creare nalla path del modello la cartella cell_field e creare al suo interno il file con il nome
-del _campo.html.erb e quindi inserire li il rendering (ES modello User, campo :name):
-app/views/users/user/cell_field/_campo.html.erb
-```
-<%# locals: (obj:,field:)  -%>
-<td><%= obj.name.upcase %></td>
-```
-MESSAGE
-
   def search_result_buttons(rec)
     btns = ActiveSupport::SafeBuffer.new
 
@@ -100,3 +87,17 @@ MESSAGE
     [ransack_instance.ransack_query]
   end
 end
+
+BaseEditingBootstrap.deprecator.deprecate_methods(Utilities::SearchHelper, render_raw_field: <<-MESSAGE
+Abbiamo migrato ad un sistema di rendering tramite views, 
+è stato lasciato come memo per una migrazione semplificata
+nel caso si voglia renderizzare un determinato campo in modo differente dal normale dato del DB
+creare nalla path del modello la cartella cell_field e creare al suo interno il file con il nome
+del _campo.html.erb e quindi inserire li il rendering (ES modello User, campo :name):
+app/views/users/user/cell_field/_campo.html.erb
+```
+<%# locals: (obj:,field:)  -%>
+<td><%= obj.name.upcase %></td>
+```
+MESSAGE
+)

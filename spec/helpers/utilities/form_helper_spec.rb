@@ -3,6 +3,12 @@
 require 'rails_helper'
 
 RSpec.describe Utilities::FormHelper, type: :helper do
+
+  it "#editing_form_print_field" do
+    expect(helper).to receive(:form_print_field).with("a","b")
+    helper.editing_form_print_field("a","b")
+  end
+
   describe "#form_print_field" do
 
     let(:form) {

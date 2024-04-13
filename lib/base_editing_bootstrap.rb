@@ -18,6 +18,10 @@ module BaseEditingBootstrap
   include ActiveSupport::Configurable
   config_accessor :inherited_controller, default: "ApplicationController"
 
+  def self.deprecator
+    @deprecator ||= ActiveSupport::Deprecation.new("1.0", "BaseEditingBootstrap")
+  end
+
 end
 
 loader.eager_load
