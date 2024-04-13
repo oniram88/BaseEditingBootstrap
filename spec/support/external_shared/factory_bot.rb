@@ -1,3 +1,4 @@
+require 'factory_bot_rails'
 ##
 # Condiviso con applicazione esterna
 # 
