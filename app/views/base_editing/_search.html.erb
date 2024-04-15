@@ -1,0 +1,17 @@
+<%= search_form_for *search_form_for_params(@search_instance) do |f| %>
+
+  <div class="row g-2">
+    <%= render @search_instance.search_fields, ransack_form_builder: f %>
+  </div>
+
+  <div class="row mt-4">
+    <div class="col-1">
+      <div class="btn-group mr-1">
+        <% search_form_buttons(f) %>
+        <%= content_for :search_form_buttons %>
+      </div>
+    </div>
+  </div>
+<% end %>
+
+

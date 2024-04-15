@@ -1,6 +1,6 @@
 services:
   app:
-    command: bin/rails s -b 0.0.0.0
+    command: /app/spec/dummy/bin/dev
     build:
       context: .
     user: ${CMPS_UID_GID}
