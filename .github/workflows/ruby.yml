@@ -39,6 +39,6 @@ jobs:
       run: bundle exec rails db:create && bundle exec rails db:schema:load
     - name: Assets
       working-directory: spec/dummy
-      run: bundle exec rails app:assets:precompile
+      run: bundle exec rails assets:precompile
     - name: Test
       run: bundle exec rspec
