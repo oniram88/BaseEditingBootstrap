@@ -36,6 +36,6 @@ jobs:
         ruby-version: ${{ matrix.ruby-version }}
         bundler-cache: true # runs 'bundle install' and caches installed gems automatically
     - name: Run prepare tasks
-      run: bundle exec rails db:create && bundle exec rails db:schema:load
+      run: bundle exec rails db:create && bundle exec rails db:schema:load && bundle exec rails assets:precompile
     - name: Test
       run: bundle exec rspec
