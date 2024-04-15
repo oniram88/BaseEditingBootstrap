@@ -2,8 +2,7 @@ require "ransack"
 require "kaminari"
 require "pundit"
 
-if ENV['RAILS_ENV'] == 'test'
-
+if ENV['RAILS_ENV'] == 'test' and defined? RSpec
   dir_path = File.expand_path('../spec/support/external_shared', __dir__)
   Dir["#{dir_path}/*.rb"].each do |file|
     require file

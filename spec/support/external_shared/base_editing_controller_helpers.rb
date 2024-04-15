@@ -1,8 +1,6 @@
 ##
 # Condiviso con applicazione esterna
 
-
-
 def check_if_should_execute(only, except, action)
   return false if except.include?(action)
   return true if only.empty?
@@ -61,9 +59,9 @@ RSpec.shared_examples "base editing controller" do |factory: nil, only: [], exce
         get url_for_index, params: params
         expect(response).to have_http_status(:ok)
         expect(assigns[:search_instance]).to be_an_instance_of(BaseEditingBootstrap::Searches::Base).and(have_attributes(
-                                                                                     user: user,
-                                                                                     params: ActionController::Parameters.new(params).permit!
-                                                                                   ))
+                                                                                                           user: user,
+                                                                                                           params: ActionController::Parameters.new(params).permit!
+                                                                                                         ))
       end
     end
   end
@@ -142,7 +140,6 @@ RSpec.shared_examples "base editing controller" do |factory: nil, only: [], exce
     end
   end
 end
-
 
 default_unathorized_failure = -> { raise "TODO - passare proc con richiesta che dovrà fallire" }
 

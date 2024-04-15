@@ -19,24 +19,19 @@ module Utilities
       locals = {form:, field:}
       case form.object.class.type_for_attribute(field).type
       when :datetime
-         generic_field = "datetime_field"
+        generic_field = "datetime_field"
       when :date
-         generic_field = "date_field"
+        generic_field = "date_field"
       when :decimal
         locals[:scale] = form.object.class.type_for_attribute(field).scale || 2
         generic_field = "decimal_field"
       when :float
-        locals[:scale] = 2 #usiamo il default dato che non abbiamo questa informazione negli attributes di rails
+        locals[:scale] = 2 # usiamo il default dato che non abbiamo questa informazione negli attributes di rails
         generic_field = "decimal_field"
       when :integer
         generic_field = "integer_field"
       else
-        case field
-        when :created_at, :updated_at
-          "timestamps"
-        else
-          generic_field = "base"
-        end
+        generic_field = "base"
       end
 
       template = find_template_with_fallbacks(
