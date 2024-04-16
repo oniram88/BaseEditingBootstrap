@@ -5,6 +5,7 @@ SimpleCov.start 'rails' do
 
   project_name "Base Editing Bootstrp"
 
+  add_group "View","app/views"
   add_filter "spec"
 
 end

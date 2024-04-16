@@ -17,4 +17,8 @@ class PostPolicy < BaseModelPolicy
   def search_result_fields
     [:title]
   end
+
+  def search_fields
+    [:title_i_cont]
+  end
 end

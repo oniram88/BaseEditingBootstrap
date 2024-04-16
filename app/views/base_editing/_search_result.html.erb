@@ -1,4 +1,4 @@
-<table class="table table-head-fixed text-nowrap">
+<table class="table table-head-fixed text-nowrap <%= dom_class(@search_instance.model_klass,:search_results) %>">
   <thead>
   <tr>
     <% @search_instance.search_result_fields.each do |srf| %>
