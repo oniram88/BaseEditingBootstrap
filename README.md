@@ -104,7 +104,7 @@ Utilizzo per modello base, in questo esempio prendiamo come modello Post come es
   - Decimal          => _decimal.html.erb
   - DateTime         => _detetime.html.erb
   - Date             => _date.html.erb
-  - Default/Strin    => _base.html.erb
+  - Default/String    => _base.html.erb
   
   In futuro si prevede di aggiungere automatismi per renderizzare senza 
   l'intervento dell'utente dei campi.
