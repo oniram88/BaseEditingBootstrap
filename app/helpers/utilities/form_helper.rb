@@ -19,17 +19,17 @@ module Utilities
       locals = {form:, field:}
       case form.object.class.type_for_attribute(field).type
       when :datetime
-        generic_field = "datetime_field"
+        generic_field = "datetime"
       when :date
-        generic_field = "date_field"
+        generic_field = "date"
       when :decimal
         locals[:scale] = form.object.class.type_for_attribute(field).scale || 2
-        generic_field = "decimal_field"
+        generic_field = "decimal"
       when :float
         locals[:scale] = 2 # usiamo il default dato che non abbiamo questa informazione negli attributes di rails
-        generic_field = "decimal_field"
+        generic_field = "decimal"
       when :integer
-        generic_field = "integer_field"
+        generic_field = "integer"
       else
         generic_field = "base"
       end

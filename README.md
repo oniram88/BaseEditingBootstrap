@@ -1,8 +1,5 @@
 # BaseEditingBootstrap
-Short description and motivation.
-
-## Usage
-How to use my plugin.
+WIP
 
 ## Installation
 Add this line to your application's Gemfile:
@@ -97,10 +94,17 @@ Utilizzo per modello base, in questo esempio prendiamo come modello Post come es
 - [OPTIONAL] Base overrides:  
   E' possibile anche fare un override generico dei campi, sono previsti questi tipi di partial
   legati al tipo di dati:  
-
+  **Cell Field**:
   - created_at => timestamps.html.erb
   - updated_at => timestamps.html.erb
   - default    => base.html.erb
+  **Form Field**
+  - Integer          => _integer.html.erb
+  - Float            => _decimal.html.erb
+  - Decimal          => _decimal.html.erb
+  - DateTime         => _detetime.html.erb
+  - Date             => _date.html.erb
+  - Default/Strin    => _base.html.erb
   
   In futuro si prevede di aggiungere automatismi per renderizzare senza 
   l'intervento dell'utente dei campi.
