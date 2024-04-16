@@ -108,6 +108,20 @@ Utilizzo per modello base, in questo esempio prendiamo come modello Post come es
   
   In futuro si prevede di aggiungere automatismi per renderizzare senza 
   l'intervento dell'utente dei campi.
+- [OPTIONAL] Search Form:  
+  Per poter aggiungere una form di ricerca basta aggiungere alla policy
+  del modello in questione i campi di ricerca che verranno poi utilizzati da ransack
+  per eseguire le ricerche  
+  ES:
+  ```ruby 
+  # file app/policies/post_policy.rb
+  #...
+  def search_fields
+  [:title_i_cont]
+  end
+  #...
+  ```
+
 
 ## Contributing
 Contribution directions go here.
