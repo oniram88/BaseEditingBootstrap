@@ -7,17 +7,13 @@ Gem::Specification.new do |spec|
   spec.email = ["marinobonetti@gmail.com"]
   spec.summary = "BaseEditing: funzionalità di base per cms rails"
   spec.description = "Raccolta di utility per semplificare costruzione cms in rails"
-  spec.homepage = "https://www.TODO.todo"
+  spec.homepage = "https://github.com/oniram88/BaseEditingBootstrap"
   spec.license = "MIT"
   spec.required_ruby_version = ">= 3.1"
 
-  # Prevent pushing this gem to RubyGems.org. To allow pushes either set the "allowed_push_host"
-  # to allow pushing to a single host or delete this section to allow pushing to any host.
-  spec.metadata["allowed_push_host"] = "TODO: Set to 'http://mygemserver.com'"
-
   spec.metadata["homepage_uri"] = spec.homepage
-  spec.metadata["source_code_uri"] = "https://todo.td"
-  spec.metadata["changelog_uri"] = "https://todo.td/CHANGELOG"
+  spec.metadata["source_code_uri"] = "https://github.com/oniram88/BaseEditingBootstrap"
+  spec.metadata["changelog_uri"] = "https://github.com/oniram88/BaseEditingBootstrap/CHANGELOG"
 
   # Specify which files should be added to the gem when it is released.
   # The `git ls-files -z` loads the files in the RubyGem that have been added into git.
