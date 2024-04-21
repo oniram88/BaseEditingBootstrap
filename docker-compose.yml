@@ -9,6 +9,8 @@ services:
       - 'bundle:/bundle'
       - '~/.gitconfig:/home/nobody/.gitconfig'
       - '~/.gnupg:/home/nobody/.gnupg'
+      - '~/.gem:/home/nobody/.gem'
+      - '~/.ssh:/home/nobody/.ssh'
     environment:
       RAILS_ENV: development
     ports:

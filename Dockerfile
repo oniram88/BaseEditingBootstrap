@@ -32,7 +32,7 @@ RUN curl -sL https://github.com/nodenv/node-build/archive/master.tar.gz | tar xz
 FROM build_dev_image as development_image
 
 ARG default_editor
-RUN apt-get install -y nano gpg gpg-agent git-lfs git
+RUN apt-get install -y nano gpg gpg-agent git-lfs git ssh
 #questo serve per editare le credentials
 ENV EDITOR='nano' \
     BUNDLE_PATH="/bundle"
