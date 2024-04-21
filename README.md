@@ -1,4 +1,6 @@
 # BaseEditingBootstrap
+[![Gem Version](https://badge.fury.io/rb/base_editing_bootstrap.svg)](https://badge.fury.io/rb/base_editing_bootstrap)
+
 WIP
 
 ## Installation
