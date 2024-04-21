@@ -1,4 +1,8 @@
-## Unreleased (d83204c..4a94d82)
+# Changelog
+All notable changes to this project will be documented in this file. See [conventional commits](https://www.conventionalcommits.org/) for commit guidelines.
+
+- - -
+## 0.1.2 - 2024-04-21
 #### Continuous Integration
 - Test - (b05a41b) - Marino Bonetti
 - Assets precompile - (036f22e) - Marino Bonetti
@@ -8,6 +12,7 @@
 - Documentation form search form - (346da14) - Marino Bonetti
 - Typo - (b83e829) - Marino Bonetti
 #### Miscellaneous Chores
+- Upgrade CHANGELOG.md - (3004ebd) - Marino Bonetti
 - Prepare to push - (4a94d82) - Marino Bonetti
 - Add cog cfg - (636b3ee) - Marino Bonetti
 - Correct Ruby Ver Dependency - (0a05fba) - Marino Bonetti
