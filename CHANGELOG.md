@@ -2,6 +2,12 @@
 All notable changes to this project will be documented in this file. See [conventional commits](https://www.conventionalcommits.org/) for commit guidelines.
 
 - - -
+## 0.1.3 - 2024-04-21
+#### Miscellaneous Chores
+- Set Version - (2c384f4) - Marino Bonetti
+
+- - -
+
 ## 0.1.2 - 2024-04-21
 #### Continuous Integration
 - Test - (b05a41b) - Marino Bonetti
