@@ -3,14 +3,16 @@ class PostPolicy < BaseModelPolicy
   def editable_attributes
     [
       :title,
-      :description
+      :description,
+      :category
     ]
   end
 
   def permitted_attributes
     [
       :title,
-      :description
+      :description,
+      :category
     ]
   end
 

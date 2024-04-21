@@ -48,6 +48,12 @@ RSpec.describe Utilities::FormHelper, type: :helper do
         expect(helper.form_print_field(form, :read_counter)).to have_tag(:input, with: {type: "number", step: "1"})
       end
 
+      it "with enum" do
+        expect(helper.form_print_field(form, :category)).to have_tag(:select) do
+          with_tag(:option, text: "News", with: {value: "news"})
+        end
+      end
+
     end
 
     context "user model" do

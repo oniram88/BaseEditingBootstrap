@@ -1,6 +1,7 @@
 module Utilities
   module FormHelper
     include TemplateHelper
+    include EnumHelper
     ##
     # Metodo su cui eseguire override per i campi specifici rispetto all'oggetto gestito dal controller
     # @deprecated Utilizza form_print_field(form, field) senza sovrascriverlo
@@ -17,7 +18,8 @@ module Utilities
     # @param [Symbol] field
     def form_print_field(form, field)
       locals = {form:, field:}
-      case form.object.class.type_for_attribute(field).type
+      type = form.object.class.type_for_attribute(field).type
+      case type
       when :datetime
         generic_field = "datetime"
       when :date
@@ -31,7 +33,11 @@ module Utilities
       when :integer
         generic_field = "integer"
       else
-        generic_field = "base"
+        if form.object.class.defined_enums.key?(field.to_s)
+          generic_field = "enum"
+        else
+          generic_field = "base"
+        end
       end
 
       template = find_template_with_fallbacks(
@@ -40,7 +46,7 @@ module Utilities
         "form_field",
         generic_field
       )
-      Rails.logger.debug { "#{template}->#{ locals.inspect}" }
+      Rails.logger.debug { "#{type}->#{generic_field}->#{template}->#{ locals.inspect}" }
       render template, **locals
     end
 

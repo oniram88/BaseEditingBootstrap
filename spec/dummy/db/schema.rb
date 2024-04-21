@@ -14,6 +14,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_04_07_194221) do
   create_table "posts", force: :cascade do |t|
     t.string "title"
     t.string "description"
+    t.string "category"
     t.integer "read_counter"
     t.date "published_at"
     t.float "rating"

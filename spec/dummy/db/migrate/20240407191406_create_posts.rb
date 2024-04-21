@@ -3,6 +3,7 @@ class CreatePosts < ActiveRecord::Migration[7.1]
     create_table :posts do |t|
       t.string :title
       t.string :description
+      t.string :category
       t.integer :read_counter
       t.date :published_at
       t.float :rating
