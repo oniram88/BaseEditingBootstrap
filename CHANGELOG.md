@@ -2,6 +2,13 @@
 All notable changes to this project will be documented in this file. See [conventional commits](https://www.conventionalcommits.org/) for commit guidelines.
 
 - - -
+## 0.1.4 - 2024-04-21
+#### Miscellaneous Chores
+- Fix Cog hooks - (ebd2d77) - Marino Bonetti
+- Fix Version read - (ead56ca) - Marino Bonetti
+
+- - -
+
 ## 0.1.3 - 2024-04-21
 #### Miscellaneous Chores
 - Set Version - (2c384f4) - Marino Bonetti
