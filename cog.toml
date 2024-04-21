@@ -6,7 +6,8 @@ branch_whitelist = []
 skip_ci = "[skip ci]"
 skip_untracked = false
 pre_bump_hooks = [
-    "echo '{{version}}' > lib/base_editing_bootstrap/VERSION"
+    "echo '{{version}}' > lib/base_editing_bootstrap/VERSION",
+    "docker compose run app bundle"
 ]
 post_bump_hooks = [
     "git push",
