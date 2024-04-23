@@ -20,7 +20,12 @@ Gem::Specification.new do |spec|
   spec.files = Dir.chdir(__dir__) do
     `git ls-files -z`.split("\x0").reject do |f|
       (File.expand_path(f) == __FILE__) ||
-        f.start_with?(*%w[bin/ test/ spec/ features/ .git .gitlab-ci.yml appveyor Gemfile])
+        f.start_with?(*[
+          "bin/","test/","spec/","features/",
+          ".git",".gitlab-ci.yml","appveyor","Gemfile",
+          "cog.toml","docker-compose.yml","Dockerfile",
+          ".rspec",".rubocop.yml"
+        ])
     end
   end
   spec.files += Dir['spec/support/external_shared/*.rb']
