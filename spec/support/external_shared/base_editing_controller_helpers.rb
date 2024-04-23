@@ -23,13 +23,13 @@ RSpec.shared_examples "base editing controller" do |factory: nil, only: [], exce
   ##
   # Possibili override per la costruzione delle path
   #
-  let(:url_for_new) { [model.new, action: :new] }
+  let(:url_for_new) { url_for([model.new, action: :new]) }
   let(:url_for_index) { url_for(model) }
-  let(:url_for_create) { [model.new] }
+  let(:url_for_create) { url_for(model.new) }
   let(:url_for_succ_delete) { url_for(model) }
   let(:url_for_fail_delete) { url_for_succ_delete }
-  let(:url_for_edit) { [persisted_instance, action: :edit] }
-  let(:url_for_update) { [persisted_instance, params: {param_key => valid_attributes}] }
+  let(:url_for_edit) { url_for([persisted_instance, action: :edit]) }
+  let(:url_for_update) { url_for(persisted_instance) }
   ## non sempre abbiamo l'index nelle action disponibili, dobbiamo quindi avere modo di eseguire un override
   let(:url_for_unauthorized) { url_for_index }
   ##
@@ -69,7 +69,7 @@ RSpec.shared_examples "base editing controller" do |factory: nil, only: [], exce
   if check_if_should_execute(only, except, :new)
     describe "new" do
       it "response" do
-        get url_for(url_for_new)
+        get url_for_new
         expect(response).to have_http_status(:ok)
         expect(assigns[:object]).to be_an_instance_of(model)
       end
@@ -79,7 +79,7 @@ RSpec.shared_examples "base editing controller" do |factory: nil, only: [], exce
   if check_if_should_execute(only, except, :edit)
     describe "edit" do
       it "response" do
-        get url_for(url_for_edit)
+        get url_for_edit
         expect(response).to have_http_status(:ok)
         expect(assigns[:object]).to be_an_instance_of(model)
       end
@@ -89,14 +89,14 @@ RSpec.shared_examples "base editing controller" do |factory: nil, only: [], exce
   if check_if_should_execute(only, except, :update)
     describe "update" do
       it "response" do
-        put url_for(url_for_update)
+        put url_for_update, params: {param_key => valid_attributes}
         expect(assigns[:object]).to be_an_instance_of(model)
         expect(response).to have_http_status(:see_other)
       end
 
       unless skip_invalid_checks
         it "not valid" do
-          put url_for([persisted_instance, params: {param_key => invalid_attributes}])
+          put url_for_update, params: {param_key => invalid_attributes}
           expect(response).to have_http_status(:unprocessable_entity)
         end
       end
@@ -106,14 +106,14 @@ RSpec.shared_examples "base editing controller" do |factory: nil, only: [], exce
   if check_if_should_execute(only, except, :create)
     describe "create" do
       it "response" do
-        post url_for([*url_for_create, params: {param_key => valid_attributes}])
+        post url_for_create, params: {param_key => valid_attributes}
         expect(assigns[:object]).to be_an_instance_of(model)
         expect(response).to have_http_status(:see_other)
       end
 
       unless skip_invalid_checks
         it "not valid" do
-          post url_for([*url_for_create, params: {param_key => invalid_attributes}])
+          post url_for_create, params: {param_key => invalid_attributes}
           expect(response).to have_http_status(:unprocessable_entity)
         end
       end
