@@ -40,6 +40,7 @@ Gem::Specification.new do |spec|
 
   spec.add_development_dependency "rspec-rails", '~> 6.0'
   spec.add_development_dependency "factory_bot_rails", '~> 6.4'
+  spec.add_development_dependency 'faker'
   spec.add_development_dependency "puma"
   spec.add_development_dependency "sqlite3"
   spec.add_development_dependency "sprockets-rails"
