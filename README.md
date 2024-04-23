@@ -44,6 +44,19 @@ config.generators do |g|
   g.factory_bot dir: 'spec/factories'
 end
 ```
+### Initializers
+E' possibile configurare BaseEditingBootstrap con alcune impostazioni:
+```ruby
+  BaseEditingBootstrap.configure do |config|
+    ##
+    # Controller da cui derivare poi il BaseEditingController da cui derivano 
+    # tutti i controller sottostanti
+    # @default "ApplicationController"
+    # config.inherited_controller = 'ApplicationController'
+  end
+
+```
+
 ## Usage
 Utilizzo per modello base, in questo esempio prendiamo come modello Post come esempio del dummy.
 

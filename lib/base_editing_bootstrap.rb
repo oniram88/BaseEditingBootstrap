@@ -15,6 +15,11 @@ loader.setup
 
 module BaseEditingBootstrap
   include ActiveSupport::Configurable
+
+  ##
+  # Controller da cui derivare poi il BaseEditingController da cui derivano
+  # tutti i controller sottostanti
+  # @default "ApplicationController"
   config_accessor :inherited_controller, default: "ApplicationController"
 
   def self.deprecator
