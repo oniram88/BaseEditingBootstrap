@@ -2,10 +2,10 @@ PATH
   remote: .
   specs:
     base_editing_bootstrap (0.2.0)
-      kaminari (>= 1.2.2)
-      pundit (>= 2.3.1)
-      rails (>= 7.0)
-      ransack (>= 4.0.0)
+      kaminari (~> 1.2, >= 1.2.2)
+      pundit (~> 2.3, >= 2.3.1)
+      rails (>= 7.0, < 8.0)
+      ransack (~> 4.0, >= 4.0.0)
 
 GEM
   remote: https://rubygems.org/
@@ -309,14 +309,14 @@ PLATFORMS
 DEPENDENCIES
   base_editing_bootstrap!
   cssbundling-rails
-  factory_bot_rails
+  factory_bot_rails (~> 6.4)
   i18n-debug
   puma
   rails-controller-testing
   rails-i18n (~> 7.0.0)
   rspec-html-matchers
   rspec-parameterized (>= 1.0.0)
-  rspec-rails
+  rspec-rails (~> 6.0)
   simplecov
   sprockets-rails
   sqlite3
