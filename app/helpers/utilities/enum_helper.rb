@@ -18,7 +18,10 @@ module Utilities
     def enum_translation(model, attribute, value, variant = nil)
       return '' if value.nil?
       variant = "_#{variant}" unless variant.nil?
-      model.human_attribute_name("#{attribute}.#{value}#{variant}")
+      model.human_attribute_name(
+        "#{attribute}.#{value}#{variant}",
+        default: model.human_attribute_name("#{attribute}.#{value}")
+      )
     end
   end
 end

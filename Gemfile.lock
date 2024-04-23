@@ -111,6 +111,8 @@ GEM
       activesupport (>= 6.1)
     i18n (1.14.4)
       concurrent-ruby (~> 1.0)
+    i18n-debug (1.2.0)
+      i18n (< 2)
     io-console (0.7.2)
     irb (1.12.0)
       rdoc
@@ -308,6 +310,7 @@ DEPENDENCIES
   base_editing_bootstrap!
   cssbundling-rails
   factory_bot_rails
+  i18n-debug
   puma
   rails-controller-testing
   rails-i18n (~> 7.0.0)

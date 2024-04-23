@@ -60,7 +60,10 @@ E' possibile configurare BaseEditingBootstrap con alcune impostazioni:
 ## Usage
 Utilizzo per modello base, in questo esempio prendiamo come modello Post come esempio del dummy.
 
-- Creare il Modello ed includere `include BaseEditingBootstrap::BaseModel`
+- Creare il Modello ed includere 
+  ```ruby
+   include BaseEditingBootstrap::BaseModel
+  ```
 - Creare Controller:
   ```ruby
     class PostsController < BaseEditingController
@@ -114,11 +117,15 @@ Utilizzo per modello base, in questo esempio prendiamo come modello Post come es
   - updated_at => timestamps.html.erb
   - default    => base.html.erb
   **Form Field**
-  - Integer          => _integer.html.erb
-  - Float            => _decimal.html.erb
-  - Decimal          => _decimal.html.erb
-  - DateTime         => _detetime.html.erb
-  - Date             => _date.html.erb
+  - Integer           => _integer.html.erb
+  - Float             => _decimal.html.erb
+  - Decimal           => _decimal.html.erb
+  - DateTime          => _detetime.html.erb
+  - Date              => _date.html.erb
+  - Enum              => _enum.html.erb
+    Per gli enum, le traduzioni dei labels di ogni valore provvengono da i18n
+    attraverso l'helper: `Utilities::EnumHelper#enum_translation`
+    il quale utilizza il nome dell'attributo con 
   - Default/String    => _base.html.erb
   
   In futuro si prevede di aggiungere automatismi per renderizzare senza 

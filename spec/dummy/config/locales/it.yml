@@ -27,5 +27,11 @@
 #       "yes": yup
 #       enabled: "ON"
 
-en:
-  hello: "Hello world"
+it:
+  activerecord:
+    attributes:
+      post/category:
+        other: "Altro"
+        project: "Progetti"
+        project_html: "Progetti<br>" # Version implementata per simulare il test
+
