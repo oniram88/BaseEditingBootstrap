@@ -64,6 +64,13 @@ Utilizzo per modello base, in questo esempio prendiamo come modello Post come es
   ```ruby
    include BaseEditingBootstrap::BaseModel
   ```
+- La factory nelle spec deve contenere il trait `with_invalid_attributes` per definire la situazione di dati per record
+  non valido. ES:  
+  ```ruby
+  trait :with_invalid_attributes do
+   name {nil} # name dovrebbe essere obbligatorio nel modello
+  end
+  ```
 - Creare Controller:
   ```ruby
     class PostsController < BaseEditingController
