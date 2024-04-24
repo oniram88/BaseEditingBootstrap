@@ -10,6 +10,11 @@ end
 ##
 # Helper per testare controller derivanti da base editing
 # only e except servono per filtrare o escludere determinate actions
+# @!attribute factory [Symbol] -> nome della factory da usare per il modello
+# @!attribute only [Array[Symbol]] -> nome delle sole action da controllare
+# @!attribute expect [Array[Symbol]] -> nome delle action da non controllare
+# @!attribute skip_invalid_checks [Boolean] -> se serve saltare il check delle azioni con dati non validi
+# 
 RSpec.shared_examples "base editing controller" do |factory: nil, only: [], except: [], skip_invalid_checks: false|
   if factory
     let(:inside_factory) { factory }
