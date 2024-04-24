@@ -53,6 +53,19 @@ E' possibile configurare BaseEditingBootstrap con alcune impostazioni:
     # tutti i controller sottostanti
     # @default "ApplicationController"
     # config.inherited_controller = 'ApplicationController'
+
+    ##
+    # Configurazione per alterare lo standard di azione post aggiornamento record
+    # il default è andare nella pagina di editing del record
+    # possibili valori :edit , :index
+    # config_accessor :after_success_update_redirect, default: :edit
+
+    ##
+    # Configurazione per alterare lo standard di azione post creazione record
+    # il default è andare nella pagina di editing del record
+    # possibili valori :edit , :index  
+    # config_accessor :after_success_create_redirect, default: :edit
+  
   end
 
 ```

@@ -186,7 +186,13 @@ class BaseEditingController < RestrictedAreaController
 
   def _successful_create(format)
     format.all do
-      redirect_to edit_custom_polymorphic_path(@object),
+      path = case BaseEditingBootstrap.after_success_create_redirect
+             when :index
+               index_custom_polymorphic_path(@object.class)
+             else
+               edit_custom_polymorphic_path(@object)
+             end
+      redirect_to path,
                   status: :see_other,
                   notice: t('activerecord.successful.messages.created', model: base_class.model_name.human)
     end
@@ -201,7 +207,13 @@ class BaseEditingController < RestrictedAreaController
 
   def _successful_update(format)
     format.all do
-      redirect_to edit_custom_polymorphic_path(@object),
+      path = case BaseEditingBootstrap.after_success_update_redirect
+             when :index
+               index_custom_polymorphic_path(@object.class)
+             else
+               edit_custom_polymorphic_path(@object)
+             end
+      redirect_to path,
                   status: :see_other,
                   notice: t('activerecord.successful.messages.updated', model: base_class.model_name.human)
     end
