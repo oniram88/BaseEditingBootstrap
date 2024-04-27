@@ -12,6 +12,7 @@ gem "sprockets-rails", '~> 3.4'
 
 gem 'simplecov', require: false, group: :test
 gem 'rails-i18n', '~> 7.0' # For 7.0.0
+gem "generator_spec",'~> 0.10'
 gem 'faker', '~> 3.3'
 gem "i18n-debug", '~> 1.2'
 gem "cssbundling-rails", '~> 1.4'
