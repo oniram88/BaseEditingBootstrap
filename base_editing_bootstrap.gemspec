@@ -37,6 +37,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'ransack', ['~> 4.0', '>= 4.0.0']
   # Pagination
   spec.add_dependency 'kaminari', ['~> 1.2', '>= 1.2.2']
+  spec.add_dependency 'kaminari-i18n', '~> 0.5'
 
   spec.add_development_dependency "rspec-rails", '~> 6.0'
   spec.add_development_dependency "factory_bot_rails", '~> 6.4'

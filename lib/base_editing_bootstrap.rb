@@ -1,5 +1,6 @@
 require "ransack"
 require "kaminari"
+require "kaminari-i18n"
 require "pundit"
 
 if ENV['RAILS_ENV'] == 'test' and defined? RSpec

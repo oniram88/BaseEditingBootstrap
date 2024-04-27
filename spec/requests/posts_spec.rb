@@ -46,6 +46,23 @@ RSpec.describe "Posts", type: :request do
 
     end
 
+    describe "pagination" do
+
+      let!(:posts) {
+        create_list(:post, 30, title: "Post 1")
+      }
+
+      it "render pagination" do
+        get posts_path
+        expect(response.body).to have_tag("nav ul.pagination") do
+          with_tag("li.page-item.active>a",text: "1")
+          with_tag("li.page-item>a",text: "2")
+        end
+      end
+
+
+    end
+
   end
 
 end
