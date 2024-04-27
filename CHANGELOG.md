@@ -2,6 +2,23 @@
 All notable changes to this project will be documented in this file. See [conventional commits](https://www.conventionalcommits.org/) for commit guidelines.
 
 - - -
+## 0.3.0 - 2024-04-27
+#### Bug Fixes
+- Remove files from gem - (660cb3d) - Marino Bonetti
+#### Documentation
+- Update documentation - (42472ff) - Marino Bonetti
+- Add documentation for spec helper - (170dd5a) - Marino Bonetti
+#### Features
+- Add configurations to change redirect after edit/create - (f8f3048) - Marino Bonetti
+#### Refactoring
+- Gem dependency organization - (7fb8caf) - Marino Bonetti
+- Gem dependency organization - (f997fd9) - Marino Bonetti
+#### Tests
+- Aggiunta test per controllo redirect post success o update - (4c28e38) - Marino Bonetti
+- Add Seed for generating multiple post in dummy - (bcbe986) - Marino Bonetti
+
+- - -
+
 ## 0.2.0 - 2024-04-23
 #### Documentation
 - Add documntation for installation - (b528daa) - Marino Bonetti
