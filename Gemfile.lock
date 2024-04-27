@@ -3,6 +3,7 @@ PATH
   specs:
     base_editing_bootstrap (0.3.0)
       kaminari (~> 1.2, >= 1.2.2)
+      kaminari-i18n (~> 0.5)
       pundit (~> 2.3, >= 2.3.1)
       rails (>= 7.0, < 8.0)
       ransack (~> 4.0, >= 4.0.0)
@@ -131,6 +132,9 @@ GEM
       activerecord
       kaminari-core (= 1.2.2)
     kaminari-core (1.2.2)
+    kaminari-i18n (0.5.0)
+      kaminari
+      rails
     loofah (2.22.0)
       crass (~> 1.0.2)
       nokogiri (>= 1.12.0)
@@ -310,19 +314,19 @@ PLATFORMS
 
 DEPENDENCIES
   base_editing_bootstrap!
-  cssbundling-rails
+  cssbundling-rails (~> 1.4)
   factory_bot_rails (~> 6.4)
-  faker
-  i18n-debug
-  puma
-  rails-controller-testing
-  rails-i18n (~> 7.0.0)
-  rspec-html-matchers
+  faker (~> 3.3)
+  i18n-debug (~> 1.2)
+  puma (~> 6.4)
+  rails-controller-testing (~> 1.0)
+  rails-i18n (~> 7.0)
+  rspec-html-matchers (~> 0.10)
   rspec-parameterized (>= 1.0.0)
   rspec-rails (~> 6.0)
   simplecov
-  sprockets-rails
-  sqlite3
+  sprockets-rails (~> 3.4)
+  sqlite3 (~> 1.7)
 
 BUNDLED WITH
    2.5.3
