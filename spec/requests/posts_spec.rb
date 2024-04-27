@@ -5,6 +5,22 @@ RSpec.describe "Posts", type: :request do
     let(:user) { create(:user) }
     it_behaves_like "base editing controller", factory: :post
 
+    context "configuration to redirect to index action" do
+      around do |example|
+        BaseEditingBootstrap.configure do |config|
+          config.after_success_update_redirect = :index
+          config.after_success_create_redirect = :index
+        end
+        example.run
+        BaseEditingBootstrap.configure do |config|
+          config.after_success_update_redirect = :edit
+          config.after_success_create_redirect = :edit
+        end
+      end
+      it_behaves_like "base editing controller", factory: :post
+
+    end
+
     describe "search" do
       let!(:posts) {
         create(:post, title: "Post 1")

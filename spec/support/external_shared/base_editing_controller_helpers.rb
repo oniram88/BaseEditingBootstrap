@@ -21,6 +21,21 @@ end
 # @!attribute expect [Array[Symbol]] -> nome delle action da non controllare
 # @!attribute skip_invalid_checks [Boolean] -> se serve saltare il check delle azioni con dati non validi
 #
+# Sono poi disponibili diversi let per poter fare l'override arbitrario degli url,
+# tutti abbastanza auto-descrittivi
+# 
+# :url_for_new
+# :url_for_index
+# :url_for_create
+# :url_for_succ_delete
+# :url_for_fail_delete
+# :url_for_edit             ->  Rispetto  agli altri questo risulta essere pià complicato in quanto
+#                               deve ritornare una proc a cui passiamo il valore dell'istanza persistente
+#                               che nei casi del after create non abbiamo a priori.
+# :url_for_unauthorized
+# :url_for_update
+#
+#
 RSpec.shared_examples "base editing controller" do |factory: nil, only: [], except: [], skip_invalid_checks: false|
   if factory
     let(:inside_factory) { factory }
@@ -39,7 +54,9 @@ RSpec.shared_examples "base editing controller" do |factory: nil, only: [], exce
   let(:url_for_create) { url_for(model.new) }
   let(:url_for_succ_delete) { url_for(model) }
   let(:url_for_fail_delete) { url_for_succ_delete }
-  let(:url_for_edit) { url_for([persisted_instance, action: :edit]) }
+  let(:url_for_edit) { ->(p = persisted_instance) {
+    url_for([p, action: :edit])
+  } }
   let(:url_for_update) { url_for(persisted_instance) }
   ## non sempre abbiamo l'index nelle action disponibili, dobbiamo quindi avere modo di eseguire un override
   let(:url_for_unauthorized) { url_for_index }
@@ -90,7 +107,7 @@ RSpec.shared_examples "base editing controller" do |factory: nil, only: [], exce
   if check_if_should_execute(only, except, :edit)
     describe "edit" do
       it "response" do
-        get url_for_edit
+        get url_for_edit.call
         expect(response).to have_http_status(:ok)
         expect(assigns[:object]).to be_an_instance_of(model)
       end
@@ -103,6 +120,13 @@ RSpec.shared_examples "base editing controller" do |factory: nil, only: [], exce
         put url_for_update, params: {param_key => valid_attributes}
         expect(assigns[:object]).to be_an_instance_of(model)
         expect(response).to have_http_status(:see_other)
+        case BaseEditingBootstrap.after_success_update_redirect
+        when :index
+          expect(response).to redirect_to(url_for_index)
+        else
+          # edit
+          expect(response).to redirect_to(url_for_edit.call(assigns[:object]))
+        end
       end
 
       unless skip_invalid_checks
@@ -120,6 +144,13 @@ RSpec.shared_examples "base editing controller" do |factory: nil, only: [], exce
         post url_for_create, params: {param_key => valid_attributes}
         expect(assigns[:object]).to be_an_instance_of(model)
         expect(response).to have_http_status(:see_other)
+        case BaseEditingBootstrap.after_success_create_redirect
+        when :index
+          expect(response).to redirect_to(url_for_index)
+        else
+          # edit
+          expect(response).to redirect_to(url_for_edit.call(assigns[:object]))
+        end
       end
 
       unless skip_invalid_checks
