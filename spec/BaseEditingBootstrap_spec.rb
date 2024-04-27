@@ -2,7 +2,7 @@
 
 RSpec.describe BaseEditingBootstrap do
   it "has a version number" do
-    expect(BaseEditingBootstrap::VERSION).not_to be nil
+    expect(BaseEditingBootstrap::VERSION).not_to match /[0-9]+\.[0-9]+\.[0-9]+]/
   end
 
   describe "configurations" do
