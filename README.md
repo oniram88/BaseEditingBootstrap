@@ -20,6 +20,11 @@ Or install it yourself as:
 $ gem install base_editing_bootstrap
 ```
 
+Then run installer:
+```bash
+$ bundle exec rails g base_editing_bootstrap:install
+```
+
 ### TODO generators
 Then Install dependency (WIP TO TRANSLATE IN INSTALLATION TASK):
 ```bash
@@ -36,7 +41,8 @@ La versione più semplice è attraverso: https://github.com/rails/cssbundling-ra
 Una volta installato basta lanciare bin/rails css:install:bootstrap come da
 documentazione e avrete la vostra versione di boostrap installata.
 
-Installare `gem "factory_bot_rails"` e configurarlo correttamente in application.rb
+Installare `gem "factory_bot_rails"`,  
+Optional configurarlo correttamente in application.rb
 ```ruby
 config.generators do |g|
   g.test_framework :rspec
