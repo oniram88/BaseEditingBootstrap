@@ -2,6 +2,25 @@
 All notable changes to this project will be documented in this file. See [conventional commits](https://www.conventionalcommits.org/) for commit guidelines.
 
 - - -
+## 0.4.0 - 2024-04-29
+#### Bug Fixes
+- Add Translations for pagination - (14bbb6f) - Marino Bonetti
+- Remove rubygems warnings - (5b0dc6e) - Marino Bonetti
+#### Documentation
+- Documentation - (a2f93cd) - Marino Bonetti
+#### Features
+- Prepare new installer - (9189b26) - Marino Bonetti
+#### Miscellaneous Chores
+- Start initializer as template - (7cc6756) - Marino Bonetti
+- Fix versions in gemfile - (5280d4e) - Marino Bonetti
+#### Tests
+- Create spec for generators - (c7b3210) - Marino Bonetti
+- Spec per generator - (bf79a97) - Marino Bonetti
+- Add test to policy - (41d6bac) - Marino Bonetti
+- Match gem version - (462e72f) - Marino Bonetti
+
+- - -
+
 ## 0.3.0 - 2024-04-27
 #### Bug Fixes
 - Remove files from gem - (660cb3d) - Marino Bonetti
