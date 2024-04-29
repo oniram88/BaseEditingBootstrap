@@ -25,8 +25,8 @@ Then run installer:
 $ bundle exec rails g base_editing_bootstrap:install
 ```
 
-### TODO generators
-Then Install dependency (WIP TO TRANSLATE IN INSTALLATION TASK):
+### Generators
+Then Install dependency (if you run base_editing_bootstrap:install you are good to go):
 ```bash
 
 bundle exec rails g pundit:install
