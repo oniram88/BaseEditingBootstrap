@@ -13,7 +13,7 @@ RSpec::Matchers.define :permit_editable_attributes do |*expected_attributes|
   end
 end
 
-shared_examples "a standard policy" do |factory|
+RSpec.shared_examples "a standard policy" do |factory|
   let(:user) { create(:user) }
   let(:instance) { described_class.new(user, build(factory)) }
 
