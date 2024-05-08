@@ -13,11 +13,11 @@ RSpec::Matchers.define :permit_editable_attributes do |*expected_attributes|
   end
 end
 
-RSpec.shared_examples "a standard policy" do |factory|
+RSpec.shared_examples "a standard base model policy" do |factory, check_default_responses: false|
   let(:user) { create(:user) }
   let(:instance) { described_class.new(user, build(factory)) }
 
-  describe "standard_methotds" do
+  describe "standard_methods" do
     where(:method, :response) do
       [
         [:show?, false],
@@ -32,8 +32,10 @@ RSpec.shared_examples "a standard policy" do |factory|
       it "should " do
         expect(instance).to respond_to(method)
       end
-      it "return value" do
-        expect(instance.send(method)).to be == response
+      if check_default_responses
+        it "return value" do
+          expect(instance.send(method)).to be == response
+        end
       end
     end
   end
