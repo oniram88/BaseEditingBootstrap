@@ -2,6 +2,12 @@
 All notable changes to this project will be documented in this file. See [conventional commits](https://www.conventionalcommits.org/) for commit guidelines.
 
 - - -
+## 0.4.2 - 2024-05-08
+#### Bug Fixes
+- Rename shared example for cluck with apps - (41638f8) - Marino Bonetti
+
+- - -
+
 ## 0.4.1 - 2024-04-30
 #### Bug Fixes
 - Correct pundit shared examples - (2001e08) - Marino Bonetti
