@@ -1,5 +1,5 @@
 class BaseEditingController < RestrictedAreaController
-  before_action :load_object, only: [:edit, :update, :destroy]
+  before_action :load_object, only: [:edit, :show, :update, :destroy]
   helper_method :base_class,
                 :destroy_custom_polymorphic_path,
                 :edit_custom_polymorphic_path,
@@ -29,6 +29,10 @@ class BaseEditingController < RestrictedAreaController
   end
 
   def edit
+    @object = yield(@object) if block_given?
+  end
+
+  def show
     @object = yield(@object) if block_given?
   end
 
