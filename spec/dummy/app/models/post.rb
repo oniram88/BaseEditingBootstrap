@@ -7,4 +7,10 @@ class Post < ApplicationRecord
     project: "project",
     other: "other"
   }
+
+  enum :priority, {
+    normal: 0,
+    low: 1,
+    urgent: 2
+  }, default: :normal, prefix: true
 end

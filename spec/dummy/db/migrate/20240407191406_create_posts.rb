@@ -4,6 +4,7 @@ class CreatePosts < ActiveRecord::Migration[7.1]
       t.string :title
       t.string :description
       t.string :category
+      t.integer :priority
       t.integer :read_counter
       t.date :published_at
       t.float :rating

@@ -48,9 +48,18 @@ RSpec.describe Utilities::FormHelper, type: :helper do
         expect(helper.form_print_field(form, :read_counter)).to have_tag(:input, with: {type: "number", step: "1"})
       end
 
-      it "with enum" do
-        expect(helper.form_print_field(form, :category)).to have_tag(:select) do
-          with_tag(:option, text: "News", with: {value: "news"})
+      describe "enum" do
+        it "as string enum" do
+          expect(helper.form_print_field(form, :category)).to have_tag(:select) do
+            with_tag(:option, text: "News", with: {value: "news"})
+          end
+        end
+        it "as integer" do
+          expect(helper.form_print_field(form, :priority)).to have_tag(:select) do
+            with_tag(:option, text: "Normal", with: {value: "normal"})
+            with_tag(:option, text: "Low", with: {value: "low"})
+            with_tag(:option, text: "Urgent", with: {value: "urgent"})
+          end
         end
       end
 

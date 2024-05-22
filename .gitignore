@@ -8,6 +8,7 @@
 /spec/dummy/log/*.log
 /spec/dummy/storage/
 /spec/dummy/tmp/
+/spec/examples.txt
 coverage
 !Dockerfile
 *.gem

@@ -18,23 +18,23 @@ module Utilities
     # @param [Symbol] field
     def form_print_field(form, field)
       locals = {form:, field:}
-      type = form.object.class.type_for_attribute(field).type
-      case type
-      when :datetime
-        generic_field = "datetime"
-      when :date
-        generic_field = "date"
-      when :decimal
-        locals[:scale] = form.object.class.type_for_attribute(field).scale || 2
-        generic_field = "decimal"
-      when :float
-        locals[:scale] = 2 # usiamo il default dato che non abbiamo questa informazione negli attributes di rails
-        generic_field = "decimal"
-      when :integer
-        generic_field = "integer"
+      if form.object.class.defined_enums.key?(field.to_s)
+        generic_field = "enum"
       else
-        if form.object.class.defined_enums.key?(field.to_s)
-          generic_field = "enum"
+        type = form.object.class.type_for_attribute(field).type
+        case type
+        when :datetime
+          generic_field = "datetime"
+        when :date
+          generic_field = "date"
+        when :decimal
+          locals[:scale] = form.object.class.type_for_attribute(field).scale || 2
+          generic_field = "decimal"
+        when :float
+          locals[:scale] = 2 # usiamo il default dato che non abbiamo questa informazione negli attributes di rails
+          generic_field = "decimal"
+        when :integer
+          generic_field = "integer"
         else
           generic_field = "base"
         end

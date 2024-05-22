@@ -4,7 +4,8 @@ class PostPolicy < BaseModelPolicy
     [
       :title,
       :description,
-      :category
+      :category,
+      :priority
     ]
   end
 
@@ -12,7 +13,8 @@ class PostPolicy < BaseModelPolicy
     [
       :title,
       :description,
-      :category
+      :category,
+      :priority
     ]
   end
 
