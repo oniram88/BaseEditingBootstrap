@@ -2,6 +2,17 @@
 All notable changes to this project will be documented in this file. See [conventional commits](https://www.conventionalcommits.org/) for commit guidelines.
 
 - - -
+## 0.5.0 - 2024-05-22
+#### Bug Fixes
+- Correct initializer commented examples - (ba90fba) - Marino Bonetti
+#### Features
+- Action for Show enabled - (d364ed3) - Marino Bonetti
+- Enums with Integer identified - (4fa9e87) - Marino Bonetti
+#### Tests
+- Save example_status_persistence_file_path - (235939d) - Marino Bonetti
+
+- - -
+
 ## 0.4.2 - 2024-05-08
 #### Bug Fixes
 - Rename shared example for cluck with apps - (41638f8) - Marino Bonetti
