@@ -170,6 +170,50 @@ Utilizzo per modello base, in questo esempio prendiamo come modello Post come es
   #...
   ```
 
+## Testing helpers
+
+### Requirements(installed with generators)
+```ruby
+group :test do
+  gem 'rails-controller-testing'
+end
+```
+### Usage 
+Controllers:
+```ruby
+require 'rails_helper'
+RSpec.describe "ServiceControllers", type: :request do
+  it_behaves_like "as logged in user" do
+    it_behaves_like "base editing controller", factory: :service
+  end
+end
+```
+Model:
+```ruby
+require 'rails_helper'
+RSpec.describe Service, type: :model do
+  it_behaves_like "a base model",
+                  ransack_permitted_attributes: %w[created_at id last_status name stack_id updated_at],
+                  ransack_permitted_associations: []
+end
+```
+Policy
+```ruby
+require 'rails_helper'
+##
+# - check_default_responses default false, to check default responses
+#    TODO should be configurable
+#    [:show?, false], 
+#    [:destroy?, true],
+#    [:update?, true],
+#    [:create?, true],
+#    [:index?, true],
+# 
+RSpec.describe ServicePolicy, type: :policy do
+  it_behaves_like "a standard base model policy", :service, check_default_responses: false
+end
+```
+
 
 ## Contributing
 Contribution directions go here.
