@@ -18,6 +18,7 @@ module BaseEditingBootstrap
 
       def prepare_test_environment
         gem "factory_bot_rails", group: :test, version: '~> 6.4', comment: "Necessary for spec"
+        gem 'rails-controller-testing',group: :test,comment:"Required if used with controllers spec"
         inject_into_class "config/application.rb", "Application", <<~RUBY
           config.generators do |g|
             g.test_framework :rspec
