@@ -33,12 +33,13 @@ RSpec.describe BaseEditingBootstrap::Generators::InstallGenerator, type: :genera
   it "install_and_configure_pundit" do
     expect(generator).to receive(:generate).with("pundit:install")
     generator.install_and_configure_pundit
-    assert_file(File.join(destination_root, "app/controllers/application_controller.rb"),/include Pundit::Authorization/)
+    assert_file(File.join(destination_root, "app/controllers/application_controller.rb"), /include Pundit::Authorization/)
   end
 
   it "#prepare_test_environment" do
     expect(generator).to receive(:gem).with("factory_bot_rails", anything)
+    expect(generator).to receive(:gem).with('rails-controller-testing', anything)
     generator.prepare_test_environment
-    assert_file(File.join(destination_root, "config/application.rb"),/g.factory_bot dir: 'spec\/factories'/)
+    assert_file(File.join(destination_root, "config/application.rb"), /g.factory_bot dir: 'spec\/factories'/)
   end
 end
