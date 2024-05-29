@@ -20,6 +20,7 @@ end
 #         - index
 # @!attribute expect [Array[Symbol]] -> nome delle action da non controllare
 # @!attribute skip_invalid_checks [Boolean] -> se serve saltare il check delle azioni con dati non validi
+# @!attribute skip_authorization_check [Boolean] -> se skippare controllo delle autorizzazioni nel caso non siano azioni non autorizzabili
 #
 # Sono poi disponibili diversi let per poter fare l'override arbitrario degli url,
 # tutti abbastanza auto-descrittivi
@@ -36,7 +37,7 @@ end
 # :url_for_update
 #
 #
-RSpec.shared_examples "base editing controller" do |factory: nil, only: [], except: [], skip_invalid_checks: false|
+RSpec.shared_examples "base editing controller" do |factory: nil, only: [], except: [], skip_invalid_checks: false, skip_authorization_check: false|
   if factory
     let(:inside_factory) { factory }
   else
@@ -78,7 +79,9 @@ RSpec.shared_examples "base editing controller" do |factory: nil, only: [], exce
     nested_attributes_for(inside_factory)
   }
 
-  it_behaves_like "fail with unauthorized", request: -> { get url_for(url_for_unauthorized) }
+  unless skip_authorization_check
+    it_behaves_like "fail with unauthorized", request: -> { get url_for(url_for_unauthorized) }
+  end
 
   if check_if_should_execute(only, except, :index)
     describe "index" do
@@ -186,7 +189,7 @@ end
 default_unathorized_failure = -> { raise "TODO - passare proc con richiesta che dovrà fallire" }
 
 RSpec.shared_examples "fail with unauthorized" do |request: default_unathorized_failure|
-  it "expect to redirect to root" do
+  it "is expected to redirect to root" do
     expect(Pundit).to receive(:authorize).with(user, any_args).and_raise(Pundit::NotAuthorizedError)
     instance_exec(&request)
     expect(response).to redirect_to(root_path)
