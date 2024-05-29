@@ -2,6 +2,18 @@
 All notable changes to this project will be documented in this file. See [conventional commits](https://www.conventionalcommits.org/) for commit guidelines.
 
 - - -
+## 0.6.0 - 2024-05-29
+#### Bug Fixes
+- Add dependency in generator - (b911b1a) - Marino Bonetti
+#### Documentation
+- Add documentation for specs - (42a88ca) - Marino Bonetti
+#### Features
+- Add Capacity to skip un-authorization - (c83c51c) - Marino Bonetti
+#### Tests
+- Add spec for test env - (b8611d7) - Marino Bonetti
+
+- - -
+
 ## 0.5.0 - 2024-05-22
 #### Bug Fixes
 - Correct initializer commented examples - (ba90fba) - Marino Bonetti
