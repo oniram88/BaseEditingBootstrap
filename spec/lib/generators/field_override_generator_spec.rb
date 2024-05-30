@@ -12,10 +12,11 @@ RSpec.describe BaseEditingBootstrap::Generators::FieldOverrideGenerator, type: :
     where(:type, :source) do
       [
         [nil, "_base"],
+        ["string", "_base"],
         ["date", "_date"],
         ["datetime", "_datetime"],
         ["decimal", "_decimal"],
-        #["enum", "_enum"], TODO capire come implementare anche enum
+        ["enum", "_enum"],
         ["integer", "_integer"]
       ]
     end
