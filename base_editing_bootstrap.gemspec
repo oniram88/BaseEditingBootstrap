@@ -11,8 +11,7 @@ Gem::Specification.new do |spec|
   spec.license = "MIT"
   spec.required_ruby_version = ">= 3.1"
 
-  spec.metadata["homepage_uri"] = spec.homepage
-  spec.metadata["source_code_uri"] = "https://github.com/oniram88/BaseEditingBootstrap"
+  spec.metadata["source_code_uri"] = spec.homepage
   spec.metadata["changelog_uri"] = "https://github.com/oniram88/BaseEditingBootstrap/blob/main/CHANGELOG.md"
 
   # Specify which files should be added to the gem when it is released.
@@ -48,7 +47,7 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency 'rails-i18n', '~> 7.0' # For 7.0.0
   spec.add_development_dependency "i18n-debug", '~> 1.2'
   spec.add_development_dependency "cssbundling-rails", '~> 1.4'
-  spec.add_development_dependency "rspec-parameterized", ">= 1.0.0" # https://github.com/tomykaira/rspec-parameterized
+  spec.add_development_dependency "rspec-parameterized", "~> 1.0", ">= 1.0.0" # https://github.com/tomykaira/rspec-parameterized
   spec.add_development_dependency 'rspec-html-matchers', '~> 0.10' # https://github.com/kucaahbe/rspec-html-matchers
   spec.add_development_dependency 'rails-controller-testing', '~>1.0'
 
