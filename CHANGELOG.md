@@ -2,6 +2,18 @@
 All notable changes to this project will be documented in this file. See [conventional commits](https://www.conventionalcommits.org/) for commit guidelines.
 
 - - -
+## 0.7.0 - 2024-05-30
+#### Bug Fixes
+- Generators with enum - (7f25cac) - Marino Bonetti
+#### Features
+- Add Generator for cell field - (ab0210b) - Marino Bonetti
+- Add generator for form field override - (118b998) - Marino Bonetti
+- Add distinguishable classes per field - (2e5e797) - Marino Bonetti
+#### Tests
+- Add Tests to generator - (cd3f40a) - Marino Bonetti
+
+- - -
+
 ## 0.6.0 - 2024-05-29
 #### Bug Fixes
 - Add dependency in generator - (b911b1a) - Marino Bonetti
