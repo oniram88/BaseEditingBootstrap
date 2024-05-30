@@ -2,16 +2,16 @@
 
 module BaseEditingBootstrap
   module Generators
-    class FieldOverrideGenerator < ::Rails::Generators::Base
+    class CellOverrideGenerator < ::Rails::Generators::Base
       source_root File.expand_path("../../../../app/views/base_editing", __dir__)
       argument :name, type: :string, banner: "Post", required: true
       argument :attributes, type: :array, default: [], banner: "field field:type"
 
-      TYPES = %i[base date datetime decimal integer enum]
+      TYPES = [:base,:timestamps].freeze
 
       desc <<-DESCRIPTION.strip_heredoc
              Description:   
-                Copy partial files for a defined fields, 
+                Copy partial files for a defined cell, 
                 the possible types are #{TYPES}
                 Default to base
       DESCRIPTION
@@ -28,7 +28,7 @@ module BaseEditingBootstrap
             type = :base if type.nil?
             type = type.to_sym
             raise "Type #{type} not found in #{TYPES}" unless TYPES.include?(type)
-            copy_file "form_field/_#{type}.html.erb", File.join("app/views", plural_name, singular_name, 'form_field', "_#{attr_name}.html.erb")
+            copy_file "cell_field/_#{type}.html.erb", File.join("app/views", plural_name, singular_name, 'cell_field', "_#{attr_name}.html.erb")
           end
         end
 
