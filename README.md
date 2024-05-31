@@ -100,40 +100,35 @@ Utilizzo per modello base, in questo esempio prendiamo come modello Post come es
   ```ruby
   class PostPolicy < BaseModelPolicy
   
-  def editable_attributes
-  [
-  :title,
-  :description
-  ]
-  end
+    def editable_attributes
+      [
+      :title,
+      :description
+      ]
+    end
+    
+    def permitted_attributes
+      [
+      :title,
+      :description
+      ]
+    end
+    
+    def search_result_fields
+      [:title]
+    end
   
-  def permitted_attributes
-  [
-  :title,
-  :description
-  ]
-  end
-  
-  def search_result_fields
-  [:title]
-  end
   end
 
   ```
-- [OPTIONAL] nel caso si volesse fare override dei campi della form:  
-  Per il campo che si vuole fare override creare un nuovo file nella cartella 
-  del modello `app/views/posts/post/form_field/_NOME_CAMPO.html.erb`  
-  al cui interno renderizzare il campo come si preferisce:
-  ```erbruby
-    <%# locals: (form:, field:) -%>
-    <%= form.text_field(field) %>
+- [OPTIONAL] nel caso si volesse fare override dei campi della form chiamare il generatore:
+  ```shell
+  rails g base_editing_bootstrap:field_override ModelName field1 field2:type
   ```
 - [OPTIONAL] la medesima cosa è possibile fare con il rendering dei campi
-  delle celle della tabella della pagina index.  
-  La cartella da generare in questo caso sarà: `app/views/posts/post/cell_field/_NOME_CAMPO.html.erb`
-  ```erbruby
-  <%# locals: (obj:,field:)  -%>
-  <td><%= obj.read_attribute(field) %></td>
+  delle celle della tabella
+  ```shell
+  rails g base_editing_bootstrap:cell_override ModelName field1 field2:type
   ```
 - [OPTIONAL] Base overrides:  
   E' possibile anche fare un override generico dei campi, sono previsti questi tipi di partial
