@@ -41,15 +41,8 @@ La versione più semplice è attraverso: https://github.com/rails/cssbundling-ra
 Una volta installato basta lanciare bin/rails css:install:bootstrap come da
 documentazione e avrete la vostra versione di boostrap installata.
 
-Installare `gem "factory_bot_rails"`,  
-Optional configurarlo correttamente in application.rb
-```ruby
-config.generators do |g|
-  g.test_framework :rspec
-  g.fixture_replacement :factory_bot
-  g.factory_bot dir: 'spec/factories'
-end
-```
+Installare `gem "factory_bot_rails"`
+
 ### Initializers
 E' possibile configurare BaseEditingBootstrap con alcune impostazioni:
 ```ruby
