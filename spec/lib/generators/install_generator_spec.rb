@@ -39,5 +39,6 @@ RSpec.describe BaseEditingBootstrap::Generators::InstallGenerator, type: :genera
   it "#prepare_test_environment" do
     expect(generator).to receive(:gem).with("factory_bot_rails", anything)
     expect(generator).to receive(:gem).with('rails-controller-testing', anything)
+    generator.prepare_test_environment
   end
 end
