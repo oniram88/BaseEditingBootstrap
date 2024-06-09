@@ -1,0 +1,18 @@
+<%# locals: (obj:) -%>
+<%= link_to(icon("pencil-square"),
+            edit_custom_polymorphic_path(obj),
+            class: "btn btn-sm btn-primary me-1") if policy(obj).edit? %>
+
+
+<%= link_to(icon(:eye),
+            show_custom_polymorphic_path(obj),
+            class: "btn btn-sm btn-primary me-1") if policy(obj).show? %>
+
+
+<%= link_to(icon(:trash),
+            destroy_custom_polymorphic_path(obj),
+            data: {
+              turbo_method: :delete,
+              turbo_confirm: t("are_you_sure")
+            },
+            class: "btn btn-sm btn-danger me-1") if policy(obj).destroy? %>

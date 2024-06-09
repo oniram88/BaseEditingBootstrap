@@ -60,33 +60,6 @@ module Utilities
       end
     end
 
-    def search_result_buttons(rec)
-      btns = ActiveSupport::SafeBuffer.new
-
-      if policy(rec).edit?
-        btns << link_to(icon("pencil-square"),
-                        edit_custom_polymorphic_path(rec),
-                        class: "btn btn-sm btn-primary me-1")
-      end
-
-      if policy(rec).show?
-        btns << link_to(icon(:eye),
-                        show_custom_polymorphic_path(rec),
-                        class: "btn btn-sm btn-primary me-1")
-      end
-
-      if policy(rec).destroy?
-        btns << link_to(icon(:trash),
-                        destroy_custom_polymorphic_path(rec),
-                        data: {
-                          turbo_method: :delete,
-                          turbo_confirm: t("are_you_sure")
-                        },
-                        class: "btn btn-sm btn-danger me-1")
-      end
-      btns
-    end
-
     ##
     # Possibile override dei parametri da passare a ransack nella form
     def search_form_for_params(ransack_instance)
@@ -111,5 +84,11 @@ Altrimenti in modo semplificato basta lanciare il generatore:
 ```
 rails g base_editing_bootstrap:cell_override ClasseModello nome_campo
 ```
+MESSAGE
+)
+
+BaseEditingBootstrap.deprecator.deprecate_methods(Utilities::SearchHelper, search_result_buttons: <<-MESSAGE
+Come per il raw field, anche i bottoni sono stati spostati nelle viste.
+Sovrascrivi la vista _search_result_buttons.html.erb
 MESSAGE
 )
