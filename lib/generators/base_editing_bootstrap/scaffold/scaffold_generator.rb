@@ -60,6 +60,8 @@ module BaseEditingBootstrap
         end
 
         template "policy.rb", File.join("app/policies", "#{singular_name}_policy.rb")
+        template "spec/policy.rb", File.join("spec/policies", "#{singular_name}_policy_spec.rb")
+
       end
 
 
