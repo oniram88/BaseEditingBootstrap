@@ -1,9 +1,11 @@
 class <%= class_name %>Policy < BaseModelPolicy
 
   def editable_attributes = %w[<%= attributes_names.join(" ") %>]
-
   def permitted_attributes = %w[<%= attributes_names.join(" ") %>]
-
   def search_result_fields = %w[<%= attributes_names.join(" ") %>]
-
+<%- if @search_attrs.any? -%>
+  def search_fields
+    %i[<%= @search_attrs.join(" ") %>]
+  end
+<%- end -%>
 end

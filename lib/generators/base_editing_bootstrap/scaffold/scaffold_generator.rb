@@ -16,20 +16,6 @@ module BaseEditingBootstrap
         end
 
         template "spec/model.rb", File.join("spec/models", "#{singular_name}_spec.rb")
-
-
-=begin
-        gsub_file "spec/models/#{singular_name}_spec.rb", /pending.*/, ""
-
-        inject_into_file "spec/models/#{singular_name}_spec.rb", before: "end" do
-          "  it_behaves_like \"a base model\",
-                ransack_permitted_attributes: %w[#{attributes_names.join(" ")}],
-                ransack_permitted_associations: []\n"
-        end
-=end
-
-
-
       end
 
       def add_controller
@@ -44,6 +30,35 @@ module BaseEditingBootstrap
       end
 
       def add_policy
+        @search_attrs = []
+        if yes? "Vuoi poter ricercare determinati campi con form di ricerca?"
+
+          say "Gli attributi che hai indicato sono: #{ attributes_names.join(",")}"
+          say <<~MESSAGE
+            La ricerca avviene tramite le logiche di ransack.
+            Puoi trovare la documentazione dei predicati di ricerca qua: 
+            https://activerecord-hackery.github.io/ransack/getting-started/search-matches/
+            Ecco alcuni esempi di possibili modi di ricercare:
+          MESSAGE
+
+          matchers = {
+            "_eq":"Equal",
+            "_not_eq":"Not equal",
+            "_i_cont":"Contains insensitive",
+          }
+
+          out =  [["",*matchers.values]]
+          attributes_names.each do |attr|
+            out << [attr, *matchers.keys.collect{|m| "#{attr}#{m}"  } ]
+          end
+
+          puts out.inspect
+
+          print_table(out,borders:true)
+          @search_attrs = ask("Inserisce un elenco diviso da virgola degli attributi da ricercare").split(",")
+
+        end
+
         template "policy.rb", File.join("app/policies", "#{singular_name}_policy.rb")
       end
 
