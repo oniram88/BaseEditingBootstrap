@@ -1,0 +1,6 @@
+require 'rails_helper'
+RSpec.describe <%= class_name %>, type: :model do
+  it_behaves_like "a base model",
+                  ransack_permitted_attributes: %w[<%= attributes_names.join(" ") %>],
+                  ransack_permitted_associations: []
+end

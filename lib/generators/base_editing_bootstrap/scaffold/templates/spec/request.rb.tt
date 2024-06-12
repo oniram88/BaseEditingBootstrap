@@ -1,0 +1,6 @@
+require 'rails_helper'
+RSpec.describe "<%= controller_class_name %>", type: :request do
+  it_behaves_like "as logged in user" do
+    it_behaves_like "base editing controller", factory: :<%= singular_name %>
+  end
+end

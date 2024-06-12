@@ -3,6 +3,6 @@
     <%= render_cell_field(obj, srf) %>
   <% end %>
   <td>
-    <%= search_result_buttons(obj) %>
+    <%= render partial: "search_result_buttons", locals: {obj:} %>
   </td>
 </tr>
