@@ -2,6 +2,22 @@
 All notable changes to this project will be documented in this file. See [conventional commits](https://www.conventionalcommits.org/) for commit guidelines.
 
 - - -
+## 0.8.0 - 2024-06-12
+#### Documentation
+- Update Documentation - (1c7c723) - Marino Bonetti
+#### Features
+- Scaffolding - (34c203c) - Marino Bonetti
+#### Miscellaneous Chores
+- Remove useless configuration - (30f862d) - Marino Bonetti
+- Remove useless configuration - (985af64) - Marino Bonetti
+- Add Ruby 3.3 - (ed35587) - Marino Bonetti
+- Remove unused file - (eceaa88) - Marino Bonetti
+- Fix gemspec info - (73bb7e4) - Marino Bonetti
+#### Tests
+- Restore Test - (0053349) - Marino Bonetti
+
+- - -
+
 ## 0.7.0 - 2024-05-30
 #### Bug Fixes
 - Generators with enum - (7f25cac) - Marino Bonetti
