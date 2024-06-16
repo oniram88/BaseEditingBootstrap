@@ -2,6 +2,12 @@
 All notable changes to this project will be documented in this file. See [conventional commits](https://www.conventionalcommits.org/) for commit guidelines.
 
 - - -
+## 0.9.0 - 2024-06-16
+#### Features
+- Change default and docs for show - (f320698) - Marino Bonetti
+
+- - -
+
 ## 0.8.0 - 2024-06-12
 #### Documentation
 - Update Documentation - (1c7c723) - Marino Bonetti
