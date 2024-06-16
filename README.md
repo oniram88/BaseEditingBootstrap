@@ -190,12 +190,20 @@ Policy
 require 'rails_helper'
 ##
 # - check_default_responses default false, to check default responses
-#    TODO should be configurable
-#    [:show?, false], 
+#    
+#    on true all are true
+#    [:show?, true], 
 #    [:destroy?, true],
 #    [:update?, true],
 #    [:create?, true],
 #    [:index?, true],
+#
+#    when hash keys are:
+#    - show
+#    - destroy
+#    - update
+#    - create
+#    - index
 # 
 RSpec.describe ServicePolicy, type: :policy do
   it_behaves_like "a standard base model policy", :service, check_default_responses: false

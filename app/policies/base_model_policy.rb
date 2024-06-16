@@ -7,7 +7,7 @@ class BaseModelPolicy < ApplicationPolicy
 
   def destroy? = general_rule
 
-  def show? = false
+  def show? = general_rule
 
   # Questo metodo può essere anche scritto specifico per azione:
   # - permitted_attributes_for_create

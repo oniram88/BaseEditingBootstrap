@@ -19,12 +19,47 @@ RSpec.shared_examples "a standard base model policy" do |factory, check_default_
 
   describe "standard_methods" do
     where(:method, :response) do
+
+      if check_default_responses == true
+        checks = {
+          show: true,
+          destroy: true,
+          update: true,
+          create: true,
+          index: true
+        }
+      elsif check_default_responses.is_a? Hash
+        checks = check_default_responses
+      elsif check_default_responses == false
+        checks = {}
+      else
+        raise <<-MESSAGE.strip_heredoc
+         Acceptable values for check_default_responses are: 
+           - true
+           - false
+           - Hash with:  
+              show
+              destroy
+              update
+              create
+              index
+        MESSAGE
+      end
+
+      checks.reverse_merge!(
+        show: true,
+        destroy: true,
+        update: true,
+        create: true,
+        index: true
+      )
+
       [
-        [:show?, false],
-        [:destroy?, true],
-        [:update?, true],
-        [:create?, true],
-        [:index?, true],
+        [:show?, checks[:show]],
+        [:destroy?, checks[:destroy]],
+        [:update?, checks[:update]],
+        [:create?, checks[:create]],
+        [:index?, checks[:index]],
       ]
     end
 
