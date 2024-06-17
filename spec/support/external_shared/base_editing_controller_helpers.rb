@@ -88,7 +88,7 @@ RSpec.shared_examples "base editing controller" do |factory: nil, only: [], exce
       it "response" do
         params = {q: {"foo_eq": "foo"}}
         get url_for_index, params: params
-        expect(response).to have_http_status(:ok)
+        expect(response).to have_http_status(200)
         expect(assigns[:search_instance]).to be_an_instance_of(BaseEditingBootstrap::Searches::Base).and(have_attributes(
                                                                                                            user: user,
                                                                                                            params: ActionController::Parameters.new(params).permit!
@@ -101,7 +101,7 @@ RSpec.shared_examples "base editing controller" do |factory: nil, only: [], exce
     describe "new" do
       it "response" do
         get url_for_new
-        expect(response).to have_http_status(:ok)
+        expect(response).to have_http_status(200)
         expect(assigns[:object]).to be_an_instance_of(model)
       end
     end
@@ -111,7 +111,7 @@ RSpec.shared_examples "base editing controller" do |factory: nil, only: [], exce
     describe "edit" do
       it "response" do
         get url_for_edit.call
-        expect(response).to have_http_status(:ok)
+        expect(response).to have_http_status(200)
         expect(assigns[:object]).to be_an_instance_of(model)
       end
     end
@@ -122,7 +122,7 @@ RSpec.shared_examples "base editing controller" do |factory: nil, only: [], exce
       it "response" do
         put url_for_update, params: {param_key => valid_attributes}
         expect(assigns[:object]).to be_an_instance_of(model)
-        expect(response).to have_http_status(:see_other)
+        expect(response).to have_http_status(303)
         case BaseEditingBootstrap.after_success_update_redirect
         when :index
           expect(response).to redirect_to(url_for_index)
@@ -135,7 +135,7 @@ RSpec.shared_examples "base editing controller" do |factory: nil, only: [], exce
       unless skip_invalid_checks
         it "not valid" do
           put url_for_update, params: {param_key => invalid_attributes}
-          expect(response).to have_http_status(:unprocessable_entity)
+          expect(response).to have_http_status(422)
         end
       end
     end
@@ -146,7 +146,7 @@ RSpec.shared_examples "base editing controller" do |factory: nil, only: [], exce
       it "response" do
         post url_for_create, params: {param_key => valid_attributes}
         expect(assigns[:object]).to be_an_instance_of(model)
-        expect(response).to have_http_status(:see_other)
+        expect(response).to have_http_status(303)
         case BaseEditingBootstrap.after_success_create_redirect
         when :index
           expect(response).to redirect_to(url_for_index)
@@ -159,7 +159,7 @@ RSpec.shared_examples "base editing controller" do |factory: nil, only: [], exce
       unless skip_invalid_checks
         it "not valid" do
           post url_for_create, params: {param_key => invalid_attributes}
-          expect(response).to have_http_status(:unprocessable_entity)
+          expect(response).to have_http_status(422)
         end
       end
     end
