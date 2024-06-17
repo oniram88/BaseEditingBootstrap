@@ -2,6 +2,12 @@
 All notable changes to this project will be documented in this file. See [conventional commits](https://www.conventionalcommits.org/) for commit guidelines.
 
 - - -
+## 0.9.1 - 2024-06-17
+#### Bug Fixes
+- Change http status check from symbol to number - (1ecd63d) - Marino Bonetti
+
+- - -
+
 ## 0.9.0 - 2024-06-16
 #### Features
 - Change default and docs for show - (f320698) - Marino Bonetti
