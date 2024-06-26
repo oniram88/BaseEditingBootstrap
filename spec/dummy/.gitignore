@@ -4,3 +4,4 @@ log/*
 !/app/assets/builds/.keep
 
 /node_modules
+public/assets
