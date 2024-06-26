@@ -2,6 +2,14 @@
 All notable changes to this project will be documented in this file. See [conventional commits](https://www.conventionalcommits.org/) for commit guidelines.
 
 - - -
+## 0.10.0 - 2024-06-26
+#### Features
+- Add sort configuration per controller - (0cca665) - Marino Bonetti
+#### Miscellaneous Chores
+- Add ignore to assets - (aff4ac6) - Marino Bonetti
+
+- - -
+
 ## 0.9.1 - 2024-06-17
 #### Bug Fixes
 - Change http status check from symbol to number - (1ecd63d) - Marino Bonetti
