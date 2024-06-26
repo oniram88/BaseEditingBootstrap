@@ -22,7 +22,7 @@ module BaseEditingBootstrap
         opts = ["--no-helper", "--parent=BaseEditingController"]
         opts << "--force" if options.force?
         generate "controller", controller_class_name, *opts
-
+        # TODO usare i template ed aggiungere l'esempio della ricerca
         route "resources :#{plural_name}"
 
         template "spec/request.rb", File.join("spec/requests", "#{plural_file_name}_spec.rb")

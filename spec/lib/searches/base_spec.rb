@@ -70,10 +70,12 @@ module BaseEditingBootstrap
       with_them do
         it "with search_params:#{params[:search_params]}" do
           double_res = double("result")
-          double_ordered = double("ordered")
-          expect(double_res).to receive(:order).with(:id).and_return(double_ordered)
-          expect(double_ordered).to receive(:page).with(page_received)
-          expect(instance).to receive_message_chain(:ransack_query, :result).with(distinct: true).and_return(double_res)
+          ransack_double = double("ransack_instance")
+          expect(instance).to receive(:ransack_query).and_return(ransack_double)
+          expect(ransack_double).to receive_message_chain(:sorts).and_return([])
+          expect(ransack_double).to receive_message_chain(:sorts=).with(["id"])
+          expect(ransack_double).to receive_message_chain(:result).with(distinct: true).and_return(double_res)
+          expect(double_res).to receive(:page).with(page_received)
           query
         end
       end

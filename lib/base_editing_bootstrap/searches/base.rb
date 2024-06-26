@@ -7,24 +7,26 @@ module BaseEditingBootstrap::Searches
     include ActiveModel::Naming
     include ActiveModel::Conversion
 
-    attr_reader :model_klass, :user, :params, :scope
+    attr_reader :model_klass, :user, :params, :scope, :sorts
 
     # @param [User] user
     # @param [ActiveRecord::Associations::CollectionProxy] scope
-    def initialize(scope, user, params: {page: nil})
+    # @param [Array<String (frozen)>] sort
+    def initialize(scope, user, params: {page: nil}, sorts: ["id"])
       @model_klass = scope.klass
       @user = user
       @scope = scope
       @params = params
+      @sorts = sorts
     end
 
     ##
     # Risultato della ricerca, fa da pipeline verso ransack
+    # Impostando il sort nel caso in cui non sia già stato impostato da ransack
     def results
-      ransack_query
-        .result(distinct: true)
-        .order(:id)
-        .page(params[:page])
+      ransack_query.tap { |r|
+        r.sorts = @sorts if r.sorts.empty?
+      }.result(distinct: true).page(params[:page])
     end
 
     def ransack_query

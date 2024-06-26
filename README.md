@@ -86,6 +86,9 @@ Utilizzo per modello base, in questo esempio prendiamo come modello Post come es
 - Creare Controller:
   ```ruby
     class PostsController < BaseEditingController
+      ##
+      # Set default sort order for ransack
+      # self.default_sort= ["id"] 
     end
   ```
 - Aggiungere la rotta: `resources :posts`

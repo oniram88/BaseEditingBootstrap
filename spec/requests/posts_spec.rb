@@ -31,7 +31,13 @@ RSpec.describe "Posts", type: :request do
       it "index rendered with search form" do
 
         get posts_path
-        expect(assigns(:search_instance)).to be_an_instance_of(BaseEditingBootstrap::Searches::Base)
+        expect(assigns(:search_instance)).to be_an_instance_of(BaseEditingBootstrap::Searches::Base).
+          and(
+            have_attributes(
+              user: user,
+              sorts: ["id"]
+            )
+          )
         expect(response.body).to have_tag("form.post_search") do
           with_tag(:input, with: {name: "q[title_i_cont]"})
         end

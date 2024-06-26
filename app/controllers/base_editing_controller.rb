@@ -9,12 +9,19 @@ class BaseEditingController < RestrictedAreaController
                 :new_custom_polymorphic_path,
                 :show_custom_polymorphic_path
 
+  ##
+  # Configure default sort in the index query.
+  # Works like documented in https://activerecord-hackery.github.io/ransack/getting-started/sorting/#sorting-in-the-controller
+  class_attribute :default_sorts, default: ["id"]
+
   def index
     authorize base_class
 
     q = policy_scope(base_scope)
-
-    @search_instance = search_class.new(q, current_user, params: params.permit(:page, :q => {})) # FIXME trovare modo per essere più "STRONG"
+    @search_instance = search_class.new(q, current_user,
+                                        params: params.permit(:page, :q => {}), # FIXME trovare modo per essere più "STRONG"
+                                        sorts: default_sorts
+    )
     @search_instance = yield(@search_instance) if block_given?
   end
 
