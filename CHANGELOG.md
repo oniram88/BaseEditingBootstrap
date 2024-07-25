@@ -2,6 +2,12 @@
 All notable changes to this project will be documented in this file. See [conventional commits](https://www.conventionalcommits.org/) for commit guidelines.
 
 - - -
+## 0.10.1 - 2024-07-25
+#### Bug Fixes
+- Change from controller_name to controller_path (#3) - (8b123a4) - Jury Ghidinelli
+
+- - -
+
 ## 0.10.0 - 2024-06-26
 #### Features
 - Add sort configuration per controller - (0cca665) - Marino Bonetti
