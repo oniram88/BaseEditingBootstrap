@@ -2,6 +2,14 @@
 All notable changes to this project will be documented in this file. See [conventional commits](https://www.conventionalcommits.org/) for commit guidelines.
 
 - - -
+## 0.11.0 - 2024-09-05
+#### Features
+- Add clear search button - (f989c17) - Marino Bonetti
+#### Miscellaneous Chores
+- Add ask otp - (51be33d) - Marino Bonetti
+
+- - -
+
 ## 0.10.2 - 2024-09-05
 #### Bug Fixes
 - Force to_s ransackable_attributes - (a5c8cbb) - Marino Bonetti
