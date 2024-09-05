@@ -13,8 +13,7 @@ post_bump_hooks = [
     "git push",
     "git push origin {{version}}",
     "docker compose run app gem build base_editing_bootstrap.gemspec",
-    "read -p 'Inserisci OTP per rubygems: ' otp",
-    "docker compose run app gem push base_editing_bootstrap-{{version}}.gem --otp $otp",
+    "read -p 'Inserisci OTP per rubygems: ' otp && docker compose run app gem push base_editing_bootstrap-{{version}}.gem --otp $otp",
     "rm -fr base_editing_bootstrap-{{version}}.gem"
 ]
 pre_package_bump_hooks = []
