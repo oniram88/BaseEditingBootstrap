@@ -12,9 +12,9 @@ module BaseEditingBootstrap
     class_methods do
       def ransackable_attributes(auth_object = nil)
         if auth_object
-          Pundit.policy(auth_object, self.new).permitted_attributes_for_ransack
+          Pundit.policy(auth_object, self.new).permitted_attributes_for_ransack.map(&:to_s)
         else
-          Pundit.policy(User.new, self.new).permitted_attributes_for_ransack
+          Pundit.policy(User.new, self.new).permitted_attributes_for_ransack.map(&:to_s)
         end
       end 
       

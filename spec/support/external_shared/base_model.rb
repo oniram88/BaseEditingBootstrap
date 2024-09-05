@@ -3,13 +3,19 @@ RSpec.shared_examples "a base model" do |ransack_permitted_attributes: [], ransa
   it_behaves_like "a validated? object"
 
   describe "with ransackables" do
-    where(:base_model_method, :policy_method, :result) do
+    where(:base_model_method, :policy_method, :policy_output, :result) do
       [
         [
-          :ransackable_attributes, :permitted_attributes_for_ransack, ransack_permitted_attributes
+          :ransackable_attributes, :permitted_attributes_for_ransack, ransack_permitted_attributes.map(&:to_s), ransack_permitted_attributes.map(&:to_s)
         ],
         [
-          :ransackable_associations, :permitted_associations_for_ransack, ransack_permitted_associations
+          :ransackable_attributes, :permitted_attributes_for_ransack, ransack_permitted_attributes.map(&:to_sym), ransack_permitted_attributes.map(&:to_s)
+        ],
+        [
+          :ransackable_associations, :permitted_associations_for_ransack,ransack_permitted_associations.map(&:to_s), ransack_permitted_associations.map(&:to_s)
+        ],
+        [
+          :ransackable_associations, :permitted_associations_for_ransack, ransack_permitted_associations.map(&:to_sym), ransack_permitted_associations.map(&:to_s)
         ]
       ]
     end
@@ -23,7 +29,7 @@ RSpec.shared_examples "a base model" do |ransack_permitted_attributes: [], ransa
       # end
       let(:auth_object) { nil }
       let(:policy) {
-        instance_double("BaseModelPolicy", policy_method => result)
+        instance_double("BaseModelPolicy", policy_method => policy_output)
       }
       it "new user" do
         expect(Pundit).to receive(:policy).with(an_instance_of(User),
