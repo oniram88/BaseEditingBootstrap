@@ -137,7 +137,7 @@ Utilizzo per modello base, in questo esempio prendiamo come modello Post come es
   - Integer           => _integer.html.erb
   - Float             => _decimal.html.erb
   - Decimal           => _decimal.html.erb
-  - DateTime          => _detetime.html.erb
+  - DateTime          => _datetime.html.erb
   - Date              => _date.html.erb
   - Enum              => _enum.html.erb
     Per gli enum, le traduzioni dei labels di ogni valore provvengono da i18n
