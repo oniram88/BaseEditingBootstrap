@@ -2,6 +2,14 @@
 All notable changes to this project will be documented in this file. See [conventional commits](https://www.conventionalcommits.org/) for commit guidelines.
 
 - - -
+## 0.10.2 - 2024-09-05
+#### Bug Fixes
+- Force to_s ransackable_attributes - (a5c8cbb) - Marino Bonetti
+#### Documentation
+- Typo - (2ba91c6) - Marino Bonetti
+
+- - -
+
 ## 0.10.1 - 2024-07-25
 #### Bug Fixes
 - Change from controller_name to controller_path (#3) - (8b123a4) - Jury Ghidinelli
