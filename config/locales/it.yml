@@ -1,5 +1,6 @@
 it:
   search: "Esegui ricerca"
+  clear_search: "Cancella ricerca"
   save: "Salva"
   back: "Indietro"
   new: "Nuovo"

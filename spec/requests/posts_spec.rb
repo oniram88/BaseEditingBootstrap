@@ -40,6 +40,7 @@ RSpec.describe "Posts", type: :request do
           )
         expect(response.body).to have_tag("form.post_search") do
           with_tag(:input, with: {name: "q[title_i_cont]"})
+          with_tag(:a, with: {href: posts_path})
         end
         expect(response.body).to have_tag("table.search_results_post>tbody>tr", count: 3)
 

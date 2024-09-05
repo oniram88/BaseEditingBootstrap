@@ -6,7 +6,7 @@ module Utilities
     # Per aggiungere bottoni:
     # ES:
     #    def search_form_buttons(ransack_form, &block)
-    #       super #<-  questo serve per costruiri i bottoni definiti da super
+    #       super #<-  questo serve per costruire i bottoni definiti da super
     #       content_for(:search_form_buttons) do #<- questo serve per aggiungere al content_for un'altro bottone
     #         link_to "xls", admins_log_alarms_path(params: {q: params.permit(q:{})[:q]}, format: :xlsx), class: "btn btn-info", target: :_blank
     #       end
@@ -15,7 +15,10 @@ module Utilities
     # @param [Ransack::Helpers::FormBuilder] ransack_form
     def search_form_buttons(ransack_form)
       content_for(:search_form_buttons) do
-        ransack_form.submit(I18n.translate('.search'), class: "btn btn-primary")
+        ransack_form.submit(I18n.translate('.search'), class: "btn btn-primary") +
+          link_to(I18n.translate('.clear_search'),
+                  index_custom_polymorphic_path(ransack_form.object.klass),
+                  class: "btn btn-secondary")
       end
     end
 
