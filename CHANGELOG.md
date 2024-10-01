@@ -2,6 +2,16 @@
 All notable changes to this project will be documented in this file. See [conventional commits](https://www.conventionalcommits.org/) for commit guidelines.
 
 - - -
+## 0.12.0 - 2024-10-01
+#### Documentation
+- Update documentation - (e49af20) - Marino Bonetti
+#### Features
+- Add Rendering of HelpText - (35ceb69) - Marino Bonetti
+#### Miscellaneous Chores
+- Fix Ask for otp - (0f4e66b) - Marino Bonetti
+
+- - -
+
 ## 0.11.0 - 2024-09-05
 #### Features
 - Add clear search button - (f989c17) - Marino Bonetti
