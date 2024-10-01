@@ -117,10 +117,17 @@ Utilizzo per modello base, in questo esempio prendiamo come modello Post come es
   end
 
   ```
-- [OPTIONAL] nel caso si volesse fare override dei campi della form chiamare il generatore:
-  ```shell
-  rails g base_editing_bootstrap:field_override ModelName field1 field2:type
-  ```
+- [OPTIONAL] FORM overrides:
+  - nel caso si volesse fare override dei campi della form chiamare il generatore:
+    ```shell
+    rails g base_editing_bootstrap:field_override ModelName field1 field2:type
+    ```
+  - è possibile customizzare 
+    - un text help per ogni campo andando ad aggiungere nelle traduzioni la relativa 
+      traduzione nella posizione: `it.activerecord.attributes.MODEL.FIELD/help_text`
+    - un blocco per l'unità di misura accanto al campo aggiungendo alle traduzioni: 
+      `it.activerecord.attributes.MODEL.FIELD/unit`
+      
 - [OPTIONAL] la medesima cosa è possibile fare con il rendering dei campi
   delle celle della tabella
   ```shell
