@@ -34,4 +34,7 @@ it:
         other: "Altro"
         project: "Progetti"
         project_html: "Progetti<br>" # Version implementata per simulare il test
+      post:
+        priority/help_text: "Priority Helper text"
+        priority/unit: "priority unit"
 

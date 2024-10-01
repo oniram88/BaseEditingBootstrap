@@ -67,6 +67,23 @@ RSpec.describe "Posts", type: :request do
         end
       end
 
+    end
+
+    describe "form" do
+
+      subject {
+        get new_post_path
+        response.body
+      }
+
+      it "render form" do
+        is_expected.to have_tag("form[action='#{posts_path}'][method='post']")
+      end
+
+      it "render special addons" do
+        is_expected.to have_tag(".form-text", text: "Priority Helper text")
+        is_expected.to have_tag(".input-group-text", text: "priority unit")
+      end
 
     end
 

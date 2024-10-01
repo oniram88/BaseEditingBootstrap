@@ -1,0 +1,16 @@
+<%
+  # LOCALS disponibili per rendering del testo dell'help del campo se presente
+  # nelle traduzioni in field/help_text
+  # object: classe active_model che mi serve per cercare l'help text
+  # field: campo per cui stampare l'help
+%>
+<%# locals: (object:,field:) -%>
+<%
+  help_text = object.class.human_attribute_name("#{field}/help_text", default: "")
+  unless help_text.blank?
+%>
+  <div class="form-text"><%= help_text %></div>
+<%
+  end
+%>
+
