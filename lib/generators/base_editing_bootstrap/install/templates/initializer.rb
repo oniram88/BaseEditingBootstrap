@@ -11,12 +11,12 @@ BaseEditingBootstrap.configure do |config|
   # Configurazione per alterare lo standard di azione post aggiornamento record
   # il default è andare nella pagina di editing del record
   # possibili valori :edit , :index
-  # config.inherited_controller = :edit
+  # config.after_success_update_redirect = :edit
 
   ##
   # Configurazione per alterare lo standard di azione post creazione record
   # il default è andare nella pagina di editing del record
   # possibili valori :edit , :index
-  # config.inherited_controller = :edit
+  # config.after_success_create_redirect = :edit
 
 end
