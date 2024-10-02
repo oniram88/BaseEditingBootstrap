@@ -31,14 +31,14 @@ Gem::Specification.new do |spec|
 
   spec.add_dependency "rails", [">= 7.0", "< 8.0"]
   # Policy
-  spec.add_dependency "pundit", ["~> 2.3", ">= 2.3.1"]
+  spec.add_dependency "pundit", ["~> 2.3", ">= 2.3.1","< 2.3.2"] # FIXME c'è qualcosa di strano se aggiorniamo pundit qua
   # Search
   spec.add_dependency 'ransack', ['~> 4.0', '>= 4.0.0']
   # Pagination
   spec.add_dependency 'kaminari', ['~> 1.2', '>= 1.2.2']
   spec.add_dependency 'kaminari-i18n', '~> 0.5'
 
-  spec.add_development_dependency "rspec-rails", '~> 6.0'
+  spec.add_development_dependency "rspec-rails", '~> 7.0'
   spec.add_development_dependency "factory_bot_rails", '~> 6.4'
   spec.add_development_dependency 'faker', '~> 3.3'
   spec.add_development_dependency "puma", '~> 6.4'
