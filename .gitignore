@@ -12,3 +12,4 @@
 coverage
 !Dockerfile
 *.gem
+Gemfile.lock

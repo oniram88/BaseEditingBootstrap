@@ -4,6 +4,21 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 # Specify your gem's dependencies in base_editing_bootstrap.gemspec.
 gemspec
 
+rails_version = ENV["RAILS_VERSION"] || "default"
+
+rails = case rails_version
+        when "master"
+          {github: "rails/rails"}
+        when "default"
+          "~> 7.1.0"
+        else
+          "~> #{rails_version}"
+        end
+
+puts "USE RAILS #{rails.inspect}"
+
+gem "rails", rails
+
 gem "puma", '~> 6.4'
 
 gem "sqlite3", '~> 1.7'

@@ -190,7 +190,13 @@ default_unathorized_failure = -> { raise "TODO - passare proc con richiesta che 
 
 RSpec.shared_examples "fail with unauthorized" do |request: default_unathorized_failure|
   it "is expected to redirect to root" do
-    expect(Pundit).to receive(:authorize).with(user, any_args).and_raise(Pundit::NotAuthorizedError)
+
+    if Gem::Version.create( Pundit::VERSION) < Gem::Version.create('2.3.2')
+      allow(Pundit).to receive(:authorize).with(user, any_args).and_raise(Pundit::NotAuthorizedError)
+    else
+      allow_any_instance_of(Pundit::Context).to receive(:authorize).and_raise(Pundit::NotAuthorizedError)
+    end
+
     instance_exec(&request)
     expect(response).to redirect_to(root_path)
     expect(flash[:error]).not_to be_nil
