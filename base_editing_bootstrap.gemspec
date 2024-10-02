@@ -31,7 +31,7 @@ Gem::Specification.new do |spec|
 
   spec.add_dependency "rails", [">= 7.0", "< 8.0"]
   # Policy
-  spec.add_dependency "pundit", ["~> 2.3", ">= 2.3.1","< 2.3.2"] # FIXME c'è qualcosa di strano se aggiorniamo pundit qua
+  spec.add_dependency "pundit", ["~> 2.3", ">= 2.3.1"]
   # Search
   spec.add_dependency 'ransack', ['~> 4.0', '>= 4.0.0']
   # Pagination
