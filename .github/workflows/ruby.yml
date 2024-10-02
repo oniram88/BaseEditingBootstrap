@@ -26,6 +26,7 @@ jobs:
     strategy:
       matrix:
         ruby-version: ['3.1','3.2','3.3']
+        rails-version: ['7.0','7.1','7.2']
 
     steps:
     - uses: actions/checkout@v3
@@ -36,7 +37,10 @@ jobs:
     #  uses: ruby/setup-ruby@55283cc23133118229fd3f97f9336ee23a179fcf # v1.146.0
       with:
         ruby-version: ${{ matrix.ruby-version }}
-        bundler-cache: true # runs 'bundle install' and caches installed gems automatically
+        #bundler-cache: true # runs 'bundle install' and caches installed gems automatically
+    - run: bundle install
+      env:
+        RAILS_VERSION: ${{ matrix.rails-version }}
     - name: DB prepare tasks
       run: bundle exec rails db:create && bundle exec rails db:schema:load
     - name: Assets
