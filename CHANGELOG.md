@@ -2,6 +2,14 @@
 All notable changes to this project will be documented in this file. See [conventional commits](https://www.conventionalcommits.org/) for commit guidelines.
 
 - - -
+## 0.13.0 - 2024-10-02
+#### Bug Fixes
+- Correct generator - (c3a5e60) - Marino Bonetti
+#### Features
+- Rails Matrix versions (#4) - (1deaa4e) - Marino Bonetti
+
+- - -
+
 ## 0.12.0 - 2024-10-01
 #### Documentation
 - Update documentation - (e49af20) - Marino Bonetti
