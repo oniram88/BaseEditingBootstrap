@@ -22,6 +22,7 @@ jobs:
   test:
     env:
       RAILS_ENV: test
+      RAILS_VERSION: ${{ matrix.rails-version }}
     runs-on: ubuntu-latest
     strategy:
       matrix:
@@ -37,10 +38,7 @@ jobs:
     #  uses: ruby/setup-ruby@55283cc23133118229fd3f97f9336ee23a179fcf # v1.146.0
       with:
         ruby-version: ${{ matrix.ruby-version }}
-        #bundler-cache: true # runs 'bundle install' and caches installed gems automatically
-    - run: bundle install
-      env:
-        RAILS_VERSION: ${{ matrix.rails-version }}
+        bundler-cache: true # runs 'bundle install' and caches installed gems automatically
     - name: DB prepare tasks
       run: bundle exec rails db:create && bundle exec rails db:schema:load
     - name: Assets
