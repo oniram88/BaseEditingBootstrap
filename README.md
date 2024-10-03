@@ -222,7 +222,15 @@ end
 
 
 ## Contributing
-Contribution directions go here.
+1. Setup env with:  
+```shell
+docker compose run app spec/dummy/bin/setup
+```
+
+2. Start environment with:  
+```shell
+docker compose up
+```
 
 ## License
 The gem is available as open source under the terms of the [MIT License](https://opensource.org/licenses/MIT).
