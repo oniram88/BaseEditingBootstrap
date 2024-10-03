@@ -1,3 +1,10 @@
+<%
+  ##
+  # Template per il rendering campo
+  # - forma      -> FormBuilder
+  # - form_field -> Array[String]
+%>
+<%# locals: (form:, form_field:) -%>
 <%= form.label(form_field, class:  ["form-label","form-#{form_field}-label"]) %>
 <div class="input-group mb-2 <%= form.object.validated? ? "has-validation" : "" %><%= "form-#{form_field}-input-group" %>">
   <%= render partial: "editing_form_measure_unit", locals: {object: form.object, field: form_field} %>
