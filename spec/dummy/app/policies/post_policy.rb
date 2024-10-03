@@ -5,7 +5,8 @@ class PostPolicy < BaseModelPolicy
       :title,
       :description,
       :category,
-      :priority
+      :priority,
+      :published_at
     ]
   end
 
@@ -14,7 +15,8 @@ class PostPolicy < BaseModelPolicy
       :title,
       :description,
       :category,
-      :priority
+      :priority,
+      :published_at
     ]
   end
 

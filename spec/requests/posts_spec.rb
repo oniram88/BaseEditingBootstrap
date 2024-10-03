@@ -39,15 +39,15 @@ RSpec.describe "Posts", type: :request do
             )
           )
         expect(response.body).to have_tag("form.post_search") do
-          with_tag(:input, with: {name: "q[title_i_cont]"})
-          with_tag(:a, with: {href: posts_path})
+          with_tag(:input, with: { name: "q[title_i_cont]" })
+          with_tag(:a, with: { href: posts_path })
         end
         expect(response.body).to have_tag("table.search_results_post>tbody>tr", count: 3)
 
       end
 
       it "get results" do
-        get posts_path, params: {q: {title_i_cont: "post 1"}}
+        get posts_path, params: { q: { title_i_cont: "post 1" } }
         expect(response.body).to have_tag("tr>td", text: "Post 1")
       end
 
@@ -62,8 +62,8 @@ RSpec.describe "Posts", type: :request do
       it "render pagination" do
         get posts_path
         expect(response.body).to have_tag("nav ul.pagination") do
-          with_tag("li.page-item.active>a",text: "1")
-          with_tag("li.page-item>a",text: "2")
+          with_tag("li.page-item.active>a", text: "1")
+          with_tag("li.page-item>a", text: "2")
         end
       end
 
@@ -77,12 +77,29 @@ RSpec.describe "Posts", type: :request do
       }
 
       it "render form" do
-        is_expected.to have_tag("form[action='#{posts_path}'][method='post']")
+        is_expected.to have_tag("form[action='#{posts_path}'][method='post']") do
+          with_tag("#post_published_at[type='date']")
+          with_tag("#post_title[type='text']")
+          with_tag("textarea#post_description")
+          with_tag("select#post_category") do
+            with_tag("option", count: 3)
+          end
+
+        end
       end
 
       it "render special addons" do
+        is_expected.to have_tag(".form-priority-input-group") do
+          with_tag(".input-group-text", text: "priority unit")
+          with_tag("select#post_priority") do
+            with_tag("option", count: 3)
+          end
+        end
         is_expected.to have_tag(".form-text", text: "Priority Helper text")
-        is_expected.to have_tag(".input-group-text", text: "priority unit")
+      end
+
+      it "render standard form classes" do
+        is_expected.to have_tag(".input-group.mb-2", count: 5)
       end
 
     end
