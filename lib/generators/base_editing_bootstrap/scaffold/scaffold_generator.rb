@@ -31,7 +31,7 @@ module BaseEditingBootstrap
 
       def add_policy
         @search_attrs = []
-        if yes? "Vuoi poter ricercare determinati campi con form di ricerca?"
+        if yes? "Vuoi poter ricercare determinati campi con form di ricerca?(y/n)"
 
           say "Gli attributi che hai indicato sono: #{ attributes_names.join(",")}"
           say <<~MESSAGE
@@ -51,8 +51,6 @@ module BaseEditingBootstrap
           attributes_names.each do |attr|
             out << [attr, *matchers.keys.collect{|m| "#{attr}#{m}"  } ]
           end
-
-          puts out.inspect
 
           print_table(out,borders:true)
           @search_attrs = ask("Inserisce un elenco diviso da virgola degli attributi da ricercare").split(",")
