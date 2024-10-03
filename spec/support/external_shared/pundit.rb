@@ -28,6 +28,14 @@ RSpec.shared_examples "a standard base model policy" do |factory, check_default_
           create: true,
           index: true
         }
+      elsif check_default_responses == :full_disallow
+        checks = {
+          show: false,
+          destroy: false,
+          update: false,
+          create: false,
+          index: false
+        }
       elsif check_default_responses.is_a? Hash
         checks = check_default_responses
       elsif check_default_responses == false
@@ -37,6 +45,7 @@ RSpec.shared_examples "a standard base model policy" do |factory, check_default_
          Acceptable values for check_default_responses are: 
            - true
            - false
+           - :full_disallow -> all methods to false
            - Hash with:  
               show
               destroy
