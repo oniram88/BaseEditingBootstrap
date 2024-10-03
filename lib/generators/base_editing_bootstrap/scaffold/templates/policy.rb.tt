@@ -8,4 +8,10 @@ class <%= class_name %>Policy < BaseModelPolicy
     %i[<%= @search_attrs.join(" ") %>]
   end
 <%- end -%>
+<%- if @permitted_attributes.any? -%>
+  # TODO check if correct with search_fields
+  def permitted_attributes_for_ransack
+    %w[<%= @permitted_attributes.join(" ") %>]
+  end
+<%- end -%>
 end

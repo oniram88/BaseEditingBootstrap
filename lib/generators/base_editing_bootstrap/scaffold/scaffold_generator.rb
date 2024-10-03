@@ -31,6 +31,7 @@ module BaseEditingBootstrap
 
       def add_policy
         @search_attrs = []
+        @permitted_attributes = []
         if yes? "Vuoi poter ricercare determinati campi con form di ricerca?(y/n)"
 
           say "Gli attributi che hai indicato sono: #{ attributes_names.join(",")}"
@@ -54,7 +55,9 @@ module BaseEditingBootstrap
 
           print_table(out,borders:true)
           @search_attrs = ask("Inserisce un elenco diviso da virgola degli attributi da ricercare").split(",")
-
+          #cerchiamo di estrapolare gli attributi da rendere disponibili a ransack per la ricerca
+          @permitted_attributes = out.select{|c|  c[1..].intersect?(@search_attrs)  }.collect(&:first)
+          puts @permitted_attributes.inspect
         end
 
         template "policy.rb", File.join("app/policies", "#{singular_name}_policy.rb")
