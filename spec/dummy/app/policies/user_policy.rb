@@ -9,7 +9,7 @@ class UserPolicy < BaseModelPolicy
   end
 
   def search_result_fields
-    [:username]
+    [:username, :enabled]
   end
 
   def permitted_associations_for_ransack = [:posts]

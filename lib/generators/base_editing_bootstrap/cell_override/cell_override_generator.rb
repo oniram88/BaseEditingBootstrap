@@ -7,7 +7,7 @@ module BaseEditingBootstrap
       argument :name, type: :string, banner: "Post", required: true
       argument :attributes, type: :array, default: [], banner: "field field:type"
 
-      TYPES = [:base,:timestamps].freeze
+      TYPES = [:base, :timestamps, :boolean].freeze
 
       desc <<-DESCRIPTION.strip_heredoc
              Description:   

@@ -1,6 +1,8 @@
 module Utilities
   module SearchHelper
     include TemplateHelper
+    include PageHelper
+    include IconHelper
 
     ##
     # Per aggiungere bottoni:
@@ -32,7 +34,14 @@ module Utilities
                       when :created_at, :updated_at
                         "timestamps"
                       else
-                        "base"
+                        type = obj.class.type_for_attribute(field).type
+                        case type
+                        when :boolean
+                          "boolean"
+                        else
+                          "base"
+                        end
+
                       end
       template = find_template_with_fallbacks(
         obj,

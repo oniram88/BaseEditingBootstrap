@@ -25,10 +25,27 @@ RSpec.describe Utilities::SearchHelper, type: :helper do
     end
 
     context "user model" do
-      let(:obj) { create(:user, username: "dan_osman") }
+      let(:enabled) { nil }
+      let(:obj) { create(:user, username: "dan_osman", enabled:) }
 
       it "with override base" do
         expect(helper.render_cell_field(obj, :username)).to have_tag(:td, with: {class: "override"}, text: "dan_osman")
+      end
+
+      describe "boolean field" do
+        it "with default boolean" do
+          expect(helper.render_cell_field(obj, :enabled)).to have_tag(:td) do
+            with_tag("i.bi-x-lg.text-danger")
+          end
+        end
+        context "with enabled true" do
+          let(:enabled) { true }
+          it "render ok" do
+            expect(helper.render_cell_field(obj, :enabled)).to have_tag(:td) do
+              with_tag("i.bi-check-lg.text-success")
+            end
+          end
+        end
       end
 
       it "with override timestamp" do
