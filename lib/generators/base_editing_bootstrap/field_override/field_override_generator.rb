@@ -7,7 +7,7 @@ module BaseEditingBootstrap
       argument :name, type: :string, banner: "Post", required: true
       argument :attributes, type: :array, default: [], banner: "field field:type"
 
-      TYPES = %i[base date datetime decimal integer enum]
+      TYPES = %i[base date datetime decimal integer enum boolean]
 
       desc <<-DESCRIPTION.strip_heredoc
              Description:   
