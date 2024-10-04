@@ -72,6 +72,13 @@ RSpec.describe Utilities::FormHelper, type: :helper do
         expect(helper.form_print_field(form, :username)).to have_tag(:input, with: {class: "form-control override", type: "text", name: "user[username]"})
       end
 
+      it "with default boolean" do
+        expect(helper.form_print_field(form, :enabled)).to have_tag(".form-check.form-switch") do
+          with_tag("input[type='hidden']", with: {value: 0})
+          with_tag("input.form-check-input[type='checkbox']", with: {value: 1})
+        end
+      end
+
       it "with override timestamp" do
         expect(helper.form_print_field(form, :created_at)).to have_tag(:input, with: {class: "form-control", type: "datetime-local", name: "user[created_at]"})
       end
