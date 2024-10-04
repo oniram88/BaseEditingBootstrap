@@ -7,3 +7,22 @@ if Post.count < 25
     )
   end
 end
+
+if Role.count < 10
+  10.times do
+    Role.create!(
+      name: Faker::Superhero.unique.name
+    )
+  end
+end
+
+if User.count < 10
+
+  10.times do
+    u = User.create!(
+      username: Faker::Internet.unique.username
+    )
+    u.roles << Role.all.sample
+  end
+
+end

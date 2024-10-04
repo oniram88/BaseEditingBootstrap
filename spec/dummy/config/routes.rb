@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   get "up" => "rails/health#show", as: :rails_health_check
 
   resources :posts
+  resources :users
   namespace :customer do
     resources :posts
   end
