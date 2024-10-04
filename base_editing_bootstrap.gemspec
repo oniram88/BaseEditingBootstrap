@@ -29,7 +29,7 @@ Gem::Specification.new do |spec|
   end
   spec.files += Dir['spec/support/external_shared/*.rb']
 
-  spec.add_dependency "rails", [">= 7.0", "< 8.0"]
+  spec.add_dependency "rails", [">= 7.0", "< 8.1"]
   # Policy
   spec.add_dependency "pundit", ["~> 2.3", ">= 2.3.1"]
   # Search
@@ -42,7 +42,7 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "factory_bot_rails", '~> 6.4'
   spec.add_development_dependency 'faker', '~> 3.3'
   spec.add_development_dependency "puma", '~> 6.4'
-  spec.add_development_dependency "sqlite3", '~> 1.7'
+  spec.add_development_dependency "sqlite3", '>= 1.7.x'
   spec.add_development_dependency "sprockets-rails", '~> 3.4'
   spec.add_development_dependency 'rails-i18n', '~> 7.0' # For 7.0.0
   spec.add_development_dependency "i18n-debug", '~> 1.2'

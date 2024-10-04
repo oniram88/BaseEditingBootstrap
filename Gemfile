@@ -10,7 +10,7 @@ rails = case rails_version
         when "master"
           {github: "rails/rails"}
         when "default"
-          "~> 7.1.0"
+          "~> 7.2.x"
         else
           "~> #{rails_version}"
         end
@@ -21,7 +21,7 @@ gem "rails", rails
 
 gem "puma", '~> 6.4'
 
-gem "sqlite3", '~> 1.7'
+gem "sqlite3", '>= 1.7.x'
 
 gem "sprockets-rails", '~> 3.4'
 
@@ -31,7 +31,7 @@ gem "generator_spec",'~> 0.10'
 gem 'faker', '~> 3.3'
 gem "i18n-debug", '~> 1.2'
 gem "cssbundling-rails", '~> 1.4'
-gem "rspec-parameterized", ">= 1.0.0" # https://github.com/tomykaira/rspec-parameterized
+gem "rspec-parameterized", "~> 1.0", ">= 1.0.0" # https://github.com/tomykaira/rspec-parameterized
 gem 'rspec-html-matchers', '~> 0.10'  # https://github.com/kucaahbe/rspec-html-matchers
 gem 'rails-controller-testing', '~>1.0'
 
