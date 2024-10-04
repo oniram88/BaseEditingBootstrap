@@ -146,6 +146,7 @@ Utilizzo per modello base, in questo esempio prendiamo come modello Post come es
   - Decimal           => _decimal.html.erb
   - DateTime          => _datetime.html.erb
   - Date              => _date.html.erb
+  - Boolean           => _boolean.html.erb
   - Enum              => _enum.html.erb
     Per gli enum, le traduzioni dei labels di ogni valore provvengono da i18n
     attraverso l'helper: `Utilities::EnumHelper#enum_translation`

@@ -35,6 +35,8 @@ module Utilities
           generic_field = "decimal"
         when :integer
           generic_field = "integer"
+        when :boolean
+          generic_field = "boolean"
         else
           generic_field = "base"
         end
