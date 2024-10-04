@@ -111,6 +111,22 @@ RSpec.describe "Posts", type: :request do
 
     end
 
+    describe "object validated" do
+
+      let(:post_obj) { create(:post) }
+
+      it "render validations" do
+
+        put post_path(post_obj), params: {post: {title: nil}}
+
+        expect(response.body).to have_tag(".has-validation.form-title-input-group") do
+          with_tag(".invalid-feedback")
+        end
+
+      end
+
+    end
+
   end
 
 end
