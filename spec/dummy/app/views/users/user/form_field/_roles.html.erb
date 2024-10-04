@@ -1,0 +1,7 @@
+<%
+  ##
+  # Template per il rendering del vero campo input
+  # eseguire override nei casi in cui si voglia renderizzare qualcosa di differente
+%>
+<%# locals: (form:, field:) -%>
+<%= form.collection_check_boxes(:role_ids,Role.all,:id,:name) %>

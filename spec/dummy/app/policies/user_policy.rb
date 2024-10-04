@@ -5,7 +5,7 @@ class UserPolicy < BaseModelPolicy
   end
 
   def permitted_attributes
-    [:username]
+    [:username, role_ids: []]
   end
 
   def search_result_fields
