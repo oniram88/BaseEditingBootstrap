@@ -62,8 +62,8 @@ RSpec.describe "Posts", type: :request do
       it "render pagination" do
         get posts_path
         expect(response.body).to have_tag("nav ul.pagination") do
-          with_tag("li.page-item.active>a",text: "1")
-          with_tag("li.page-item>a",text: "2")
+          with_tag("li.page-item.active>a", text: "1")
+          with_tag("li.page-item>a", text: "2")
         end
       end
 
@@ -77,12 +77,52 @@ RSpec.describe "Posts", type: :request do
       }
 
       it "render form" do
-        is_expected.to have_tag("form[action='#{posts_path}'][method='post']")
+        is_expected.to have_tag("form[action='#{posts_path}'][method='post']") do
+          with_tag(".form-title-input-group") do
+            with_tag("#post_title[type='text']")
+          end
+          with_tag(".form-published_at-input-group") do
+            with_tag("#post_published_at[type='date']")
+          end
+          with_tag(".form-description-input-group") do
+            with_tag("textarea#post_description")
+          end
+          with_tag(".form-category-input-group") do
+            with_tag("select#post_category") do
+              with_tag("option", count: 3)
+            end
+          end
+        end
       end
 
       it "render special addons" do
+        is_expected.to have_tag(".form-priority-input-group") do
+          with_tag(".input-group-text", text: "priority unit")
+          with_tag("select#post_priority") do
+            with_tag("option", count: 3)
+          end
+        end
         is_expected.to have_tag(".form-text", text: "Priority Helper text")
-        is_expected.to have_tag(".input-group-text", text: "priority unit")
+      end
+
+      it "render standard form classes" do
+        is_expected.to have_tag(".input-group.mb-2", count: 5)
+      end
+
+    end
+
+    describe "object validated" do
+
+      let(:post_obj) { create(:post) }
+
+      it "render validations" do
+
+        put post_path(post_obj), params: {post: {title: nil}}
+
+        expect(response.body).to have_tag(".has-validation.form-title-input-group") do
+          with_tag(".invalid-feedback")
+        end
+
       end
 
     end

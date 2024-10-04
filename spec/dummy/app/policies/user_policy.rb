@@ -1,11 +1,11 @@
 class UserPolicy < BaseModelPolicy
 
   def editable_attributes
-    [:username]
+    [:username, :roles]
   end
 
   def permitted_attributes
-    [:username]
+    [:username, role_ids: []]
   end
 
   def search_result_fields
@@ -13,6 +13,7 @@ class UserPolicy < BaseModelPolicy
   end
 
   def permitted_associations_for_ransack = [:posts]
+
   def permitted_attributes_for_ransack = [:username]
 
 end
