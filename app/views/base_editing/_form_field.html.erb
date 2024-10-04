@@ -5,10 +5,23 @@
   # - form_field -> Array[String]
 %>
 <%# locals: (form:, form_field:) -%>
-<%= form.label(form_field, class:  ["form-label","form-#{form_field}-label"]) %>
-<div class="input-group mb-2 <%= form.object.validated? ? "has-validation" : "" %><%= "form-#{form_field}-input-group" %>">
+<%= form.label(form_field, class: ["form-label", "form-#{form_field}-label"]) %>
+
+<%
+  button_group_classes = ["mb-2"]
+
+  content = form_print_field(form, form_field)
+  unless content.match "checkbox"
+    button_group_classes << "input-group"
+  end
+
+  button_group_classes << (form.object.validated? ? "has-validation" : "")
+  button_group_classes << "form-#{form_field}-input-group"
+
+%>
+<%= content_tag :div, class: button_group_classes.join(" ") do %>
   <%= render partial: "editing_form_measure_unit", locals: {object: form.object, field: form_field} %>
-  <%= form_print_field(form, form_field) %>
+  <%= content %>
   <%= error_messages_for(form.object, form_field) %>
-</div>
+<% end %>
 <%= render partial: "editing_form_help_text", locals: {object: form.object, field: form_field} %>
