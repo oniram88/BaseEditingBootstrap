@@ -86,12 +86,14 @@ class BaseEditingController < RestrictedAreaController
 
   def base_class
     return @_base_class if @_base_class
-    controller = controller_path
-    modello = controller.singularize.camelize.safe_constantize
-    logger.debug { "Editazione del controller:#{controller} per modello: #{modello.to_s}" }
-    raise "Non riesco a restituire la classe base per il controller #{controller}" if modello.nil?
+    finder = BaseEditingBootstrap::ResourceFinder.new(controller_path)
+    if finder.model
+      logger.debug { "Editazione del controller:#{controller_path} per modello: #{finder.model.to_s}" }
+    else
+      raise "Non riesco a restituire la classe base per il controller #{controller_path}"
+    end
 
-    @_base_class = modello
+    @_base_class = finder.model
   end
 
   private

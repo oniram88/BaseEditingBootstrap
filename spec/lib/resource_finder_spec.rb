@@ -1,5 +1,5 @@
 module BaseEditingBootstrap
-  RSpec.describe BaseClassFinder do
+  RSpec.describe ResourceFinder do
     where(:controller_path, :result) do
       [
         ["not_found", nil], # no model

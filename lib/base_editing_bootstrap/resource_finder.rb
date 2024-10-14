@@ -3,7 +3,7 @@
 module BaseEditingBootstrap
   ##
   # PORO to find the base classe in the BaseEditingController
-  class BaseClassFinder
+  class ResourceFinder
     def initialize(controllar_path)
       @controllar_path = controllar_path
       @_model_class = false
@@ -19,12 +19,12 @@ module BaseEditingBootstrap
           if @controllar_path.include?("/")
             demodulize_one_level = @controllar_path.split("/")[1..].join("/")
             if demodulize_one_level != @controllar_path
-              @_model_class = BaseClassFinder.new(demodulize_one_level).model
+              @_model_class = ResourceFinder.new(demodulize_one_level).model
             end
           end
         end
-        @_model_class
       end
+      @_model_class
     end
   end
 end
