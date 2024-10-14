@@ -11,5 +11,9 @@ Rails.application.routes.draw do
     resources :posts
   end
 
+  namespace :customer do
+    resources :users, only: [:index]
+  end
+
   root "posts#index"
 end
