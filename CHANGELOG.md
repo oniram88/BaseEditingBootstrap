@@ -2,6 +2,24 @@
 All notable changes to this project will be documented in this file. See [conventional commits](https://www.conventionalcommits.org/) for commit guidelines.
 
 - - -
+## 0.14.0 - 2024-10-14
+#### Bug Fixes
+- Namespaced resources (#7) - (e85f926) - Marino Bonetti
+#### Continuous Integration
+- Start Enabling Rails 8.0 - (9c66914) - Marino Bonetti
+- Fix scaffold generator questions - (0379151) - Marino Bonetti
+#### Documentation
+- Add more info in spec desc - (82ab3a7) - Marino Bonetti
+- Add docs for Development - (616a0ea) - Marino Bonetti
+- Add locals form partial - (022eb83) - Marino Bonetti
+#### Features
+- Boolean field - (8c7d0a2) - Marino Bonetti
+- Auto remove input-group for checkboxes - (d5b13d2) - Marino Bonetti
+- Add searchable columns - (9ccfb6f) - Marino Bonetti
+- Add option to FullDisallowPolicy - (6468967) - Marino Bonetti
+
+- - -
+
 ## 0.13.0 - 2024-10-02
 #### Bug Fixes
 - Correct generator - (c3a5e60) - Marino Bonetti
