@@ -73,7 +73,7 @@ RSpec.shared_examples "a standard base model policy" do |factory, check_default_
     end
 
     with_them do
-      it "should " do
+      it "should respond_to? #{params[:method]}" do
         expect(instance).to respond_to(method)
       end
       if check_default_responses
