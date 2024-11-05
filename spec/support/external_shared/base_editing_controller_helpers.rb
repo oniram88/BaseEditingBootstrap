@@ -130,6 +130,7 @@ RSpec.shared_examples "base editing controller" do |factory: nil, only: [], exce
           # edit
           expect(response).to redirect_to(url_for_edit.call(assigns[:object]))
         end
+        expect(flash[:notice]).not_to be_blank
       end
 
       unless skip_invalid_checks
@@ -154,6 +155,7 @@ RSpec.shared_examples "base editing controller" do |factory: nil, only: [], exce
           # edit
           expect(response).to redirect_to(url_for_edit.call(assigns[:object]))
         end
+        expect(flash[:notice]).not_to be_blank
       end
 
       unless skip_invalid_checks
@@ -171,6 +173,7 @@ RSpec.shared_examples "base editing controller" do |factory: nil, only: [], exce
         delete url_for(persisted_instance)
         expect(assigns[:object]).to be_an_instance_of(model)
         expect(response).to redirect_to(url_for_succ_delete)
+        expect(flash[:notice]).not_to be_blank
       end
 
       it "not valid" do

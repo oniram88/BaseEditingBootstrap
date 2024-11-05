@@ -37,4 +37,8 @@ it:
       post:
         priority/help_text: "Priority Helper text"
         priority/unit: "priority unit"
+  errors:
+    attributes:
+      base:
+        indestructible: "Indistruttibile"
 
