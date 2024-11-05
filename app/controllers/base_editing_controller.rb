@@ -186,13 +186,13 @@ class BaseEditingController < RestrictedAreaController
     format.all do
       redirect_to index_custom_polymorphic_path(base_class),
                   status: :see_other,
-                  notice: scoped_flash_message(action: :destroyed)
+                  notice: human_action_message(action: :destroyed)
     end
   end
 
   def _failed_create(format)
     format.html do
-      flash.now.alert = scoped_flash_message(action: :created, successful: false)
+      flash.now.alert = human_action_message(action: :created, successful: false)
       render action: :new, status: :unprocessable_entity
     end
   end
@@ -207,13 +207,13 @@ class BaseEditingController < RestrictedAreaController
              end
       redirect_to path,
                   status: :see_other,
-                  notice: scoped_flash_message(action: :created)
+                  notice: human_action_message(action: :created)
     end
   end
 
   def _failed_update(format)
     format.html do
-      flash.now.alert = scoped_flash_message(action: :updated, successful: false)
+      flash.now.alert = human_action_message(action: :updated, successful: false)
       render action: :edit, status: :unprocessable_entity
     end
   end
@@ -228,14 +228,10 @@ class BaseEditingController < RestrictedAreaController
              end
       redirect_to path,
                   status: :see_other,
-                  notice: scoped_flash_message(action: :updated)
+                  notice: human_action_message(action: :updated)
     end
   end
 
-  def scoped_flash_message(action:, successful: true)
-    t(
-      "#{base_class.i18n_scope}.#{successful ? "successful" : "unsuccessful"}.messages.#{action}",
-      model: base_class.model_name.human
-    )
-  end
+  delegate :human_action_message, to: :base_class
+
 end
