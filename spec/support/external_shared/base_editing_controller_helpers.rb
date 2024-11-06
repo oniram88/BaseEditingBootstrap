@@ -130,7 +130,7 @@ RSpec.shared_examples "base editing controller" do |factory: nil, only: [], exce
           # edit
           expect(response).to redirect_to(url_for_edit.call(assigns[:object]))
         end
-        expect(flash[:notice]).not_to be_blank
+        expect(flash.to_hash).to include("notice" => be_present)
       end
 
       unless skip_invalid_checks
@@ -155,7 +155,7 @@ RSpec.shared_examples "base editing controller" do |factory: nil, only: [], exce
           # edit
           expect(response).to redirect_to(url_for_edit.call(assigns[:object]))
         end
-        expect(flash[:notice]).not_to be_blank
+        expect(flash.to_hash).to include("notice" => be_present)
       end
 
       unless skip_invalid_checks
@@ -173,7 +173,7 @@ RSpec.shared_examples "base editing controller" do |factory: nil, only: [], exce
         delete url_for(persisted_instance)
         expect(assigns[:object]).to be_an_instance_of(model)
         expect(response).to redirect_to(url_for_succ_delete)
-        expect(flash[:notice]).not_to be_blank
+        expect(flash.to_hash).to include("notice" => be_present)
       end
 
       it "not valid" do
@@ -183,7 +183,7 @@ RSpec.shared_examples "base editing controller" do |factory: nil, only: [], exce
         end
         delete url_for(persisted_instance)
         expect(response).to redirect_to(url_for_fail_delete)
-        expect(flash[:error]).not_to be_blank
+        expect(flash.to_hash).to include("error" => be_present)
       end
     end
   end
@@ -202,7 +202,7 @@ RSpec.shared_examples "fail with unauthorized" do |request: default_unathorized_
 
     instance_exec(&request)
     expect(response).to redirect_to(root_path)
-    expect(flash[:error]).not_to be_nil
+    expect(flash.to_hash).to include("error" => be_present)
   end
 end
 
