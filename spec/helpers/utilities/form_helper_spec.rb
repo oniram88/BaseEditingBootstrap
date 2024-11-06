@@ -85,5 +85,25 @@ RSpec.describe Utilities::FormHelper, type: :helper do
 
     end
 
+    context "ActionModel" do
+      let(:obj) {
+
+        a = Class.new do
+          include ActiveModel::API
+
+          def self.name = "nome_classe"
+
+          attr_accessor :example_field
+        end
+
+        a.new
+      }
+
+      it "render standard fields as text" do
+        expect(helper.form_print_field(form, :example_field)).to have_tag(:input, with: {class: "form-control", type: "text", name: "nome_classe[example_field]"})
+      end
+
+    end
+
   end
 end

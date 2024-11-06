@@ -18,10 +18,14 @@ module Utilities
     # @param [Symbol] field
     def form_print_field(form, field)
       locals = {form:, field:}
-      if form.object.class.defined_enums.key?(field.to_s)
+      if form.object.class.respond_to?(:defined_enums) && form.object.class.defined_enums.key?(field.to_s)
         generic_field = "enum"
       else
-        type = form.object.class.type_for_attribute(field).type
+        if form.object.class.respond_to?(:type_for_attribute)
+          type = form.object.class.type_for_attribute(field).type
+        else
+          type = :string
+        end
         case type
         when :datetime
           generic_field = "datetime"
