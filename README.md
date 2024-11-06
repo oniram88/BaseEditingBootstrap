@@ -221,6 +221,29 @@ RSpec.describe ServicePolicy, type: :policy do
 end
 ```
 
+## Message translations
+I messaggi di generati per il flash provengono dal metodo BaseEditingBootstrap::ActionTranslation.human_action_message  
+e seguono una logica simile ad human_attribute_name.  
+Sono già presenti i messaggi di default, a cui viene passato il nome del modello,  
+ma è possibile fare override del messaggio con la classe: 
+
+```yaml
+LANG:
+  activerecord:
+    successful:
+      messages:
+        created: "example %{model}"
+        updated:
+        destroyed:
+        CLASS_NAME:
+          created: "customized %{model} created"
+    unsuccessful:
+      messages:
+        created: 
+        updated: 
+```
+
+
 
 ## Contributing
 1. Setup env with:  

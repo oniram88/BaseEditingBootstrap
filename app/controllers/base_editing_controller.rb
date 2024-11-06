@@ -186,13 +186,13 @@ class BaseEditingController < RestrictedAreaController
     format.all do
       redirect_to index_custom_polymorphic_path(base_class),
                   status: :see_other,
-                  notice: t('activerecord.successful.messages.destroyed', model: base_class.model_name.human)
+                  notice: human_action_message(action: :destroyed)
     end
   end
 
   def _failed_create(format)
     format.html do
-      flash.now.alert = t('activerecord.unsuccessful.messages.created', model: base_class.model_name.human)
+      flash.now.alert = human_action_message(action: :created, successful: false)
       render action: :new, status: :unprocessable_entity
     end
   end
@@ -207,13 +207,13 @@ class BaseEditingController < RestrictedAreaController
              end
       redirect_to path,
                   status: :see_other,
-                  notice: t('activerecord.successful.messages.created', model: base_class.model_name.human)
+                  notice: human_action_message(action: :created)
     end
   end
 
   def _failed_update(format)
     format.html do
-      flash.now.alert = t('activerecord.unsuccessful.messages.updated', model: base_class.model_name.human)
+      flash.now.alert = human_action_message(action: :updated, successful: false)
       render action: :edit, status: :unprocessable_entity
     end
   end
@@ -228,7 +228,10 @@ class BaseEditingController < RestrictedAreaController
              end
       redirect_to path,
                   status: :see_other,
-                  notice: t('activerecord.successful.messages.updated', model: base_class.model_name.human)
+                  notice: human_action_message(action: :updated)
     end
   end
+
+  delegate :human_action_message, to: :base_class
+
 end
