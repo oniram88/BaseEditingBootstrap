@@ -40,6 +40,16 @@ it:
 #    post_policy:
 #      update?: 'You cannot edit this post!'
 #      create?: 'You cannot create posts!'
+  activemodel:
+    successful:
+      messages:
+        created: "%{model} creato correttamente."
+        updated: "%{model} aggiornato correttamente."
+        destroyed: "%{model} è stato correttamente cancellato."
+    unsuccessful:
+      messages:
+        created: "Ci sono errori che impediscono la creazione di %{model}"
+        updated: "Ci sono errori che impediscono l'aggiornamento di %{model}"
   activerecord:
     successful:
       messages:
