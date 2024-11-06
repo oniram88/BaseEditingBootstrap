@@ -6,7 +6,6 @@ module BaseEditingBootstrap
 
     extend ActiveSupport::Concern
 
-
     class_methods do
 
       ##
@@ -16,18 +15,18 @@ module BaseEditingBootstrap
       # {i18n_scope della classe}.{successful|unsuccessful}.messages.{class_name}.{action}
       # {i18n_scope della classe}.{successful|unsuccessful}.messages.{class_ancestors}.{action}
       # {i18n_scope della classe}.{successful|unsuccessful}.messages.{action}
-      def human_action_message(action:, successful: true,**options)
+      def human_action_message(action:, successful: true, **options)
 
-       successful_string = successful ? "successful" : "unsuccessful"
+        successful_string = successful ? "successful" : "unsuccessful"
 
         defaults = lookup_ancestors.map do |klass|
           :"#{i18n_scope}.#{successful_string}.messages.#{klass.model_name.i18n_key}.#{action}"
         end
 
-       defaults << options[:default] if options[:default]
-       defaults << :"#{base_class.i18n_scope}.#{successful_string}.messages.#{action}"
+        defaults << options[:default] if options[:default]
+        defaults << :"#{i18n_scope}.#{successful_string}.messages.#{action}"
 
-       options.reverse_merge!(model:base_class.model_name.human)
+        options.reverse_merge!(model: model_name.human)
 
         I18n.t(
           defaults.shift,
