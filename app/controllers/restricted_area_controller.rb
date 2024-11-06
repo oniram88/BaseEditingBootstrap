@@ -18,6 +18,7 @@ class RestrictedAreaController < BaseEditingBootstrap.inherited_controller.const
   private
 
   def user_not_authorized(exception)
+    Rails.logger.debug{"Pundit::NotAuthorizedError [#{exception.message}]"}
     policy_name = exception.policy.class.to_s.underscore
 
     flash[:error] = t "#{policy_name}.#{exception.query}", scope: "pundit", default: :default
