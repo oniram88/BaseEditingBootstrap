@@ -4,6 +4,7 @@ module BaseEditingBootstrap::Forms
   class Base < ActionView::Helpers::FormBuilder
     [
       :text_field,
+      :password_field,
       :text_area,
       :date_field,
       :datetime_field,

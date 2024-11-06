@@ -19,6 +19,7 @@ RSpec.describe BaseEditingBootstrap::Forms::Base, :type => :helper do
     where(:field_helper, :tag, :more_attributes) do
       [
         [:text_field, :input, {}],
+        [:password_field, :input, {type:"password"}],
         [:text_area, :textarea, {}],
         [:ckeditor_text_area, :textarea, {"data-controller": "ckeditor"}],
         [:date_field, :input, {}],
