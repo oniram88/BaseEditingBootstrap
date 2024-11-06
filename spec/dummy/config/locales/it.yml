@@ -37,6 +37,14 @@ it:
       post:
         priority/help_text: "Priority Helper text"
         priority/unit: "priority unit"
+    successful:
+      messages:
+        user:
+          destroyed: Congratulazioni, hai cancellato l'utente.
+    unsuccessful:
+      messages:
+        user:
+          updated: Qualcosa è andata storta e non siamo riusciti a salvare il l'utente.
   errors:
     attributes:
       base:

@@ -54,7 +54,6 @@ end
 
 RSpec.shared_examples "a validated? object" do
   subject {
-    # prendiamo un modello a caso per testare questa  cosa
     described_class.new
   }
 
