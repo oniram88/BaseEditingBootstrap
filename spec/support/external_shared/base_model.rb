@@ -2,6 +2,10 @@ RSpec.shared_examples "a base model" do |ransack_permitted_attributes: [], ransa
 
   it_behaves_like "a validated? object"
 
+  it "human_action_message" do
+    expect(described_class).to respond_to(:human_action_message)
+  end
+
   describe "with ransackables" do
     where(:base_model_method, :policy_method, :policy_output, :result) do
       [
