@@ -2,6 +2,21 @@
 All notable changes to this project will be documented in this file. See [conventional commits](https://www.conventionalcommits.org/) for commit guidelines.
 
 - - -
+## 0.15.0 - 2024-11-11
+#### Bug Fixes
+- Add Password for in standard fields - (593c8c2) - Marino Bonetti
+- Form helper for non ActiveRecords - (9e124de) - Marino Bonetti
+- Removed old code - (cbf1cd0) - Marino Bonetti
+- Add translations for actionmodel - (3be05ca) - Marino Bonetti
+#### Features
+- Add debug helper logger for PunditNotAuthorized - (a9b30d6) - Marino Bonetti
+- Human action messages (#10) - (63f9de9) - Marino Bonetti
+#### Tests
+- Add check for human_action_message method - (38af466) - Marino Bonetti
+- Better tests messages - (cda150e) - Marino Bonetti
+
+- - -
+
 ## 0.14.0 - 2024-10-14
 #### Bug Fixes
 - Namespaced resources (#7) - (e85f926) - Marino Bonetti
