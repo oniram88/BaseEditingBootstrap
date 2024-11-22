@@ -19,7 +19,7 @@ RSpec.describe BaseEditingBootstrap::Forms::Base, :type => :helper do
     where(:field_helper, :tag, :more_attributes) do
       [
         [:text_field, :input, {}],
-        [:password_field, :input, {type:"password"}],
+        [:password_field, :input, {type: "password"}],
         [:text_area, :textarea, {}],
         [:ckeditor_text_area, :textarea, {"data-controller": "ckeditor"}],
         [:date_field, :input, {}],
@@ -40,9 +40,9 @@ RSpec.describe BaseEditingBootstrap::Forms::Base, :type => :helper do
       }
       it "overrides class" do
         expect(builder.public_send(field_helper, :username, {class: "custom_class"})).to have_tag(
-                                                                                          tag,
-                                                                                          with: {class: "form-control custom_class"}.merge(more_attributes)
-                                                                                        )
+                                                                                           tag,
+                                                                                           with: {class: "form-control custom_class"}.merge(more_attributes)
+                                                                                         )
       end
       context "field not valid" do
         let(:object_instance) { super().tap { |u| u.errors.add(:username, :invalid) } }
@@ -142,6 +142,14 @@ RSpec.describe BaseEditingBootstrap::Forms::Base, :type => :helper do
         with_tag("label.form-check-label")
       end
       expect(rendered).to have_tag("label.form-check-label", text: list.first.title)
+    end
+    it "con classe custom per checkbox" do
+      expect(builder.collection_check_boxes(:posts, list, :id, :title,
+                                     {},{form_check_class:"custom-class"})).to have_tag("div.form-check.custom-class")
+    end
+    it "con multiple custom class per checkbox" do
+      expect(builder.collection_check_boxes(:posts, list, :id, :title,
+                                     {},{form_check_class:"custom-class other-class "})).to have_tag("div.form-check.custom-class.other-class")
     end
   end
 

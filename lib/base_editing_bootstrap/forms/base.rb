@@ -68,9 +68,16 @@ module BaseEditingBootstrap::Forms
       self.check_box(method, options, checked_value, unchecked_value)
     end
 
-    def collection_check_boxes(method, collection, value_method, text_method, options = {}, html_options = {}, &block)
+    def collection_check_boxes(method,
+                               collection,
+                               value_method,
+                               text_method,
+                               options = {},
+                               html_options = {},
+                               &block)
+      form_check_classes = (["form-check"] + [(html_options.delete(:form_check_class){""}).split(" ").collect(&:strip)]).compact.join(" ")
       super do |builder|
-        @template.content_tag(:div, class: "form-check") do
+        @template.content_tag(:div, class: form_check_classes) do
           builder.check_box(class: "form-check-input") + builder.label(class: "form-check-label")
         end
       end
