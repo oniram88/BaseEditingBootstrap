@@ -2,6 +2,12 @@
 All notable changes to this project will be documented in this file. See [conventional commits](https://www.conventionalcommits.org/) for commit guidelines.
 
 - - -
+## 0.16.0 - 2024-11-22
+#### Features
+- Add custom class to check-box forms - (0ff856c) - Marino Bonetti
+
+- - -
+
 ## 0.15.0 - 2024-11-11
 #### Bug Fixes
 - Add Password for in standard fields - (593c8c2) - Marino Bonetti
