@@ -2,6 +2,14 @@
 All notable changes to this project will be documented in this file. See [conventional commits](https://www.conventionalcommits.org/) for commit guidelines.
 
 - - -
+## 0.16.1 - 2024-11-22
+#### Bug Fixes
+- Correct case when attribute to print is virtual - (b86e478) - Marino Bonetti
+#### Documentation
+- Fix documentation - (8be21a5) - Marino Bonetti
+
+- - -
+
 ## 0.16.0 - 2024-11-22
 #### Features
 - Add custom class to check-box forms - (0ff856c) - Marino Bonetti
