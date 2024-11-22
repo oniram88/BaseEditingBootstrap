@@ -88,7 +88,7 @@ Utilizzo per modello base, in questo esempio prendiamo come modello Post come es
     class PostsController < BaseEditingController
       ##
       # Set default sort order for ransack
-      # self.default_sort= ["id"] 
+      # self.default_sorts= ["id"] 
     end
   ```
 - Aggiungere la rotta: `resources :posts`
