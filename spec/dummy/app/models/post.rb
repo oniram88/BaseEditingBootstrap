@@ -13,4 +13,10 @@ class Post < ApplicationRecord
     low: 1,
     urgent: 2
   }, default: :normal, prefix: true
+
+
+  def custom_virtual_attribute
+    "content from virtual attribute"
+  end
+
 end

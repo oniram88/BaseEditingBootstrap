@@ -22,6 +22,13 @@ RSpec.describe Utilities::SearchHelper, type: :helper do
           with_tag(:p, text: "DESC")
         end
       end
+
+      it "virtual attribute" do
+        expect(obj).to respond_to(:custom_virtual_attribute)
+        expect(obj.send(:custom_virtual_attribute)).to be == "content from virtual attribute"
+        expect(helper.render_cell_field(obj, :custom_virtual_attribute)).to have_tag(:td, seen: "content from virtual attribute")
+      end
+
     end
 
     context "user model" do
