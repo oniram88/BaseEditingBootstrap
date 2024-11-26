@@ -5,7 +5,7 @@
     </div>
   <% end %>
 
-  <% if @search_instance.results.count > 0 %>
+  <% if @search_instance.results.total_pages > 0 %>
     <div class="card-body table-responsive p-0">
       <%= render partial: "search_result" %>
     </div>
