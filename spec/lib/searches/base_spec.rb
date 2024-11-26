@@ -69,7 +69,7 @@ module BaseEditingBootstrap
 
       with_them do
         it "with search_params:#{params[:search_params]}" do
-          double_res = double("result")
+          double_res = double("result",to_sql:"for debug purposes")
           ransack_double = double("ransack_instance")
           expect(instance).to receive(:ransack_query).and_return(ransack_double)
           expect(ransack_double).to receive_message_chain(:sorts).and_return([])
