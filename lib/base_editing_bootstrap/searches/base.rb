@@ -24,9 +24,11 @@ module BaseEditingBootstrap::Searches
     # Risultato della ricerca, fa da pipeline verso ransack
     # Impostando il sort nel caso in cui non sia già stato impostato da ransack
     def results
-      ransack_query.tap { |r|
-        r.sorts = @sorts if r.sorts.empty?
-      }.result(distinct: true).page(params[:page])
+      ransack_query
+        .tap { |r| r.sorts = @sorts if r.sorts.empty? }
+        .result(distinct: true)
+        .tap { |q| Rails.logger.debug { "[Ransack] params:#{params} - sql: #{q.to_sql}" } }
+        .page(params[:page])
     end
 
     def ransack_query
