@@ -28,6 +28,12 @@ class BaseModelPolicy < ApplicationPolicy
 
   def search_result_fields = []
 
+  ##
+  # List of attributes in index to make it sortable
+  def sortable_search_result_fields
+    search_result_fields
+  end
+
   class Scope < Scope
     def resolve
       scope.all

@@ -13,10 +13,14 @@ module Utilities::TemplateHelper
   # @param [String] base_path
   # @param [String] generic_field
   def find_template_with_fallbacks(obj, field, base_path, generic_field)
-    obj_base_path = "#{obj.to_partial_path}/#{base_path}"
+    # nei casi in cui passiamo la classe e non l'oggetto, dobbiamo utilizzare un metodo interno a rails per
+    # avere la partial_path
+    partial_path = (obj.respond_to? :to_partial_path) ? obj.to_partial_path : obj._to_partial_path
+    obj_base_path = "#{partial_path}/#{base_path}"
     return "#{obj_base_path}/#{field}" if lookup_context.exists?(field, [obj_base_path], true)
     return "#{obj_base_path}/#{generic_field}" if lookup_context.exists?(generic_field, [obj_base_path], true)
-    "base_editing/#{base_path}/#{generic_field}"
+    return "base_editing/#{base_path}/#{generic_field}" if lookup_context.find_all("base_editing/#{base_path}/_#{generic_field}").any?
+    "base_editing/#{base_path}/base"
   end
 
 end

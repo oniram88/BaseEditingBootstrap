@@ -3,6 +3,7 @@
 require 'rails_helper'
 
 RSpec.describe Utilities::SearchHelper, type: :helper do
+
   describe "#render_cell_field" do
 
     context "post model" do

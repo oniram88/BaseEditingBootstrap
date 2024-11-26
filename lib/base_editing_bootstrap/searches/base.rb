@@ -42,6 +42,12 @@ module BaseEditingBootstrap::Searches
       Pundit.policy(@user, @model_klass).search_result_fields
     end
 
+    ##
+    # Ritorna se il campo deve essere ordinabile o meno
+    def sortable?(field)
+      Pundit.policy(@user, @model_klass).sortable_search_result_fields.include?(field)
+    end
+
     def persisted?
       false
     end

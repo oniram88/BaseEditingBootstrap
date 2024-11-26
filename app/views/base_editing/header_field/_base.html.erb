@@ -1,0 +1,9 @@
+<%# Renderizza il campo header della tabella della pagina dei risultati %>
+<%# locals: (obj:,field:,search_instance:)  -%>
+<th scope="col">
+  <% if search_instance.sortable?(field) %>
+    <%= sort_link(search_instance.ransack_query, field, obj.human_attribute_name(field)) %>
+  <% else %>
+    <%= obj.human_attribute_name(field) %>
+  <% end %>
+</th>

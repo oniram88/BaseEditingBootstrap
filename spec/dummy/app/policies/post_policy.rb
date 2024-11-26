@@ -21,7 +21,11 @@ class PostPolicy < BaseModelPolicy
   end
 
   def search_result_fields
-    [:title]
+    [:title, :category, :description, :created_at,]
+  end
+
+  def sortable_search_result_fields
+    [:title, :category]
   end
 
   def search_fields

@@ -81,18 +81,26 @@ module BaseEditingBootstrap
       end
     end
 
-    it "search_fields" do
+    it "#search_fields" do
       expect(Pundit).to receive(:policy).with(user, model_klass).and_return(
         instance_double("BaseModelPolicy", search_fields: [:nome_casuale])
       )
       expect(instance.search_fields).to include(an_instance_of(Searches::Field).and(have_attributes(search_base: instance, name: :nome_casuale)))
     end
 
-    it "search_result_fields" do
+    it "#search_result_fields" do
       expect(Pundit).to receive(:policy).with(user, model_klass).and_return(
         instance_double("BaseModelPolicy", search_result_fields: [1])
       )
       expect(instance.search_result_fields).to be == [1]
+    end
+
+    it "#sortable?" do
+      expect(Pundit).to receive(:policy).with(user, model_klass).exactly(2).times.and_return(
+        instance_double("BaseModelPolicy", sortable_search_result_fields: [:title])
+      )
+      expect(instance.sortable?(:title)).to be_truthy
+      expect(instance.sortable?(:desc)).to be_falsey
     end
   end
 end

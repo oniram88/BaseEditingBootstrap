@@ -53,6 +53,31 @@ RSpec.describe "Posts", type: :request do
 
     end
 
+    describe "sorting" do
+      let!(:posts) {
+        create(:post, title: "Post 1")
+        create(:post, title: "Post 2")
+        create(:post, title: "Post 3")
+      }
+      it "headers" do
+        get posts_path
+        expect(response.body).to have_tag("tr>th>a", seen: "Title", with: {
+          href: controller.view_context.sort_url(Post.ransack, :title)
+        })
+
+        expect(response.body).to have_tag("tr>th", seen: "Desc")
+        expect(response.body).not_to have_tag("tr>th>a", seen: "Desc")
+      end
+
+      it "ordered list" do
+        get posts_path, params: {q: {s: "title desc"}}
+        expect(response.body).to have_tag("tbody>tr:first-child>td", text: "Post 3")
+        get posts_path, params: {q: {s: "title asc"}}
+        expect(response.body).to have_tag("tbody>tr:first-child>td", text: "Post 1")
+      end
+
+    end
+
     describe "pagination" do
 
       let!(:posts) {

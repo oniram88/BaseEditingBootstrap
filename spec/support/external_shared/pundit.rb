@@ -17,6 +17,26 @@ RSpec.shared_examples "a standard base model policy" do |factory, check_default_
   let(:user) { create(:user) }
   let(:instance) { described_class.new(user, build(factory)) }
 
+  describe "response to all necessary methods" do
+    where(:method) do
+      [
+        [:sortable_search_result_fields],
+        [:search_result_fields],
+        [:search_fields],
+        [:permitted_associations_for_ransack],
+        [:permitted_attributes_for_ransack],
+        [:editable_attributes],
+        [:permitted_attributes],
+      ]
+    end
+
+    with_them do
+      it "should " do
+        expect(instance).to respond_to(method)
+      end
+    end
+  end
+
   describe "standard_methods" do
     where(:method, :response) do
 
