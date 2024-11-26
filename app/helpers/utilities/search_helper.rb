@@ -30,25 +30,7 @@ module Utilities
     # @param [Symbol] field
     # @return [ActiveSupport::SafeBuffer]
     def render_cell_field(obj, field)
-      generic_field = case field
-                      when :created_at, :updated_at
-                        "timestamps"
-                      else
-                        type = obj.class.type_for_attribute(field).type
-                        case type
-                        when :boolean
-                          "boolean"
-                        else
-                          "base"
-                        end
-
-                      end
-      template = find_template_with_fallbacks(
-        obj,
-        field,
-        "cell_field",
-        generic_field
-      )
+      template = template_for_column(obj.class,field,"cell_field")
       render template, obj:, field:
     end
 
@@ -58,7 +40,8 @@ module Utilities
     # @param [Symbol] field
     # @return [ActiveSupport::SafeBuffer]
     def render_header_cell_field(obj, field)
-      content_tag(:th, obj.human_attribute_name(field))
+      template = template_for_column(obj,field,"header_field")
+      render template, obj:, field:
     end
 
     ##
@@ -76,6 +59,33 @@ module Utilities
     # Possibile override dei parametri da passare a ransack nella form
     def search_form_for_params(ransack_instance)
       [ransack_instance.ransack_query]
+    end
+
+    private
+
+    ##
+    # Restituisce il template corretto per la tripletta, andando a ricercare il tipo di campo attraverso le informazioni
+    # che type_for_attribute può restituirci
+    def template_for_column(klazz,field, partial_type)
+      generic_field = case field
+                      when :created_at, :updated_at
+                        "timestamps"
+                      else
+                        type = klazz.type_for_attribute(field).type
+                        case type
+                        when :boolean
+                          "boolean"
+                        else
+                          "base"
+                        end
+
+                      end
+      find_template_with_fallbacks(
+        klazz,
+        field,
+        partial_type,
+        generic_field
+      )
     end
   end
 end
