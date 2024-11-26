@@ -2,6 +2,21 @@
 All notable changes to this project will be documented in this file. See [conventional commits](https://www.conventionalcommits.org/) for commit guidelines.
 
 - - -
+## 1.0.0 - 2024-11-26
+#### Bug Fixes
+- Remove fixed versions - (f8dc4b8) - Marino Bonetti
+- Utilizziamo metodo di kaminari per totale pagine - (4451592) - Marino Bonetti
+#### Documentation
+- Add debug info for ransack - (e1355ef) - Marino Bonetti
+#### Features
+- Print header search results - (20fc7be) - Marino Bonetti
+#### Miscellaneous Chores
+- Rails 8.0 stable in test case - (87aff45) - Marino Bonetti
+#### Tests
+- Debugging - (663d5e9) - Marino Bonetti
+
+- - -
+
 ## 0.16.1 - 2024-11-22
 #### Bug Fixes
 - Correct case when attribute to print is virtual - (b86e478) - Marino Bonetti
