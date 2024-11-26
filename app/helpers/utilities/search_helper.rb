@@ -30,18 +30,18 @@ module Utilities
     # @param [Symbol] field
     # @return [ActiveSupport::SafeBuffer]
     def render_cell_field(obj, field)
-      template = template_for_column(obj.class,field,"cell_field")
+      template = template_for_column(obj.class, field, "cell_field")
       render template, obj:, field:
     end
 
     ##
     # Renderizza header della tabella della index
-    # @param [BaseModel] obj
+    # @param [BaseEditingBootstrap::Searches::Base] search_instance
     # @param [Symbol] field
     # @return [ActiveSupport::SafeBuffer]
-    def render_header_cell_field(obj, field)
-      template = template_for_column(obj,field,"header_field")
-      render template, obj:, field:
+    def render_header_cell_field(search_instance, field)
+      template = template_for_column(search_instance.model_klass, field, "header_field")
+      render template, obj: search_instance.model_klass, field:, search_instance: search_instance
     end
 
     ##
@@ -66,7 +66,7 @@ module Utilities
     ##
     # Restituisce il template corretto per la tripletta, andando a ricercare il tipo di campo attraverso le informazioni
     # che type_for_attribute può restituirci
-    def template_for_column(klazz,field, partial_type)
+    def template_for_column(klazz, field, partial_type)
       generic_field = case field
                       when :created_at, :updated_at
                         "timestamps"

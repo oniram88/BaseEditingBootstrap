@@ -2,7 +2,7 @@
   <thead>
   <tr>
     <% @search_instance.search_result_fields.each do |srf| %>
-      <%= render_header_cell_field(@search_instance.model_klass, srf) %>
+      <%= render_header_cell_field(@search_instance, srf) %>
     <% end %>
     <th class="action_col"></th>
   </tr>

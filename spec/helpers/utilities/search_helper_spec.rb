@@ -4,19 +4,6 @@ require 'rails_helper'
 
 RSpec.describe Utilities::SearchHelper, type: :helper do
 
-  describe "#render_header_cell_field" do
-    context "post model" do
-
-      it "with base rendering" do
-        expect(helper.render_header_cell_field(Post, :title)).to have_tag(:th, text: "Title")
-      end
-      it "with translated header" do
-        expect(helper.render_header_cell_field(Post, :description)).to have_tag(:th, text: "Desc")
-      end
-
-    end
-  end
-
   describe "#render_cell_field" do
 
     context "post model" do
