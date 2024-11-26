@@ -133,6 +133,10 @@ Utilizzo per modello base, in questo esempio prendiamo come modello Post come es
   ```shell
   rails g base_editing_bootstrap:cell_override ModelName field1 field2:type
   ```
+- [OPTIONAL] e per fare il rendering dell'header della tabella della index
+  ```shell
+  rails g base_editing_bootstrap:header_override ModelName field1 field2:type
+  ```  
 - [OPTIONAL] Base overrides:  
   E' possibile anche fare un override generico dei campi, sono previsti questi tipi di partial
   legati al tipo di dati:  
