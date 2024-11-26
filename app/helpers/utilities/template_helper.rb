@@ -19,7 +19,8 @@ module Utilities::TemplateHelper
     obj_base_path = "#{partial_path}/#{base_path}"
     return "#{obj_base_path}/#{field}" if lookup_context.exists?(field, [obj_base_path], true)
     return "#{obj_base_path}/#{generic_field}" if lookup_context.exists?(generic_field, [obj_base_path], true)
-    "base_editing/#{base_path}/#{generic_field}"
+    return "base_editing/#{base_path}/#{generic_field}" if lookup_context.find_all("base_editing/#{base_path}/_#{generic_field}").any?
+    "base_editing/#{base_path}/base"
   end
 
 end
