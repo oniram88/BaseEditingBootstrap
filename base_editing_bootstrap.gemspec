@@ -42,9 +42,9 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "factory_bot_rails", '~> 6.4'
   spec.add_development_dependency 'faker', '~> 3.3'
   spec.add_development_dependency "puma", '~> 6.4'
-  spec.add_development_dependency "sqlite3", '>= 1.7.x'
+  spec.add_development_dependency "sqlite3"
   spec.add_development_dependency "sprockets-rails", '~> 3.4'
-  spec.add_development_dependency 'rails-i18n', '~> 7.0' # For 7.0.0
+  spec.add_development_dependency 'rails-i18n'
   spec.add_development_dependency "i18n-debug", '~> 1.2'
   spec.add_development_dependency "cssbundling-rails", '~> 1.4'
   spec.add_development_dependency "rspec-parameterized", "~> 1.0", ">= 1.0.0" # https://github.com/tomykaira/rspec-parameterized

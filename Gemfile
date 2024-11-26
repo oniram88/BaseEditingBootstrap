@@ -21,12 +21,12 @@ gem "rails", rails
 
 gem "puma", '~> 6.4'
 
-gem "sqlite3", '>= 1.7.x'
+gem "sqlite3"
 
 gem "sprockets-rails", '~> 3.4'
 
 gem 'simplecov', require: false, group: :test
-gem 'rails-i18n', '~> 7.0' # For 7.0.0
+gem 'rails-i18n'
 gem "generator_spec",'~> 0.10'
 gem 'faker', '~> 3.3'
 gem "i18n-debug", '~> 1.2'
