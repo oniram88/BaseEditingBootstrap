@@ -21,10 +21,12 @@ RSpec.describe "Posts", type: :request do
             with_tag(".form-check", count: Role.count)
           end
           without_tag(".input-group.form-roles-input-group")
+          without_tag("label.form-label", with: {for: "user_enabled"})
           with_tag(".form-enabled-input-group") do
             with_tag(".form-check.form-switch", count: 1) do
               with_tag("input[type='hidden']", with: {value: 0})
               with_tag("input.form-check-input[type='checkbox']", with: {value: 1})
+              with_tag("label.form-check-label", with: {for: "user_enabled"})
             end
           end
 

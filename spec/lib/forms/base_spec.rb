@@ -124,11 +124,11 @@ RSpec.describe BaseEditingBootstrap::Forms::Base, :type => :helper do
 
   describe "switch_box" do
     it do
-      expect(builder).to receive(:check_box).with(:username, include(class: "form-switch"), "1", "0")
+      expect(builder).to receive(:check_box).with(:username, include(class: "form-check form-switch"), "1", "0")
       builder.switch_box(:username)
     end
     it "con classe custom" do
-      expect(builder).to receive(:check_box).with(:username, include(class: "form-switch custom_class"), "1", "0")
+      expect(builder).to receive(:check_box).with(:username, include(class: "form-check form-switch custom_class"), "1", "0")
       builder.switch_box(:username, class: "custom_class")
     end
   end

@@ -131,7 +131,7 @@ RSpec.describe "Posts", type: :request do
       end
 
       it "render standard form classes" do
-        is_expected.to have_tag(".input-group.mb-2", count: 5)
+        is_expected.to have_tag(".input-group.mb-1", count: 5)
       end
 
     end

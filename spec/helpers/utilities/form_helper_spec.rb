@@ -76,6 +76,7 @@ RSpec.describe Utilities::FormHelper, type: :helper do
         expect(helper.form_print_field(form, :enabled)).to have_tag(".form-check.form-switch") do
           with_tag("input[type='hidden']", with: {value: 0})
           with_tag("input.form-check-input[type='checkbox']", with: {value: 1})
+          with_tag("label.form-check-label", with: {for: "user_enabled"})
         end
       end
 

@@ -64,7 +64,7 @@ module BaseEditingBootstrap::Forms
     end
 
     def switch_box(method, options = {}, checked_value = "1", unchecked_value = "0")
-      options[:class] = (["form-switch"] + (options[:class] || "").split(" ")).join(" ")
+      options[:class] = (["form-check form-switch"] + (options[:class] || "").split(" ")).join(" ")
       self.check_box(method, options, checked_value, unchecked_value)
     end
 
