@@ -2,6 +2,17 @@
 All notable changes to this project will be documented in this file. See [conventional commits](https://www.conventionalcommits.org/) for commit guidelines.
 
 - - -
+## 1.1.0 - 2025-01-03
+#### Continuous Integration
+- Add ruby 3.4 - (5658bb0) - Marino Bonetti
+#### Features
+- Boolean switch render right side label - (d448ef7) - Marino Bonetti
+- Add a new layout container for form_field - (77dec9f) - Marino Bonetti
+#### Tests
+- Add help text example for enabled - (efd4aff) - Marino Bonetti
+
+- - -
+
 ## 1.0.0 - 2024-11-26
 #### Bug Fixes
 - Remove fixed versions - (f8dc4b8) - Marino Bonetti
