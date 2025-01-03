@@ -5,6 +5,7 @@
       <div class="card-body">
         <%= render partial: "form_field_header", local: {form:} %>
         <%= render collection: form_attributes(form.object),
+                   layout: "form_field_container",
                    partial: "form_field", locals: {form:} %>
       </div>
 
