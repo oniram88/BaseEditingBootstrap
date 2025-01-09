@@ -1,15 +1,14 @@
 <%# locals: (obj:) -%>
-<%= link_to(icon("pencil-square"),
+<%= link_to(icon("pencil-square", translate_with_controller_scoped(".edit", default: [:edit,""])),
             edit_custom_polymorphic_path(obj),
             class: "btn btn-sm btn-primary me-1") if policy(obj).edit? %>
 
-
-<%= link_to(icon(:eye),
+<%= link_to(icon(:eye, translate_with_controller_scoped(".show", default: [:show,""])),
             show_custom_polymorphic_path(obj),
             class: "btn btn-sm btn-primary me-1") if policy(obj).show? %>
 
 
-<%= link_to(icon(:trash),
+<%= link_to(icon(:trash, translate_with_controller_scoped(".destroy", default: [:destroy,""])),
             destroy_custom_polymorphic_path(obj),
             data: {
               turbo_method: :delete,
