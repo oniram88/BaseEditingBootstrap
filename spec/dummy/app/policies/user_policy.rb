@@ -12,6 +12,10 @@ class UserPolicy < BaseModelPolicy
     [:username, :enabled]
   end
 
+  def search_fields
+    [:username_i_cont]
+  end
+
   def permitted_associations_for_ransack = [:posts]
 
   def permitted_attributes_for_ransack = [:username]

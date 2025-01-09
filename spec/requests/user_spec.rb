@@ -4,6 +4,16 @@ RSpec.describe "Posts", type: :request do
   it_behaves_like "as logged in user" do
     let(:user) { create(:user) }
 
+    describe "search" do
+
+      it "index with override search field" do
+        get users_path
+        expect(response.body).to have_tag("form.user_search") do
+          with_tag(:input, with: {name: "q[username_i_cont]", placeholder: "Username contiene"})
+        end
+      end
+    end
+
     describe "form" do
 
       before do

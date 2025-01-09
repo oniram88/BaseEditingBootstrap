@@ -61,7 +61,7 @@ RSpec.describe "Posts", type: :request do
       }
       it "headers" do
         get posts_path
-        expect(response.body).to have_tag("tr>th>a", seen: "Title", with: {
+        expect(response.body).to have_tag("tr>th>a", seen: "Titolo", with: {
           href: controller.view_context.sort_url(Post.ransack, :title)
         })
 

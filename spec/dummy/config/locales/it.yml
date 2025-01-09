@@ -38,6 +38,7 @@ it:
         priority/help_text: "Priority Helper text"
         priority/unit: "priority unit"
         description: Desc
+        title: Titolo
       user:
         enabled/help_text: Abilitato
     successful:
