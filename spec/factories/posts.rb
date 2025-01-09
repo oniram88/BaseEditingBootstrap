@@ -6,5 +6,8 @@ FactoryBot.define do
     trait :with_invalid_attributes do
       title { nil }
     end
+
+    factory :customer_post, class: "Customer::Post"
+
   end
 end

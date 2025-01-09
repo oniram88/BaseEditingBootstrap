@@ -53,4 +53,18 @@ it:
     attributes:
       base:
         indestructible: "Indistruttibile"
-
+  base_editing:
+    search_result_buttons:
+      edit: Modifica
+  posts:
+    index:
+      base_editing:
+        search_result_buttons:
+          edit: MOD Post
+          show: Show Post Inherited
+  customer:
+    posts:
+      index:
+        base_editing:
+          search_result_buttons:
+            edit: Customer Mod Post
