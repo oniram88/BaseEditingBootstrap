@@ -2,6 +2,16 @@
 All notable changes to this project will be documented in this file. See [conventional commits](https://www.conventionalcommits.org/) for commit guidelines.
 
 - - -
+## 1.3.0 - 2025-01-09
+#### Documentation
+- Aggiunta documentazione per override search field - (ba97155) - Marino Bonetti
+#### Features
+- Translated Namespaced button (#12) - (7e06c5f) - Marino Bonetti
+#### Tests
+- Add sub view for dummy posts - (0b25868) - Marino Bonetti
+
+- - -
+
 ## 1.2.0 - 2025-01-09
 #### Features
 - Add new method to get label from search field - (ace5fa0) - Marino Bonetti
