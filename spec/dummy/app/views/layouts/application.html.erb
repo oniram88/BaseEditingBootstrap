@@ -12,6 +12,7 @@
 <body>
 <div class="container-fluid p-0">
   <div class="d-flex flex-column vh-100">
+    <%= render partial:'layouts/menu' %>
     <div class="flex-grow-1 p-2">
       <%= content_for?(:content) ? yield(:content) : yield %>
     </div>
