@@ -2,6 +2,14 @@
 All notable changes to this project will be documented in this file. See [conventional commits](https://www.conventionalcommits.org/) for commit guidelines.
 
 - - -
+## 1.2.0 - 2025-01-09
+#### Features
+- Add new method to get label from search field - (ace5fa0) - Marino Bonetti
+#### Tests
+- Add Menu for navigation in dummy - (2b2a9a6) - Marino Bonetti
+
+- - -
+
 ## 1.1.0 - 2025-01-03
 #### Continuous Integration
 - Add ruby 3.4 - (5658bb0) - Marino Bonetti
