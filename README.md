@@ -173,6 +173,12 @@ Utilizzo per modello base, in questo esempio prendiamo come modello Post come es
   #...
   ```
 
+### Translations
+Traduzioni disponibili:  
+Per i bottoni della index, è possibile eseguire l'override del testo presente nel bottone. 
+Leggere la documentazione nel file `app/helpers/base_editing_helper.rb#translate_with_controller_scoped`
+
+
 ## Testing helpers
 
 ### Requirements(installed with generators)
