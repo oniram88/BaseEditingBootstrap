@@ -1,3 +1,9 @@
+<%
+  ##
+  # Il campo search_field è un BaseEditingBootstrap::Searches::Field.
+  # Per strutturare in modo differente il campo di ricerca si ha a disposizione
+  # l'helper BaseEditingBootstrap::Searches::Field#label che stampa il contenuto della label
+%>
 <div class="form-group col-xs-6 col-sm-4 col-md-3">
   <%= ransack_form_builder.label(search_field.name) %>
   <%= ransack_form_builder.search_field(search_field.name, class: "form-control form-control-sm") %>
