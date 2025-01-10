@@ -1,8 +1,8 @@
 class <%= class_name %>Policy < BaseModelPolicy
 
-  def editable_attributes = %w[<%= attributes_names.join(" ") %>]
-  def permitted_attributes = %w[<%= attributes_names.join(" ") %>]
-  def search_result_fields = %w[<%= attributes_names.join(" ") %>]
+  def editable_attributes = %i[<%= attributes_names.join(" ") %>]
+  def permitted_attributes = %i[<%= attributes_names.join(" ") %>]
+  def search_result_fields = %i[<%= attributes_names.join(" ") %>]
 <%- if @search_attrs.any? -%>
   def search_fields
     %i[<%= @search_attrs.join(" ") %>]
@@ -11,7 +11,7 @@ class <%= class_name %>Policy < BaseModelPolicy
 <%- if @permitted_attributes.any? -%>
   # TODO check if correct with search_fields
   def permitted_attributes_for_ransack
-    %w[<%= @permitted_attributes.join(" ") %>]
+    %i[<%= @permitted_attributes.join(" ") %>]
   end
 <%- end -%>
 end
