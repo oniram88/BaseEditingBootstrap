@@ -16,10 +16,10 @@ RSpec.shared_examples "a base model" do |ransack_permitted_attributes: [], ransa
     where(:base_model_method, :result, :new_user_result) do
       [
         [
-          :ransackable_attributes, ransack_permitted_attributes.map(&:to_s), ref(:new_user_ransack_permitted_attributes)
+          :ransackable_attributes, ransack_permitted_attributes.map(&:to_s), lazy { new_user_ransack_permitted_attributes.map(&:to_s) }
         ],
         [
-          :ransackable_associations, ransack_permitted_associations.map(&:to_s), ref(:new_user_ransack_permitted_associations)
+          :ransackable_associations, ransack_permitted_associations.map(&:to_s), lazy { new_user_ransack_permitted_associations.map(&:to_s) }
         ],
       ]
     end
