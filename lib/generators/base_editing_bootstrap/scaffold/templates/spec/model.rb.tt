@@ -1,6 +1,15 @@
 require 'rails_helper'
 RSpec.describe <%= class_name %>, type: :model do
   it_behaves_like "a base model",
-                  ransack_permitted_attributes: %w[<%= attributes_names.join(" ") %>],
-                  ransack_permitted_associations: []
+                  ransack_permitted_attributes: %w[<%= attributes_names.join(" ") %>]
+
+ # it_behaves_like "a base model",
+ #                 ransack_permitted_attributes: %w[<%= attributes_names.join(" ") %>],
+ #                 ransack_permitted_associations: []  do
+ #     let(:auth_object) { :auth_object } <- default
+ #     let(:auth_object) { create(:user, :as_admin) } <- in caso di necessità di override
+ #     let(:new_user_ransack_permitted_attributes) { ransack_permitted_attributes }
+ #     let(:new_user_ransack_permitted_associations) { ransack_permitted_associations }
+ # end
+
 end
