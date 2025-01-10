@@ -2,6 +2,12 @@
 All notable changes to this project will be documented in this file. See [conventional commits](https://www.conventionalcommits.org/) for commit guidelines.
 
 - - -
+## 1.3.1 - 2025-01-10
+#### Bug Fixes
+- Better spec helpers - (0d16364) - Marino Bonetti
+
+- - -
+
 ## 1.3.0 - 2025-01-09
 #### Documentation
 - Aggiunta documentazione per override search field - (ba97155) - Marino Bonetti
