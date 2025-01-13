@@ -30,3 +30,4 @@
   <%= error_messages_for(form.object, form_field) %>
 <% end %>
 <%= render partial: "editing_form_help_text", locals: {object: form.object, field: form_field} %>
+<%= content_for :form_field_ending %>

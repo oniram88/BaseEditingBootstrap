@@ -1,0 +1,32 @@
+<%# locals: (form:, field:) -%>
+<%
+  is_attached = form.object.send(field).attached?
+  hidden_field_id = dom_id(form.object, "hidden_#{field}")
+  preview_image_id = dom_id(form.object, "preview_image_#{field}")
+  filename_id = dom_id(form.object, "filename_#{field}")
+
+  javascript_clear_event = <<~JAVASCRIPT
+                            try{document.getElementById('#{hidden_field_id}').value = ''}catch{};
+                            try{document.getElementById('#{preview_image_id}').remove()}catch{};
+                            try{document.getElementById('#{filename_id}').remove()}catch{};
+                            return false
+                            JAVASCRIPT
+
+%>
+<%= form.hidden_field field, value: form.object.send(field).signed_id, id: hidden_field_id if is_attached %>
+
+<%= form.file_field field, direct_upload: true %>
+
+<% if is_attached %>
+  <%= content_tag :span, form.object.send(field).attachment.blob.filename, class: "input-group-text", id: filename_id %>
+  <%= content_tag :button, icon(:trash),
+                  onclick: javascript_clear_event,
+                  class: "btn btn-outline-secondary rounded-0" %>
+  <%= link_to icon(:download), form.object.send(field), class: "btn btn-outline-secondary", target: :_blank %>
+  <% if form.object.send(field).representable? %>
+    <% content_for :form_field_ending do %>
+      <%= content_tag :div, image_tag(form.object.send(field).representation(resize_to_limit: [100, 100])), id: preview_image_id %>
+    <% end %>
+  <% end %>
+<% end %>
+
