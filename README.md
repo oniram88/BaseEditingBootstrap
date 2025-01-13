@@ -25,6 +25,8 @@ Then run installer:
 $ bundle exec rails g base_editing_bootstrap:install
 ```
 
+**Si presume quindi che ActiveStorage sia correttamente installato, completo del javascript per il direct upload**
+
 ### Generators
 Then Install dependency (if you run base_editing_bootstrap:install you are good to go):
 ```bash
