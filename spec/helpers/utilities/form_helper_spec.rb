@@ -86,7 +86,7 @@ RSpec.describe Utilities::FormHelper, type: :helper do
             end
             is_expected.to have_tag(:span, seen: obj.primary_image.attachment.blob.filename)
             is_expected.to have_tag(:a, with: {href: url_for(obj.primary_image), target: "_blank"})
-            expect(helper.content_for(:form_field_ending)).to have_tag(:div) do
+            expect(helper.content_for(:form_field_ending)).to have_tag("div##{dom_id(obj, "preview_image_primary_image")}") do
               with_tag(:img)
             end
 

@@ -24,9 +24,8 @@
                   class: "btn btn-outline-secondary rounded-0" %>
   <%= link_to icon(:download), form.object.send(field), class: "btn btn-outline-secondary", target: :_blank %>
   <% if form.object.send(field).representable? %>
-    <% content_for :form_field_ending do %>
+    <% content_for :form_field_ending,flush:true do %>
       <%= content_tag :div, image_tag(form.object.send(field).representation(resize_to_limit: [100, 100])), id: preview_image_id %>
     <% end %>
   <% end %>
 <% end %>
-

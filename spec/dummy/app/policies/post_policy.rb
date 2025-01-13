@@ -4,10 +4,10 @@ class PostPolicy < BaseModelPolicy
     [
       :title,
       :description,
+      :primary_image,
       :category,
       :priority,
       :published_at,
-      :primary_image
     ]
   end
 
@@ -15,10 +15,10 @@ class PostPolicy < BaseModelPolicy
     [
       :title,
       :description,
+      :primary_image,
       :category,
       :priority,
       :published_at,
-      :primary_image
     ]
   end
 
