@@ -6,7 +6,8 @@ class PostPolicy < BaseModelPolicy
       :description,
       :category,
       :priority,
-      :published_at
+      :published_at,
+      :primary_image
     ]
   end
 
@@ -16,7 +17,8 @@ class PostPolicy < BaseModelPolicy
       :description,
       :category,
       :priority,
-      :published_at
+      :published_at,
+      :primary_image
     ]
   end
 

@@ -63,6 +63,55 @@ RSpec.describe Utilities::FormHelper, type: :helper do
         end
       end
 
+      describe "has_one_attached" do
+
+        subject { helper.form_print_field(form, :primary_image) }
+
+        it "rendered when empty" do
+
+          is_expected.to have_tag(:input, with: {type: "file"})
+          is_expected.not_to have_tag(:input, with: {type: "hidden", name: "post[primary_image]"})
+          is_expected.not_to have_tag(:button)
+
+          expect(helper.content_for?(:form_field_ending)).to be_falsey
+        end
+
+        context "with an attached image" do
+          let(:obj) { create(:post, :with_primary_image) }
+
+          it do
+            is_expected.to have_tag(:input, with: {type: "hidden", name: "post[primary_image]", value: obj.primary_image.signed_id})
+            is_expected.to have_tag(:button) do
+              with_tag("i.bi-trash")
+            end
+            is_expected.to have_tag(:span, seen: obj.primary_image.attachment.blob.filename)
+            is_expected.to have_tag(:a, with: {href: url_for(obj.primary_image), target: "_blank"})
+            expect(helper.content_for(:form_field_ending)).to have_tag(:div) do
+              with_tag(:img)
+            end
+
+          end
+
+        end
+
+        context "with an attached file not representable?" do
+          let(:obj) { create(:post, :with_text_file) }
+
+          it do
+            is_expected.to have_tag(:input, with: {type: "hidden", name: "post[primary_image]", value: obj.primary_image.signed_id})
+            is_expected.to have_tag(:button) do
+              with_tag("i.bi-trash")
+            end
+            is_expected.to have_tag(:span, seen: obj.primary_image.attachment.blob.filename)
+            is_expected.to have_tag(:a, with: {href: url_for(obj.primary_image), target: "_blank"})
+            expect(helper.content_for?(:form_field_ending)).to be_falsey
+
+          end
+
+        end
+
+      end
+
     end
 
     context "user model" do
