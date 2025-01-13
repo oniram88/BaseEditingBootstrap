@@ -2,6 +2,7 @@ module Utilities
   module FormHelper
     include TemplateHelper
     include EnumHelper
+    include IconHelper
     ##
     # Metodo su cui eseguire override per i campi specifici rispetto all'oggetto gestito dal controller
     # @deprecated Utilizza form_print_field(form, field) senza sovrascriverlo
@@ -23,9 +24,15 @@ module Utilities
       else
         if form.object.class.respond_to?(:type_for_attribute)
           type = form.object.class.type_for_attribute(field).type
+
+          # Se non abbiamo ancora il type tentiamo di capire se è di tipo attachment SINGOLO
+          if type.nil? and form.object.respond_to?(:"#{field}_attachment")
+            type = :has_one_attachment
+          end
         else
           type = :string
         end
+
         case type
         when :datetime
           generic_field = "datetime"
@@ -41,6 +48,8 @@ module Utilities
           generic_field = "integer"
         when :boolean
           generic_field = "boolean"
+        when :has_one_attachment
+          generic_field = "has_one_attachment"
         else
           generic_field = "base"
         end

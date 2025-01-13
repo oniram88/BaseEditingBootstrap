@@ -14,6 +14,8 @@ class Post < ApplicationRecord
     urgent: 2
   }, default: :normal, prefix: true
 
+  has_one_attached :primary_image
+
 
   def custom_virtual_attribute
     "content from virtual attribute"

@@ -1,6 +1,8 @@
 require 'rails_helper'
 
 RSpec.describe "Posts", type: :request do
+  include ActionView::RecordIdentifier
+
   it_behaves_like "as logged in user" do
     let(:user) { create(:user) }
     it_behaves_like "base editing controller", factory: :post
@@ -131,7 +133,7 @@ RSpec.describe "Posts", type: :request do
       end
 
       it "render standard form classes" do
-        is_expected.to have_tag(".input-group.mb-1", count: 5)
+        is_expected.to have_tag(".input-group.mb-1", count: 6)
       end
 
     end
@@ -148,6 +150,19 @@ RSpec.describe "Posts", type: :request do
           with_tag(".invalid-feedback")
         end
 
+      end
+
+      context "with image" do
+        let(:post_obj) { create(:post, :with_primary_image) }
+        it "render primary_image" do
+          put post_path(post_obj), params: {post: {title: nil}}
+
+          expect(response.body).to have_tag("div##{dom_id(post_obj, "preview_image_primary_image")}",count:1) do
+            with_tag(:img)
+          end
+
+
+        end
       end
 
     end
