@@ -2,6 +2,14 @@
 All notable changes to this project will be documented in this file. See [conventional commits](https://www.conventionalcommits.org/) for commit guidelines.
 
 - - -
+## 1.4.0 - 2025-01-13
+#### Bug Fixes
+- Correct generator for values - (a83f07a) - Marino Bonetti
+#### Features
+- Has one attached automatic file_field - (fd32678) - Marino Bonetti
+
+- - -
+
 ## 1.3.2 - 2025-01-10
 #### Bug Fixes
 - Fields in form inside layout - (a2e1d42) - Marino Bonetti
