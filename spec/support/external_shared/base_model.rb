@@ -1,4 +1,4 @@
-RSpec.shared_examples "a base model" do |ransack_permitted_attributes: [], ransack_permitted_associations: []|
+RSpec.shared_examples "a base model" do |ransack_permitted_attributes: [], ransack_permitted_associations: [], option_label_method: :to_s|
 
   it_behaves_like "a validated? object"
 
@@ -7,7 +7,11 @@ RSpec.shared_examples "a base model" do |ransack_permitted_attributes: [], ransa
   end
 
   it "have method for belongs_to options" do
-    expect(described_class).to respond_to(:option_label_method)
+    instance = described_class.new
+    expect(instance).to respond_to(:option_label_method)
+
+    expect(instance).to receive(option_label_method).and_return("LABEL")
+    instance.option_label_method
   end
 
   ##
