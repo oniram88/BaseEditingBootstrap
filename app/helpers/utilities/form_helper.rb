@@ -3,6 +3,7 @@ module Utilities
     include TemplateHelper
     include EnumHelper
     include IconHelper
+    include Pundit::Authorization
     ##
     # Metodo su cui eseguire override per i campi specifici rispetto all'oggetto gestito dal controller
     # @deprecated Utilizza form_print_field(form, field) senza sovrascriverlo
@@ -20,7 +21,16 @@ module Utilities
     def form_print_field(form, field)
       locals = {form:, field:}
       if form.object.class.respond_to?(:defined_enums) && form.object.class.defined_enums.key?(field.to_s)
+        type = :enum
         generic_field = "enum"
+      elsif form.object.class.respond_to?(:reflect_on_association) &&
+        form.object.class.reflect_on_association(field.to_s).is_a?(ActiveRecord::Reflection::BelongsToReflection)
+        # Abbiamo una relazione belongs_to da gestire
+        reflection = form.object.class.reflect_on_association(field.to_s)
+        type = :belongs_to
+        generic_field = "belongs_to_select"
+        locals[:relation_class] = reflection.klass
+        locals[:foreign_key] = reflection.foreign_key
       else
         if form.object.class.respond_to?(:type_for_attribute)
           type = form.object.class.type_for_attribute(field).type
