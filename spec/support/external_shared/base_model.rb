@@ -6,6 +6,10 @@ RSpec.shared_examples "a base model" do |ransack_permitted_attributes: [], ransa
     expect(described_class).to respond_to(:human_action_message)
   end
 
+  it "have method for belongs_to options" do
+    expect(described_class).to respond_to(:option_label_method)
+  end
+
   ##
   # Oggetto solitamente di classe User che identifichi l'utente a cui eseguire il check dei permessi
   let(:auth_object) { :auth_object }
