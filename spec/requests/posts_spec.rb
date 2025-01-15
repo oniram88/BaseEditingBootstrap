@@ -133,7 +133,7 @@ RSpec.describe "Posts", type: :request do
       end
 
       it "render standard form classes" do
-        is_expected.to have_tag(".input-group.mb-1", count: 6)
+        is_expected.to have_tag(".input-group.mb-1", count: 7)
       end
 
     end
@@ -157,10 +157,9 @@ RSpec.describe "Posts", type: :request do
         it "render primary_image" do
           put post_path(post_obj), params: {post: {title: nil}}
 
-          expect(response.body).to have_tag("div##{dom_id(post_obj, "preview_image_primary_image")}",count:1) do
+          expect(response.body).to have_tag("div##{dom_id(post_obj, "preview_image_primary_image")}", count: 1) do
             with_tag(:img)
           end
-
 
         end
       end
