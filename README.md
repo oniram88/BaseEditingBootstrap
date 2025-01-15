@@ -154,9 +154,15 @@ Utilizzo per modello base, in questo esempio prendiamo come modello Post come es
   - Date              => _date.html.erb
   - Boolean           => _boolean.html.erb
   - Enum              => _enum.html.erb
-    Per gli enum, le traduzioni dei labels di ogni valore provvengono da i18n
+    Per gli enum, le traduzioni dei labels di ogni valore provengono da i18n
     attraverso l'helper: `Utilities::EnumHelper#enum_translation`
     il quale utilizza il nome dell'attributo con 
+  - belongs_to      => _belongs_to_select.html.erb 
+    Come si può leggere dal partial, il modello che viene utilizzato come base dati per la collection deve
+    avere come metodo `option_label_method` che deve ritornare la label da utilizzare nelle options.
+    Di default questo metodo utilizza il semplice #to_s
+    Ha anche un metodo per il valore da utilizzare come chiave, di default viene dedotto dalla reflection
+    come anche il nome della classe da utilizzare come sorgente dei dati della collection
   - Default/String    => _base.html.erb
   
   In futuro si prevede di aggiungere automatismi per renderizzare senza 
