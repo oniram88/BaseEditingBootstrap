@@ -9,8 +9,11 @@ class CreatePosts < ActiveRecord::Migration[7.1]
       t.date :published_at
       t.float :rating
       t.decimal :decimal_test_number, precision: 10, scale: 3
+      t.bigint :user_id
 
       t.timestamps
+
+      t.index :user_id
     end
   end
 end

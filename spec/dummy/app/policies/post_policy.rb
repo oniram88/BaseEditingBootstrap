@@ -4,6 +4,7 @@ class PostPolicy < BaseModelPolicy
     [
       :title,
       :description,
+      :user,
       :primary_image,
       :category,
       :priority,
@@ -15,6 +16,7 @@ class PostPolicy < BaseModelPolicy
     [
       :title,
       :description,
+      :user_id,
       :primary_image,
       :category,
       :priority,

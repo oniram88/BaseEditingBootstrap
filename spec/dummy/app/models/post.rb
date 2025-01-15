@@ -15,6 +15,7 @@ class Post < ApplicationRecord
   }, default: :normal, prefix: true
 
   has_one_attached :primary_image
+  belongs_to :user
 
 
   def custom_virtual_attribute

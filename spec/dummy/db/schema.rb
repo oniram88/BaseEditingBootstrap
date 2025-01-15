@@ -48,8 +48,10 @@ ActiveRecord::Schema[7.2].define(version: 2025_01_13_080431) do
     t.date "published_at"
     t.float "rating"
     t.decimal "decimal_test_number", precision: 10, scale: 3
+    t.bigint "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_posts_on_user_id"
   end
 
   create_table "role_users", force: :cascade do |t|
