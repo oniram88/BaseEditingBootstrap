@@ -1,0 +1,3 @@
+<%# Renderizza il campo nella tabella della pagina dei risultati %>
+<%# locals: (obj:,field:)  -%>
+<td><%= enum_translation(obj.class, field, obj.send(field), :cell_field)  %></td>

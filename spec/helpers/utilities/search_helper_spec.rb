@@ -7,7 +7,7 @@ RSpec.describe Utilities::SearchHelper, type: :helper do
   describe "#render_cell_field" do
 
     context "post model" do
-      let(:obj) { create(:post, title: "Titolo", description: "desc") }
+      let(:obj) { create(:post, :other, title: "Titolo", description: "desc") }
 
       it "with base rendering" do
         expect(helper.render_cell_field(obj, :title)).to have_tag(:td, text: "Titolo")
@@ -30,6 +30,9 @@ RSpec.describe Utilities::SearchHelper, type: :helper do
         expect(helper.render_cell_field(obj, :custom_virtual_attribute)).to have_tag(:td, seen: "content from virtual attribute")
       end
 
+      it "enum category" do
+        expect(helper.render_cell_field(obj, :category)).to have_tag(:td, text: "Altro")
+      end
     end
 
     context "user model" do

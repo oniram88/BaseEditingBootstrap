@@ -145,6 +145,18 @@ Utilizzo per modello base, in questo esempio prendiamo come modello Post come es
   **Cell Field**:
   - created_at => timestamps.html.erb
   - updated_at => timestamps.html.erb
+  - Enum              => _enum.html.erb
+    Per gli enum, le traduzioni dei labels di ogni valore provengono da i18n
+    attraverso l'helper: `Utilities::EnumHelper#enum_translation` con variant `:cell_field`
+    il quale sfrutta human_attribute_name del modello con 'attributo.enum_value',
+    quindi ad esempio per un modello `Post` con enum `categoria` e un enum `importante`, la ricerca nelle traduzioni
+    saranno così composte:
+    - it.activerecord.attributes.post/categoria.importante_cell_field
+    - it.activerecord.attributes.categoria.importante_cell_field  
+    - it.attributes.importante_cell_field
+    - it.activerecord.attributes.post/categoria.importante
+    - it.activerecord.attributes.categoria.importante
+    - it.attributes.importante => nil
   - default    => base.html.erb
   
   **Form Field**
@@ -156,12 +168,16 @@ Utilizzo per modello base, in questo esempio prendiamo come modello Post come es
   - Boolean           => _boolean.html.erb
   - Enum              => _enum.html.erb
     Per gli enum, le traduzioni dei labels di ogni valore provengono da i18n
-    attraverso l'helper: `Utilities::EnumHelper#enum_translation`
+    attraverso l'helper: `Utilities::EnumHelper#enum_translation`" con variante `:form_field`
     il quale sfrutta human_attribute_name del modello con 'attributo.enum_value', 
     quindi ad esempio per un modello `Post` con enum `categoria` e un enum `importante`, la ricerca nelle traduzioni
     saranno così composte: 
+    - it.activerecord.attributes.post/categoria.importante_form_field
+    - it.activerecord.attributes.categoria.importante_form_field
+    - it.attributes.importante_form_field
     - it.activerecord.attributes.post/categoria.importante
     - it.activerecord.attributes.categoria.importante
+    - it.attributes.importante => nil
   - belongs_to      => _belongs_to_select.html.erb 
     Come si può leggere dal partial, il modello che viene utilizzato come base dati per la collection deve
     avere come metodo `option_label` che deve ritornare la label da utilizzare nelle options.

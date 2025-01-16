@@ -3,6 +3,7 @@ module Utilities
     include TemplateHelper
     include PageHelper
     include IconHelper
+    include EnumHelper
 
     ##
     # Per aggiungere bottoni:
@@ -71,10 +72,16 @@ module Utilities
                       when :created_at, :updated_at
                         "timestamps"
                       else
-                        type = klazz.type_for_attribute(field).type
+                        if klazz.respond_to?(:defined_enums) && klazz.defined_enums.key?(field.to_s)
+                          type = :enum
+                        else
+                          type = klazz.type_for_attribute(field).type
+                        end
                         case type
                         when :boolean
                           "boolean"
+                        when :enum
+                          "enum"
                         else
                           "base"
                         end
