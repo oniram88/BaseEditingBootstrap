@@ -159,7 +159,7 @@ Utilizzo per modello base, in questo esempio prendiamo come modello Post come es
     il quale utilizza il nome dell'attributo con 
   - belongs_to      => _belongs_to_select.html.erb 
     Come si può leggere dal partial, il modello che viene utilizzato come base dati per la collection deve
-    avere come metodo `option_label_method` che deve ritornare la label da utilizzare nelle options.
+    avere come metodo `option_label` che deve ritornare la label da utilizzare nelle options.
     Di default questo metodo utilizza il semplice #to_s
     Ha anche un metodo per il valore da utilizzare come chiave, di default viene dedotto dalla reflection
     come anche il nome della classe da utilizzare come sorgente dei dati della collection

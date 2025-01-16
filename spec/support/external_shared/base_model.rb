@@ -8,10 +8,10 @@ RSpec.shared_examples "a base model" do |ransack_permitted_attributes: [], ransa
 
   it "have method for belongs_to options" do
     instance = described_class.new
-    expect(instance).to respond_to(:option_label_method)
+    expect(instance).to respond_to(:option_label)
 
-    expect(instance).to receive(option_label_method).and_return("LABEL")
-    instance.option_label_method
+    expect(instance).to receive(option_label_method).and_call_original
+    instance.option_label
   end
 
   ##

@@ -12,8 +12,8 @@ module BaseEditingBootstrap
 
       ##
       # Label da utilizzare nelle option per quando si genera le select dei belongs to
-      # @return [String]
-      def option_label_method
+      # @return [String,NilClass]
+      def option_label
         to_s
       end
     end

@@ -1,4 +1,4 @@
-<%# locals: (form:, field:,relation_class:,foreign_key:,value_method: :id, label_method: :option_label_method) -%>
+<%# locals: (form:, field:,relation_class:,foreign_key:,value_method: :id, label_method: :option_label) -%>
 <%= form.select(foreign_key, options_from_collection_for_select(policy_scope(relation_class),
                                                           value_method, label_method,
                                                           selected: form.object.send(foreign_key)),

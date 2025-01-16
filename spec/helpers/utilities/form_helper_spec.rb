@@ -55,7 +55,7 @@ RSpec.describe Utilities::FormHelper, type: :helper do
           expect(helper.form_print_field(form, :user)).to have_tag(:select, with: {name: "post[user_id]"}) do
             with_tag(:option, count: User.count + 1) # +1 per il blank
             with_tag('option[selected]', with: {value: obj.user_id}, seen:obj.user.username )
-            with_tag(:option, with: {value: user_2.id},seen: user_2.option_label_method)
+            with_tag(:option, with: {value: user_2.id},seen: user_2.option_label)
             with_tag(:option, with: {value: "", label: " "})
           end
         end
