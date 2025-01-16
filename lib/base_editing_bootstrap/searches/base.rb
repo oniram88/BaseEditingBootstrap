@@ -37,21 +37,27 @@ module BaseEditingBootstrap::Searches
     end
 
     def search_fields
-      Pundit.policy(@user, @model_klass).search_fields.collect { |f| Field.new(self, f) }
+      policy.search_fields.collect { |f| Field.new(self, f) }
     end
 
     def search_result_fields
-      Pundit.policy(@user, @model_klass).search_result_fields
+      policy.search_result_fields
     end
 
     ##
     # Ritorna se il campo deve essere ordinabile o meno
     def sortable?(field)
-      Pundit.policy(@user, @model_klass).sortable_search_result_fields.include?(field)
+      policy.sortable_search_result_fields.include?(field)
     end
 
     def persisted?
       false
+    end
+
+    ##
+    # @return [ApplicationPolicy]
+    def policy
+      Pundit.policy(@user, @model_klass)
     end
   end
 end
