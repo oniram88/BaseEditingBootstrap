@@ -8,6 +8,14 @@ module BaseEditingBootstrap
       include IsValidated
       include ActionTranslation
       delegate :ransackable_attributes, :ransackable_associations, to: :@class
+
+
+      ##
+      # Label da utilizzare nelle option per quando si genera le select dei belongs to
+      # @return [String,NilClass]
+      def option_label
+        to_s
+      end
     end
 
     class_methods do

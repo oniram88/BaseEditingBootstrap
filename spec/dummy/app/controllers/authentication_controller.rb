@@ -5,7 +5,7 @@ class AuthenticationController < ApplicationController
   private
 
   def current_user
-    @_user ||= User.last
+    @_user ||= Thread.current[:current_user]
   end
 
 end

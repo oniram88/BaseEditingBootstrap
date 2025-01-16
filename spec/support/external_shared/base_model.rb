@@ -1,9 +1,17 @@
-RSpec.shared_examples "a base model" do |ransack_permitted_attributes: [], ransack_permitted_associations: []|
+RSpec.shared_examples "a base model" do |ransack_permitted_attributes: [], ransack_permitted_associations: [], option_label_method: :to_s|
 
   it_behaves_like "a validated? object"
 
   it "human_action_message" do
     expect(described_class).to respond_to(:human_action_message)
+  end
+
+  it "have method for belongs_to options" do
+    instance = described_class.new
+    expect(instance).to respond_to(:option_label)
+
+    expect(instance).to receive(option_label_method).and_call_original
+    instance.option_label
   end
 
   ##

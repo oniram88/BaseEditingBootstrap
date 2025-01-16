@@ -2,6 +2,7 @@ FactoryBot.define do
   factory :post do
     sequence(:title) { |n| "title_#{n}" }
     description { "MyString" }
+    user
 
     trait :with_invalid_attributes do
       title { nil }
