@@ -146,6 +146,7 @@ Utilizzo per modello base, in questo esempio prendiamo come modello Post come es
   - created_at => timestamps.html.erb
   - updated_at => timestamps.html.erb
   - default    => base.html.erb
+  
   **Form Field**
   - Integer           => _integer.html.erb
   - Float             => _decimal.html.erb
@@ -156,7 +157,11 @@ Utilizzo per modello base, in questo esempio prendiamo come modello Post come es
   - Enum              => _enum.html.erb
     Per gli enum, le traduzioni dei labels di ogni valore provengono da i18n
     attraverso l'helper: `Utilities::EnumHelper#enum_translation`
-    il quale utilizza il nome dell'attributo con 
+    il quale sfrutta human_attribute_name del modello con 'attributo.enum_value', 
+    quindi ad esempio per un modello `Post` con enum `categoria` e un enum `importante`, la ricerca nelle traduzioni
+    saranno così composte: 
+    - it.activerecord.attributes.post/categoria.importante
+    - it.activerecord.attributes.categoria.importante
   - belongs_to      => _belongs_to_select.html.erb 
     Come si può leggere dal partial, il modello che viene utilizzato come base dati per la collection deve
     avere come metodo `option_label` che deve ritornare la label da utilizzare nelle options.
