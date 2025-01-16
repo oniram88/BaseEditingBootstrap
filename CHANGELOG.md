@@ -2,6 +2,17 @@
 All notable changes to this project will be documented in this file. See [conventional commits](https://www.conventionalcommits.org/) for commit guidelines.
 
 - - -
+## 1.5.0 - 2025-01-16
+#### Documentation
+- Update documentation - (3a29e34) - Marino Bonetti
+#### Features
+- Render enum in index - (c520cd1) - Marino Bonetti
+- Belongs_to Form fields - (6572b9f) - Marino Bonetti
+#### Refactoring
+- Estrapolazione policy in metodo - (711746b) - Marino Bonetti
+
+- - -
+
 ## 1.4.0 - 2025-01-13
 #### Bug Fixes
 - Correct generator for values - (a83f07a) - Marino Bonetti
