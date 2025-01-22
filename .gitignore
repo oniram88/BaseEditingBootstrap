@@ -13,3 +13,4 @@ coverage
 !Dockerfile
 *.gem
 Gemfile.lock
+.gem_rbs_collection/
