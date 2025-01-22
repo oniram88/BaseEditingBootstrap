@@ -1,0 +1,9 @@
+module BaseEditingBootstrap
+  module IsValidated
+    extend ActiveSupport::Concern
+
+    attr_reader is_validated: bool
+    alias is_validated? is_validated
+
+  end
+end

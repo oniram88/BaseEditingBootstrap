@@ -1,0 +1,38 @@
+class BaseModelPolicy < ApplicationPolicy
+  def index?: () -> bool
+
+  def create?: () -> bool
+
+  def update?: () -> bool
+
+  def destroy?: () -> bool
+
+  def show?: () -> bool
+
+  # Questo metodo può essere anche scritto specifico per azione:
+  # - permitted_attributes_for_create
+  # - permitted_attributes_for_update
+  def permitted_attributes: () -> ::Array[untyped]
+
+  def editable_attributes: () -> ::Array[untyped]
+
+  def permitted_attributes_for_ransack: () -> untyped
+
+  def permitted_associations_for_ransack: () -> ::Array[untyped]
+
+  def search_fields: () -> ::Array[BaseEditingBootstrap::Searches::Field]
+
+  def search_result_fields: () -> ::Array[untyped]
+
+  #
+  # List of attributes in index to make it sortable
+  def sortable_search_result_fields: () -> untyped
+
+  class Scope < Scope
+    def resolve: () -> ActiveRecord::Associations::CollectionProxy
+  end
+
+  private
+
+  def general_rule: () -> bool
+end

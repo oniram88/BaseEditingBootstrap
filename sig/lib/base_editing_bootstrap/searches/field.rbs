@@ -1,0 +1,14 @@
+module BaseEditingBootstrap::Searches
+  class Field
+
+    attr_reader search_base: BaseEditingBootstrap::Searches::Base
+
+    attr_reader name: Symbol
+
+    def initialize: (BaseEditingBootstrap::Searches::Base search_base, Symbol name) -> void
+
+    def to_partial_path: () -> "search_field"
+
+    def label: () -> String
+  end
+end
