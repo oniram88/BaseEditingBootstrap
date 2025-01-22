@@ -2,6 +2,14 @@
 All notable changes to this project will be documented in this file. See [conventional commits](https://www.conventionalcommits.org/) for commit guidelines.
 
 - - -
+## 1.5.1 - 2025-01-22
+#### Bug Fixes
+- Ricerca template anche con contesto del controller - (ac93a9f) - Marino Bonetti
+#### Miscellaneous Chores
+- Remove unused files - (0b56f94) - Marino Bonetti
+
+- - -
+
 ## 1.5.0 - 2025-01-16
 #### Documentation
 - Update documentation - (3a29e34) - Marino Bonetti
