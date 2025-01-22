@@ -1,0 +1,14 @@
+module BaseEditingBootstrap
+  #
+  # PORO to find the base classe in the BaseEditingController
+  class ResourceFinder
+    @_model_class: (ActiveRecord::Base|false)?
+    @controllar_path: String
+
+
+    def initialize: (String controllar_path) -> void
+
+    # @return [NilClass|Object]
+    def model: () -> (ActiveRecord::Base|false)?
+  end
+end

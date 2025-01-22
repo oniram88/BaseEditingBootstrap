@@ -1,0 +1,7 @@
+module BaseEditingBootstrap
+  module ActionTranslation
+    extend ActiveSupport::Concern
+
+    def  human_action_message: (action: String, successful: bool, **Hash[untyped,untyped] options) -> String
+  end
+end

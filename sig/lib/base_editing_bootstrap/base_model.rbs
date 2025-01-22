@@ -1,0 +1,11 @@
+module BaseEditingBootstrap
+  module BaseModel
+    extend ActiveSupport::Concern
+
+    def option_label: () -> String?
+
+    def ransackable_attributes: (Object?) -> Object?
+    def ransackable_associations: (Object?) -> [String]
+
+  end
+end
