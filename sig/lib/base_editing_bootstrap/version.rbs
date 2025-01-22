@@ -1,0 +1,3 @@
+module BaseEditingBootstrap
+  VERSION: String
+end

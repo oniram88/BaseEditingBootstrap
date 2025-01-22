@@ -1,0 +1,8 @@
+module BaseEditingBootstrap
+
+  self.@deprecator: ActiveSupport::Deprecation
+
+  include ActiveSupport::Configurable
+
+  def self.deprecator: () -> ActiveSupport::Deprecation
+end
