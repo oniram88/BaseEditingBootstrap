@@ -21,6 +21,18 @@ RSpec.describe "Controller Namespaced Class", type: :request do
       end
     end
 
+    describe "namespaced resources with custom form fields" do
+      let(:post) { create(:post) }
+      it "get correct field override" do
+        get edit_customer_post_path(post)
+
+        expect(response.body).to have_tag(:span, seen: "OVERRIDE for title")
+
+
+      end
+    end
+
+
 
   end
 

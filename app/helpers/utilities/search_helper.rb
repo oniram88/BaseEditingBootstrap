@@ -32,7 +32,7 @@ module Utilities
     # @return [ActiveSupport::SafeBuffer]
     def render_cell_field(obj, field)
       template = template_for_column(obj.class, field, "cell_field")
-      render template, obj:, field:
+      template.render(self,{obj:, field:})
     end
 
     ##
@@ -42,7 +42,7 @@ module Utilities
     # @return [ActiveSupport::SafeBuffer]
     def render_header_cell_field(search_instance, field)
       template = template_for_column(search_instance.model_klass, field, "header_field")
-      render template, obj: search_instance.model_klass, field:, search_instance: search_instance
+      template.render(self,{obj: search_instance.model_klass, field:, search_instance: search_instance})
     end
 
     ##

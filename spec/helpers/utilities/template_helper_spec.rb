@@ -32,7 +32,7 @@ RSpec.describe Utilities::TemplateHelper, type: :helper do
       subject { helper.find_template_with_fallbacks(obj, field, base_path, generic_field) }
 
       it "should " do
-        is_expected.to be == result
+        is_expected.to be == lookup_context.find(result,[],true)
       end
     end
   end

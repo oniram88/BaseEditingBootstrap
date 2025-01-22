@@ -17,10 +17,23 @@ module Utilities::TemplateHelper
     # avere la partial_path
     partial_path = (obj.respond_to? :to_partial_path) ? obj.to_partial_path : obj._to_partial_path
     obj_base_path = "#{partial_path}/#{base_path}"
-    return "#{obj_base_path}/#{field}" if lookup_context.exists?(field, [obj_base_path], true)
-    return "#{obj_base_path}/#{generic_field}" if lookup_context.exists?(generic_field, [obj_base_path], true)
-    return "base_editing/#{base_path}/#{generic_field}" if lookup_context.find_all("base_editing/#{base_path}/_#{generic_field}").any?
-    "base_editing/#{base_path}/base"
+
+    # Precedenza modello e campo specifico
+    if lookup_context.exists?(field, [obj_base_path], true)
+      return lookup_context.find(field, [obj_base_path], true)
+    end
+    # Ricerca tramite campo generico e prefissi di contesto che contiene anche controller e namespace di controller
+    if lookup_context.exists?("#{base_path}/#{generic_field}", lookup_context.prefixes, true)
+      view = lookup_context.find_all("#{base_path}/#{generic_field}", lookup_context.prefixes, true)
+      return view.first
+    end
+    if lookup_context.exists?(generic_field, [obj_base_path], true)
+      return lookup_context.find(generic_field, [obj_base_path], true)
+    end
+    if lookup_context.exists?("base_editing/#{base_path}/#{generic_field}", [], true)
+      return lookup_context.find_all("base_editing/#{base_path}/#{generic_field}", [], true).first
+    end
+    lookup_context.find("base_editing/#{base_path}/base", [], true)
   end
 
 end
