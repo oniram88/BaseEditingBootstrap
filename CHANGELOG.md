@@ -2,6 +2,15 @@
 All notable changes to this project will be documented in this file. See [conventional commits](https://www.conventionalcommits.org/) for commit guidelines.
 
 - - -
+## 1.6.0 - 2025-01-23
+#### Features
+- Add new test helper for association relation - (15690c7) - Marino Bonetti
+#### Tests
+- Fix association for order - (9e2bdd4) - Marino Bonetti
+- Example order by ransack - (79cccc7) - Marino Bonetti
+
+- - -
+
 ## 1.5.1 - 2025-01-22
 #### Bug Fixes
 - Ricerca template anche con contesto del controller - (ac93a9f) - Marino Bonetti
