@@ -1,0 +1,77 @@
+class BaseEditingController < RestrictedAreaController
+  @search_instance: untyped
+
+  @object: untyped
+
+  @_base_class: untyped
+
+  def index: () ?{ (untyped) -> untyped } -> void
+
+  def new: () ?{ (untyped) -> untyped } -> void
+
+  def edit: () ?{ (untyped) -> untyped } -> void
+
+  def show: () ?{ (untyped) -> untyped } -> void
+
+  def update: () ?{ (untyped) -> untyped } -> void
+
+  def create: () ?{ (untyped) -> untyped } -> void
+
+  def destroy: () ?{ (untyped) -> untyped } -> void
+
+  def base_class: () -> ActiveRecord::Base
+
+  private
+
+  def search_class: () -> BaseEditingBootstrap::Searches::Base
+
+  def form_builder: () -> BaseEditingBootstrap::Forms::Base
+
+  def form_attributes: (?untyped model, ?untyped action) -> untyped
+
+  def load_object: () -> untyped
+
+  #
+  # Scope iniziale per index, viene passato al policy_scope in index.
+  def base_scope: () -> untyped
+
+  #
+  # Semplice override per avere un debug
+  # @param record [ActiveRecord::Base] oggetto per cui estrapolare gli attributi ripuliti, di default utilizza
+  #                                    la classe base
+  # @param [nil] action
+  # @return [Hash{String->Object}]
+  def permitted_attributes: (?untyped record, ?untyped action) -> untyped
+
+  #
+  # In casi in cui l'azione non è quella di pundit per poter ricercarne le policy
+  # possiamo fare override, altrimenti il default è l'action_name standard
+  def override_pundit_action_name: () -> untyped
+
+  #
+  # Versione più addolcita del require params, nel caso non sia presente il parametro corretto viene
+  # restituito un hash vuoto
+  def pundit_params_for: (untyped record) -> untyped
+
+  def new_custom_polymorphic_path: (*untyped base_class) -> untyped
+
+  def edit_custom_polymorphic_path: (*untyped) ?{ () -> untyped } -> untyped
+
+  def show_custom_polymorphic_path: (*untyped) ?{ () -> untyped } -> untyped
+
+  def index_custom_polymorphic_path: (*untyped) ?{ () -> untyped } -> untyped
+
+  def destroy_custom_polymorphic_path: (*untyped) ?{ () -> untyped } -> untyped
+
+  def _failed_destroy: (untyped format) -> untyped
+
+  def _successful_destroy: (untyped format) -> untyped
+
+  def _failed_create: (untyped format) -> untyped
+
+  def _successful_create: (untyped format) -> untyped
+
+  def _failed_update: (untyped format) -> untyped
+
+  def _successful_update: (untyped format) -> untyped
+end

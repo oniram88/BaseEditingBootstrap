@@ -1,0 +1,4 @@
+module Pundit
+  module Authorization
+  end
+end
