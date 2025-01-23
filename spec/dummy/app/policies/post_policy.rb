@@ -25,11 +25,15 @@ class PostPolicy < BaseModelPolicy
   end
 
   def search_result_fields
-    [:title, :category, :description, :created_at,]
+    [:title, :category, :description, :created_at, :user_username]
   end
 
   def sortable_search_result_fields
-    [:title, :category]
+    [:title, :category, :user_username]
+  end
+
+  def permitted_associations_for_ransack
+    [:user]
   end
 
   def search_fields

@@ -17,6 +17,8 @@ class Post < ApplicationRecord
   has_one_attached :primary_image
   belongs_to :user
 
+  delegate :username, to: :user, prefix: true
+
 
   def custom_virtual_attribute
     "content from virtual attribute"
