@@ -1,0 +1,5 @@
+module Utilities::IconHelper
+  #
+  # Genera le icone di Bootstrap icons
+  def icon: (untyped name, ?untyped? text, ?::Hash[untyped, untyped] html_options) -> untyped
+end

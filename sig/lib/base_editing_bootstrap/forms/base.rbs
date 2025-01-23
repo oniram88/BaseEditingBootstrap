@@ -1,0 +1,34 @@
+module BaseEditingBootstrap::Forms
+  class Base < ActionView::Helpers::FormBuilder
+
+    type like_field = (Symbol|String)
+
+    #
+    # Costruisce l'array delle classi che devono essere presenti sul campo della form
+    #
+    def form_style_class_for: (like_field method, ?::Hash[Symbol, untyped] options) -> String
+
+    def decimal_field: (like_field field, ?::Hash[untyped, untyped] options) -> untyped
+
+    def ckeditor_text_area: (like_field field, ?::Hash[untyped, untyped] options) -> untyped
+
+    def select: (like_field method, ?untyped? choices, ?::Hash[untyped, untyped] options, ?::Hash[untyped, untyped] html_options) { () -> untyped } -> untyped
+
+    def check_box: (like_field method, ?::Hash[untyped, untyped] options, ?::String checked_value, ?::String unchecked_value) -> untyped
+
+    def switch_box: (like_field method, ?::Hash[untyped, untyped] options, ?::String checked_value, ?::String unchecked_value) -> untyped
+
+    def collection_check_boxes: (like_field method, untyped collection, untyped value_method, untyped text_method, ?::Hash[untyped, untyped] options, ?::Hash[untyped, untyped] html_options) { () -> untyped } -> untyped
+
+    def radio_button: (like_field method, untyped tag_value, ?::Hash[untyped, untyped] options) -> untyped
+
+    #
+    # Se necessario modificare il testo dell' "undo", basta aggiungere nelle traduzioni
+    # nella solita struttura di active record l'attributo :_submit_undo,
+    # per il normale submit consiglio la lettura della guida standard di rails
+    # ATTENZIONE: nelle classi del bottone undo, abbiamo aggiunto .btn-undo-button
+    #             che ascoltiamo dalle modal e utilizziamo per chiudere la modal, al posto
+    #             seguire realmente il link con il browser.
+    def submit: (?untyped? value, ?::Hash[untyped, untyped] options) -> untyped
+  end
+end

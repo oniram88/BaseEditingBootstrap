@@ -1,0 +1,25 @@
+module Utilities
+  module FormHelper
+    include TemplateHelper
+
+    include EnumHelper
+
+    include IconHelper
+
+    #include Pundit::Authorization
+
+    #
+    # Metodo su cui eseguire override per i campi specifici rispetto all'oggetto gestito dal controller
+    # @deprecated Utilizza form_print_field(form, field) senza sovrascriverlo
+    # @param [Forms::Base] form
+    # @param [Symbol] field
+    def editing_form_print_field: (untyped form, untyped field) -> untyped
+
+    #
+    # Metodo per il partial corretto per eseguire il render del campo della form
+    #
+    # @param [Forms::Base] form
+    # @param [Symbol] field
+    def form_print_field: (untyped form, untyped field) -> untyped
+  end
+end
