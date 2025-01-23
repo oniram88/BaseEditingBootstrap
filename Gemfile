@@ -42,5 +42,7 @@ gem "binding_of_caller", group: :development
 # Start debugger with binding.b [https://github.com/ruby/debug]
 gem "debug", ">= 1.0.0"
 
-gem "rbs"
-gem "steep"
+gem "rbs", require: false
+gem "steep", require: false
+gem 'rbs_rails', require: false
+gem 'rbs_protobuf', require: false

@@ -5,6 +5,7 @@
 #   ignore_signature "sig/test"
 #
    check "lib"                      # Directory name
+   check "app/**/*.rb"
 #   check "path/to/source.rb"         # File name
 #   check "app/models/**/*.rb"        # Glob
 #   # ignore "lib/templates/*.rb"
