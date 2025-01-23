@@ -1,0 +1,18 @@
+module Utilities::PageHelper
+  # @param [BaseModel] base_class
+  def title_mod_g: (untyped base_class) -> ::String
+
+  # @param [BaseModel] base_class
+  def title_new_g: (untyped base_class) -> ::String
+
+  # @param [TrueClass, FalseClass] valore
+  def boolean_to_icon: (untyped valore) -> untyped
+
+  # @param [String] path
+  # @param [Hash] options
+  def new_button: (untyped path, ?::Hash[untyped, untyped] options) -> untyped
+
+  # @param [BaseModel] obj instance
+  # @param [Symbol] field
+  def error_messages_for: (untyped obj, untyped field) -> (untyped | nil)
+end

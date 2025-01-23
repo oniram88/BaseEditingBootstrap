@@ -16,7 +16,7 @@ class BaseModelPolicy < ApplicationPolicy
 
   def editable_attributes: () -> ::Array[untyped]
 
-  def permitted_attributes_for_ransack: () -> untyped
+  def permitted_attributes_for_ransack: () -> Array[untyped]
 
   def permitted_associations_for_ransack: () -> ::Array[untyped]
 
