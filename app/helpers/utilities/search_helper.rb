@@ -14,7 +14,7 @@ module Utilities
     #         link_to "xls", admins_log_alarms_path(params: {q: params.permit(q:{})[:q]}, format: :xlsx), class: "btn btn-info", target: :_blank
     #       end
     #     end
-    # @return [ActiveSupport::SafeBuffer]
+    # @return [NilClass]
     # @param [Ransack::Helpers::FormBuilder] ransack_form
     def search_form_buttons(ransack_form)
       content_for(:search_form_buttons) do

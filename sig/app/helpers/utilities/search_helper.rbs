@@ -8,46 +8,25 @@ module Utilities
 
     include EnumHelper
 
-    #
-    # Per aggiungere bottoni:
-    # ES:
-    #    def search_form_buttons(ransack_form, &block)
-    #       super #<-  questo serve per costruire i bottoni definiti da super
-    #       content_for(:search_form_buttons) do #<- questo serve per aggiungere al content_for un'altro bottone
-    #         link_to "xls", admins_log_alarms_path(params: {q: params.permit(q:{})[:q]}, format: :xlsx), class: "btn btn-info", target: :_blank
-    #       end
-    #     end
-    # @return [ActiveSupport::SafeBuffer]
-    # @param [Ransack::Helpers::FormBuilder] ransack_form
-    def search_form_buttons: (untyped ransack_form) -> untyped
+    def search_form_buttons: (Ransack::Helpers::FormBuilder ransack_form) -> nil
 
-    #
-    # Renderizza la cella della tabella nella pagina della index
-    # @param [BaseModel] obj
-    # @param [Symbol] field
-    # @return [ActiveSupport::SafeBuffer]
-    def render_cell_field: (untyped obj, untyped field) -> untyped
+    def render_cell_field: (BaseEditingBootstrap::BaseModel obj, Symbol field) -> ActiveSupport::SafeBuffer
 
-    #
-    # Renderizza header della tabella della index
-    # @param [BaseEditingBootstrap::Searches::Base] search_instance
-    # @param [Symbol] field
-    # @return [ActiveSupport::SafeBuffer]
-    def render_header_cell_field: (untyped search_instance, untyped field) -> untyped
+    def render_header_cell_field: (BaseEditingBootstrap::Searches::Base search_instance, Symbol field) -> ActiveSupport::SafeBuffer
 
     #
     # Restituisce il valore che vogliamo mostrare
-    def render_raw_field: (untyped obj, untyped field) -> untyped
+    def render_raw_field: (BaseEditingBootstrap::BaseModel obj, Symbol field) -> untyped
 
     #
     # Possibile override dei parametri da passare a ransack nella form
-    def search_form_for_params: (untyped ransack_instance) -> ::Array[untyped]
+    def search_form_for_params: (BaseEditingBootstrap::Searches::Base ransack_instance) -> ::Array[Ransack::Search]
 
     private
 
     #
     # Restituisce il template corretto per la tripletta, andando a ricercare il tipo di campo attraverso le informazioni
     # che type_for_attribute può restituirci
-    def template_for_column: (untyped klazz, untyped field, untyped partial_type) -> untyped
+    def template_for_column: (Object klazz, Symbol field, String partial_type) -> ActionView::Template
   end
 end

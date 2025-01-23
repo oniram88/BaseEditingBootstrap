@@ -1,13 +1,12 @@
 module Utilities::TemplateHelper
-  #
-  # Ricerca template con fallbacks.
-  # In ordine, cerca di trovare il partial per l'oggetto(tramite il metodo to_partial_path) e il campo specifico.
-  # In successione cerca poi per il partial con nome relativo al tipo di dato
-  # sempre nella cartella dell'oggetto
-  # ed infine nella cerca nella cartella del base editing
-  # @param [Object#to_partial_path] obj
-  # @param [Symbol] field
-  # @param [String] base_path
-  # @param [String] generic_field
-  def find_template_with_fallbacks: (untyped obj, untyped field, untyped base_path, untyped generic_field) -> untyped
+
+  interface _ToPartialPathDirect
+    def to_partial_path: () -> String
+  end
+
+  interface _ToPartialPath
+    def _to_partial_path: () -> String
+  end
+
+  def find_template_with_fallbacks: ((_ToPartialPath | _ToPartialPathDirect) obj, Symbol field, String base_path, String generic_field) -> ActionView::Template
 end
