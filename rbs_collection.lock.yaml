@@ -129,15 +129,7 @@ gems:
     revision: 145319bd4faabc7480c7f38b12024d2d84e57db4
     remote: https://github.com/ruby/gem_rbs_collection.git
     repo_dir: gems
-- name: csv
-  version: '0'
-  source:
-    type: stdlib
 - name: date
-  version: '0'
-  source:
-    type: stdlib
-- name: dbm
   version: '0'
   source:
     type: stdlib
@@ -153,6 +145,10 @@ gems:
     revision: 145319bd4faabc7480c7f38b12024d2d84e57db4
     remote: https://github.com/ruby/gem_rbs_collection.git
     repo_dir: gems
+- name: digest
+  version: '0'
+  source:
+    type: stdlib
 - name: erb
   version: '0'
   source:
@@ -170,10 +166,6 @@ gems:
   source:
     type: rubygems
 - name: fileutils
-  version: '0'
-  source:
-    type: stdlib
-- name: forwardable
   version: '0'
   source:
     type: stdlib
@@ -197,10 +189,6 @@ gems:
   version: '0'
   source:
     type: stdlib
-- name: json
-  version: '0'
-  source:
-    type: stdlib
 - name: kaminari-actionview
   version: '1.2'
   source:
@@ -219,14 +207,6 @@ gems:
     repo_dir: gems
 - name: kaminari-core
   version: '1.2'
-  source:
-    type: git
-    name: ruby/gem_rbs_collection
-    revision: 145319bd4faabc7480c7f38b12024d2d84e57db4
-    remote: https://github.com/ruby/gem_rbs_collection.git
-    repo_dir: gems
-- name: listen
-  version: '3.9'
   source:
     type: git
     name: ruby/gem_rbs_collection
@@ -301,10 +281,6 @@ gems:
   version: '0'
   source:
     type: stdlib
-- name: optparse
-  version: '0'
-  source:
-    type: stdlib
 - name: parser
   version: '3.2'
   source:
@@ -314,14 +290,6 @@ gems:
     remote: https://github.com/ruby/gem_rbs_collection.git
     repo_dir: gems
 - name: pathname
-  version: '0'
-  source:
-    type: stdlib
-- name: pstore
-  version: '0'
-  source:
-    type: stdlib
-- name: psych
   version: '0'
   source:
     type: stdlib
@@ -357,14 +325,6 @@ gems:
     revision: 145319bd4faabc7480c7f38b12024d2d84e57db4
     remote: https://github.com/ruby/gem_rbs_collection.git
     repo_dir: gems
-- name: rainbow
-  version: '3.0'
-  source:
-    type: git
-    name: ruby/gem_rbs_collection
-    revision: 145319bd4faabc7480c7f38b12024d2d84e57db4
-    remote: https://github.com/ruby/gem_rbs_collection.git
-    repo_dir: gems
 - name: rake
   version: '13.0'
   source:
@@ -373,10 +333,6 @@ gems:
     revision: 145319bd4faabc7480c7f38b12024d2d84e57db4
     remote: https://github.com/ruby/gem_rbs_collection.git
     repo_dir: gems
-- name: rbs
-  version: 3.8.1
-  source:
-    type: rubygems
 - name: rdoc
   version: '0'
   source:
@@ -409,7 +365,7 @@ gems:
     revision: 145319bd4faabc7480c7f38b12024d2d84e57db4
     remote: https://github.com/ruby/gem_rbs_collection.git
     repo_dir: gems
-- name: strscan
+- name: stringio
   version: '0'
   source:
     type: stdlib
