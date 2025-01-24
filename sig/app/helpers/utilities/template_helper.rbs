@@ -1,12 +1,13 @@
 module Utilities::TemplateHelper
 
-  interface _ToPartialPathDirect
+  interface _ToTempletable
     def to_partial_path: () -> String
-  end
 
-  interface _ToPartialPath
     def _to_partial_path: () -> String
   end
 
-  def find_template_with_fallbacks: ((_ToPartialPath | _ToPartialPathDirect) obj, Symbol field, String base_path, String generic_field) -> ActionView::Template
+  # FIXME non saprei da dove lo prende questo metodo dell'helper
+  def lookup_context: () -> ActionView::LookupContext
+
+  def find_template_with_fallbacks: (_ToTempletable obj, Symbol field, String base_path, String generic_field) -> ActionView::Template
 end

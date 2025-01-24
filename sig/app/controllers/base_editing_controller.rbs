@@ -3,9 +3,9 @@ class BaseEditingController < RestrictedAreaController
 
   @object: untyped
 
-  @_base_class: untyped
+  @_base_class: ActiveRecord::Base?
 
-  def index: () ?{ (untyped) -> untyped } -> void
+  def index: () ?{ (BaseEditingBootstrap::Searches::Base) -> untyped } -> void
 
   def new: () ?{ (untyped) -> untyped } -> void
 
@@ -23,13 +23,13 @@ class BaseEditingController < RestrictedAreaController
 
   private
 
-  def search_class: () -> BaseEditingBootstrap::Searches::Base
+  def search_class: () -> singleton(BaseEditingBootstrap::Searches::Base)
 
-  def form_builder: () -> BaseEditingBootstrap::Forms::Base
+  def form_builder: () -> singleton(BaseEditingBootstrap::Forms::Base)
 
   def form_attributes: (?untyped model, ?untyped action) -> untyped
 
-  def load_object: () -> untyped
+  def load_object: () -> void
 
   #
   # Scope iniziale per index, viene passato al policy_scope in index.
@@ -46,7 +46,7 @@ class BaseEditingController < RestrictedAreaController
   #
   # In casi in cui l'azione non è quella di pundit per poter ricercarne le policy
   # possiamo fare override, altrimenti il default è l'action_name standard
-  def override_pundit_action_name: () -> untyped
+  def override_pundit_action_name: () -> String
 
   #
   # Versione più addolcita del require params, nel caso non sia presente il parametro corretto viene

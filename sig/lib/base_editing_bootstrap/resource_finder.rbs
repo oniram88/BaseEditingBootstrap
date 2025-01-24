@@ -9,6 +9,6 @@ module BaseEditingBootstrap
     def initialize: (String controllar_path) -> void
 
     # @return [NilClass|Object]
-    def model: () -> (ActiveRecord::Base|false)?
+    def model: () -> ActiveRecord::Base?
   end
 end
