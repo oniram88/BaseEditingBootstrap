@@ -145,7 +145,15 @@ RSpec.describe "Posts", type: :request do
             with_tag("option", count: 3)
           end
         end
+      end
+      it "render help_text" do
         is_expected.to have_tag(".form-text", text: "Priority Helper text")
+      end
+
+      it "render help_text_html" do
+        is_expected.to have_tag(".form-text", seen: "Helper con html") do
+          with_tag(:b, seen: "html")
+        end
       end
 
       it "render standard form classes" do

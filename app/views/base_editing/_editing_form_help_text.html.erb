@@ -6,7 +6,13 @@
 %>
 <%# locals: (object:,field:) -%>
 <%
-  help_text = object.class.human_attribute_name("#{field}/help_text", default: "")
+  nf = "NOT_FOUND_HTML"
+  help_text = object.class.human_attribute_name("#{field}/help_text_html", default: nf)
+  if help_text != nf
+    help_text = help_text.html_safe
+  else
+    help_text = object.class.human_attribute_name("#{field}/help_text", default: "")
+  end
   unless help_text.blank?
 %>
   <div class="form-text"><%= help_text %></div>
