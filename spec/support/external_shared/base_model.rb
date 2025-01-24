@@ -10,7 +10,7 @@ RSpec.shared_examples "a base model" do |ransack_permitted_attributes: [], ransa
     instance = described_class.new
     expect(instance).to respond_to(:option_label)
 
-    expect(instance).to receive(option_label_method).and_call_original
+    expect(instance).to receive(option_label_method).and_call_original,"Expected `#{instance.class}#option_label` chiami il metodo `##{option_label_method}` per la traduzione del label nelle options"
     instance.option_label
   end
 
