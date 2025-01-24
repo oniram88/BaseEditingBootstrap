@@ -10,7 +10,14 @@ RSpec.describe "Controller Namespaced Class", type: :request do
         expect(assigns(:object)).to be_an_instance_of(Customer::Post)
         expect(response.body).to have_tag(:span, text: /this_is_special_method_for_customer_post/)
       end
+    end
 
+    describe "check sorts and distinct" do
+      it_behaves_like "base editing controller", factory: :post, only: [:index] do
+        let(:url_for_index) { customer_posts_path }
+        let(:default_sorts) { ["title"] }
+        let(:default_distinct) { false }
+      end
     end
 
     describe "namespaced resources withouth namespaced model" do
@@ -28,11 +35,8 @@ RSpec.describe "Controller Namespaced Class", type: :request do
 
         expect(response.body).to have_tag(:span, seen: "OVERRIDE for title")
 
-
       end
     end
-
-
 
   end
 

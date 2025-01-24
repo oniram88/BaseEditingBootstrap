@@ -28,7 +28,9 @@ module BaseEditingBootstrap
                        model_klass: model_klass,
                        params: {page: nil},
                        user: user,
-                       scope: scope
+                       scope: scope,
+                       sorts: ["id"],
+                       distinct: true
                      )
     end
     context "with params" do
@@ -60,21 +62,22 @@ module BaseEditingBootstrap
     describe "results" do
       subject(:query) { instance.results }
 
-      where(:search_params, :page_received) do
+      where(:search_params, :page_received, :distinct_received) do
         [
-          [{}, nil],
-          [{params: {page: 12}}, 12],
+          [{}, nil, true],
+          [{params: {page: 12}}, 12, true],
+          [{distinct: false}, nil, false],
         ]
       end
 
       with_them do
         it "with search_params:#{params[:search_params]}" do
-          double_res = double("result",to_sql:"for debug purposes")
+          double_res = double("result", to_sql: "for debug purposes")
           ransack_double = double("ransack_instance")
           expect(instance).to receive(:ransack_query).and_return(ransack_double)
           expect(ransack_double).to receive_message_chain(:sorts).and_return([])
           expect(ransack_double).to receive_message_chain(:sorts=).with(["id"])
-          expect(ransack_double).to receive_message_chain(:result).with(distinct: true).and_return(double_res)
+          expect(ransack_double).to receive_message_chain(:result).with(distinct: distinct_received).and_return(double_res)
           expect(double_res).to receive(:page).with(page_received)
           query
         end

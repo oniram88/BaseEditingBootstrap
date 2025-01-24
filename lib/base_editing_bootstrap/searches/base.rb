@@ -7,17 +7,18 @@ module BaseEditingBootstrap::Searches
     include ActiveModel::Naming
     include ActiveModel::Conversion
 
-    attr_reader :model_klass, :user, :params, :scope, :sorts
+    attr_reader :model_klass, :user, :params, :scope, :sorts, :distinct
 
     # @param [User] user
     # @param [ActiveRecord::Associations::CollectionProxy] scope
     # @param [Array<String (frozen)>] sort
-    def initialize(scope, user, params: {page: nil}, sorts: ["id"])
+    def initialize(scope, user, params: {page: nil}, sorts: ["id"], distinct: true)
       @model_klass = scope.klass
       @user = user
       @scope = scope
       @params = params
       @sorts = sorts
+      @distinct = distinct
     end
 
     ##
@@ -26,7 +27,7 @@ module BaseEditingBootstrap::Searches
     def results
       ransack_query
         .tap { |r| r.sorts = @sorts if r.sorts.empty? }
-        .result(distinct: true)
+        .result(distinct: @distinct)
         .tap { |q| Rails.logger.debug { "[Ransack] params:#{params} - sql: #{q.to_sql}" } }
         .page(params[:page])
     end

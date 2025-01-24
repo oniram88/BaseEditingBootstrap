@@ -14,13 +14,19 @@ class BaseEditingController < RestrictedAreaController
   # Works like documented in https://activerecord-hackery.github.io/ransack/getting-started/sorting/#sorting-in-the-controller
   class_attribute :default_sorts, default: ["id"]
 
+  ##
+  # Configure default distinct results in the index query.
+  # Works like documented in https://activerecord-hackery.github.io/ransack/going-further/other-notes/#problem-with-distinct-selects
+  class_attribute :default_distinct, default: true
+
   def index
     authorize base_class
 
     q = policy_scope(base_scope)
     @search_instance = search_class.new(q, current_user,
                                         params: params.permit(:page, :q => {}), # FIXME trovare modo per essere più "STRONG"
-                                        sorts: default_sorts
+                                        sorts: default_sorts,
+                                        distinct: default_distinct
     )
     @search_instance = yield(@search_instance) if block_given?
   end

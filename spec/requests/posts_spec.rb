@@ -78,6 +78,22 @@ RSpec.describe "Posts", type: :request do
         expect(response.body).to have_tag("tbody>tr:first-child>td", text: "Post 1")
       end
 
+      it "sorting instance defaults sort and distinct" do
+        get posts_path
+        expect(assigns(:search_instance)).to have_attributes(
+                                               sorts: ["id"],
+                                               distinct: true
+                                             )
+      end
+
+      it "sorting instance overrides sort and distinct" do
+        get customer_posts_path
+        expect(assigns(:search_instance)).to have_attributes(
+                                               sorts: ["title"],
+                                               distinct: false
+                                             )
+      end
+
     end
 
     describe "pagination" do

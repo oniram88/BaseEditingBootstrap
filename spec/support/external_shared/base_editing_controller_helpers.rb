@@ -49,7 +49,9 @@ RSpec.shared_examples "base editing controller" do |factory: nil, only: [], exce
 
   ##
   # Possibili override per la costruzione delle path
-  #
+
+  let(:default_sorts) { BaseEditingController.default_sorts } # configurazione nel controller per ordine di default del modello
+  let(:default_distinct) { BaseEditingController.default_distinct } # configurazione nel controller per distinct nella ricerca di ransack
   let(:url_for_new) { url_for([model.new, action: :new]) }
   let(:url_for_index) { url_for(model) }
   let(:url_for_create) { url_for(model.new) }
@@ -89,10 +91,13 @@ RSpec.shared_examples "base editing controller" do |factory: nil, only: [], exce
         params = {q: {"foo_eq": "foo"}}
         get url_for_index, params: params
         expect(response).to have_http_status(200)
-        expect(assigns[:search_instance]).to be_an_instance_of(BaseEditingBootstrap::Searches::Base).and(have_attributes(
-                                                                                                           user: user,
-                                                                                                           params: ActionController::Parameters.new(params).permit!
-                                                                                                         ))
+        expect(assigns[:search_instance]).to be_an_instance_of(BaseEditingBootstrap::Searches::Base)
+                                               .and(have_attributes(
+                                                      user: user,
+                                                      params: ActionController::Parameters.new(params).permit!,
+                                                      sorts: default_sorts,
+                                                      distinct: default_distinct,
+                                                    ))
       end
     end
   end
@@ -194,7 +199,7 @@ default_unathorized_failure = -> { raise "TODO - passare proc con richiesta che 
 RSpec.shared_examples "fail with unauthorized" do |request: default_unathorized_failure|
   it "is expected to redirect to root" do
 
-    if Gem::Version.create( Pundit::VERSION) < Gem::Version.create('2.3.2')
+    if Gem::Version.create(Pundit::VERSION) < Gem::Version.create('2.3.2')
       allow(Pundit).to receive(:authorize).with(user, any_args).and_raise(Pundit::NotAuthorizedError)
     else
       allow_any_instance_of(Pundit::Context).to receive(:authorize).and_raise(Pundit::NotAuthorizedError)
