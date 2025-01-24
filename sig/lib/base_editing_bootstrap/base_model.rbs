@@ -1,6 +1,5 @@
 module BaseEditingBootstrap
-  module BaseModel
-    extend ActiveSupport::Concern
+  interface _BaseModel
 
     def option_label: () -> String?
 

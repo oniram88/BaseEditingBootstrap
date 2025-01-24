@@ -10,13 +10,13 @@ module Utilities
 
     def search_form_buttons: (Ransack::Helpers::FormBuilder ransack_form) -> nil
 
-    def render_cell_field: (BaseEditingBootstrap::BaseModel obj, Symbol field) -> ActiveSupport::SafeBuffer
+    def render_cell_field: (BaseEditingBootstrap::_BaseModel obj, Symbol field) -> ActiveSupport::SafeBuffer
 
     def render_header_cell_field: (BaseEditingBootstrap::Searches::Base search_instance, Symbol field) -> ActiveSupport::SafeBuffer
 
     #
     # Restituisce il valore che vogliamo mostrare
-    def render_raw_field: (BaseEditingBootstrap::BaseModel obj, Symbol field) -> untyped
+    def render_raw_field: (BaseEditingBootstrap::_BaseModel obj, Symbol field) -> untyped
 
     #
     # Possibile override dei parametri da passare a ransack nella form
@@ -27,6 +27,6 @@ module Utilities
     #
     # Restituisce il template corretto per la tripletta, andando a ricercare il tipo di campo attraverso le informazioni
     # che type_for_attribute può restituirci
-    def template_for_column: (Object klazz, Symbol field, String partial_type) -> ActionView::Template
+    def template_for_column: (TemplateHelper::_ToTempletable klazz, Symbol field, String partial_type) -> ActionView::Template
   end
 end

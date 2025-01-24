@@ -3,12 +3,12 @@ module Utilities
     # @param [BaseModel] model class
     # @param [Symbol] attribute
     # @param [nil|String] variant
-    def enum_collection: (untyped model, untyped attribute, ?untyped? variant) -> untyped
+    def enum_collection: (BaseEditingBootstrap::_BaseModel model, untyped attribute, ?untyped? variant) -> untyped
 
     # @param [BaseModel] model class
     # @param [Symbol] attribute
     # @param [Symbol|nil] value
     # @param [nil|String] variant
-    def enum_translation: (untyped model, untyped attribute, untyped value, ?untyped? variant) -> ("" | untyped)
+    def enum_translation: (BaseEditingBootstrap::_BaseModel model, untyped attribute, untyped value, ?untyped? variant) -> ("" | untyped)
   end
 end
