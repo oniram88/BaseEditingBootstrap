@@ -4,7 +4,12 @@ module BaseEditingBootstrap
     def option_label: () -> String?
 
     def ransackable_attributes: (Object?) -> Object?
+
     def ransackable_associations: (Object?) -> [String]
+
+    def read_attribute:(Symbol) -> untyped
+
+    alias [] read_attribute
 
   end
 end
