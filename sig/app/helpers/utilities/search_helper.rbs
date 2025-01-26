@@ -1,5 +1,6 @@
 module Utilities
   module SearchHelper
+    include ActionView::Helpers::CaptureHelper
     include TemplateHelper
 
     include PageHelper

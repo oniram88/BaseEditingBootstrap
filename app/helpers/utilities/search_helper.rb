@@ -50,7 +50,7 @@ module Utilities
     def render_raw_field(obj, field)
       case field
       when :created_at, :updated_at
-        l(obj.read_attribute(field), format: :long)
+        I18n.l(obj.read_attribute(field), format: :long)
       else
         obj[field]
       end

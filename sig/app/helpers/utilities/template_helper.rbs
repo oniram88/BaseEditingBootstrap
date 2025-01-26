@@ -4,10 +4,19 @@ module Utilities::TemplateHelper
     def to_partial_path: () -> String
 
     def _to_partial_path: () -> String
+
+    def respond_to?: (Symbol) -> bool
+
+    def defined_enums: () -> Hash[String, untyped]
   end
 
   # FIXME non saprei da dove lo prende questo metodo dell'helper
   def lookup_context: () -> ActionView::LookupContext
 
   def find_template_with_fallbacks: (_ToTempletable obj, Symbol field, String base_path, String generic_field) -> ActionView::Template
+end
+
+
+class ActiveRecord::Base
+  include Utilities::TemplateHelper::_ToTempletable
 end

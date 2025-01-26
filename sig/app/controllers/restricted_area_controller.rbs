@@ -1,4 +1,4 @@
-class RestrictedAreaController
+class RestrictedAreaController < ActionController::Base
   include Pundit::Authorization
 
   # :nocov:
