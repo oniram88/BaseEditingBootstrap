@@ -67,7 +67,7 @@ RSpec.describe BaseEditingBootstrap::Forms::Base, :type => :helper do
       expect(builder.form_style_class_for(:username, {class: "form-control custom_class"})).to be == "form-control custom_class"
     end
     it "with custom base classes" do
-       expect(builder.form_style_class_for(:username,base_classes:["custom-base-class","other-base-class"])).to be == "custom-base-class other-base-class"
+      expect(builder.form_style_class_for(:username, base_classes: ["custom-base-class", "other-base-class"])).to be == "custom-base-class other-base-class"
     end
     context "with errors" do
       let(:object_instance) { super().tap { |u| u.errors.add(:username, :invalid) } }
@@ -93,6 +93,17 @@ RSpec.describe BaseEditingBootstrap::Forms::Base, :type => :helper do
                                                                               with: {class: "custom_class"}
                                                                             )
     end
+
+    context "field not valid" do
+      let(:object_instance) { super().tap { |u| u.errors.add(:only_false_virtual, :invalid) } }
+      it {
+        expect(builder.select(:only_false_virtual, [])).to have_tag("select.form-control.form-select.is-invalid")
+      }
+      it "con altre opzioni della select" do
+        expect(builder.select(:only_false_virtual, [], include_blank: true)).to have_tag("select.form-control.form-select.is-invalid")
+      end
+    end
+
   end
 
   describe "radio button" do

@@ -18,6 +18,7 @@ class Post < ApplicationRecord
   belongs_to :user
 
   delegate :username, to: :user, prefix: true
+  validates :user_id, presence: true
 
 
   def custom_virtual_attribute

@@ -166,14 +166,16 @@ RSpec.describe "Posts", type: :request do
 
       let(:post_obj) { create(:post) }
 
-      it "render validations" do
-
-        put post_path(post_obj), params: {post: {title: nil}}
-
-        expect(response.body).to have_tag(".has-validation.form-title-input-group") do
-          with_tag(".invalid-feedback")
+      describe "rendered" do
+        subject {
+          put post_path(post_obj), params: {post: {title: nil}}
+          response.body
+        }
+        it "render validations" do
+          is_expected.to have_tag(".has-validation.form-title-input-group") do
+            with_tag(".invalid-feedback")
+          end
         end
-
       end
 
       context "with image" do
