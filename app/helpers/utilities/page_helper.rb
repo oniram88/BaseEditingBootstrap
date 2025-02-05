@@ -1,4 +1,5 @@
 module Utilities::PageHelper
+  include Utilities::IconHelper
   # @param [BaseModel] base_class
   def title_mod_g(base_class)
     "#{t("edit")} #{base_class.model_name.human}"
@@ -24,12 +25,15 @@ module Utilities::PageHelper
   #   end
   # end
 
-  # @param [TrueClass, FalseClass] valore
+  # @param [TrueClass, FalseClass, NilClass] valore
   def boolean_to_icon(valore)
-    if valore
+    case valore
+    when true
       icon("check-lg", class: "text-success")
-    else
+    when false
       icon("x-lg", class: "text-danger")
+    else
+      nil
     end
   end
 
