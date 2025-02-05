@@ -24,8 +24,8 @@ module BaseEditingBootstrap::Forms
     ##
     # Costruisce l'array delle classi che devono essere presenti sul campo della form
     #
-    def form_style_class_for(method, options = {})
-      classes = ["form-control"]
+    def form_style_class_for(method, options = {}, base_classes: ["form-control"])
+      classes = base_classes
       classes << "is-invalid" if object.errors && object.errors.include?(method)
       classes << options[:class].split(" ") if options[:class]
       classes.flatten.compact.uniq.join(" ")
@@ -57,9 +57,10 @@ module BaseEditingBootstrap::Forms
       else
         label_tag = nil
       end
-      classes = (["form-check"] + (options.extract!(:class)[:class] || "").split(" ")).join(" ")
-      @template.content_tag(:div, class: classes) do
-        super(method, options.reverse_merge(class: "form-check-input"), checked_value, unchecked_value) + label_tag
+      @template.content_tag(:div, class: form_style_class_for(method, {class: (options.extract!(:class)[:class] || "")}, base_classes: ["form-check"])) do
+        checkbox_class = ["form-check-input"]
+        checkbox_class << "is-invalid" if object.errors && object.errors.include?(method)
+        super(method, options.reverse_merge(class: checkbox_class.join(" ")), checked_value, unchecked_value) + label_tag
       end
     end
 
@@ -75,7 +76,7 @@ module BaseEditingBootstrap::Forms
                                options = {},
                                html_options = {},
                                &block)
-      form_check_classes = (["form-check"] + [(html_options.delete(:form_check_class){""}).split(" ").collect(&:strip)]).compact.join(" ")
+      form_check_classes = (["form-check"] + [(html_options.delete(:form_check_class) { "" }).split(" ").collect(&:strip)]).compact.join(" ")
       super do |builder|
         @template.content_tag(:div, class: form_check_classes) do
           builder.check_box(class: "form-check-input") + builder.label(class: "form-check-label")

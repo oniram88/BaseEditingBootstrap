@@ -120,6 +120,14 @@ RSpec.describe BaseEditingBootstrap::Forms::Base, :type => :helper do
     it "con classe custom" do
       expect(builder.check_box(:username, class: "custom_class")).to have_tag(:div, with: {class: "form-check custom_class"})
     end
+    context "field not valid" do
+      let(:object_instance) { super().tap { |u| u.errors.add(:only_false_virtual, :invalid) } }
+      it {
+        expect(builder.check_box(:only_false_virtual)).to have_tag(".form-check.is-invalid") do
+          with_tag("input[type='checkbox'].form-check-input.is-invalid")
+        end
+      }
+    end
   end
 
   describe "switch_box" do
@@ -145,11 +153,11 @@ RSpec.describe BaseEditingBootstrap::Forms::Base, :type => :helper do
     end
     it "con classe custom per checkbox" do
       expect(builder.collection_check_boxes(:posts, list, :id, :title,
-                                     {},{form_check_class:"custom-class"})).to have_tag("div.form-check.custom-class")
+                                            {}, {form_check_class: "custom-class"})).to have_tag("div.form-check.custom-class")
     end
     it "con multiple custom class per checkbox" do
       expect(builder.collection_check_boxes(:posts, list, :id, :title,
-                                     {},{form_check_class:"custom-class other-class "})).to have_tag("div.form-check.custom-class.other-class")
+                                            {}, {form_check_class: "custom-class other-class "})).to have_tag("div.form-check.custom-class.other-class")
     end
   end
 
