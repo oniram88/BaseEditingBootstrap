@@ -41,6 +41,8 @@ it:
         description/help_text_html: "Helper con <b>html</b>"
         title: Titolo
       user:
+        only_true_boolean/help_text: "Field to simulate validation on boolean value"
+        only_false_boolean/help_text: "Field to simulate validation on boolean value"
         enabled/help_text: Abilitato
     successful:
       messages:

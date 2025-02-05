@@ -1,11 +1,23 @@
 class UserPolicy < BaseModelPolicy
 
   def editable_attributes
-    [:username, :roles, :enabled]
+    [
+      :username,
+      :roles,
+      :enabled,
+      :only_true_boolean,
+      :only_false_virtual
+    ]
   end
 
   def permitted_attributes
-    [:username, :enabled, role_ids: []]
+    [
+      :username,
+      :enabled,
+      :only_true_boolean,
+      :only_false_virtual,
+      role_ids: []
+    ]
   end
 
   def search_result_fields
