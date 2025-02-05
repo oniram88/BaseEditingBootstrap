@@ -66,6 +66,9 @@ RSpec.describe BaseEditingBootstrap::Forms::Base, :type => :helper do
     it "override with same" do
       expect(builder.form_style_class_for(:username, {class: "form-control custom_class"})).to be == "form-control custom_class"
     end
+    it "with custom base classes" do
+       expect(builder.form_style_class_for(:username,base_classes:["custom-base-class","other-base-class"])).to be == "custom-base-class other-base-class"
+    end
     context "with errors" do
       let(:object_instance) { super().tap { |u| u.errors.add(:username, :invalid) } }
       it "default" do
