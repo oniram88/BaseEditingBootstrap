@@ -126,7 +126,8 @@ Utilizzo per modello base, in questo esempio prendiamo come modello Post come es
     ```
   - è possibile customizzare 
     - un text help per ogni campo andando ad aggiungere nelle traduzioni la relativa 
-      traduzione nella posizione: `it.activerecord.attributes.MODEL.FIELD/help_text`
+      traduzione nella posizione: `it.activerecord.attributes.MODEL.FIELD/help_text` oppure `help_text_html` in caso di
+      contenuto con html
     - un blocco per l'unità di misura accanto al campo aggiungendo alle traduzioni: 
       `it.activerecord.attributes.MODEL.FIELD/unit`
       
