@@ -138,6 +138,10 @@ RSpec.describe "Posts", type: :request do
         end
       end
 
+      it "render without .was-validated on form tag" do
+        is_expected.not_to have_tag("form##{dom_id(Post.new,:create)}.was-validated")
+      end
+
       it "render special addons" do
         is_expected.to have_tag(".form-priority-input-group") do
           with_tag(".input-group-text", text: "priority unit")
@@ -166,12 +170,19 @@ RSpec.describe "Posts", type: :request do
 
       let(:post_obj) { create(:post) }
 
-      it "render validations" do
+      describe "rendered form" do
+        subject {
+          put post_path(post_obj), params: {post: {title: nil}}
+          response.body
+        }
+        it "render validations" do
+          is_expected.to have_tag(".has-validation.form-title-input-group") do
+            with_tag(".invalid-feedback")
+          end
+        end
 
-        put post_path(post_obj), params: {post: {title: nil}}
-
-        expect(response.body).to have_tag(".has-validation.form-title-input-group") do
-          with_tag(".invalid-feedback")
+        it "render .was-validated on form tag" do
+          is_expected.to have_tag("form##{dom_id(post_obj,:edit)}.was-validated")
         end
 
       end

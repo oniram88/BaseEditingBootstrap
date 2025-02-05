@@ -1,6 +1,11 @@
+<%
+  form_html_options = {
+    class: (@object.try(:validated?) ? "was-validated" : "")
+  }
+%>
 <div class="card" id="card_id">
   <div class="card-header">
-    <%= form_for @object, builder: form_builder do |form| %>
+    <%= form_for @object, builder: form_builder, html: form_html_options do |form| %>
 
       <div class="card-body">
         <%= render partial: "form_field_header", local: {form:} %>
