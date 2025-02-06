@@ -1,4 +1,7 @@
-RSpec.shared_examples "a base model" do |ransack_permitted_attributes: [], ransack_permitted_associations: [], option_label_method: :to_s|
+RSpec.shared_examples "a base model" do |ransack_permitted_attributes: [],
+  ransack_permitted_associations: [],
+  option_label_method: :to_s,
+  ransack_permitted_scopes: []|
 
   it_behaves_like "a validated? object"
 
@@ -10,8 +13,16 @@ RSpec.shared_examples "a base model" do |ransack_permitted_attributes: [], ransa
     instance = described_class.new
     expect(instance).to respond_to(:option_label)
 
-    expect(instance).to receive(option_label_method).and_call_original,"Expected `#{instance.class}#option_label` chiami il metodo `##{option_label_method}` per la traduzione del label nelle options"
+    expect(instance).to receive(option_label_method).and_call_original, "Expected `#{instance.class}#option_label` chiami il metodo `##{option_label_method}` per la traduzione del label nelle options"
     instance.option_label
+  end
+
+  if ransack_permitted_scopes.any?
+    it "have scopes" do
+      ransack_permitted_scopes.each do |scope|
+        expect(described_class).to respond_to(scope)
+      end
+    end
   end
 
   ##
@@ -19,6 +30,7 @@ RSpec.shared_examples "a base model" do |ransack_permitted_attributes: [], ransa
   let(:auth_object) { :auth_object }
   let(:new_user_ransack_permitted_attributes) { ransack_permitted_attributes }
   let(:new_user_ransack_permitted_associations) { ransack_permitted_associations }
+  let(:new_user_ransack_permitted_scopes) { ransack_permitted_scopes }
 
   describe "with ransackables" do
     where(:base_model_method, :result, :new_user_result) do
@@ -28,6 +40,9 @@ RSpec.shared_examples "a base model" do |ransack_permitted_attributes: [], ransa
         ],
         [
           :ransackable_associations, ransack_permitted_associations.map(&:to_s), lazy { new_user_ransack_permitted_associations.map(&:to_s) }
+        ],
+        [
+          :ransackable_scopes, ransack_permitted_scopes.map(&:to_s), lazy { new_user_ransack_permitted_scopes.map(&:to_s) }
         ],
       ]
     end

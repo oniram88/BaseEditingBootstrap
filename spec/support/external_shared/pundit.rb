@@ -25,6 +25,7 @@ RSpec.shared_examples "a standard base model policy" do |factory, check_default_
         [:search_fields],
         [:permitted_associations_for_ransack],
         [:permitted_attributes_for_ransack],
+        [:permitted_scopes_for_ransack],
         [:editable_attributes],
         [:permitted_attributes],
       ]

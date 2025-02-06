@@ -24,6 +24,8 @@ class BaseModelPolicy < ApplicationPolicy
     []
   end
 
+  def permitted_scopes_for_ransack = []
+
   def search_fields = []
 
   def search_result_fields = []

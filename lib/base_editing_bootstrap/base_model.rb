@@ -7,7 +7,9 @@ module BaseEditingBootstrap
     included do
       include IsValidated
       include ActionTranslation
-      delegate :ransackable_attributes, :ransackable_associations, to: :@class
+      delegate :ransackable_attributes,
+               :ransackable_associations,
+               :ransackable_scopes, to: :@class
 
 
       ##
@@ -32,6 +34,14 @@ module BaseEditingBootstrap
           Pundit.policy(auth_object, self.new).permitted_associations_for_ransack.map(&:to_s)
         else
           Pundit.policy(User.new, self.new).permitted_associations_for_ransack.map(&:to_s)
+        end
+      end
+
+      def ransackable_scopes(auth_object = nil)
+        if auth_object
+          Pundit.policy(auth_object, self.new).permitted_scopes_for_ransack.map(&:to_s)
+        else
+          Pundit.policy(User.new, self.new).permitted_scopes_for_ransack.map(&:to_s)
         end
       end
     end

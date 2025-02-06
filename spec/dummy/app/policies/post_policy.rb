@@ -36,6 +36,10 @@ class PostPolicy < BaseModelPolicy
     [:user]
   end
 
+  def permitted_scopes_for_ransack
+    [:test_scoped_ransack]
+  end
+
   def search_fields
     [:title_i_cont]
   end

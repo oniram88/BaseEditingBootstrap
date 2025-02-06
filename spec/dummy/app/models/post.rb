@@ -20,6 +20,7 @@ class Post < ApplicationRecord
   delegate :username, to: :user, prefix: true
   validates :user_id, presence: true
 
+  scope :test_scoped_ransack, ->(category) { where(category: category) }
 
   def custom_virtual_attribute
     "content from virtual attribute"
