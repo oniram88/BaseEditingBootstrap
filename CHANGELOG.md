@@ -2,6 +2,22 @@
 All notable changes to this project will be documented in this file. See [conventional commits](https://www.conventionalcommits.org/) for commit guidelines.
 
 - - -
+## 1.7.0 - 2025-02-11
+#### Bug Fixes
+- Add permits of ransack scopes - (5fa26c6) - Marino Bonetti
+- Correct set select classes - (a5ef685) - Marino Bonetti
+- Boolean_icon with nil value - (211c91f) - Marino Bonetti
+- Better expection for spec helper - (65b26ce) - Marino Bonetti
+#### Documentation
+- Add documentation for help html version - (dbc1c01) - Marino Bonetti
+#### Features
+- Add HTML helper version in form field help - (f06c438) - Marino Bonetti
+- Add Configurable distinct query in controller - (184d772) - Marino Bonetti
+#### Tests
+- Correct validation for selects - (e4b8016) - Marino Bonetti
+
+- - -
+
 ## 1.6.0 - 2025-01-23
 #### Features
 - Add new test helper for association relation - (15690c7) - Marino Bonetti
