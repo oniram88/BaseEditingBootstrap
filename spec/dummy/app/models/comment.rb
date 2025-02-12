@@ -1,3 +1,4 @@
 class Comment < ApplicationRecord
-  belongs_to :commentable, polymorphic: true
+  include BaseEditingBootstrap::BaseModel
+    belongs_to :commentable, polymorphic: true
 end
