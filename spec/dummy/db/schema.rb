@@ -58,7 +58,6 @@ ActiveRecord::Schema[7.2].define(version: 2025_02_12_100706) do
     t.float "rating"
     t.decimal "decimal_test_number", precision: 10, scale: 3
     t.bigint "user_id"
-    t.boolean "only_true_boolean", default: true
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_posts_on_user_id"
