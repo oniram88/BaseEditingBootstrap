@@ -24,7 +24,8 @@ module Utilities
         type = :enum
         generic_field = "enum"
       elsif form.object.class.respond_to?(:reflect_on_association) &&
-        form.object.class.reflect_on_association(field.to_s).is_a?(ActiveRecord::Reflection::BelongsToReflection)
+        form.object.class.reflect_on_association(field.to_s).is_a?(ActiveRecord::Reflection::BelongsToReflection) &&
+        !form.object.class.reflect_on_association(field.to_s).polymorphic? # non deve essere polymorphic
         # Abbiamo una relazione belongs_to da gestire
         reflection = form.object.class.reflect_on_association(field.to_s)
         type = :belongs_to
