@@ -72,7 +72,15 @@ module Utilities
         "form_field",
         generic_field
       )
-      Rails.logger.debug { "#{type}->#{generic_field}->#{template.short_identifier}->#{ locals.inspect}" }
+      Rails.logger.debug do
+        <<~TEXT
+          [BASE EDITING BOOTSTRAP]
+           TYPE: #{type}
+           GENERIC_FIELD: #{generic_field}
+           TEMPLATE: #{template.short_identifier}
+           LOCALS:#{locals}
+        TEXT
+      end
       template.render(self, locals)
     end
 

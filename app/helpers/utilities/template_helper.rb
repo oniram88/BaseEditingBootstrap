@@ -18,21 +18,20 @@ module Utilities::TemplateHelper
     partial_path = (obj.respond_to? :to_partial_path) ? obj.to_partial_path : obj._to_partial_path
     obj_base_path = "#{partial_path}/#{base_path}"
 
-    # Precedenza modello e campo specifico
-    if lookup_context.exists?(field, [obj_base_path], true)
-      return lookup_context.find(field, [obj_base_path], true)
+    [
+      # Precedenza modello e campo specifico
+      [field, [obj_base_path]],
+      # Ricerca tramite campo generico e prefissi di contesto che contiene anche controller e namespace di controller
+      ["#{base_path}/#{generic_field}", lookup_context.prefixes],
+      [generic_field, [obj_base_path]],
+      ["base_editing/#{base_path}/#{generic_field}", []],
+    ].each do |partial, prefixes|
+      Rails.logger.debug { "[BASE EDITING BOOTSTRAP] Cerco `_#{partial}` in #{prefixes.inspect}" }
+      if lookup_context.exists?(partial, prefixes, true)
+        return lookup_context.find(partial, prefixes, true)
+      end
     end
-    # Ricerca tramite campo generico e prefissi di contesto che contiene anche controller e namespace di controller
-    if lookup_context.exists?("#{base_path}/#{generic_field}", lookup_context.prefixes, true)
-      view = lookup_context.find_all("#{base_path}/#{generic_field}", lookup_context.prefixes, true)
-      return view.first
-    end
-    if lookup_context.exists?(generic_field, [obj_base_path], true)
-      return lookup_context.find(generic_field, [obj_base_path], true)
-    end
-    if lookup_context.exists?("base_editing/#{base_path}/#{generic_field}", [], true)
-      return lookup_context.find_all("base_editing/#{base_path}/#{generic_field}", [], true).first
-    end
+    # fallback finale
     lookup_context.find("base_editing/#{base_path}/base", [], true)
   end
 
