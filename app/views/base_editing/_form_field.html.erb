@@ -6,14 +6,14 @@
 %>
 <%# locals: (form:, form_field:) -%>
 <%
-  button_group_classes = ["mb-1"]
+  input_group_classes = ["mb-1"]
 
   content = form_print_field(form, form_field)
   unless content.match "checkbox"
-    button_group_classes << "input-group"
+    input_group_classes << "input-group"
   end
-  button_group_classes << (form.object.validated? ? "has-validation" : "")
-  button_group_classes << "form-#{form_field}-input-group"
+  input_group_classes << (form.object.validated? ? "has-validation" : "")
+  input_group_classes << "form-#{form_field}-input-group"
 
   # Non renderizziamo il contenuto del label in questa vista se siamo nello switch
   if content.match "form-switch"
@@ -24,7 +24,7 @@
 
 %>
 <%= label_content %>
-<%= content_tag :div, class: button_group_classes.join(" ") do %>
+<%= content_tag :div, class: input_group_classes.join(" ") do %>
   <%= render partial: "editing_form_measure_unit", locals: {object: form.object, field: form_field} %>
   <%= content %>
   <%= error_messages_for(form.object, form_field) %>
