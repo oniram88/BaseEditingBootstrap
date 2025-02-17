@@ -54,8 +54,8 @@ RSpec.describe Utilities::FormHelper, type: :helper do
         it do
           expect(helper.form_print_field(form, :user)).to have_tag(:select, with: {name: "post[user_id]"}) do
             with_tag(:option, count: User.count + 1) # +1 per il blank
-            with_tag('option[selected]', with: {value: obj.user_id}, seen:obj.user.username )
-            with_tag(:option, with: {value: user_2.id},seen: user_2.option_label)
+            with_tag('option[selected]', with: {value: obj.user_id}, seen: obj.user.username)
+            with_tag(:option, with: {value: user_2.id}, seen: user_2.option_label)
             with_tag(:option, with: {value: "", label: " "})
           end
         end
@@ -144,6 +144,20 @@ RSpec.describe Utilities::FormHelper, type: :helper do
 
       it "with override timestamp" do
         expect(helper.form_print_field(form, :created_at)).to have_tag(:input, with: {class: "form-control", type: "datetime-local", name: "user[created_at]"})
+      end
+
+    end
+
+    context "comment model" do
+      let(:obj) { create(:comment) }
+
+      it "textarea" do
+        expect(helper.form_print_field(form, :comment)).to have_tag(:textarea,
+                                                                    with: {
+                                                                      class: "form-control",
+                                                                      name: "comment[comment]"
+                                                                    }
+                                                           )
       end
 
     end

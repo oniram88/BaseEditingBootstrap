@@ -61,6 +61,8 @@ module Utilities
           generic_field = "boolean"
         when :has_one_attachment
           generic_field = "has_one_attachment"
+        when :text
+          generic_field = "textarea"
         else
           generic_field = "base"
         end
