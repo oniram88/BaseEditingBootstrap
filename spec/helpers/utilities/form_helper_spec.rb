@@ -148,7 +148,7 @@ RSpec.describe Utilities::FormHelper, type: :helper do
 
     end
 
-    context "ActionModel" do
+    context "ActiveModel" do
       let(:obj) {
 
         a = Class.new do
