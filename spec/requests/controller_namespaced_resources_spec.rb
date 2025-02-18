@@ -4,12 +4,22 @@ RSpec.describe "Controller Namespaced Class", type: :request do
   it_behaves_like "as logged in user" do
 
     describe "namespaced resources with namespaced model" do
-      let(:post) { create(:post) }
+      let!(:post) { create(:post) }
       it "get correct namespaced class" do
         get customer_post_path(post.id)
         expect(assigns(:object)).to be_an_instance_of(Customer::Post)
         expect(response.body).to have_tag(:span, text: /this_is_special_method_for_customer_post/)
       end
+
+      it "index with override custom template from super class model" do
+
+        get customer_posts_path
+        expect(response.body).to have_tag(:td) do
+          with_tag(:strong,text:"OVERRIDEN")
+        end
+
+      end
+
     end
 
     describe "check sorts and distinct" do

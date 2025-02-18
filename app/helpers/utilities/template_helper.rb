@@ -21,12 +21,14 @@ module Utilities::TemplateHelper
     [
       # Precedenza modello e campo specifico
       [field, [obj_base_path]],
+      # cerco tramite nome modello semplice, con namespace della risorsa (cell_field,header_field,form_field) e nome del campo specifico
+      ["#{obj.model_name.element}/#{base_path}/#{field}", lookup_context.prefixes],
       # Ricerca tramite campo generico e prefissi di contesto che contiene anche controller e namespace di controller
       ["#{base_path}/#{generic_field}", lookup_context.prefixes],
       [generic_field, [obj_base_path]],
       ["base_editing/#{base_path}/#{generic_field}", []],
     ].each do |partial, prefixes|
-      Rails.logger.debug { "[BASE EDITING BOOTSTRAP] Cerco `_#{partial}` in #{prefixes.inspect}" }
+      Rails.logger.debug { "[BASE EDITING BOOTSTRAP] Cerco partial:`#{partial}` in #{prefixes.inspect}" }
       if lookup_context.exists?(partial, prefixes, true)
         return lookup_context.find(partial, prefixes, true)
       end
