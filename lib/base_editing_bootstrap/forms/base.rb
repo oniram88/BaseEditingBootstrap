@@ -97,7 +97,7 @@ module BaseEditingBootstrap::Forms
     # per il normale submit consiglio la lettura della guida standard di rails
     # ATTENZIONE: nelle classi del bottone undo, abbiamo aggiunto .btn-undo-button
     #             che ascoltiamo dalle modal e utilizziamo per chiudere la modal, al posto
-    #             seguire realmente il link con il browser.
+    #             di seguire realmente il link con il browser.
     def submit(value = nil, options = {})
       @template.content_tag(:div, class: "btn-group mr-1") do
         super(value, options.reverse_merge(class: "btn btn-primary")) +
