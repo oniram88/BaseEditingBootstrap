@@ -11,7 +11,7 @@ module BaseEditingBootstrap
       invoke :model
 
       def add_base_model
-        inject_into_class "app/models/#{model_resource_name}.rb", class_name do
+        inject_into_class "app/models/#{file_path}.rb", class_name do
           "  include BaseEditingBootstrap::BaseModel\n"
         end
 
