@@ -20,7 +20,8 @@ class BaseEditingController < RestrictedAreaController
   class_attribute :default_distinct, default: true
 
   def index
-    authorize base_class
+    #se è già stato autorizzano non rieseguiamo, utile nel caso vogliamo sovrascrivere la logica di autorizzazione in inheritance
+    authorize base_class unless pundit_policy_authorized?
 
     q = policy_scope(base_scope)
     @search_instance = search_class.new(q, current_user,
@@ -34,7 +35,9 @@ class BaseEditingController < RestrictedAreaController
   def new
     @object = base_class.new
     @object = yield(@object) if block_given?
-    authorize @object
+
+    #se è già stato autorizzano non rieseguiamo, utile nel caso vogliamo sovrascrivere la logica di autorizzazione in inheritance
+    authorize @object unless pundit_policy_authorized?
 
     respond_to do |format|
       format.html
@@ -64,7 +67,8 @@ class BaseEditingController < RestrictedAreaController
   def create
     @object = base_class.new(permitted_attributes)
     @object = yield(@object) if block_given?
-    authorize @object
+    #se è già stato autorizzano non rieseguiamo, utile nel caso vogliamo sovrascrivere la logica di autorizzazione in inheritance
+    authorize @object unless pundit_policy_authorized?
 
     respond_to do |format|
       if @object.save
@@ -124,7 +128,9 @@ class BaseEditingController < RestrictedAreaController
 
   def load_object
     @object = base_class.find(params[:id])
-    authorize @object
+
+    #se è già stato autorizzano non rieseguiamo, utile nel caso vogliamo sovrascrivere la logica di autorizzazione in inheritance
+    authorize @object unless pundit_policy_authorized?
     logger.debug { "Oggetto #{@object.inspect}" }
   end
 
