@@ -1,20 +1,18 @@
-<div class="card" id="card_id">
-  <div class="card-header">
-    <%= form_for @object, builder: form_builder do |form| %>
+<%= render layout: "form_container" do %>
+  <%= form_for @object, builder: form_builder do |form| %>
 
-      <div class="card-body">
-        <%= render partial: "form_field_header", locals: {form:} %>
-        <%= render layout: "form_fields_container" do %>
-          <%= render collection: form_attributes(form.object),
-                     layout: "form_field_container",
-                     partial: "form_field", locals: {form:} %>
-        <% end %>
-      </div>
-
-      <div class="card-footer">
-        <%= render partial: "form_footer", locals: {form: form} %>
-      </div>
-
+    <%= render layout: "form_body_container" do %>
+      <%= render partial: "form_field_header", locals: {form:} %>
+      <%= render layout: "form_fields_container" do %>
+        <%= render collection: form_attributes(form.object),
+                   layout: "form_field_container",
+                   partial: "form_field", locals: {form:} %>
+      <% end %>
     <% end %>
-  </div>
-</div>
+
+    <%= render layout: "form_footer_container" do %>
+      <%= render partial: "form_footer", locals: {form: form} %>
+    <% end %>
+
+  <% end %>
+<% end %>
