@@ -2,6 +2,28 @@
 All notable changes to this project will be documented in this file. See [conventional commits](https://www.conventionalcommits.org/) for commit guidelines.
 
 - - -
+## 1.8.0 - 2025-03-20
+#### Bug Fixes
+- Correct pass locals datas - (00fd083) - Marino Bonetti
+- Don't re-authorize if authorization is already done - (dd756b3) - Marino Bonetti
+- Correct path for generator - (a7d9842) - Marino Bonetti
+- Search partial with class name and without namespace - (2d08db3) - Marino Bonetti
+- Belongs to polymorphic (#17) - (7d736d7) - Marino Bonetti
+#### Documentation
+- Update documentation - (07dd44d) - Marino Bonetti
+- Correct documentation - (6337745) - Marino Bonetti
+#### Features
+- Aggiunto contenitore per gli errori base - (2f9f309) - Marino Bonetti
+- Add layouts for customization - (1bb0201) - Marino Bonetti
+- AutoRender text columns to TextArea - (8533b53) - Marino Bonetti
+#### Refactoring
+- Rename variable to be more logic - (8fa9bbb) - Marino Bonetti
+- Rewrite for debugging - (b7a3756) - Marino Bonetti
+#### Tests
+- Typo - (a1ada44) - Marino Bonetti
+
+- - -
+
 ## 1.7.0 - 2025-02-11
 #### Bug Fixes
 - Add permits of ransack scopes - (5fa26c6) - Marino Bonetti
