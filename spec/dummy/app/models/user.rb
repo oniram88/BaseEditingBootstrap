@@ -11,6 +11,13 @@ class User < ApplicationRecord
   attribute :only_false_virtual, :boolean, default: false
   validates :only_false_virtual, inclusion: {in: [false]}
 
+  ##
+  # Simulo un errore per il base, per poterlo vedere nella form
+  validate -> {
+    if self.username == "BASE ERROR"
+      self.errors.add(:base, "SIMULATE BASE ERROR")
+    end
+  }
 
   def option_label
     self.username

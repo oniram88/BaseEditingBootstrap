@@ -20,6 +20,14 @@ class Post < ApplicationRecord
   delegate :username, to: :user, prefix: true
   validates :user_id, presence: true
 
+  ##
+  # Simulo un errore per il base, per poterlo vedere nella form
+  validate ->{
+    if self.title == "BASE ERROR"
+      self.errors.add(:base,"SIMULATE BASE ERROR")
+    end
+  }
+
   scope :test_scoped_ransack, ->(category) { where(category: category) }
 
   def custom_virtual_attribute

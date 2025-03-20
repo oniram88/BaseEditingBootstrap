@@ -76,3 +76,10 @@ it:
   ransack:
     predicates:
       i_cont: "contiene"
+  base_editing:
+    form_base_errors:
+      title: Presenti errori generici
+  post:
+    base_editing:
+      form_base_errors:
+        title: Presenti errori per il modello POST

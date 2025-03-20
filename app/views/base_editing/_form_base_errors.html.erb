@@ -1,0 +1,22 @@
+<%
+  ##
+  # Template per il rendering degli errori base
+  # - form       -> FormBuilder
+%>
+<%# locals: (form:) -%>
+<% if form.object.errors.key?(:base) %>
+  <div class="row base-errors-container" id="<%= dom_id(@object,:base_errors_container) %>">
+    <div class="col-12">
+      <div class="card border-danger mb-3">
+        <div class="card-header"><%= t ".title", scope: form.object.class.model_name.i18n_key, default: t(".title") %></div>
+        <div class="card-body text-danger">
+          <ul>
+            <% form.object.errors.full_messages_for(:base).each do |m| %>
+              <li><%= m %></li>
+            <% end %>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+<% end %>
