@@ -17,8 +17,18 @@ module BaseEditingBootstrap
       end
 
       def prepare_test_environment
-        gem "factory_bot_rails", group: :test, version: '~> 6.4', comment: "Necessary for spec"
-        gem 'rails-controller-testing', group: :test, comment: "Required if used with controllers spec"
+        actual_gemfile_path = File.join(@destination_stack, "Gemfile")
+        if File.exist?(actual_gemfile_path)
+          actual_gemfile = File.read(File.join(@destination_stack, "Gemfile"))
+        else
+          actual_gemfile = ''
+        end
+        unless actual_gemfile =~ /factory_bot_rails/
+          gem "factory_bot_rails", group: :test, version: '~> 6.4', comment: "Necessary for spec"
+        end
+        unless actual_gemfile =~ /rails-controller-test/
+          gem 'rails-controller-testing', group: :test, comment: "Required if used with controllers spec"
+        end
       end
     end
   end

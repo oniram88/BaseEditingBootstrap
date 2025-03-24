@@ -2,15 +2,17 @@ require 'rails_helper'
 require 'generators/base_editing_bootstrap/install/install_generator'
 
 RSpec.describe BaseEditingBootstrap::Generators::InstallGenerator, type: :generator do
+  let(:files) { {
+    "app/controllers/application_controller.rb" => "class ApplicationController < ActionController::Base\n\nend",
+    "config/application.rb" => "module NamoOfApplication\n\tclass Application < Rails::Application\n\tend\nend"
+  } }
+
   destination File.join(ENGINE_ROOT, "spec/dummy/tmp/generators_spec")
 
-  before(:all) do
+  before(:each) do
     prepare_destination
     # Create files in dummy app
-    {
-      "app/controllers/application_controller.rb" => "class ApplicationController < ActionController::Base\n\nend",
-      "config/application.rb" => "module NamoOfApplication\n\tclass Application < Rails::Application\n\tend\nend"
-    }.each do |file_name, content|
+    files.each do |file_name, content|
       file_name = File.join(destination_root, file_name)
       FileUtils.mkdir_p(File.dirname(file_name))
       File.write(file_name, content)
@@ -40,5 +42,30 @@ RSpec.describe BaseEditingBootstrap::Generators::InstallGenerator, type: :genera
     expect(generator).to receive(:gem).with("factory_bot_rails", anything)
     expect(generator).to receive(:gem).with('rails-controller-testing', anything)
     generator.prepare_test_environment
+  end
+
+  context "when gemfile have already the required gems" do
+
+    let(:files)do
+      super().merge(
+        "Gemfile"=> <<-RUBY.strip_heredoc
+          source "https://rubygems.org"
+          
+          gem 'factory_bot_rails', group: :test
+          group :test do
+            gem 'rails-controller-testing'
+          end
+
+      RUBY
+      )
+    end
+
+    it {
+      expect(generator).not_to receive(:gem).with("factory_bot_rails", anything)
+      expect(generator).not_to receive(:gem).with('rails-controller-testing', anything)
+      generator.prepare_test_environment
+    }
+
+
   end
 end
