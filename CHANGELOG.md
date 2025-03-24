@@ -2,6 +2,12 @@
 All notable changes to this project will be documented in this file. See [conventional commits](https://www.conventionalcommits.org/) for commit guidelines.
 
 - - -
+## 1.8.1 - 2025-03-24
+#### Bug Fixes
+- Correct generator install multiple gems - (73948f5) - Marino Bonetti
+
+- - -
+
 ## 1.8.0 - 2025-03-20
 #### Bug Fixes
 - Correct pass locals datas - (00fd083) - Marino Bonetti
