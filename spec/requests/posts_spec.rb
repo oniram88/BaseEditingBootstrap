@@ -160,6 +160,25 @@ RSpec.describe "Posts", type: :request do
         is_expected.to have_tag(".input-group.mb-1", count: 7)
       end
 
+      describe "inheritted models" do
+        subject {
+          get new_red_post_path
+          response.body
+        }
+
+        it "render form" do
+          is_expected.to have_tag("form[action='#{red_posts_path}'][method='post']") do
+
+            # inheritted from standard post
+            with_tag(".form-description-input-group") do
+              with_tag("textarea#red_post_description")
+            end
+
+          end
+        end
+
+      end
+
     end
 
     describe "object validated" do

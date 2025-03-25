@@ -37,7 +37,7 @@ module BaseEditingBootstrap
   config_accessor :after_success_create_redirect, default: :edit
 
   def self.deprecator
-    @deprecator ||= ActiveSupport::Deprecation.new("1.0", "BaseEditingBootstrap")
+    @deprecator ||= ActiveSupport::Deprecation.new("2.0", "BaseEditingBootstrap")
   end
 
 end
