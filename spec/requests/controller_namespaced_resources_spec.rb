@@ -15,7 +15,7 @@ RSpec.describe "Controller Namespaced Class", type: :request do
 
         get customer_posts_path
         expect(response.body).to have_tag(:td) do
-          with_tag(:strong,text:"OVERRIDEN")
+          with_tag(:strong, text: "OVERRIDEN")
         end
 
       end
