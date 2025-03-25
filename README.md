@@ -1,7 +1,9 @@
 # BaseEditingBootstrap
 [![Gem Version](https://badge.fury.io/rb/base_editing_bootstrap.svg)](https://badge.fury.io/rb/base_editing_bootstrap)
 
-WIP
+### Active tested on:
+* rails: 7.x,8.x
+* ruby: 3.x
 
 ## Installation
 Add this line to your application's Gemfile:
