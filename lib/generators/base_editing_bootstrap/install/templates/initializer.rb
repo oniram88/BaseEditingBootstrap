@@ -23,4 +23,8 @@ BaseEditingBootstrap.configure do |config|
   # Classe che rappresenta l'utente, solitamente User
   # config.authentication_model_class= "User"
 
+  ##
+  # Factory per la creazione del modello che rappresenta l'auteticazione
+  # config.authentication_model_factory= :user
+
 end
