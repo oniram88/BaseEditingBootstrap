@@ -36,6 +36,14 @@ module BaseEditingBootstrap
   # possibili valori :edit , :index  
   config_accessor :after_success_create_redirect, default: :edit
 
+  ##
+  # Classe che rappresenta l'utente, solitamente User
+  config_accessor :authentication_model_class, default: "User"
+
+  def self.authentication_model
+    self.authentication_model_class.constantize
+  end
+
   def self.deprecator
     @deprecator ||= ActiveSupport::Deprecation.new("2.0", "BaseEditingBootstrap")
   end

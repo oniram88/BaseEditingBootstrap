@@ -19,4 +19,8 @@ BaseEditingBootstrap.configure do |config|
   # possibili valori :edit , :index
   # config.after_success_create_redirect = :edit
 
+  ##
+  # Classe che rappresenta l'utente, solitamente User
+  # config.authentication_model_class= "User"
+
 end
