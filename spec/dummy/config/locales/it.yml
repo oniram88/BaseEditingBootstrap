@@ -74,3 +74,7 @@ it:
     base_editing:
       form_base_errors:
         title: Presenti errori per il modello POST
+  titles:
+    role:
+      new: Nuovissimo
+      edit: Modifica Nuovissimo

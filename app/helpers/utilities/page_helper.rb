@@ -1,13 +1,22 @@
 module Utilities::PageHelper
   include Utilities::IconHelper
+
+  ##
+  # Traduzione del titolo EDIT con possibilità di modificare intestazione rispetto a modello
+  # - Il default è quello di Utilizzare la chiave .edit
+  # - Viene cercato la traduzione con la chiave titles.CHIAVE_I18N_MODELLO.edit
   # @param [BaseModel] base_class
   def title_mod_g(base_class)
-    "#{t("edit")} #{base_class.model_name.human}"
+    "#{t("titles.#{base_class.model_name.i18n_key}.edit", default: :edit)} #{base_class.model_name.human}"
   end
 
+  ##
+  # Traduzione del titolo NUOVO con possibilità di modificare intestazione rispetto a modello
+  # - Il default è quello di Utilizzare la chiave .new
+  # - Viene cercato la traduzione con la chiave titles.CHIAVE_I18N_MODELLO.new
   # @param [BaseModel] base_class
   def title_new_g(base_class)
-    "#{t("new")} #{base_class.model_name.human}"
+    "#{t("titles.#{base_class.model_name.i18n_key}.new", default: :new)} #{base_class.model_name.human}"
   end
 
   # Quando e se servirà verrà testato:

@@ -20,4 +20,25 @@ RSpec.describe Utilities::PageHelper, type: :helper do
     end
   end
 
+  describe "#title_new/mod_g" do
+
+  end
+
+  describe "#title_new/mod_g" do
+    where(:method, :model, :title) do
+      [
+        [:title_new_g, User, "Nuovo User"], # Traduzione Standard
+        [:title_new_g, Role, "Nuovissimo Role"], # Traduzione con override tramite scope modello
+        [:title_mod_g, User, "Modifica User"], # Traduzione Standard
+        [:title_mod_g, Role, "Modifica Nuovissimo Role"] # Traduzione con override tramite scope modello
+      ]
+    end
+
+    with_them do
+      it "should " do
+        expect(helper.send(method, model)).to be == title
+      end
+    end
+  end
+
 end
