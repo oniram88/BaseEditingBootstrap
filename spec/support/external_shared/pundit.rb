@@ -14,7 +14,7 @@ RSpec::Matchers.define :permit_editable_attributes do |*expected_attributes|
 end
 
 RSpec.shared_examples "a standard base model policy" do |factory, check_default_responses: false|
-  let(:user) { create(:user) }
+  let(:user) { create(BaseEditingBootstrap.authentication_model_factory) }
   let(:instance) { described_class.new(user, build(factory)) }
 
   describe "response to all necessary methods" do
@@ -68,10 +68,10 @@ RSpec.shared_examples "a standard base model policy" do |factory, check_default_
         end
       end.flatten(1).compact.uniq
 
-      elenco_campi_ordinabili_in_relazione.each do |relation,field|
+      elenco_campi_ordinabili_in_relazione.each do |relation, field|
         reflection = klass.reflect_on_association(relation.to_s)
         policy = Pundit.policy(instance.user, reflection.class_name.constantize.new)
-        expect(policy.permitted_attributes_for_ransack.collect(&:to_sym).include?(field.to_sym)).to be_truthy, lambda{
+        expect(policy.permitted_attributes_for_ransack.collect(&:to_sym).include?(field.to_sym)).to be_truthy, lambda {
           "Mi aspetto che `#{policy.class.name}#permitted_attributes_for_ransack` includa `#{field}` per permettere l'ordinamento del campo tramite relazione"
         }
       end

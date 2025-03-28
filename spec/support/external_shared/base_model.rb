@@ -27,7 +27,7 @@ RSpec.shared_examples "a base model" do |ransack_permitted_attributes: [],
 
   ##
   # Oggetto solitamente di classe User che identifichi l'utente a cui eseguire il check dei permessi
-  let(:auth_object) { :auth_object }
+  let(:auth_object) { BaseEditingBootstrap.authentication_model }
   let(:new_user_ransack_permitted_attributes) { ransack_permitted_attributes }
   let(:new_user_ransack_permitted_associations) { ransack_permitted_associations }
   let(:new_user_ransack_permitted_scopes) { ransack_permitted_scopes }
@@ -52,7 +52,7 @@ RSpec.shared_examples "a base model" do |ransack_permitted_attributes: [],
 
       let(:inner_auth_object) { nil }
       it "new user" do
-        expect(Pundit).to receive(:policy).with(an_instance_of(User),
+        expect(Pundit).to receive(:policy).with(an_instance_of(auth_object),
                                                 an_instance_of(described_class)).and_call_original
 
         is_expected.to match_array(new_user_result)
