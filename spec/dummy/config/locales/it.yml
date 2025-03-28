@@ -70,3 +70,7 @@ it:
       base_editing:
         search_result_buttons:
           edit: Customer Mod Post
+  post:
+    base_editing:
+      form_base_errors:
+        title: Presenti errori per il modello POST
