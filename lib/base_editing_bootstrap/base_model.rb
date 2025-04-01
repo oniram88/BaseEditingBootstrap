@@ -25,7 +25,7 @@ module BaseEditingBootstrap
         if auth_object
           Pundit.policy(auth_object, self.new).permitted_attributes_for_ransack.map(&:to_s)
         else
-          Pundit.policy(User.new, self.new).permitted_attributes_for_ransack.map(&:to_s)
+          Pundit.policy(BaseEditingBootstrap.authentication_model.new, self.new).permitted_attributes_for_ransack.map(&:to_s)
         end
       end
 
@@ -33,7 +33,7 @@ module BaseEditingBootstrap
         if auth_object
           Pundit.policy(auth_object, self.new).permitted_associations_for_ransack.map(&:to_s)
         else
-          Pundit.policy(User.new, self.new).permitted_associations_for_ransack.map(&:to_s)
+          Pundit.policy(BaseEditingBootstrap.authentication_model.new, self.new).permitted_associations_for_ransack.map(&:to_s)
         end
       end
 
@@ -41,7 +41,7 @@ module BaseEditingBootstrap
         if auth_object
           Pundit.policy(auth_object, self.new).permitted_scopes_for_ransack.map(&:to_s)
         else
-          Pundit.policy(User.new, self.new).permitted_scopes_for_ransack.map(&:to_s)
+          Pundit.policy(BaseEditingBootstrap.authentication_model.new, self.new).permitted_scopes_for_ransack.map(&:to_s)
         end
       end
     end
