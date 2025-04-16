@@ -52,7 +52,7 @@ RSpec.shared_examples "a base model" do |ransack_permitted_attributes: [],
 
       let(:inner_auth_object) { nil }
       it "new user" do
-        expect(Pundit).to receive(:policy).with(an_instance_of(auth_object),
+        expect(Pundit).to receive(:policy).with(an_instance_of(BaseEditingBootstrap.authentication_model),
                                                 an_instance_of(described_class)).and_call_original
 
         is_expected.to match_array(new_user_result)
