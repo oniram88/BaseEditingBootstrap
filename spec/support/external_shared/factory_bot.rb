@@ -13,6 +13,7 @@ module FactoryBot::Syntax::Methods
     klass = FactoryBot::Internal.factory_by_name(args.first).build_class
 
     klass.reflect_on_all_associations(:belongs_to).each do |r|
+      next if r.options.fetch(:optional, false)
       association = FactoryBot.create(r.class_name.underscore)
       attributes[:"#{r.name}_id"] = association.id
       attributes[:"#{r.name}_type"] = association.class.name if r.options[:polymorphic]
