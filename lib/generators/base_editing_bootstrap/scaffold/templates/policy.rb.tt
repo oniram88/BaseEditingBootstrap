@@ -1,8 +1,20 @@
 class <%= class_name %>Policy < BaseModelPolicy
 
-  def editable_attributes = %i[<%= attributes_names.join(" ") %>]
-  def permitted_attributes = %i[<%= attributes_names.join(" ") %>]
-  def search_result_fields = %i[<%= attributes_names.join(" ") %>]
+<%- if attributes_names.size > 3 %>
+  <%- ["editable_attributes","editable_attributes","search_result_fields"].each do |meth|%>
+  def <%= meth %>
+    [
+      <% attributes_names.each do |m| %>
+        :<%= m %>,
+      <% end %>
+    ]
+  end
+  <%- end %>
+<%- else %>
+  <%- ["editable_attributes","editable_attributes","search_result_fields"].each do |meth|%>
+  def <%= meth %> = %i[<%= attributes_names.join(" ") %>]
+  <%- end %>
+<%- end %>
 <%- if @search_attrs.any? -%>
   def search_fields
     %i[<%= @search_attrs.join(" ") %>]
