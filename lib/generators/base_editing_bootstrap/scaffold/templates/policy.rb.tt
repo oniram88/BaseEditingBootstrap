@@ -1,29 +1,33 @@
 class <%= class_name %>Policy < BaseModelPolicy
 
-<%- if attributes_names.size > 3 %>
-  <%- ["editable_attributes","editable_attributes","search_result_fields"].each do |meth|%>
+<%- if attributes_names.size > 3 -%>
+  <%- ["permitted_attributes","editable_attributes","search_result_fields"].each do |meth| -%>
   def <%= meth %>
     [
-      <% attributes_names.each do |m| %>
+      <%- attributes_names.each do |m| -%>
         :<%= m %>,
-      <% end %>
+      <%- end -%>
     ]
   end
-  <%- end %>
-<%- else %>
-  <%- ["editable_attributes","editable_attributes","search_result_fields"].each do |meth|%>
+
+  <%- end -%>
+<%- else -%>
+  <%- ["permitted_attributes  ","editable_attributes","search_result_fields"].each do |meth| -%>
   def <%= meth %> = %i[<%= attributes_names.join(" ") %>]
-  <%- end %>
-<%- end %>
+  <%- end -%>
+<%- end -%>
 <%- if @search_attrs.any? -%>
+
   def search_fields
     %i[<%= @search_attrs.join(" ") %>]
   end
 <%- end -%>
 <%- if @permitted_attributes.any? -%>
+
   # TODO check if correct with search_fields
   def permitted_attributes_for_ransack
     %i[<%= @permitted_attributes.join(" ") %>]
   end
 <%- end -%>
+
 end
