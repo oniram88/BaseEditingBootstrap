@@ -40,14 +40,6 @@ RSpec.describe BaseEditingBootstrap::Generators::HeaderOverrideGenerator, type: 
       end
     }
   end
-
-  it "should create correct paths" do
-    run_generator ["PostCategory", "title"]
-    expect(destination_root).to have_structure {
-      directory("app/views/post_categories/post_category/header_field") do
-        file("_title.html.erb")
-      end
-    }
-  end
+  it_behaves_like "generator with correct file paths", file_name: "header_field"
 
 end

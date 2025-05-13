@@ -42,13 +42,6 @@ RSpec.describe BaseEditingBootstrap::Generators::CellOverrideGenerator, type: :g
     }
   end
 
-  it "should create correct paths" do
-    run_generator ["PostCategory", "title"]
-    expect(destination_root).to have_structure {
-      directory("app/views/post_categories/post_category/cell_field") do
-        file("_title.html.erb")
-      end
-    }
-  end
+  it_behaves_like "generator with correct file paths", file_name: "cell_field"
 
 end
