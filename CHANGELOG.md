@@ -2,6 +2,25 @@
 All notable changes to this project will be documented in this file. See [conventional commits](https://www.conventionalcommits.org/) for commit guidelines.
 
 - - -
+## 1.9.0 - 2025-07-30
+#### Bug Fixes
+- Correct add is-invalid class on relation fields - (21e4a92) - Marino Bonetti
+- Correct path generator for namespaced resources - (a4f72c8) - Marino Bonetti
+- Migliore formattazione generatore - (1ceda4d) - Marino Bonetti
+- Creazione dei nested attributi necessari con belongs to - (564f61b) - Marino Bonetti
+- Correct Shared Specs - (1994128) - Marino Bonetti
+- Authentication Model configurable (#19) - (cef424f) - Marino Bonetti
+- Errore Traduzione di test - (95ff702) - Marino Bonetti
+#### Documentation
+- Add info on test matrix - (b097a01) - Marino Bonetti
+#### Features
+- Configurable test controller requests - (327163e) - Marino Bonetti
+- In caso di molti attributi struttura multilinea - (21dfe09) - Marino Bonetti
+- Add customizable title New and Edit - (d484e23) - Marino Bonetti
+- Check model inheritance for partial search (#18) - (14f081f) - Marino Bonetti
+
+- - -
+
 ## 1.8.1 - 2025-03-24
 #### Bug Fixes
 - Correct generator install multiple gems - (73948f5) - Marino Bonetti
