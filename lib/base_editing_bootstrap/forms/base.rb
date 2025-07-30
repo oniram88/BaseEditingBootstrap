@@ -26,7 +26,13 @@ module BaseEditingBootstrap::Forms
     #
     def form_style_class_for(method, options = {}, base_classes: ["form-control"])
       classes = base_classes
-      classes << "is-invalid" if object.errors && object.errors.include?(method)
+      if object.errors
+        classes << "is-invalid" if object.errors.include?(method)
+        # caso in cui il metodo è una relazione
+        if method.to_s.match(/(.*)_id\z/)
+          classes << "is-invalid" if object.errors.include?(Regexp.last_match(1))
+        end
+      end
       classes << options[:class].split(" ") if options[:class]
       classes.flatten.compact.uniq.join(" ")
     end
@@ -47,7 +53,7 @@ module BaseEditingBootstrap::Forms
 
     def select(method, choices = nil, options = {}, html_options = {}, &block)
       html_options.merge!(class: form_style_class_for(method, html_options, base_classes: ["form-control", "form-select"]))
-      super(method, choices, options,html_options , &block)
+      super(method, choices, options, html_options, &block)
     end
 
     def check_box(method, options = {}, checked_value = "1", unchecked_value = "0")

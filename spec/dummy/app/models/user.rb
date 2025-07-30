@@ -10,6 +10,13 @@ class User < ApplicationRecord
   validates :only_true_boolean, inclusion: {in: [true]}
   attribute :only_false_virtual, :boolean, default: false
   validates :only_false_virtual, inclusion: {in: [false]}
+  # simulazione di relazione
+  attribute :only_false_relation_id, :integer, default:1
+  validates :only_false_relation_id, presence:true
+  def only_false_relation
+    # simula il relativo campo virtuale della relazione
+    nil
+  end
 
   ##
   # Simulo un errore per il base, per poterlo vedere nella form

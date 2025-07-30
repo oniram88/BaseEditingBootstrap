@@ -77,6 +77,9 @@ RSpec.describe BaseEditingBootstrap::Forms::Base, :type => :helper do
       it "with override" do
         expect(builder.form_style_class_for(:username, {class: "custom_class"})).to be == "form-control is-invalid custom_class"
       end
+      it "with relationable column" do
+        expect(builder.form_style_class_for(:username_id)).to be == "form-control is-invalid"
+      end
     end
   end
 
@@ -102,6 +105,14 @@ RSpec.describe BaseEditingBootstrap::Forms::Base, :type => :helper do
       it "con altre opzioni della select" do
         expect(builder.select(:only_false_virtual, [], include_blank: true)).to have_tag("select.form-control.form-select.is-invalid")
       end
+    end
+
+    context "field is a relation with id" do
+      let(:object_instance) { super().tap { |u| u.errors.add(:only_false_relation, :invalid) } }
+      # Se stiamo renderizzando un campo select il quale punterà probabilmente ad una relazione, potremmo aver assegnato
+      # l'errore di validazione alla relazione piuttosto che alla colonna con *_id, quindi dovremmo visualizzare
+      # l'errore cercando anche nella variante del metodo senza _id
+      it { expect(builder.select(:only_false_relation_id, [])).to have_tag("select.form-control.form-select.is-invalid") }
     end
 
   end
