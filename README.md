@@ -1,11 +1,14 @@
 # BaseEditingBootstrap
+
 [![Gem Version](https://badge.fury.io/rb/base_editing_bootstrap.svg)](https://badge.fury.io/rb/base_editing_bootstrap)
 
 ### Active tested on:
+
 * rails: 7.x,8.x
 * ruby: 3.x
 
 ## Installation
+
 Add this line to your application's Gemfile:
 
 ```ruby
@@ -13,16 +16,19 @@ gem "base_editing_bootstrap"
 ```
 
 And then execute:
+
 ```bash
 $ bundle
 ```
 
 Or install it yourself as:
+
 ```bash
 $ gem install base_editing_bootstrap
 ```
 
 Then run installer:
+
 ```bash
 $ bundle exec rails g base_editing_bootstrap:install
 ```
@@ -30,19 +36,26 @@ $ bundle exec rails g base_editing_bootstrap:install
 **Si presume quindi che ActiveStorage sia correttamente installato, completo del javascript per il direct upload**
 
 ### Note for NestedAttributes
+
 Seguire le istruzioni per installare anche NestedAttributeForm Controller per stimulus:
+
 ```shell
 bin/importmap pin @stimulus-components/rails-nested-form
 ```
+
 e seguire installazione https://www.stimulus-components.com/docs/stimulus-rails-nested-form
 
 ### Generators
+
 Then Install dependency (if you run base_editing_bootstrap:install you are good to go):
+
 ```bash
 
 bundle exec rails g pundit:install
 ```
-Aggiungere ad ApplicationController 
+
+Aggiungere ad ApplicationController
+
 ```ruby
   include Pundit::Authorization
 ```
@@ -55,40 +68,43 @@ documentazione e avrete la vostra versione di boostrap installata.
 Installare `gem "factory_bot_rails"`
 
 ### Initializers
+
 E' possibile configurare BaseEditingBootstrap con alcune impostazioni:
+
 ```ruby
   BaseEditingBootstrap.configure do |config|
-    ##
-    # Controller da cui derivare poi il BaseEditingController da cui derivano 
-    # tutti i controller sottostanti
-    # @default "ApplicationController"
-    # config.inherited_controller = 'ApplicationController'
+  ##
+  # Controller da cui derivare poi il BaseEditingController da cui derivano 
+  # tutti i controller sottostanti
+  # @default "ApplicationController"
+  # config.inherited_controller = 'ApplicationController'
 
-    ##
-    # Configurazione per alterare lo standard di azione post aggiornamento record
-    # il default è andare nella pagina di editing del record
-    # possibili valori :edit , :index
-    # config_accessor :after_success_update_redirect, default: :edit
+  ##
+  # Configurazione per alterare lo standard di azione post aggiornamento record
+  # il default è andare nella pagina di editing del record
+  # possibili valori :edit , :index
+  # config_accessor :after_success_update_redirect, default: :edit
 
-    ##
-    # Configurazione per alterare lo standard di azione post creazione record
-    # il default è andare nella pagina di editing del record
-    # possibili valori :edit , :index  
-    # config_accessor :after_success_create_redirect, default: :edit
-  
-  end
+  ##
+  # Configurazione per alterare lo standard di azione post creazione record
+  # il default è andare nella pagina di editing del record
+  # possibili valori :edit , :index  
+  # config_accessor :after_success_create_redirect, default: :edit
+
+end
 
 ```
 
 ## Usage
+
 Utilizzo per modello base, in questo esempio prendiamo come modello Post come esempio del dummy.
 
-- Creare il Modello ed includere 
+- Creare il Modello ed includere
   ```ruby
    include BaseEditingBootstrap::BaseModel
   ```
 - La factory nelle spec deve contenere il trait `with_invalid_attributes` per definire la situazione di dati per record
-  non valido. ES:  
+  non valido. ES:
   ```ruby
   trait :with_invalid_attributes do
    name {nil} # name dovrebbe essere obbligatorio nel modello
@@ -133,13 +149,13 @@ Utilizzo per modello base, in questo esempio prendiamo come modello Post come es
     ```shell
     rails g base_editing_bootstrap:field_override ModelName field1 field2:type
     ```
-  - è possibile customizzare 
-    - un text help per ogni campo andando ad aggiungere nelle traduzioni la relativa 
+  - è possibile customizzare
+    - un text help per ogni campo andando ad aggiungere nelle traduzioni la relativa
       traduzione nella posizione: `it.activerecord.attributes.MODEL.FIELD/help_text` oppure `help_text_html` in caso di
       contenuto con html
-    - un blocco per l'unità di misura accanto al campo aggiungendo alle traduzioni: 
+    - un blocco per l'unità di misura accanto al campo aggiungendo alle traduzioni:
       `it.activerecord.attributes.MODEL.FIELD/unit`
-      
+
 - [OPTIONAL] la medesima cosa è possibile fare con il rendering dei campi
   delle celle della tabella
   ```shell
@@ -155,48 +171,51 @@ Utilizzo per modello base, in questo esempio prendiamo come modello Post come es
   **Cell Field**:
   - created_at => timestamps.html.erb
   - updated_at => timestamps.html.erb
-  - Enum              => _enum.html.erb
+  - Enum => _enum.html.erb
     Per gli enum, le traduzioni dei labels di ogni valore provengono da i18n
     attraverso l'helper: `Utilities::EnumHelper#enum_translation` con variant `:cell_field`
     il quale sfrutta human_attribute_name del modello con 'attributo.enum_value',
     quindi ad esempio per un modello `Post` con enum `categoria` e un enum `importante`, la ricerca nelle traduzioni
     saranno così composte:
     - it.activerecord.attributes.post/categoria.importante_cell_field
-    - it.activerecord.attributes.categoria.importante_cell_field  
+    - it.activerecord.attributes.categoria.importante_cell_field
     - it.attributes.importante_cell_field
     - it.activerecord.attributes.post/categoria.importante
     - it.activerecord.attributes.categoria.importante
     - it.attributes.importante => nil
-  - default    => base.html.erb
-  
+  - default => base.html.erb
+
   **Form Field**
-  - Integer           => _integer.html.erb
-  - Float             => _decimal.html.erb
-  - Decimal           => _decimal.html.erb
-  - DateTime          => _datetime.html.erb
-  - Date              => _date.html.erb
-  - Boolean           => _boolean.html.erb
-  - Enum              => _enum.html.erb
+  - Integer => _integer.html.erb
+  - Float => _decimal.html.erb
+  - Decimal => _decimal.html.erb
+  - DateTime => _datetime.html.erb
+  - Date => _date.html.erb
+  - Boolean => _boolean.html.erb
+  - Enum => _enum.html.erb
     Per gli enum, le traduzioni dei labels di ogni valore provengono da i18n
     attraverso l'helper: `Utilities::EnumHelper#enum_translation`" con variante `:form_field`
-    il quale sfrutta human_attribute_name del modello con 'attributo.enum_value', 
+    il quale sfrutta human_attribute_name del modello con 'attributo.enum_value',
     quindi ad esempio per un modello `Post` con enum `categoria` e un enum `importante`, la ricerca nelle traduzioni
-    saranno così composte: 
+    saranno così composte:
     - it.activerecord.attributes.post/categoria.importante_form_field
     - it.activerecord.attributes.categoria.importante_form_field
     - it.attributes.importante_form_field
     - it.activerecord.attributes.post/categoria.importante
     - it.activerecord.attributes.categoria.importante
     - it.attributes.importante => nil
-  - belongs_to      => _belongs_to_select.html.erb 
+  - belongs_to => _belongs_to_select.html.erb
     Come si può leggere dal partial, il modello che viene utilizzato come base dati per la collection deve
     avere come metodo `option_label` che deve ritornare la label da utilizzare nelle options.
     Di default questo metodo utilizza il semplice #to_s
     Ha anche un metodo per il valore da utilizzare come chiave, di default viene dedotto dalla reflection
     come anche il nome della classe da utilizzare come sorgente dei dati della collection
-  - Default/String    => _base.html.erb
-  
-  In futuro si prevede di aggiungere automatismi per renderizzare senza 
+  - accept_nested_field => _accept_nested_field.html.erb
+    Questo partial renderizza una tabella per i campi associati al modello.  
+    Più informazioni nelle note per il [nested attributes](#nested-attributes)
+  - Default/String => _base.html.erb
+
+  In futuro si prevede di aggiungere automatismi per renderizzare senza
   l'intervento dell'utente dei campi.
 - [OPTIONAL] Search Form:  
   Per poter aggiungere una form di ricerca basta aggiungere alla policy
@@ -212,22 +231,40 @@ Utilizzo per modello base, in questo esempio prendiamo come modello Post come es
   #...
   ```
 
-### Translations
-Traduzioni disponibili:  
-Per i bottoni della index, è possibile eseguire l'override del testo presente nel bottone. 
-Leggere la documentazione nel file `app/helpers/base_editing_helper.rb#translate_with_controller_scoped`
+### Nested Attributes
 
+Il funzionamento si basa completamente sul sistema di NestedAttributes
+di [Rails](https://api.rubyonrails.org/classes/ActiveRecord/NestedAttributes/ClassMethods.html)  
+Note:
+
+- Nelle policy bisogna definire come campo da editare il nome della relazione/nested_attribute
+- Nella policy bisogna inoltre definire per i permitted_attributes anche il
+  `XXXXX_attributes => [Array attributi da editare] + [:id,:_destroy]`
+- Il permitted _destroy vale solamente nel caso in cui si definisca nei nested_attributes che debba essere cancellabile.
+- I campi visualizzati del modello sono presi dalla relativa policy.
+
+Fai riferimento all'implementazione di esempio del dummy `Company->addresses`
+
+### Translations
+
+Traduzioni disponibili:  
+Per i bottoni della index, è possibile eseguire l'override del testo presente nel bottone.
+Leggere la documentazione nel file `app/helpers/base_editing_helper.rb#translate_with_controller_scoped`
 
 ## Testing helpers
 
 ### Requirements(installed with generators)
+
 ```ruby
 group :test do
   gem 'rails-controller-testing'
 end
 ```
-### Usage 
+
+### Usage
+
 Controllers:
+
 ```ruby
 require 'rails_helper'
 RSpec.describe "ServiceControllers", type: :request do
@@ -236,7 +273,9 @@ RSpec.describe "ServiceControllers", type: :request do
   end
 end
 ```
+
 Model:
+
 ```ruby
 require 'rails_helper'
 RSpec.describe Service, type: :model do
@@ -245,7 +284,9 @@ RSpec.describe Service, type: :model do
                   ransack_permitted_associations: []
 end
 ```
+
 Policy
+
 ```ruby
 require 'rails_helper'
 ##
@@ -271,10 +312,11 @@ end
 ```
 
 ## Message translations
+
 I messaggi di generati per il flash provengono dal metodo BaseEditingBootstrap::ActionTranslation.human_action_message  
 e seguono una logica simile ad human_attribute_name.  
 Sono già presenti i messaggi di default, a cui viene passato il nome del modello,  
-ma è possibile fare override del messaggio con la classe: 
+ma è possibile fare override del messaggio con la classe:
 
 ```yaml
 LANG:
@@ -288,22 +330,24 @@ LANG:
           created: "customized %{model} created"
     unsuccessful:
       messages:
-        created: 
+        created:
         updated: 
 ```
 
-
-
 ## Contributing
-1. Setup env with:  
+
+1. Setup env with:
+
 ```shell
 docker compose run app spec/dummy/bin/setup
 ```
 
-2. Start environment with:  
+2. Start environment with:
+
 ```shell
 docker compose up
 ```
 
 ## License
+
 The gem is available as open source under the terms of the [MIT License](https://opensource.org/licenses/MIT).
