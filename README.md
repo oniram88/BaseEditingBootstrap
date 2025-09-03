@@ -29,6 +29,13 @@ $ bundle exec rails g base_editing_bootstrap:install
 
 **Si presume quindi che ActiveStorage sia correttamente installato, completo del javascript per il direct upload**
 
+### Note for NestedAttributes
+Seguire le istruzioni per installare anche NestedAttributeForm Controller per stimulus:
+```shell
+bin/importmap pin @stimulus-components/rails-nested-form
+```
+e seguire installazione https://www.stimulus-components.com/docs/stimulus-rails-nested-form
+
 ### Generators
 Then Install dependency (if you run base_editing_bootstrap:install you are good to go):
 ```bash
