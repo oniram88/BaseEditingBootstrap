@@ -1,0 +1,2 @@
+class CompaniesController < BaseEditingController
+end
