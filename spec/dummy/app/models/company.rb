@@ -6,4 +6,12 @@ class Company < ApplicationRecord
 
   validates :name, presence: true
 
+  validate -> {
+    # Test max number of addresses to raise error in form and check nested attributes rendering
+    if self.addresses.size > 2
+      self.errors.add(:addresses, "TOO MANY ADDRESSES")
+      self.errors.add(:addresses, "Other Error") # to simulate joined error
+    end
+  }
+
 end

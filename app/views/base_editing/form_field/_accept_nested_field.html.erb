@@ -1,0 +1,48 @@
+<%# locals: (form:, field:,new_object:) -%>
+<%= content_tag :table, class: "table", data: {controller: 'nested-form'} do %>
+
+  <thead>
+  <tr>
+    <% policy(new_object).editable_attributes.each do |field| %>
+      <th>
+        <%= new_object.class.human_attribute_name(field) %>
+      </th>
+    <% end %>
+    <th class="text-end">
+      <button type="button" data-action="nested-form#add" class="btn btn-outline-success"><%= icon("plus-lg") %></button>
+    </th>
+  </tr>
+  </thead>
+
+  <template data-nested-form-target="template">
+    <%= form.fields_for field, new_object, child_index: 'NEW_RECORD' do |form_for_sections| %>
+      <%= render "nested_row_form", form: form_for_sections %>
+    <% end %>
+  </template>
+
+  <tbody>
+
+  <%= form.fields_for field do |form_for_sections| %>
+    <%= render "nested_row_form", form: form_for_sections %>
+  <% end %>
+
+  <!-- Inserted elements will be injected before that target. -->
+  <tr data-nested-form-target="target"></tr>
+
+  </tbody>
+
+
+<% end %>
+
+<% if form.object.errors.key?(field) %>
+
+  <div class="row">
+    <div class="col-12">
+      <div class="alert alert-danger">
+        <%= form.object.errors[field].join(", ") %>
+      </div>
+    </div>
+  </div>
+
+<% end %>
+

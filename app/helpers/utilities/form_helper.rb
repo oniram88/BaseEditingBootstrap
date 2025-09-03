@@ -24,14 +24,20 @@ module Utilities
         type = :enum
         generic_field = "enum"
       elsif form.object.class.respond_to?(:reflect_on_association) &&
-        form.object.class.reflect_on_association(field.to_s).is_a?(ActiveRecord::Reflection::BelongsToReflection) &&
-        !form.object.class.reflect_on_association(field.to_s).polymorphic? # non deve essere polymorphic
+            form.object.class.reflect_on_association(field.to_s).is_a?(ActiveRecord::Reflection::BelongsToReflection) &&
+            !form.object.class.reflect_on_association(field.to_s).polymorphic? # non deve essere polymorphic
         # Abbiamo una relazione belongs_to da gestire
         reflection = form.object.class.reflect_on_association(field.to_s)
         type = :belongs_to
         generic_field = "belongs_to_select"
         locals[:relation_class] = reflection.klass
         locals[:foreign_key] = reflection.foreign_key
+      elsif form.object.class.respond_to?(:nested_attributes_options) &&
+            form.object.class.nested_attributes_options.key?(field.to_sym)
+        type= :nested_attributes
+        generic_field = "accept_nested_field"
+        reflection = form.object.class.reflect_on_association(field.to_s)
+        locals[:new_object] = reflection.klass.new(reflection.foreign_key => form.object)
       else
         if form.object.class.respond_to?(:type_for_attribute)
           type = form.object.class.type_for_attribute(field).type

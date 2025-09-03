@@ -1,0 +1,16 @@
+<tr class="nested-form-wrapper" data-new-record="<%= form.object.new_record? %>" id="<%= dom_id(form.object) %>">
+
+  <% policy(form.object).editable_attributes.each do |field| %>
+    <td>
+      <%= form_print_field(form, field) %>
+      <%= error_messages_for(form.object, field) %>
+    </td>
+
+  <% end %>
+
+  <td class="d-flex justify-content-end">
+    <button type="button" class="btn btn-outline-danger" data-action="nested-form#remove"><%= icon("trash") %></button>
+    <%= form.hidden_field :_destroy %>
+  </td>
+
+</tr>
