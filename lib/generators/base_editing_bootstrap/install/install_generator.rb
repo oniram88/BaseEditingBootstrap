@@ -30,6 +30,16 @@ module BaseEditingBootstrap
           gem 'rails-controller-testing', group: :test, comment: "Required if used with controllers spec"
         end
       end
+
+      def install_nested_attributes_dependencies
+        # attualmente penso sia più sensato semplicemente scrivere a video i passaggi necessari, dato che
+        # potrebbe essere già presente importmap, nested_attribute_controller e le varie configurazioni
+
+        say "Install dependencies for nested attributes:"
+        say "   bin/importmap pin @stimulus-components/rails-nested-form"
+        say "Attiva quindi come spiegato qua: https://www.stimulus-components.com/docs/stimulus-rails-nested-form il controller"
+
+      end
     end
   end
 end
