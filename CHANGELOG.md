@@ -2,6 +2,12 @@
 All notable changes to this project will be documented in this file. See [conventional commits](https://www.conventionalcommits.org/) for commit guidelines.
 
 - - -
+## 1.10.0 - 2025-09-12
+#### Features
+- Automatic Nested attributes - (dad38de) - Marino Bonetti
+
+- - -
+
 ## 1.9.0 - 2025-07-30
 #### Bug Fixes
 - Correct add is-invalid class on relation fields - (21e4a92) - Marino Bonetti
