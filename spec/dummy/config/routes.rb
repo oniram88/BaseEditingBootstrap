@@ -17,5 +17,7 @@ Rails.application.routes.draw do
     resources :users, only: [:index]
   end
 
+  resources :companies
+
   root "posts#index"
 end
