@@ -2,6 +2,14 @@
 All notable changes to this project will be documented in this file. See [conventional commits](https://www.conventionalcommits.org/) for commit guidelines.
 
 - - -
+## 1.11.0 - 2025-09-15
+#### Bug Fixes
+- Simplify gem push command in cog.toml - (ab70061) - Marino Bonetti
+#### Features
+- Add nested_attributes for has_one - (d76422c) - Marino Bonetti
+
+- - -
+
 ## 1.10.0 - 2025-09-12
 #### Features
 - Automatic Nested attributes - (dad38de) - Marino Bonetti
