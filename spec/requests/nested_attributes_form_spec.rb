@@ -50,6 +50,16 @@ RSpec.describe "Nested Attributes Form", type: :request do
         end
       end
 
+      it "render form with has_one nested element initialized" do
+        expect {
+          is_expected.to have_tag("form[action='#{companies_path}'][method='post']") do
+            with_tag(".form-comment-input-group") do
+              with_tag("textarea", with: {name: "company[comment_attributes][comment]"})
+            end
+          end
+        }.not_to change(Comment, :count)
+      end
+
       context "with nested elements" do
         let(:address) { create(:address) }
         let(:company) { address.company }
@@ -80,6 +90,19 @@ RSpec.describe "Nested Attributes Form", type: :request do
 
             end
           end
+        end
+
+        context "with comment on company" do
+          let!(:comment) {
+            create(:comment, commentable: company, comment: "COMMENTO da VISUALIZZARE")
+          }
+
+          it do
+            is_expected.to have_tag(".form-comment-input-group") do
+              with_tag("textarea", with: {name: "company[comment_attributes][comment]"},seen: comment.comment)
+            end
+          end
+
         end
 
       end

@@ -1,0 +1,4 @@
+<%# locals: (form:, field:) -%>
+<%= form.fields_for field do |form_for_sections| %>
+  <%= render partial: "form_full_components", locals: {form: form_for_sections} %>
+<% end %>

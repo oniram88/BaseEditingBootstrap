@@ -210,9 +210,13 @@ Utilizzo per modello base, in questo esempio prendiamo come modello Post come es
     Di default questo metodo utilizza il semplice #to_s
     Ha anche un metodo per il valore da utilizzare come chiave, di default viene dedotto dalla reflection
     come anche il nome della classe da utilizzare come sorgente dei dati della collection
-  - accept_nested_field => _accept_nested_field.html.erb
-    Questo partial renderizza una tabella per i campi associati al modello.  
-    Più informazioni nelle note per il [nested attributes](#nested-attributes)
+  - accept_nested_attributes
+    - has_many => _accept_has_many_nested_field.html.erb
+      Questo partial renderizza una tabella per i campi associati al modello.  
+      Più informazioni nelle note per il [nested attributes](#nested-attributes)
+    - has_one => _accept_has_one_nested_field.html.erb
+      Questo partial renderizza una nested form che si comporta come una form normale renderizzando i vari campi del
+      nested attraverso quanto elencato nella policy dell'oggetto padre.  
   - Default/String => _base.html.erb
 
   In futuro si prevede di aggiungere automatismi per renderizzare senza
@@ -238,8 +242,9 @@ di [Rails](https://api.rubyonrails.org/classes/ActiveRecord/NestedAttributes/Cla
 Note:
 
 - Nelle policy bisogna definire come campo da editare il nome della relazione/nested_attribute
-- Nella policy bisogna inoltre definire per i permitted_attributes anche il
-  `XXXXX_attributes => [Array attributi da editare] + [:id,:_destroy]`
+- Nella policy bisogna inoltre definire per i permitted_attributes anche:
+  - nel caso di has_many: `XXXXX_attributes => [Array attributi da editare] + [:id,:_destroy]`
+  - nel caso di has_one: `XXXXX_attributes => [Array attributi da editare]`
 - Il permitted _destroy vale solamente nel caso in cui si definisca nei nested_attributes che debba essere cancellabile.
 - I campi visualizzati del modello sono presi dalla relativa policy.
 

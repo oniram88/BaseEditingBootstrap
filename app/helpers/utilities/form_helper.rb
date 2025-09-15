@@ -34,10 +34,18 @@ module Utilities
         locals[:foreign_key] = reflection.foreign_key
       elsif form.object.class.respond_to?(:nested_attributes_options) &&
             form.object.class.nested_attributes_options.key?(field.to_sym)
-        type= :nested_attributes
-        generic_field = "accept_nested_field"
+        type = :nested_attributes
         reflection = form.object.class.reflect_on_association(field.to_s)
-        locals[:new_object] = reflection.klass.new(reflection.foreign_key => form.object)
+        case reflection
+        when ActiveRecord::Reflection::HasManyReflection
+          locals[:new_object] = reflection.klass.new(reflection.foreign_key => form.object)
+          generic_field = "accept_has_many_nested_field"
+        when ActiveRecord::Reflection::HasOneReflection
+          form.object.send(:"build_#{field}") unless form.object.send(field).present?
+          generic_field = "accept_has_one_nested_field"
+        else
+          raise "Unknown reflection for nested attributes #{field}->#{reflection.class}"
+        end
       else
         if form.object.class.respond_to?(:type_for_attribute)
           type = form.object.class.type_for_attribute(field).type

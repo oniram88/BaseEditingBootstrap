@@ -1,15 +1,7 @@
 <%= render layout: "form_container" do %>
   <%= form_for @object, builder: form_builder do |form| %>
 
-    <%= render layout: "form_body_container" do %>
-      <%= render partial: "form_field_header", locals: {form:} %>
-      <%= render partial: "form_base_errors", locals: {form:} if form.object.errors.key?(:base) %>
-      <%= render layout: "form_fields_container" do %>
-        <%= render collection: form_attributes(form.object),
-                   layout: "form_field_container",
-                   partial: "form_field", locals: {form:} %>
-      <% end %>
-    <% end %>
+    <%= render partial: "form_full_components", locals: {form: form} %>
 
     <%= render layout: "form_footer_container" do %>
       <%= render partial: "form_footer", locals: {form: form} %>
