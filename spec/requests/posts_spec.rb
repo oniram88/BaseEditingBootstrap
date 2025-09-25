@@ -53,6 +53,16 @@ RSpec.describe "Posts", type: :request do
         expect(response.body).to have_tag("tr>td", text: "Post 1")
       end
 
+      it "rendered with standard action columns" do
+        get posts_path
+        expect(response.body).to have_tag("thead>tr>th.action-column")
+        expect(response.body).to have_tag("tbody>tr>td.action-column") do
+          with_tag("a", with: {href: edit_post_path(Post.first)})
+          with_tag("a", with: {href: post_path(Post.first)})
+          with_tag("a", with: {href: post_path(Post.first), method: :delete})
+        end
+      end
+
     end
 
     describe "sorting" do
