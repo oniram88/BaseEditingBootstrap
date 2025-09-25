@@ -114,8 +114,19 @@ Utilizzo per modello base, in questo esempio prendiamo come modello Post come es
   ```ruby
     class PostsController < BaseEditingController
       ##
-      # Set default sort order for ransack
+      # Configure default sort in the index query.
+      # Works like documented in https://activerecord-hackery.github.io/ransack/getting-started/sorting/#sorting-in-the-controller
       # self.default_sorts= ["id"] 
+
+      ##
+      # Configure default distinct results in the index query.
+      # Works like documented in https://activerecord-hackery.github.io/ransack/going-further/other-notes/#problem-with-distinct-selects
+      # self.default_distinct=true
+
+      ##
+      # Display action column in the index table.
+      # self.display_action_column = true
+  
     end
   ```
 - Aggiungere la rotta: `resources :posts`
