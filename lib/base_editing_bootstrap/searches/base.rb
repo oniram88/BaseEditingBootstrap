@@ -7,18 +7,20 @@ module BaseEditingBootstrap::Searches
     include ActiveModel::Naming
     include ActiveModel::Conversion
 
-    attr_reader :model_klass, :user, :params, :scope, :sorts, :distinct
+    attr_reader :model_klass, :user, :params, :scope, :sorts, :distinct, :display_action_column
 
     # @param [User] user
     # @param [ActiveRecord::Associations::CollectionProxy] scope
     # @param [Array<String (frozen)>] sort
-    def initialize(scope, user, params: {page: nil}, sorts: ["id"], distinct: true)
+    # @param [TrueClass,FalseClass] display_action_column => visualizzare o meno la colonna delle azioni
+    def initialize(scope, user, params: {page: nil}, sorts: ["id"], distinct: true, display_action_column: true)
       @model_klass = scope.klass
       @user = user
       @scope = scope
       @params = params
       @sorts = sorts
       @distinct = distinct
+      @display_action_column = display_action_column
     end
 
     ##

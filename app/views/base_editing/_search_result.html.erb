@@ -1,10 +1,10 @@
-<table class="table table-head-fixed text-nowrap <%= dom_class(@search_instance.model_klass,:search_results) %>">
+<table class="table table-head-fixed text-nowrap <%= dom_class(@search_instance.model_klass, :search_results) %>">
   <thead>
   <tr>
     <% @search_instance.search_result_fields.each do |srf| %>
       <%= render_header_cell_field(@search_instance, srf) %>
     <% end %>
-    <th class="action_col"></th>
+    <%= content_tag :th, nil, class: "action_col" if @search_instance.display_action_column %>
   </tr>
   </thead>
   <tbody>

@@ -55,12 +55,18 @@ RSpec.describe "Posts", type: :request do
 
       it "rendered with standard action columns" do
         get posts_path
-        expect(response.body).to have_tag("thead>tr>th.action-column")
-        expect(response.body).to have_tag("tbody>tr>td.action-column") do
+        expect(response.body).to have_tag("thead>tr>th.action_col")
+        expect(response.body).to have_tag("tbody>tr>td.action_col") do
           with_tag("a", with: {href: edit_post_path(Post.first)})
           with_tag("a", with: {href: post_path(Post.first)})
-          with_tag("a", with: {href: post_path(Post.first), method: :delete})
+          with_tag("a", with: {href: post_path(Post.first), "data-turbo-method"=> :delete})
         end
+      end
+
+      it "with custom disabled action column" do
+        get red_posts_path
+        expect(response.body).not_to have_tag("thead>tr>th.action_col")
+        expect(response.body).not_to have_tag("tbody>tr>td.action_col")
       end
 
     end

@@ -19,15 +19,20 @@ class BaseEditingController < RestrictedAreaController
   # Works like documented in https://activerecord-hackery.github.io/ransack/going-further/other-notes/#problem-with-distinct-selects
   class_attribute :default_distinct, default: true
 
+  ##
+  # Display action column in the index table.
+  class_attribute :display_action_column, default: true
+
   def index
-    #se è già stato autorizzano non rieseguiamo, utile nel caso vogliamo sovrascrivere la logica di autorizzazione in inheritance
+    # se è già stato autorizzano non rieseguiamo, utile nel caso vogliamo sovrascrivere la logica di autorizzazione in inheritance
     authorize base_class unless pundit_policy_authorized?
 
     q = policy_scope(base_scope)
     @search_instance = search_class.new(q, current_user,
                                         params: params.permit(:page, :q => {}), # FIXME trovare modo per essere più "STRONG"
                                         sorts: default_sorts,
-                                        distinct: default_distinct
+                                        distinct: default_distinct,
+                                        display_action_column: display_action_column
     )
     @search_instance = yield(@search_instance) if block_given?
   end
@@ -36,7 +41,7 @@ class BaseEditingController < RestrictedAreaController
     @object = base_class.new
     @object = yield(@object) if block_given?
 
-    #se è già stato autorizzano non rieseguiamo, utile nel caso vogliamo sovrascrivere la logica di autorizzazione in inheritance
+    # se è già stato autorizzano non rieseguiamo, utile nel caso vogliamo sovrascrivere la logica di autorizzazione in inheritance
     authorize @object unless pundit_policy_authorized?
 
     respond_to do |format|
@@ -67,7 +72,7 @@ class BaseEditingController < RestrictedAreaController
   def create
     @object = base_class.new(permitted_attributes)
     @object = yield(@object) if block_given?
-    #se è già stato autorizzano non rieseguiamo, utile nel caso vogliamo sovrascrivere la logica di autorizzazione in inheritance
+    # se è già stato autorizzano non rieseguiamo, utile nel caso vogliamo sovrascrivere la logica di autorizzazione in inheritance
     authorize @object unless pundit_policy_authorized?
 
     respond_to do |format|
@@ -129,7 +134,7 @@ class BaseEditingController < RestrictedAreaController
   def load_object
     @object = base_class.find(params[:id])
 
-    #se è già stato autorizzano non rieseguiamo, utile nel caso vogliamo sovrascrivere la logica di autorizzazione in inheritance
+    # se è già stato autorizzano non rieseguiamo, utile nel caso vogliamo sovrascrivere la logica di autorizzazione in inheritance
     authorize @object unless pundit_policy_authorized?
     logger.debug { "Oggetto #{@object.inspect}" }
   end

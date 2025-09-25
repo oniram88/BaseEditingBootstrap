@@ -2,7 +2,9 @@
   <% @search_instance.search_result_fields.each do |srf| %>
     <%= render_cell_field(obj, srf) %>
   <% end %>
-  <td>
-    <%= render partial: "search_result_buttons", locals: {obj:} %>
-  </td>
+  <% if @search_instance.display_action_column %>
+    <td class="action_col">
+      <%= render partial: "search_result_buttons", locals: {obj:} %>
+    </td>
+  <% end %>
 </tr>
