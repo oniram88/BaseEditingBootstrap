@@ -8,6 +8,7 @@ RSpec.describe <%= class_name %>, type: :model do
  #                 ransack_permitted_associations: [],
  #                 option_label_method: :to_s,
  #                 ransack_permitted_scopes: []  do
+ #     let(:option_label_instance){described_class.new} <- default, for override instance to check option_label_method
  #     let(:auth_object) { :auth_object } <- default
  #     let(:auth_object) { create(:user, :as_admin) } <- in caso di necessità di override
  #     let(:new_user_ransack_permitted_attributes) { ransack_permitted_attributes }
