@@ -3,6 +3,8 @@ RSpec.shared_examples "a base model" do |ransack_permitted_attributes: [],
   option_label_method: :to_s,
   ransack_permitted_scopes: []|
 
+
+  let(:option_label_instance){described_class.new}
   it_behaves_like "a validated? object"
 
   it "human_action_message" do
@@ -10,11 +12,10 @@ RSpec.shared_examples "a base model" do |ransack_permitted_attributes: [],
   end
 
   it "have method for belongs_to options" do
-    instance = described_class.new
-    expect(instance).to respond_to(:option_label)
+    expect(option_label_instance).to respond_to(:option_label)
 
-    expect(instance).to receive(option_label_method).and_call_original, "Expected `#{instance.class}#option_label` chiami il metodo `##{option_label_method}` per la traduzione del label nelle options"
-    instance.option_label
+    expect(option_label_instance).to receive(option_label_method).and_call_original, "Expected `#{option_label_instance.class}#option_label` chiami il metodo `##{option_label_method}` per la traduzione del label nelle options"
+    option_label_instance.option_label
   end
 
   if ransack_permitted_scopes.any?
