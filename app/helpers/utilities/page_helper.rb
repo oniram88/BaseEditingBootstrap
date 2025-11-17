@@ -49,8 +49,7 @@ module Utilities::PageHelper
   # @param [String] path
   # @param [Hash] options
   def new_button(path, options = {})
-    options.merge!({class: 'btn btn-success btn-sm'})
-    link_to icon("plus-lg", I18n.t(:new)), path, options
+    link_to icon("plus-lg", I18n.t(:new)), path, options.reverse_merge({class: 'btn btn-success btn-sm'})
   end
 
   # @param [BaseModel] obj instance

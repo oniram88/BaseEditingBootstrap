@@ -41,4 +41,22 @@ RSpec.describe Utilities::PageHelper, type: :helper do
     end
   end
 
+  describe "#new_button" do
+
+    it "no options" do
+      expect(helper.new_button("root/test")).to have_tag("a.btn.btn-success.btn-sm", with: {href: "root/test"}) do
+        with_tag("i.bi-plus-lg")
+      end
+    end
+
+    it "override options" do
+      expect(helper.new_button("root/test", {class: "example"})).to have_tag("a.example", with: {href: "root/test"})
+    end
+
+    it "merged options" do
+      expect(helper.new_button("root/test", {title: "example"})).to have_tag("a.btn.btn-success.btn-sm",
+                                                                             with: {href: "root/test", title: "example"})
+    end
+  end
+
 end
