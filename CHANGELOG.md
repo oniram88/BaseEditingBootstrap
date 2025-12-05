@@ -2,6 +2,24 @@
 All notable changes to this project will be documented in this file. See [conventional commits](https://www.conventionalcommits.org/) for commit guidelines.
 
 - - -
+## 1.12.0 - 2025-12-05
+#### Features
+- Add Capacity of custom disable action column - (4910fc3) - Marino Bonetti
+#### Bug Fixes
+- Add ability to override new_button classes - (ba18b10) - Marino Bonetti
+#### Documentation
+- Update generator example - (445bf2f) - Marino Bonetti
+- Update README with ransack sorting, distinct, and action column examples - (5b9728b) - Marino Bonetti
+#### Tests
+- Add option to define option_label_instance in shared example - (5e7628b) - Marino Bonetti
+- Add Check for action columns - (001b0c9) - Marino Bonetti
+#### Continuous Integration
+- Add Rails 8.1 to Matrix - (455ffc6) - Marino Bonetti
+#### Miscellaneous Chores
+- Extend rails compatibility - (ef018b0) - Marino Bonetti
+
+- - -
+
 ## 1.11.0 - 2025-09-15
 #### Bug Fixes
 - Simplify gem push command in cog.toml - (ab70061) - Marino Bonetti
