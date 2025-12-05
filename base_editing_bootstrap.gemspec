@@ -29,7 +29,7 @@ Gem::Specification.new do |spec|
   end
   spec.files += Dir['spec/support/external_shared/*.rb']
 
-  spec.add_dependency "rails", [">= 7.0", "< 8.1"]
+  spec.add_dependency "rails", [">= 7.0", "< 9.0"]
   # Policy
   spec.add_dependency "pundit", ["~> 2.3", ">= 2.3.1"]
   # Search
