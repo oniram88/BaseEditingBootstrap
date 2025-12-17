@@ -27,4 +27,10 @@ BaseEditingBootstrap.configure do |config|
   # Factory per la creazione del modello che rappresenta l'auteticazione
   # config.authentication_model_factory= :user
 
+  ##
+  # Logger, default to Rails.logger
+  # @default to Rails.logger or STDOUT if no Rails.logger
+  # config.logger = ActiveSupport::TaggedLogging.logger($stdout)
+  # config.logger = Rails.logger
+
 end

@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module Utilities::TemplateHelper
-
+  include BaseEditingBootstrap::Logging
   ##
   # Ricerca template con fallbacks.
   # In ordine, cerca di trovare il partial per l'oggetto(tramite il metodo to_partial_path) e il campo specifico.
@@ -42,7 +42,7 @@ module Utilities::TemplateHelper
       ["Campo GENERICO + inheritance tra modelli", generic_field, obj_base_paths],
       ["Default BaseEditingController", "base_editing/#{base_path}/#{generic_field}", []],
     ].each do |desc,partial, prefixes|
-      Rails.logger.debug { "[BASE EDITING BOOTSTRAP] #{desc} - partial:`#{partial}` in #{prefixes.inspect}" }
+      bs_logger.debug { "[BASE EDITING BOOTSTRAP] #{desc} - partial:`#{partial}` in #{prefixes.inspect}" }
       if lookup_context.exists?(partial, prefixes, true)
         return lookup_context.find(partial, prefixes, true)
       end

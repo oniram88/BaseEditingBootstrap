@@ -52,6 +52,10 @@ module BaseEditingBootstrap
     @deprecator ||= ActiveSupport::Deprecation.new("2.0", "BaseEditingBootstrap")
   end
 
+  ##
+  # Logger, default to Rails.logger
+  config_accessor :logger, default: nil
+
 end
 
 loader.eager_load

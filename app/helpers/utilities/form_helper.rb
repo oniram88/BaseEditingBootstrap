@@ -4,6 +4,7 @@ module Utilities
     include EnumHelper
     include IconHelper
     include Pundit::Authorization
+    include BaseEditingBootstrap::Logging
     ##
     # Metodo su cui eseguire override per i campi specifici rispetto all'oggetto gestito dal controller
     # @deprecated Utilizza form_print_field(form, field) senza sovrascriverlo
@@ -88,7 +89,7 @@ module Utilities
         "form_field",
         generic_field
       )
-      Rails.logger.debug do
+      bs_logger.debug do
         <<~TEXT
           [BASE EDITING BOOTSTRAP]
            TYPE: #{type}
