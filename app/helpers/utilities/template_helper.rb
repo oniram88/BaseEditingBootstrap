@@ -30,21 +30,23 @@ module Utilities::TemplateHelper
       start_class = start_class.superclass
     end
 
-    [
-      # Precedenza modello e campo specifico
-      ["Campo SPECIFICO + inheritance tra modelli", field, obj_base_paths],
-      # cerco tramite nome modello semplice, con namespace della risorsa (cell_field,header_field,form_field) e nome del campo specifico
-      ["Campo specifico con nome modello + inheritance controllers", "#{obj.model_name.element}/#{base_path}/#{field}", lookup_context.prefixes],
-      # cerco struttura senza il livello del nome del modello
-      ["Campo specifico senza nome modello + inheritance controllers", "#{base_path}/#{field}", lookup_context.prefixes],
-      # Ricerca tramite campo generico e prefissi di contesto che contiene anche controller e namespace di controller
-      ["Campo GENERICO + inheritance controllers", "#{base_path}/#{generic_field}", lookup_context.prefixes],
-      ["Campo GENERICO + inheritance tra modelli", generic_field, obj_base_paths],
-      ["Default BaseEditingController", "base_editing/#{base_path}/#{generic_field}", []],
-    ].each do |desc,partial, prefixes|
-      bs_logger.debug { "[BASE EDITING BOOTSTRAP] #{desc} - partial:`#{partial}` in #{prefixes.inspect}" }
-      if lookup_context.exists?(partial, prefixes, true)
-        return lookup_context.find(partial, prefixes, true)
+    bs_logger.tagged(field) do
+      [
+        # Precedenza modello e campo specifico
+        ["Campo SPECIFICO + inheritance tra modelli", field, obj_base_paths],
+        # cerco tramite nome modello semplice, con namespace della risorsa (cell_field,header_field,form_field) e nome del campo specifico
+        ["Campo specifico con nome modello + inheritance controllers", "#{obj.model_name.element}/#{base_path}/#{field}", lookup_context.prefixes],
+        # cerco struttura senza il livello del nome del modello
+        ["Campo specifico senza nome modello + inheritance controllers", "#{base_path}/#{field}", lookup_context.prefixes],
+        # Ricerca tramite campo generico e prefissi di contesto che contiene anche controller e namespace di controller
+        ["Campo GENERICO + inheritance controllers", "#{base_path}/#{generic_field}", lookup_context.prefixes],
+        ["Campo GENERICO + inheritance tra modelli", generic_field, obj_base_paths],
+        ["Default BaseEditingController", "base_editing/#{base_path}/#{generic_field}", []],
+      ].each do |desc, partial, prefixes|
+        bs_logger.debug { "#{desc} - partial:`#{partial}` in #{prefixes.inspect}" }
+        if lookup_context.exists?(partial, prefixes, true)
+          return lookup_context.find(partial, prefixes, true)
+        end
       end
     end
     # fallback finale

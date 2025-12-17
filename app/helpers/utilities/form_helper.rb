@@ -91,7 +91,6 @@ module Utilities
       )
       bs_logger.debug do
         <<~TEXT
-          [BASE EDITING BOOTSTRAP]
            TYPE: #{type}
            GENERIC_FIELD: #{generic_field}
            TEMPLATE: #{template.short_identifier}
