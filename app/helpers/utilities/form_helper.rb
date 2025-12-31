@@ -21,7 +21,9 @@ module Utilities
     # @param [Symbol] field
     def form_print_field(form, field)
       locals = {form:, field:}
-      if form.object.class.respond_to?(:defined_enums) && form.object.class.defined_enums.key?(field.to_s)
+      if form.object.class.respond_to?(:field_to_form_partial) and (generic_field = form.object.class.field_to_form_partial(field))
+        type= :custom
+      elsif form.object.class.respond_to?(:defined_enums) && form.object.class.defined_enums.key?(field.to_s)
         type = :enum
         generic_field = "enum"
       elsif form.object.class.respond_to?(:reflect_on_association) &&
@@ -91,10 +93,10 @@ module Utilities
       )
       bs_logger.debug do
         <<~TEXT
-           TYPE: #{type}
-           GENERIC_FIELD: #{generic_field}
-           TEMPLATE: #{template.short_identifier}
-           LOCALS:#{locals}
+          TYPE: #{type}
+          GENERIC_FIELD: #{generic_field}
+          TEMPLATE: #{template.short_identifier}
+          LOCALS:#{locals}
         TEXT
       end
       template.render(self, locals)

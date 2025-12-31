@@ -197,6 +197,18 @@ Utilizzo per modello base, in questo esempio prendiamo come modello Post come es
   - default => base.html.erb
 
   **Form Field**
+- CUSTOM => Nel modello, aggiungere un metodo di classe che restituisca il partial da utilizzare. 
+            Questo poi seguirà il normale iter di ricerca fra namespace di classe e namespace di controller per trovare
+            il corretto partial:
+    ```ruby
+    def self.field_to_form_partial(field)
+       if field == "test"
+         :textarea
+       else 
+         nil
+       end
+    end
+    ```
   - Integer => _integer.html.erb
   - Float => _decimal.html.erb
   - Decimal => _decimal.html.erb
