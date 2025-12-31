@@ -206,6 +206,10 @@ Utilizzo per modello base, in questo esempio prendiamo come modello Post come es
         set_field_to_form_partial :title, :textarea
       end
       ```
+      E' anche disponibile un helper per testare la corretta configurazione:
+      ```ruby
+        it_behaves_like "a model with custom field_to_form_partial", :importo, :currency
+      ```
   - Integer => _integer.html.erb
   - Float => _decimal.html.erb
   - Decimal => _decimal.html.erb
