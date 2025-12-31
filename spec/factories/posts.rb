@@ -25,6 +25,7 @@ FactoryBot.define do
     end
 
     factory :customer_post, class: "Customer::Post"
+    factory :red_post, class: "RedPost"
 
   end
 end

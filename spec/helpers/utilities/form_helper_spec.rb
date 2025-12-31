@@ -127,6 +127,22 @@ RSpec.describe Utilities::FormHelper, type: :helper do
 
     end
 
+    context "red_post with custom form helper" do
+      let(:obj) { create(:red_post,
+                         title: "Titolo",
+                         description: "desc") }
+
+      it "title overridden" do
+        expect(helper.form_print_field(form, :title)).to have_tag(:textarea, with: {class: "form-control", name: "red_post[title]"})
+      end
+
+      it "published_at not overridden" do
+        expect(helper.form_print_field(form, :published_at)).to have_tag(:input, with: {type: "date"})
+      end
+
+
+    end
+
     context "user model" do
       let(:obj) { create(:user, username: "dan_osman") }
 
