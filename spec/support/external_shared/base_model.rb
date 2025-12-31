@@ -84,3 +84,15 @@ RSpec.shared_examples "a validated? object" do
     it { is_expected.to be_validated }
   end
 end
+
+RSpec.shared_examples "a model with custom field_to_form_partial" do |field, partial|
+
+  it "when #{field}" do
+    expect(described_class.field_to_form_partial(field)).to eq partial
+  end
+
+  it "anything else" do
+    expect(described_class.field_to_form_partial(anything)).to be_nil
+  end
+
+end

@@ -197,18 +197,15 @@ Utilizzo per modello base, in questo esempio prendiamo come modello Post come es
   - default => base.html.erb
 
   **Form Field**
-- CUSTOM => Nel modello, aggiungere un metodo di classe che restituisca il partial da utilizzare. 
-            Questo poi seguirà il normale iter di ricerca fra namespace di classe e namespace di controller per trovare
-            il corretto partial:
-    ```ruby
-    def self.field_to_form_partial(field)
-       if field == "test"
-         :textarea
-       else 
-         nil
-       end
-    end
-    ```
+  - CUSTOM => Nel modello, richiamare il metodo di classe per impostare il partial per lo specifico campo, 
+              dal punto di vista del helper per ricercare il partial corretto avverrà poi il normale iter di ricerca 
+              fra namespace di classe e namespace di controller per trovare il corretto partial:
+      ```ruby
+      class MyCustomModel < ApplicationRecord
+        include BaseEditingBootstrap::BaseModel
+        set_field_to_form_partial :title, :textarea
+      end
+      ```
   - Integer => _integer.html.erb
   - Float => _decimal.html.erb
   - Decimal => _decimal.html.erb
@@ -242,8 +239,8 @@ Utilizzo per modello base, in questo esempio prendiamo come modello Post come es
       nested attraverso quanto elencato nella policy dell'oggetto padre.  
   - Default/String => _base.html.erb
 
-  In futuro si prevede di aggiungere automatismi per renderizzare senza
-  l'intervento dell'utente dei campi.
+    In futuro si prevede di aggiungere automatismi per renderizzare senza
+    l'intervento dell'utente dei campi.
 - [OPTIONAL] Search Form:  
   Per poter aggiungere una form di ricerca basta aggiungere alla policy
   del modello in questione i campi di ricerca che verranno poi utilizzati da ransack
