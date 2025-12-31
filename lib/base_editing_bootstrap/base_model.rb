@@ -12,7 +12,6 @@ module BaseEditingBootstrap
                :ransackable_scopes, to: :@class
 
       class_attribute :_field_to_form_partial
-      self._field_to_form_partial ||= {}
 
       ##
       # Label da utilizzare nelle option per quando si genera le select dei belongs to
@@ -56,10 +55,12 @@ module BaseEditingBootstrap
       #   it_behaves_like "a model with custom field_to_form_partial", :importo, :currency
       #
       def set_field_to_form_partial(field, partial)
+        self._field_to_form_partial ||= {}
         self._field_to_form_partial[field] = partial
       end
 
       def field_to_form_partial(field)
+        return nil unless self._field_to_form_partial
         self._field_to_form_partial.fetch(field, nil)
       end
 
