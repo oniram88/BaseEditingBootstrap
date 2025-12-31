@@ -56,7 +56,7 @@ module BaseEditingBootstrap
       #
       def set_field_to_form_partial(field, partial)
         self._field_to_form_partial ||= {}
-        self._field_to_form_partial[field] = partial
+        self._field_to_form_partial = self._field_to_form_partial.merge(field => partial)
       end
 
       def field_to_form_partial(field)
