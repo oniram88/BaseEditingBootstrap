@@ -225,5 +225,20 @@ RSpec.describe BaseEditingBootstrap::Forms::Base, :type => :helper do
       end
     end
 
+    context "object not derived from ::ActiveRecord::Base" do
+      let(:object_instance) {
+        b = Class.new do
+          include ActiveModel::API
+        end
+        Object.const_set("FakeBaseClass", b)
+        Object.const_set("InheritedFakeBaseClass", Class.new(b)).new #new finale per avere l'istanza della classe
+      }
+
+      it {
+          expect(builder.submit).to have_tag("div.btn-group.mr-1 > input.btn.btn-primary", with: {type: :submit, value: "Crea Inherited fake base class"})
+      }
+
+    end
+
   end
 end

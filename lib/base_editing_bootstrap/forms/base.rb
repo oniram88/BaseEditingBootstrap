@@ -108,10 +108,10 @@ module BaseEditingBootstrap::Forms
       @template.content_tag(:div, class: "btn-group mr-1") do
 
         if value.nil? && object.respond_to?(:model_name)
-          key = object.persisted? ? :update : :create
+          key = object.respond_to?(:persisted?) ? (object.persisted? ? :update : :create) : :submit
           defaults = []
           tmp = object.class
-          while tmp != ::ApplicationRecord
+          while tmp != ::ActiveRecord::Base && tmp.respond_to?(:model_name)
             defaults << :"helpers.submit.#{tmp.model_name.i18n_key}.#{key}"
             tmp = tmp.superclass
           end
