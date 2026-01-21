@@ -107,8 +107,8 @@ module BaseEditingBootstrap::Forms
     def submit(value = nil, options = {})
       @template.content_tag(:div, class: "btn-group mr-1") do
 
-        if object.respond_to?(:model_name)
-          key = object ? (object.persisted? ? :update : :create) : :submit
+        if value.nil? && object.respond_to?(:model_name)
+          key = object.persisted? ? :update : :create
           defaults = []
           tmp = object.class
           while tmp != ::ApplicationRecord
