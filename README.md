@@ -276,9 +276,21 @@ Fai riferimento all'implementazione di esempio del dummy `Company->addresses`
 
 ### Translations
 
-Traduzioni disponibili:  
+#### Index buttons:  
 Per i bottoni della index, è possibile eseguire l'override del testo presente nel bottone.
 Leggere la documentazione nel file `app/helpers/base_editing_helper.rb#translate_with_controller_scoped`
+
+#### Per i bottoni delle form(Submit):  
+E' possibile tradurre il contenuto del bottone andando ad impostare la traduzione direttamente in yml.
+ES:  
+Con la class inheritance così composta: Remote < Base < ApplicationRecord < ActiveRecord::Base  
+per il bottone dell'oggetto Remote avremo questa ricerca:
+1. en.helpers.submit.remote.create
+2. en.helpers.submit.base.create
+3. en.helpers.submit.create
+
+In caso di oggetto persistente verrà ricercata la chiave finale `update`
+
 
 ## Testing helpers
 
