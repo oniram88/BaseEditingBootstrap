@@ -106,6 +106,22 @@ module BaseEditingBootstrap::Forms
     #             di seguire realmente il link con il browser.
     def submit(value = nil, options = {})
       @template.content_tag(:div, class: "btn-group mr-1") do
+
+        if value.nil? && object.respond_to?(:model_name)
+          key = object.persisted? ? :update : :create
+          defaults = []
+          tmp = object.class
+          while tmp != ::ApplicationRecord
+            defaults << :"helpers.submit.#{tmp.model_name.i18n_key}.#{key}"
+            tmp = tmp.superclass
+          end
+          defaults << :"helpers.submit.#{key}"
+          defaults << "_NOT_FOUND_TRANSLATION_"
+
+          value = I18n.translate(defaults.shift, model: object.model_name.human, default: defaults)
+          value = nil if value == "_NOT_FOUND_TRANSLATION_"
+        end
+
         super(value, options.reverse_merge(class: "btn btn-primary")) +
           @template.link_to(object.class.human_attribute_name(:_submit_undo, default: :undo),
                             @template.index_custom_polymorphic_path(object.class),

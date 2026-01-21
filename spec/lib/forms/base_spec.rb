@@ -191,9 +191,39 @@ RSpec.describe BaseEditingBootstrap::Forms::Base, :type => :helper do
       expect(helper).to receive(:index_custom_polymorphic_path).with(object_instance.class).and_call_original
 
       expect(builder.submit).to have_tag("div.btn-group.mr-1") do
-        with_tag("input.btn.btn-primary", with: {type: :submit})
-        with_tag("a.btn.btn-default.btn-undo-button")
+        with_tag("input.btn.btn-primary", with: {type: :submit, value: "Crea User"})
+        with_tag("a.btn.btn-default.btn-undo-button", text: "Annulla")
       end
     end
+
+    it "with full override of value" do
+      expect(builder.submit("MANUAL OVERRIDE")).to have_tag("div.btn-group.mr-1 > input.btn.btn-primary", with: {type: :submit, value: "MANUAL OVERRIDE"})
+    end
+
+    describe "check variants" do
+      where(:case_name, :object_instance, :result) do
+        [
+          ["Standard persiste object", lazy { create(:user) }, "Aggiorna User"],
+          ["change text from inheritance and i18n", lazy { RedPost.new }, "Esegui Red post"],
+          ["change text from inheritance and i18n persisted", lazy { create(:red_post) }, "RiEsegui Red post"],
+        ]
+      end
+
+      with_them do
+        it "should " do
+          expect(builder.submit).to have_tag("div.btn-group.mr-1 > input.btn.btn-primary", with: {type: :submit, value: result})
+        end
+      end
+    end
+
+    context "in a translation context without key for a overriden class" do
+      let(:object_instance) { RedPost.new }
+      it "fallback on standard rails" do
+        I18n.with_locale(:zzz) do
+          expect(builder.submit).to have_tag("div.btn-group.mr-1 > input.btn.btn-primary", with: {type: :submit, value: "Create Red post"})
+        end
+      end
+    end
+
   end
 end

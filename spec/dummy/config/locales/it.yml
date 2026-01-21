@@ -78,3 +78,8 @@ it:
     role:
       new: Nuovissimo
       edit: Modifica Nuovissimo
+  helpers:
+    submit:
+      red_post:
+        update: RiEsegui %{model}
+        create: Esegui %{model}
