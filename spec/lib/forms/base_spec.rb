@@ -219,12 +219,9 @@ RSpec.describe BaseEditingBootstrap::Forms::Base, :type => :helper do
     context "in a translation context without key for a overriden class" do
       let(:object_instance) { RedPost.new }
       it "fallback on standard rails" do
-        old = I18n.enforce_available_locales
-        I18n.enforce_available_locales = false
         I18n.with_locale(:zzz) do
           expect(builder.submit).to have_tag("div.btn-group.mr-1 > input.btn.btn-primary", with: {type: :submit, value: "Create Red post"})
         end
-        I18n.enforce_available_locales = old
       end
     end
 
