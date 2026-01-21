@@ -16,29 +16,31 @@ loader.ignore("#{__dir__}/generators")
 loader.setup
 
 module BaseEditingBootstrap
-  include ActiveSupport::Configurable
+    def self.configure
+      yield self
+    end
 
   ##
   # Controller da cui derivare poi il BaseEditingController da cui derivano
   # tutti i controller sottostanti
   # @default "ApplicationController"
-  config_accessor :inherited_controller, default: "ApplicationController"
+  mattr_accessor :inherited_controller, default: "ApplicationController"
   
   ##
   # Configurazione per alterare lo standard di azione post aggiornamento record
   # il default è andare nella pagina di editing del record
   # possibili valori :edit , :index
-  config_accessor :after_success_update_redirect, default: :edit
+  mattr_accessor :after_success_update_redirect, default: :edit
 
   ##
   # Configurazione per alterare lo standard di azione post creazione record
   # il default è andare nella pagina di editing del record
   # possibili valori :edit , :index  
-  config_accessor :after_success_create_redirect, default: :edit
+  mattr_accessor :after_success_create_redirect, default: :edit
 
   ##
   # Classe che rappresenta l'utente, solitamente User
-  config_accessor :authentication_model_class, default: "User"
+  mattr_accessor :authentication_model_class, default: "User"
 
   def self.authentication_model
     self.authentication_model_class.constantize
@@ -46,7 +48,7 @@ module BaseEditingBootstrap
 
   ##
   # Factory per la creazione del modello che rappresenta l'auteticazione
-  config_accessor :authentication_model_factory, default: :user
+  mattr_accessor :authentication_model_factory, default: :user
 
   def self.deprecator
     @deprecator ||= ActiveSupport::Deprecation.new("2.0", "BaseEditingBootstrap")
@@ -54,7 +56,7 @@ module BaseEditingBootstrap
 
   ##
   # Logger, default to Rails.logger
-  config_accessor :logger, default: nil
+  mattr_accessor :logger, default: nil
 
 end
 
