@@ -2,6 +2,22 @@
 All notable changes to this project will be documented in this file. See [conventional commits](https://www.conventionalcommits.org/) for commit guidelines.
 
 - - -
+## 1.13.0 - 2026-02-03
+#### Features
+- Form submit button inheritance value - (00b04b1) - Marino Bonetti
+- Add customizability on model for form partial (#21) - (b7cead4) - Marino Bonetti
+- Add BaseEditingBootstrap::Logging for form selection - (ecded89) - Marino Bonetti
+#### Bug Fixes
+- Warning escape - (1512271) - Marino Bonetti
+- Correct submit text in case of not ActiveRecord - (6b658d4) - Marino Bonetti
+#### Refactoring
+- Replace `config_accessor` with `mattr_accessor` in BaseEditingBootstrap - (a4c3fb0) - Marino Bonetti
+- BsLogging default tagging - (fbd4f2f) - Marino Bonetti
+#### Miscellaneous Chores
+- Add Ruby 4.0 as a valid version in matrix - (f32795e) - Marino Bonetti
+
+- - -
+
 ## 1.12.0 - 2025-12-05
 #### Features
 - Add Capacity of custom disable action column - (4910fc3) - Marino Bonetti
