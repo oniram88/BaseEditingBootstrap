@@ -99,7 +99,7 @@ RSpec.describe "Nested Attributes Form", type: :request do
 
           it do
             is_expected.to have_tag(".form-comment-input-group") do
-              with_tag("textarea", with: {name: "company[comment_attributes][comment]"},seen: comment.comment)
+              with_tag("textarea", with: {name: "company[comment_attributes][comment]"}, seen: comment.comment)
             end
           end
 
@@ -120,6 +120,27 @@ RSpec.describe "Nested Attributes Form", type: :request do
         is_expected.to have_tag("tr#new_address>td") do
           with_tag("input.is-invalid", with: {type: "text", name: "company[addresses_attributes][0][street]"})
           with_tag(".invalid-feedback", seen: "Street non può essere lasciato in bianco")
+        end
+      end
+
+    end
+
+    describe "update record and nested_row but one is to delete" do
+
+      let(:address1) { create(:address) }
+      let!(:address2) { create(:address, company: address1.company) }
+      let!(:company) { address1.company }
+
+      it "is expected not to render address marked for destruction" do
+
+        put company_path(company), params: {company: {addresses_attributes: [
+          {street: nil, id: address1.id, _destroy: false}, # <- volutamente non valido
+          {street: address2.street, id: address2.id, _destroy: true} # <- DA CANCELLARE
+        ]}}
+
+        expect(response.body).to have_tag("table") do
+          with_tag("tr##{dom_id(address1)}")
+          with_tag("tr##{dom_id(address2)}.d-none")
         end
       end
 
