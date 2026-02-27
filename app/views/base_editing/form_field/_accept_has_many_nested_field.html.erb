@@ -1,4 +1,16 @@
 <%# locals: (form:, field:,new_object:) -%>
+<%
+
+  ##
+  # Costruisco le opzioni per limitare tramite interfaccia (ricevuta da configurazione di Rails nested_attributes_for)
+  # il numero di nested elements
+  add_button_data = {action: "nested-form#add"}
+  if(limit = form.object.class.nested_attributes_options[field].dig(:limit))
+    add_button_data["nested-form-limit-value"] = limit
+  end
+
+%>
+
 <%= content_tag :table, class: "table", data: {controller: 'nested-form'} do %>
 
   <thead>
@@ -9,7 +21,7 @@
       </th>
     <% end %>
     <th class="text-end">
-      <button type="button" data-action="nested-form#add" class="btn btn-outline-success"><%= icon("plus-lg") %></button>
+      <%= button_tag(icon("plus-lg"), type: "button", data:add_button_data, class: "btn btn-outline-success") %>
     </th>
   </tr>
   </thead>

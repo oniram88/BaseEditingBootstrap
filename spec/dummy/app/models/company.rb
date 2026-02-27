@@ -5,7 +5,7 @@ class Company < ApplicationRecord
   accepts_nested_attributes_for :addresses, allow_destroy: true, reject_if: :all_blank
 
   has_many :shipping_addresses, dependent: :destroy, as: :addressable
-  accepts_nested_attributes_for :shipping_addresses, allow_destroy: true, reject_if: :all_blank, limit: 5
+  accepts_nested_attributes_for :shipping_addresses, allow_destroy: true, reject_if: :all_blank, limit: 3
 
   has_one :comment, as: :commentable, dependent: :destroy
   accepts_nested_attributes_for :comment, reject_if: :all_blank
