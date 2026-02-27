@@ -7,7 +7,7 @@ class CreateCompanies < ActiveRecord::Migration[7.1]
     end
 
     create_table :addresses do |t|
-      t.references :company
+      t.belongs_to :addressable, polymorphic: true
       t.string :street
       t.string :cap
       t.string :city

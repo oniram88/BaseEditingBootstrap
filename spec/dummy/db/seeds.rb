@@ -27,6 +27,40 @@ if User.count < 10
 
 end
 
+if Company.count < 10
+
+  10.times do
+    Company.create!(
+      name: Faker::Company.unique.name,
+      addresses_attributes: [
+        {
+          street: Faker::Address.unique.street_name,
+          cap: Faker::Address.unique.zip,
+          city: Faker::Address.unique.city,
+        },
+        {
+          street: Faker::Address.unique.street_name,
+          cap: Faker::Address.unique.zip,
+          city: Faker::Address.unique.city,
+        }
+      ],
+      shipping_addresses_attributes: [
+        {
+          street: Faker::Address.unique.street_name,
+          cap: Faker::Address.unique.zip,
+          city: Faker::Address.unique.city,
+        },
+        {
+          street: Faker::Address.unique.street_name,
+          cap: Faker::Address.unique.zip,
+          city: Faker::Address.unique.city,
+        }
+      ]
+    )
+
+  end
+
+end
 
 
 
