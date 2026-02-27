@@ -6,11 +6,12 @@ class CreateCompanies < ActiveRecord::Migration[7.1]
       t.timestamps
     end
 
-    create_table :addresses do |t|
+    create_table :base_addresses do |t|
       t.belongs_to :addressable, polymorphic: true
       t.string :street
       t.string :cap
       t.string :city
+      t.string :type
 
       t.timestamps
     end
