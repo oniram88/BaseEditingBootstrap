@@ -5,8 +5,16 @@
   # Costruisco le opzioni per limitare tramite interfaccia (ricevuta da configurazione di Rails nested_attributes_for)
   # il numero di nested elements
   add_button_data = {action: "nested-form#add"}
-  if(limit = form.object.class.nested_attributes_options[field].dig(:limit))
-    add_button_data["nested-form-limit-value"] = limit
+  if (limit = form.object.class.nested_attributes_options[field].dig(:limit))
+    add_button_data["nested-form-limit-value"] = \
+      case limit
+      when Symbol #TODO add tests
+        form.object.class.send(limit)
+      when Proc #TODO add tests
+        limit.call
+      else
+        limit
+      end
   end
 
 %>
@@ -21,7 +29,7 @@
       </th>
     <% end %>
     <th class="text-end">
-      <%= button_tag(icon("plus-lg"), type: "button", data:add_button_data, class: "btn btn-outline-success") %>
+      <%= button_tag(icon("plus-lg"), type: "button", data: add_button_data, class: "btn btn-outline-success") %>
     </th>
   </tr>
   </thead>
