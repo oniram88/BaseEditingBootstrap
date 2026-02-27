@@ -13,7 +13,11 @@ RSpec.describe "Nested Attributes Form", type: :request do
       }
 
       it "render form for without nested elements" do
+
+
         is_expected.to have_tag("form[action='#{companies_path}'][method='post']") do
+
+          without_tag(".form-addresses-input-group table[data-nested-form-limit-value]")
 
           with_tag(".form-addresses-input-group table",
                    with: {
@@ -27,7 +31,6 @@ RSpec.describe "Nested Attributes Form", type: :request do
             with_tag("thead>tr>th", seen: "Cap")
             with_tag("thead>tr>th", seen: "City")
             with_tag("thead>tr>th>button", with: {"data-action": "nested-form#add"})
-            without_tag("thead>tr>th>button[data-nested-form-limit-value]", with: {"data-action": "nested-form#add"})
 
             # template for adds
             with_tag("template", with: {"data-nested-form-target": "template"}) do
@@ -52,9 +55,7 @@ RSpec.describe "Nested Attributes Form", type: :request do
       end
 
       it "render nested elements add button with limit value" do
-        is_expected.to have_tag(".form-shipping_addresses-input-group table") do
-          with_tag("thead>tr>th>button", with: {"data-action": "nested-form#add", "data-nested-form-limit-value": "3"})
-        end
+        is_expected.to have_tag(".form-shipping_addresses-input-group table", with: {"data-nested-form-limit-value": "3"})
       end
 
       it "render form with has_one nested element initialized" do
