@@ -1,0 +1,1 @@
+//= link nested_form_controller.js

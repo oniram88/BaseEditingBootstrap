@@ -1,0 +1,2 @@
+pin "@stimulus-components/rails-nested-form", to: "https://ga.jspm.io/npm:@stimulus-components/rails-nested-form@5.0.0/dist/stimulus-rails-nested-form.mjs" # @5.0.0
+pin_all_from File.expand_path("../app/assets/javascripts", __dir__)
