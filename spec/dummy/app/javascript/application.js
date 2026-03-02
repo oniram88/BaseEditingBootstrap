@@ -4,7 +4,9 @@ import * as ActiveStorage from "@rails/activestorage"
 ActiveStorage.start()
 
 import { Application } from '@hotwired/stimulus'
-import RailsNestedForm from '@stimulus-components/rails-nested-form'
 
 const application = Application.start()
-application.register('nested-form', RailsNestedForm)
+
+import NestedForm from 'nested_form_controller'
+application.register('nested-form', NestedForm)
+

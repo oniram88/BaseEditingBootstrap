@@ -1,5 +1,25 @@
 <%# locals: (form:, field:,new_object:) -%>
-<%= content_tag :table, class: "table", data: {controller: 'nested-form'} do %>
+<%
+
+  ##
+  # Costruisco le opzioni per limitare tramite interfaccia (ricevuta da configurazione di Rails nested_attributes_for)
+  # il numero di nested elements
+  controller_data = {controller: 'nested-form'}
+  if (limit = form.object.class.nested_attributes_options[field].dig(:limit))
+    controller_data["nested-form-limit-value"] = \
+      case limit
+      when Symbol #TODO add tests
+        form.object.class.send(limit)
+      when Proc #TODO add tests
+        limit.call
+      else
+        limit
+      end
+  end
+
+%>
+
+<%= content_tag :table, class: "table", data: controller_data do %>
 
   <thead>
   <tr>

@@ -35,9 +35,9 @@ module BaseEditingBootstrap
         # attualmente penso sia più sensato semplicemente scrivere a video i passaggi necessari, dato che
         # potrebbe essere già presente importmap, nested_attribute_controller e le varie configurazioni
 
-        say "Install dependencies for nested attributes:"
-        say "   bin/importmap pin @stimulus-components/rails-nested-form"
-        say "Attiva quindi come spiegato qua: https://www.stimulus-components.com/docs/stimulus-rails-nested-form il controller"
+        say "Install nested attributes controller, add to application.js:"
+        say " import NestedForm from 'nested_form_controller' \n
+              application.register('nested-form', NestedForm)"
 
       end
     end

@@ -24,7 +24,7 @@ gem "puma", '~> 6.4'
 gem "sqlite3"
 
 gem "propshaft", '~> 1.1.0'
-gem 'importmap-rails', '~> 2.1.0'
+gem 'importmap-rails', '~> 2.1'
 gem "image_processing", "~> 1.2"
 
 gem 'simplecov', require: false, group: :test

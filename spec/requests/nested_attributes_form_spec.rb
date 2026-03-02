@@ -13,9 +13,13 @@ RSpec.describe "Nested Attributes Form", type: :request do
       }
 
       it "render form for without nested elements" do
+
+
         is_expected.to have_tag("form[action='#{companies_path}'][method='post']") do
 
-          with_tag(:table,
+          without_tag(".form-addresses-input-group table[data-nested-form-limit-value]")
+
+          with_tag(".form-addresses-input-group table",
                    with: {
                      class: "table",
                      "data-controller": "nested-form"
@@ -50,6 +54,10 @@ RSpec.describe "Nested Attributes Form", type: :request do
         end
       end
 
+      it "render nested elements add button with limit value" do
+        is_expected.to have_tag(".form-shipping_addresses-input-group table", with: {"data-nested-form-limit-value": "3"})
+      end
+
       it "render form with has_one nested element initialized" do
         expect {
           is_expected.to have_tag("form[action='#{companies_path}'][method='post']") do
@@ -62,7 +70,7 @@ RSpec.describe "Nested Attributes Form", type: :request do
 
       context "with nested elements" do
         let(:address) { create(:address) }
-        let(:company) { address.company }
+        let(:company) { address.addressable }
 
         subject {
           get edit_company_path(company)
@@ -70,7 +78,7 @@ RSpec.describe "Nested Attributes Form", type: :request do
         }
         it "render form for with nested elements" do
           is_expected.to have_tag("form[action='#{company_path(company)}'][method='post']") do
-            with_tag(:table,
+            with_tag(".form-addresses-input-group table",
                      with: {
                        class: "table",
                        "data-controller": "nested-form"
@@ -128,8 +136,8 @@ RSpec.describe "Nested Attributes Form", type: :request do
     describe "update record and nested_row but one is to delete" do
 
       let(:address1) { create(:address) }
-      let!(:address2) { create(:address, company: address1.company) }
-      let!(:company) { address1.company }
+      let!(:address2) { create(:address, addressable: address1.addressable) }
+      let!(:company) { address1.addressable }
 
       it "is expected not to render address marked for destruction" do
 

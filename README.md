@@ -35,15 +35,33 @@ $ bundle exec rails g base_editing_bootstrap:install
 
 **Si presume quindi che ActiveStorage sia correttamente installato, completo del javascript per il direct upload**
 
+### Upgrade Notes
+- From <= 1.13:
+  In `app/javascript/controllers/application.js` replace:
+  ```js
+  import RailsNestedForm from '@stimulus-components/rails-nested-form'
+  application.register('nested-form', RailsNestedForm)
+  ```
+  with:
+  ```js
+  import NestedForm from 'nested_form_controller';
+  application.register('nested-form', NestedForm);
+  ```
+  in `config/importmap.rb` remove: 
+  ```ruby
+  pin "@stimulus-components/rails-nested-form"
+  ```
+  and finaly remove in vendor/javascript the `@stimulus-components/rails-nested-form` downloaded dependencies
+
 ### Note for NestedAttributes
 
-Seguire le istruzioni per installare anche NestedAttributeForm Controller per stimulus:
+Il controller nested attributes viene importato da importmaps dell'engine.
+E' necessagio registrare il nuovo controller in app/javascript/application.js
 
-```shell
-bin/importmap pin @stimulus-components/rails-nested-form
+```js
+import NestedForm from 'nested_form_controller'; // Mappato con import maps locale
+application.register('nested-form', NestedForm); // Utilizzato nell'interfaccia della form.
 ```
-
-e seguire installazione https://www.stimulus-components.com/docs/stimulus-rails-nested-form
 
 ### Generators
 
