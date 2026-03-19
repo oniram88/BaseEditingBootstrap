@@ -2,6 +2,14 @@
 All notable changes to this project will be documented in this file. See [conventional commits](https://www.conventionalcommits.org/) for commit guidelines.
 
 - - -
+## 1.14.0 - 2026-03-19
+#### Features
+- Nested elements with limit from rails config (#24) - (f003ce4) - Marino Bonetti
+#### Bug Fixes
+- Correct nested_form when elements are marked for destruction - (9fd6544) - Marino Bonetti
+
+- - -
+
 ## 1.13.0 - 2026-02-03
 #### Features
 - Form submit button inheritance value - (00b04b1) - Marino Bonetti
