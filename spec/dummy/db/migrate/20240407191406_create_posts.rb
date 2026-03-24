@@ -10,6 +10,7 @@ class CreatePosts < ActiveRecord::Migration[7.1]
       t.float :rating
       t.decimal :decimal_test_number, precision: 10, scale: 3
       t.bigint :user_id
+      t.boolean :editable, default: true
 
       t.timestamps
 

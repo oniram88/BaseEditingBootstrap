@@ -3,6 +3,7 @@ class PostPolicy < BaseModelPolicy
   def editable_attributes
     [
       :title,
+      :editable,
       :description,
       :user,
       :primary_image,
@@ -15,6 +16,7 @@ class PostPolicy < BaseModelPolicy
   def permitted_attributes
     [
       :title,
+      :editable,
       :description,
       :user_id,
       :primary_image,
@@ -42,5 +44,15 @@ class PostPolicy < BaseModelPolicy
 
   def search_fields
     [:title_i_cont]
+  end
+
+  def attribute_is_readonly?(attribute)
+    if record.editable?
+      # Editabili tutti gli attributi, quindi l'attributo passato NON è editable
+      false
+    else
+      # Tutti i campi diversi da editable sono readonly
+      attribute != :editable
+    end
   end
 end

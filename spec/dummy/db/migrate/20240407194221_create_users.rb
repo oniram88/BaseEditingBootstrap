@@ -3,6 +3,7 @@ class CreateUsers < ActiveRecord::Migration[7.1]
     create_table :users do |t|
       t.string :username
       t.boolean :enabled
+      t.boolean :editable, default: true
 
       t.timestamps
     end
