@@ -1,0 +1,2 @@
+<%# locals: (form:, field:,relation_class:,foreign_key:,value_method: :id, label_method: :option_label) -%>
+<%= form.object.send(field)&.send(label_method) %>
