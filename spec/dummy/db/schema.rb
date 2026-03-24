@@ -62,6 +62,7 @@ ActiveRecord::Schema[7.2].define(version: 2025_09_03_080036) do
 
   create_table "companies", force: :cascade do |t|
     t.string "name"
+    t.boolean "editable", default: true
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
