@@ -5,6 +5,7 @@ class BaseEditingController < RestrictedAreaController
                 :edit_custom_polymorphic_path,
                 :form_attributes,
                 :form_builder,
+                :readonly_attribute?,
                 :index_custom_polymorphic_path,
                 :new_custom_polymorphic_path,
                 :show_custom_polymorphic_path
@@ -129,6 +130,16 @@ class BaseEditingController < RestrictedAreaController
                     "editable_attributes"
                   end
     policy.public_send(method_name)
+  end
+
+  def readonly_attribute?(attribute, model = base_class.new, action = override_pundit_action_name)
+    policy = policy(model)
+    method_name = if policy.respond_to?("attribute_is_readonly_for_#{action}?")
+                    "attribute_is_readonly_for_#{action}?"
+                  else
+                    "attribute_is_readonly?"
+                  end
+    policy.public_send(method_name, attribute)
   end
 
   def load_object
