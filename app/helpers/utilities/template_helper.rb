@@ -44,14 +44,12 @@ module Utilities::TemplateHelper
         ["Campo GENERICO + inheritance tra modelli", generic_field, obj_base_paths],
         ["Default BaseEditingController", "base_editing/#{base_path}/#{generic_field}", []],
       ]
+      # In caso di readonly andremo a ricercare solamente la versione di quel tipo
       if readonly
-        casistiche = casistiche.flat_map do |desc, partial, prefixes|
-          [
-            [desc, "#{partial}_readonly", prefixes],
-            [desc,partial,prefixes]
-          ]
+        casistiche = casistiche.collect do |desc, partial, prefixes|
+          [desc, "#{partial}_readonly", prefixes]
         end
-     end
+      end
       casistiche.each do |desc, partial, prefixes|
         bs_logger.debug { "#{desc} - partial:`#{partial}` in #{prefixes.inspect}" }
         if lookup_context.exists?(partial, prefixes, true)
