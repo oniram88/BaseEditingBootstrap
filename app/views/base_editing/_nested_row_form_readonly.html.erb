@@ -1,0 +1,8 @@
+<tr id="<%= dom_id(form.object) %>">
+  <% policy(form.object).editable_attributes.each do |field| %>
+    <td>
+      <%= form_print_field(form, field, readonly: true) %>
+      <%= error_messages_for(form.object, field) %>
+    </td>
+  <% end %>
+</tr>

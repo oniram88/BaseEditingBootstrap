@@ -19,10 +19,13 @@ module Utilities
     #
     # @param [Forms::Base] form
     # @param [Symbol] field
-    def form_print_field(form, field)
+    # @param [Boolean] readonly -> rende possibile nelle nested form, nel caso arrivi da un field padre che definisce
+    #                               il campo come readonly di non controllare nemmeno la policy(il padre ha priorità su figlio)
+    # @return [ActiveSupport::SafeBuffer]
+    def form_print_field(form, field, readonly: nil)
       locals = {form:, field:}
       if form.object.class.respond_to?(:field_to_form_partial) and (generic_field = form.object.class.field_to_form_partial(field))
-        type= :custom
+        type = :custom
       elsif form.object.class.respond_to?(:defined_enums) && form.object.class.defined_enums.key?(field.to_s)
         type = :enum
         generic_field = "enum"
@@ -89,7 +92,8 @@ module Utilities
         form.object,
         field,
         "form_field",
-        generic_field
+        generic_field,
+        readonly: (readonly.nil? ? readonly_attribute?(field, form.object) : readonly)
       )
       bs_logger.debug do
         <<~TEXT
