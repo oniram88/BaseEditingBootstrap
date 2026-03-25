@@ -1,2 +1,2 @@
 <%# locals: (form:, field:) -%>
-<%= form.object.send(field) ? l( form.object.send(field)) : "" %>
+<%= form.date_field(field, disabled: true, readonly: true, name: "READONLY") %>

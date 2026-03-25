@@ -132,11 +132,11 @@ RSpec.describe Utilities::FormHelper, type: :helper do
       end
       context "readonly" do
         it "with base rendering" do
-          expect(helper.form_print_field(form, :title, readonly: true)).to have_tag(:input, with: {class: "form-control form-control-plaintext", readonly: "readonly", type: "text", name: "post[title]"})
+          expect(helper.form_print_field(form, :title, readonly: true)).to have_tag(:input, with: {class: "form-control", readonly: "readonly", value: "Titolo", name: "READONLY", disabled: "disabled"})
         end
 
         it "with timestamps rendering" do
-          expect(helper.form_print_field(form, :created_at, readonly: true)).to be == I18n.l(obj.created_at)
+          expect(helper.form_print_field(form, :created_at, readonly: true)).to have_tag(:input, with: {class: "form-control", type: "datetime-local", readonly: "readonly", value: obj.created_at.strftime("%Y-%m-%dT%T"), name: "READONLY", disabled: "disabled"})
         end
 
         it "with specific rendering" do
@@ -144,13 +144,27 @@ RSpec.describe Utilities::FormHelper, type: :helper do
         end
 
         it "decimal_test_number" do
-          expect(helper.form_print_field(form, :decimal_test_number, readonly: true)).to be == "1,123"
+          expect(helper.form_print_field(form, :decimal_test_number, readonly: true)).to have_tag(:input,
+                                                                                                  with: {
+                                                                                                    name: "READONLY",
+                                                                                                    readonly: "readonly",
+                                                                                                    disabled: "disabled",
+                                                                                                    value: "1.123",
+                                                                                                    step: "0.001",
+                                                                                                  })
         end
         it "rating" do
-          expect(helper.form_print_field(form, :rating, readonly: true)).to be == "9,88"
+          expect(helper.form_print_field(form, :rating, readonly: true)).to have_tag(:input,
+                                                                                     with: {
+                                                                                       name: "READONLY",
+                                                                                       readonly: "readonly",
+                                                                                       disabled: "disabled",
+                                                                                       step: "0.01",
+                                                                                       value: "9.87654321"
+                                                                                     })
         end
         it "published_at" do
-          expect(helper.form_print_field(form, :published_at, readonly: true)).to be == I18n.l(obj.published_at)
+          expect(helper.form_print_field(form, :published_at, readonly: true)).to have_tag(:input, with: {type: "date", name: "READONLY", readonly: "readonly", disabled: "disabled", value: obj.published_at.strftime("%Y-%m-%d")})
         end
         it "read_counter" do
           expect(helper.form_print_field(form, :read_counter, readonly: true)).to have_tag(:input, with: {type: "number", step: "1", readonly: "readonly"})
@@ -160,18 +174,20 @@ RSpec.describe Utilities::FormHelper, type: :helper do
           let!(:user_2) { create(:user) }
 
           it do
-            expect(helper.form_print_field(form, :user, readonly: true)).to be == obj.user.username
+            expect(helper.form_print_field(form, :user, readonly: true)).to have_tag(:select, with: {name: "READONLY", disabled: "disabled", readonly: "readonly"}) do
+              with_tag('option[selected]', with: {value: obj.user_id}, seen: obj.user.username)
+            end
           end
         end
 
         describe "enum" do
           it "as string enum" do
-            expect(helper.form_print_field(form, :category, readonly: true)).to have_tag(:select,with:{disabled:"disabled"}) do
+            expect(helper.form_print_field(form, :category, readonly: true)).to have_tag(:select, with: {name: "READONLY", disabled: "disabled", readonly: "readonly"}) do
               with_tag(:option, text: "News", with: {value: "news"})
             end
           end
           it "as integer" do
-            expect(helper.form_print_field(form, :priority, readonly: true)).to have_tag(:select,with:{disabled:"disabled"}) do
+            expect(helper.form_print_field(form, :priority, readonly: true)).to have_tag(:select, with: {name: "READONLY", disabled: "disabled", readonly: "readonly"}) do
               with_tag(:option, text: "Normal", with: {value: "normal"})
               with_tag(:option, text: "Low", with: {value: "low"})
               with_tag(:option, text: "Urgent", with: {value: "urgent"})

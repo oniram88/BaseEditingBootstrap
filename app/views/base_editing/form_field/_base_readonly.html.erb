@@ -4,4 +4,5 @@
   # eseguire override nei casi in cui si voglia renderizzare qualcosa di differente
 %>
 <%# locals: (form:, field:) -%>
-<%= form.text_field(field, readonly: true, class: "form-control-plaintext") %>
+<%= form.text_field(field, readonly: true, disabled: true, name: "READONLY") %>
+
