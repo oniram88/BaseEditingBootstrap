@@ -34,7 +34,7 @@ class BaseModelPolicy < ApplicationPolicy
   # @param attribute [Symbol] nome dell'attributo
   # @param action_name [String] nome dell'azione
   # @return [Boolean] true se l'attributo è di sola lettura, false altrimenti
-  def attribute_is_readonly?(_attribute) = false
+  def attribute_is_readonly(_attribute) = false
 
   def permitted_attributes_for_ransack
     record.class.column_names + record.class._ransackers.keys

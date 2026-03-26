@@ -134,10 +134,10 @@ class BaseEditingController < RestrictedAreaController
 
   def readonly_attribute?(attribute, model = base_class.new, action = override_pundit_action_name)
     policy = policy(model)
-    method_name = if policy.respond_to?("attribute_is_readonly_for_#{action}?")
-                    "attribute_is_readonly_for_#{action}?"
+    method_name = if policy.respond_to?("attribute_is_readonly_for_#{action}")
+                    "attribute_is_readonly_for_#{action}"
                   else
-                    "attribute_is_readonly?"
+                    "attribute_is_readonly"
                   end
     policy.public_send(method_name, attribute)
   end

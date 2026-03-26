@@ -34,7 +34,7 @@ class UserPolicy < BaseModelPolicy
 
   def permitted_attributes_for_ransack = [:username]
 
-  def attribute_is_readonly?(attribute)
+  def attribute_is_readonly(attribute)
     if record.editable?
       # Editabili tutti gli attributi, quindi l'attributo passato NON è editable
       false

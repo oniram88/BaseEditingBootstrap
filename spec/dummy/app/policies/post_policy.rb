@@ -46,7 +46,7 @@ class PostPolicy < BaseModelPolicy
     [:title_i_cont]
   end
 
-  def attribute_is_readonly?(attribute)
+  def attribute_is_readonly(attribute)
     if record.editable?
       # Editabili tutti gli attributi, quindi l'attributo passato NON è editable
       false

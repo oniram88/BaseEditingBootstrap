@@ -28,7 +28,7 @@ RSpec.shared_examples "a standard base model policy" do |factory, check_default_
         [:permitted_scopes_for_ransack],
         [:editable_attributes],
         [:permitted_attributes],
-        [:attribute_is_readonly?],
+        [:attribute_is_readonly],
       ]
     end
 

@@ -12,7 +12,7 @@ class CompanyPolicy < BaseModelPolicy
 
   def editable_attributes = %i[name editable addresses shipping_addresses comment]
 
-  def attribute_is_readonly?(attribute)
+  def attribute_is_readonly(attribute)
     if record.editable?
       # Editabili tutti gli attributi, quindi l'attributo passato NON è editable
       false
