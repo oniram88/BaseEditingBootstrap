@@ -2,6 +2,12 @@
 All notable changes to this project will be documented in this file. See [conventional commits](https://www.conventionalcommits.org/) for commit guidelines.
 
 - - -
+## 1.15.0 - 2026-04-09
+#### Features
+- Add Read only mode (#25) - (0ba3da2) - Marino Bonetti
+
+- - -
+
 ## 1.14.0 - 2026-03-19
 #### Features
 - Nested elements with limit from rails config (#24) - (f003ce4) - Marino Bonetti
