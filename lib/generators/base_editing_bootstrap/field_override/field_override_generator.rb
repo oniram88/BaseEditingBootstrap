@@ -6,7 +6,8 @@ module BaseEditingBootstrap
       include BaseEditingBootstrap::GeneratorsHelpers
       source_root File.expand_path("../../../../app/views/base_editing", __dir__)
       argument :name, type: :string, banner: "Post", required: true
-      argument :attributes, type: :array, default: [], banner: "field field:type"
+      argument :attributes, type: :array, default: [], banner: "field field[:type]"
+      class_option :readonly, type: :boolean, default: false, banner: "--readonly"
 
       TYPES = %i[base date datetime decimal integer enum boolean]
 
@@ -24,13 +25,15 @@ module BaseEditingBootstrap
 
           base_path = class_to_view_path(name)
 
+          readonly_suffix = options[:readonly] ? "_readonly" : ""
+
           attributes.each do |a|
             attr_name, type = a.split(":")
 
             type = :base if type.nil?
             type = type.to_sym
             raise "Type #{type} not found in #{TYPES}" unless TYPES.include?(type)
-            copy_file "form_field/_#{type}.html.erb", File.join(*base_path,"form_field", "_#{attr_name}.html.erb")
+            copy_file "form_field/_#{type}#{readonly_suffix}.html.erb", File.join(*base_path,"form_field", "_#{attr_name}#{readonly_suffix}.html.erb")
           end
         end
 
