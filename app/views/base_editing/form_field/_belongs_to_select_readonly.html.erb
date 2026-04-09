@@ -2,5 +2,5 @@
 <%= form.select(foreign_key, options_from_collection_for_select(policy_scope(relation_class),
                                                                 value_method, label_method,
                                                                 selected: form.object.send(foreign_key)),
-                include_blank: true
+                {include_blank: true}, {disabled: true, readonly: true, name: "READONLY"}
     ) %>

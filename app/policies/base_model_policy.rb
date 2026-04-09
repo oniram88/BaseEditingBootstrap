@@ -9,12 +9,32 @@ class BaseModelPolicy < ApplicationPolicy
 
   def show? = general_rule
 
-  # Questo metodo può essere anche scritto specifico per azione:
+  # Questo metodo può essere richiamato specifico per azione:
   # - permitted_attributes_for_create
   # - permitted_attributes_for_update
+  # - permitted_attributes_for_ACTION_NAME
+  # Quindi nella policy possiamo differenziare le due situazioni
   def permitted_attributes = []
 
+  # Questo metodo può essere richiamato specifico per azione:
+  # - editable_attributes_for_create
+  # - editable_attributes_for_update
+  # - editable_attributes_for_ACTION_NAME
+  # Quindi nella policy possiamo differenziare le due situazioni
   def editable_attributes = []
+
+  ##
+  # Permette di specificare se un attributo è di sola lettura durante il rendering della form.
+  # Oltre alla versione standard è possibile definire il metodo specificando il tipo di azione con il
+  # medesimo formato utilizzato negli altri metodi:
+  # - attribute_is_readonly_for_create?
+  # - attribute_is_readonly_for_update?
+  # - attribute_is_readonly_for_ACTION_NAME?
+  #
+  # @param attribute [Symbol] nome dell'attributo
+  # @param action_name [String] nome dell'azione
+  # @return [Boolean] true se l'attributo è di sola lettura, false altrimenti
+  def attribute_is_readonly(_attribute) = false
 
   def permitted_attributes_for_ransack
     record.class.column_names + record.class._ransackers.keys

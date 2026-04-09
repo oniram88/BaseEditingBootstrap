@@ -5,6 +5,7 @@ class UserPolicy < BaseModelPolicy
       :username,
       :roles,
       :enabled,
+      :editable,
       :only_true_boolean,
       :only_false_virtual
     ]
@@ -14,6 +15,7 @@ class UserPolicy < BaseModelPolicy
     [
       :username,
       :enabled,
+      :editable,
       :only_true_boolean,
       :only_false_virtual,
       role_ids: []
@@ -31,5 +33,15 @@ class UserPolicy < BaseModelPolicy
   def permitted_associations_for_ransack = [:posts]
 
   def permitted_attributes_for_ransack = [:username]
+
+  def attribute_is_readonly(attribute)
+    if record.editable?
+      # Editabili tutti gli attributi, quindi l'attributo passato NON è editable
+      false
+    else
+      # Tutti i campi diversi da editable sono readonly
+      attribute != :editable
+    end
+  end
 
 end

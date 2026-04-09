@@ -1,0 +1,12 @@
+<%# locals: (form:, field:) -%>
+<% if form.object.send(field).attached? %>
+  <div class="d-flex">
+    <%= content_tag :span, form.object.send(field).attachment.blob.filename, class: "input-group-text flex-grow-1" %>
+    <%= link_to icon(:download), form.object.send(field), class: "btn btn-outline-secondary ms-1", target: :_blank %>
+  </div>
+  <% if form.object.send(field).representable? %>
+    <% content_for :form_field_ending, flush: true do %>
+      <%= content_tag :div, image_tag(form.object.send(field).representation(resize_to_limit: [100, 100])) %>
+    <% end %>
+  <% end %>
+<% end %>

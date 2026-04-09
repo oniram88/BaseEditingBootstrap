@@ -292,6 +292,20 @@ Note:
 
 Fai riferimento all'implementazione di esempio del dummy `Company->addresses`
 
+### ReadOnly
+E' possibile renderizzare i campi di un modello in sola lettura, andando a ridefinire nella policy
+il metodo  `attribute_is_readonly(attribute_name)`.  
+Per ogni campo abbiamo la versione NOME_CAMPO_readonly.html.erb che viene renderizzato quando il metodo
+precedente restituisce true.  
+I nested attributes verranno renderizzati rispetto a quanto definito dal
+campo padre.  
+La ricerca dei partial avviene nella stessa modalità dei campi sopra definiti.  
+Al generator per i campi standard basta aggiungere il parametro `--readonly` per avere la versione NOME_CAMPO_readonly.html.erb:  
+```shell
+  rails g base_editing_bootstrap:field_override ModelName field1 field2:type --readonly
+```
+
+
 ### Translations
 
 #### Index buttons:  

@@ -33,6 +33,19 @@ RSpec.describe BaseEditingBootstrap::Generators::FieldOverrideGenerator, type: :
           end
         }
       end
+
+      it "should create a copy of read_only version" do
+        source_path = File.join(ENGINE_ROOT, "app/views/base_editing/form_field/#{source}_readonly.html.erb")
+        run_generator ["Post", "title:#{type}","--readonly"]
+        expect(destination_root).to have_structure {
+          directory("app/views/posts/post/form_field") do
+            file("_title_readonly.html.erb") do
+              contains File.read(source_path)
+              end
+            end
+        }
+      end
+
     end
   end
 
@@ -43,6 +56,17 @@ RSpec.describe BaseEditingBootstrap::Generators::FieldOverrideGenerator, type: :
         file("_title.html.erb")
         file("_name.html.erb")
         file("_created_at.html.erb")
+      end
+    }
+  end
+
+  it "should create multiple in one shot readonly" do
+    run_generator ["Post", "title", "name:date", "created_at:datetime", "--readonly"]
+    expect(destination_root).to have_structure {
+      directory("app/views/posts/post/form_field") do
+        file("_title_readonly.html.erb")
+        file("_name_readonly.html.erb")
+        file("_created_at_readonly.html.erb")
       end
     }
   end

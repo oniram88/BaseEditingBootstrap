@@ -12,7 +12,8 @@ module Utilities::TemplateHelper
   # @param [Symbol] field
   # @param [String] base_path
   # @param [String] generic_field
-  def find_template_with_fallbacks(obj, field, base_path, generic_field)
+  # @param [Boolean] readonly #aggiunge nella ricerca del template la versione readonly
+  def find_template_with_fallbacks(obj, field, base_path, generic_field, readonly: false)
     # nei casi in cui passiamo la classe e non l'oggetto, dobbiamo utilizzare un metodo interno a rails per
     # avere la partial_path
 
@@ -31,7 +32,7 @@ module Utilities::TemplateHelper
     end
 
     bs_logger.tagged(field) do
-      [
+      casistiche = [
         # Precedenza modello e campo specifico
         ["Campo SPECIFICO + inheritance tra modelli", field, obj_base_paths],
         # cerco tramite nome modello semplice, con namespace della risorsa (cell_field,header_field,form_field) e nome del campo specifico
@@ -42,7 +43,14 @@ module Utilities::TemplateHelper
         ["Campo GENERICO + inheritance controllers", "#{base_path}/#{generic_field}", lookup_context.prefixes],
         ["Campo GENERICO + inheritance tra modelli", generic_field, obj_base_paths],
         ["Default BaseEditingController", "base_editing/#{base_path}/#{generic_field}", []],
-      ].each do |desc, partial, prefixes|
+      ]
+      # In caso di readonly andremo a ricercare solamente la versione di quel tipo
+      if readonly
+        casistiche = casistiche.collect do |desc, partial, prefixes|
+          [desc, "#{partial}_readonly", prefixes]
+        end
+      end
+      casistiche.each do |desc, partial, prefixes|
         bs_logger.debug { "#{desc} - partial:`#{partial}` in #{prefixes.inspect}" }
         if lookup_context.exists?(partial, prefixes, true)
           return lookup_context.find(partial, prefixes, true)

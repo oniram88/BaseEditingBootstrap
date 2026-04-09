@@ -1,0 +1,22 @@
+<%# locals: (form:, field:,new_object:) -%>
+<%= content_tag :table, class: "table read-only" do %>
+  <thead>
+  <tr>
+    <% policy(new_object).editable_attributes.each do |field| %>
+      <th>
+        <%= new_object.class.human_attribute_name(field) %>
+      </th>
+    <% end %>
+  </tr>
+  </thead>
+
+  <tbody>
+
+  <%= form.fields_for field do |form_for_sections| %>
+    <%= render "nested_row_form_readonly", form: form_for_sections %>
+  <% end %>
+
+  </tbody>
+
+<% end %>
+

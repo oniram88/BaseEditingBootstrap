@@ -62,6 +62,7 @@ ActiveRecord::Schema[7.2].define(version: 2025_09_03_080036) do
 
   create_table "companies", force: :cascade do |t|
     t.string "name"
+    t.boolean "editable", default: true
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -76,6 +77,7 @@ ActiveRecord::Schema[7.2].define(version: 2025_09_03_080036) do
     t.float "rating"
     t.decimal "decimal_test_number", precision: 10, scale: 3
     t.bigint "user_id"
+    t.boolean "editable", default: true
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_posts_on_user_id"
@@ -97,6 +99,7 @@ ActiveRecord::Schema[7.2].define(version: 2025_09_03_080036) do
   create_table "users", force: :cascade do |t|
     t.string "username"
     t.boolean "enabled"
+    t.boolean "editable", default: true
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
