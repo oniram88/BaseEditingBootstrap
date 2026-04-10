@@ -1,3 +1,5 @@
+require 'pundit/matchers'
+
 RSpec::Matchers.define :permit_editable_attributes do |*expected_attributes|
   description { "to permit editable attributes:#{expected_attributes}" }
   failure_message { "'#{actual}' does not permit attributes #{expected_attributes - actual.editable_attributes}" }
@@ -84,21 +86,9 @@ RSpec.shared_examples "a standard base model policy" do |factory, check_default_
     where(:method, :response) do
 
       if check_default_responses == true
-        checks = {
-          show: true,
-          destroy: true,
-          update: true,
-          create: true,
-          index: true
-        }
+        checks = {} # will be setted to permit_al_actions
       elsif check_default_responses == :full_disallow
-        checks = {
-          show: false,
-          destroy: false,
-          update: false,
-          create: false,
-          index: false
-        }
+        checks = {} # will be setted to forbid_al_actions
       elsif check_default_responses.is_a? Hash
         checks = check_default_responses
       elsif check_default_responses == false
@@ -106,15 +96,16 @@ RSpec.shared_examples "a standard base model policy" do |factory, check_default_
       else
         raise <<-MESSAGE.strip_heredoc
          Acceptable values for check_default_responses are: 
-           - true
-           - false
-           - :full_disallow -> all methods to false
-           - Hash with:  
-              show
-              destroy
-              update
-              create
-              index
+           - true -> is like permit_al_actions
+           - false -> don't check
+           - :full_disallow -> is like forbid_al_actions
+           - Hash with key value:  
+              show => boolean
+              destroy => boolean
+              update => boolean
+              create => boolean
+              index => boolean
+              ...custom => boolean
         MESSAGE
       end
 
@@ -126,20 +117,22 @@ RSpec.shared_examples "a standard base model policy" do |factory, check_default_
         index: true
       )
 
-      [
-        [:show?, checks[:show]],
-        [:destroy?, checks[:destroy]],
-        [:update?, checks[:update]],
-        [:create?, checks[:create]],
-        [:index?, checks[:index]],
-      ]
+      checks.collect{|k,v| [ :"#{k}?",v ]}
     end
 
     with_them do
       it "should respond_to? #{params[:method]}" do
         expect(instance).to respond_to(method)
       end
-      if check_default_responses
+
+      case check_default_responses
+      when :full_disallow
+        it { expect(instance).to forbid_all_actions }
+      when true
+        it { expect(instance).to permit_all_actions }
+      when false
+        # nothing
+      else
         it "return value" do
           expect(instance.send(method)).to be == response
         end
