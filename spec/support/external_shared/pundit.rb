@@ -130,9 +130,7 @@ RSpec.shared_examples "a standard base model policy" do |factory, check_default_
         it { expect(instance).to forbid_all_actions }
       when true
         it { expect(instance).to permit_all_actions }
-      when false
-        # nothing
-      else
+      when Hash
         it "return value" do
           expect(instance.send(method)).to be == response
         end
