@@ -33,6 +33,10 @@ RSpec.describe BaseEditingBootstrap::Forms::FieldRenderer, type: :helper do
     helper.define_singleton_method(:form_attributes) do |model = nil, action = nil|
       policy(model || obj).editable_attributes
     end
+
+    helper.define_singleton_method(:field_renderer_class) do |model = nil, action = nil|
+      BaseEditingBootstrap::Forms::FieldRenderer
+    end
   end
 
   def render_field(field, readonly: nil)

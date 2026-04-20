@@ -5,6 +5,7 @@ class BaseEditingController < RestrictedAreaController
                 :edit_custom_polymorphic_path,
                 :form_attributes,
                 :form_builder,
+                :field_renderer_class,
                 :readonly_attribute?,
                 :hidden_attribute?,
                 :index_custom_polymorphic_path,
@@ -121,6 +122,10 @@ class BaseEditingController < RestrictedAreaController
 
   def form_builder
     BaseEditingBootstrap::Forms::Base
+  end
+
+  def field_renderer_class
+    BaseEditingBootstrap::Forms::FieldRenderer
   end
 
   def form_attributes(model = base_class.new, action = override_pundit_action_name)

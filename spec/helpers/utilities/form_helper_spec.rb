@@ -10,6 +10,13 @@ RSpec.describe Utilities::FormHelper, type: :helper do
   end
 
   describe "#form_print_field_object" do
+
+    before do
+      without_partial_double_verification do
+        allow(helper).to receive(:field_renderer_class).and_return(BaseEditingBootstrap::Forms::FieldRenderer)
+      end
+    end
+
     let(:form) { double("form", object: double("object")) }
     let(:field) { "name" }
 

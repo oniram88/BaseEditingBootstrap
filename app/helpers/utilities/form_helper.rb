@@ -24,7 +24,7 @@ module Utilities
     #                               il campo come readonly di non controllare nemmeno la policy(il padre ha priorità su figlio)
     # @return [BaseEditingBootstrap::Forms::FormFieldRenderer]
     def form_print_field_object(form, field, readonly: nil)
-      BaseEditingBootstrap::Forms::FieldRenderer.new(self, form, field, readonly: readonly)
+      field_renderer_class.new(self, form, field, readonly: readonly)
     end
 
 
