@@ -12,11 +12,11 @@ module Utilities
       @locals = { form: form, field: field }
       @type = nil
       @generic_field = nil
+      determine_field_and_locals
     end
 
     # Perform full rendering and return SafeBuffer
     def render
-      determine_field_and_locals
       tmpl = template
       view.bs_logger.debug do
         <<~TEXT
