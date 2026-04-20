@@ -1,7 +1,7 @@
-module Utilities
+module BaseEditingBootstrap::Forms
   # Responsible for deciding which template and locals to use for form fields
   # Usage: Utilities::FormFieldRenderer.new(view_context, form, field, readonly:).render
-  class FormFieldRenderer
+  class FieldRenderer
     attr_reader :view, :form, :field, :locals, :type, :generic_field
 
     def initialize(view, form, field, readonly: nil)
