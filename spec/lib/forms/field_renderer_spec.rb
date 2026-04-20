@@ -14,7 +14,21 @@ RSpec.describe BaseEditingBootstrap::Forms::FieldRenderer, type: :helper do
   # Helper to build renderer
   before(:each) do
     helper.extend(Utilities::FormHelper)
+    helper.extend(Utilities::PageHelper)
     helper.define_singleton_method(:current_user) { nil }
+    # Ensure templates located under app/views/base_editing are resolvable when rendering nested partials
+    if helper.lookup_context.respond_to?(:prefixes)
+      helper.lookup_context.prefixes.unshift('base_editing') unless helper.lookup_context.prefixes.include?('base_editing')
+    end
+
+    # minimal implementations of controller helper methods used by templates
+    helper.define_singleton_method(:readonly_attribute?) do |attribute, model = nil, action = nil|
+      false
+    end
+
+    helper.define_singleton_method(:form_attributes) do |model = nil, action = nil|
+      policy(model || obj).editable_attributes
+    end
   end
 
   def render_field(field, readonly: nil)
@@ -224,6 +238,46 @@ RSpec.describe BaseEditingBootstrap::Forms::FieldRenderer, type: :helper do
       it 'render standard fields as text' do
         expect(render_field(:example_field, readonly: false)).to eq helper.form_print_field(form, :example_field, readonly: false).to_s
       end
+    end
+
+    context 'nested_attributes' do
+      let(:obj) { create(:company) }
+
+      it 'has has_many nested table rendering' do
+        expect(render_field(:addresses, readonly: false)).to eq helper.form_print_field(form, :addresses, readonly: false).to_s
+      end
+
+      it 'has template with NEW_RECORD inputs for nested has_many' do
+        html = render_field(:addresses, readonly: false)
+        expect(html).to include('data-nested-form-target="template"')
+        expect(html).to include('company[addresses_attributes][NEW_RECORD][street]')
+        expect(html).to include('company[addresses_attributes][NEW_RECORD][cap]')
+        expect(html).to include('company[addresses_attributes][NEW_RECORD][city]')
+      end
+
+      context 'with existing nested elements' do
+        let!(:address) { create(:address) }
+        let(:obj) { address.addressable }
+
+        it 'renders existing rows' do
+          expect(render_field(:addresses, readonly: false)).to eq helper.form_print_field(form, :addresses, readonly: false).to_s
+        end
+
+      end
+
+      it 'has has_one nested initialized and renders expected textarea name' do
+        html = render_field(:comment, readonly: false)
+        expect(html).to eq helper.form_print_field(form, :comment, readonly: false).to_s
+        expect(html).to include('name="company[comment_attributes][comment]"')
+      end
+
+      it 'renders general errors block when object has addresses errors' do
+        obj.errors.add(:addresses, "TOO MANY ADDRESSES, Other Error")
+        out = render_field(:addresses, readonly: false)
+        expect(out).to eq helper.form_print_field(form, :addresses, readonly: false).to_s
+        expect(out).to include('alert alert-danger')
+      end
+
     end
   end
 end
