@@ -183,6 +183,28 @@ RSpec.describe "Posts", type: :request do
 
       end
 
+      context "hidden_field" do
+        before do
+          allow_any_instance_of(PostPolicy).to receive(:attribute_is_hidden).and_return(true)
+        end
+
+        it "render fields as hidden" do
+
+          is_expected.to have_tag("form[action='#{posts_path}'][method='post']") do
+
+            [
+              :category,
+              :description,
+              :published_at,
+              :title
+            ].each do |field|
+              with_tag("input[type='hidden'][name='post[#{field}]']")
+            end
+          end
+        end
+
+      end
+
       it "render special addons" do
         is_expected.to have_tag(".form-priority-input-group") do
           with_tag(".input-group-text", text: "priority unit")
@@ -221,6 +243,15 @@ RSpec.describe "Posts", type: :request do
 
           end
         end
+
+        it "check real render field as hidden" do
+
+          is_expected.to have_tag("form[action='#{red_posts_path}'][method='post']") do
+            without_tag(".form_field_container_editable_red_post")
+            with_tag("input[type='hidden'][name='red_post[editable]']")
+          end
+        end
+
 
       end
 

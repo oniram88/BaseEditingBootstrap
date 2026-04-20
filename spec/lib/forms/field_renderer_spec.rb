@@ -26,6 +26,10 @@ RSpec.describe BaseEditingBootstrap::Forms::FieldRenderer, type: :helper do
       false
     end
 
+    helper.define_singleton_method(:hidden_attribute?) do |attribute, model = nil, action = nil|
+      false
+    end
+
     helper.define_singleton_method(:form_attributes) do |model = nil, action = nil|
       policy(model || obj).editable_attributes
     end
