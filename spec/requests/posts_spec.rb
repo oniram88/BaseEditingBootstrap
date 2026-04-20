@@ -137,18 +137,33 @@ RSpec.describe "Posts", type: :request do
 
       it "render form" do
         is_expected.to have_tag("form[action='#{posts_path}'][method='post']") do
-          with_tag(".form-title-input-group") do
-            with_tag("#post_title[type='text']")
+          with_tag(".form_field_container_title_post") do
+            with_tag("label", with: {for: "post_title"})
+            with_tag(".form-title-input-group") do
+              with_tag("#post_title[type='text']")
+            end
           end
-          with_tag(".form-published_at-input-group") do
-            with_tag("#post_published_at[type='date']")
+
+          with_tag(".form_field_container_published_at_post") do
+            with_tag("label", with: {for: "post_published_at"})
+            with_tag(".form-published_at-input-group") do
+              with_tag("#post_published_at[type='date']")
+            end
           end
-          with_tag(".form-description-input-group") do
-            with_tag("textarea#post_description")
+
+          with_tag(".form_field_container_description_post") do
+            with_tag("label", with: {for: "post_description"})
+            with_tag(".form-description-input-group") do
+              with_tag("textarea#post_description")
+            end
           end
-          with_tag(".form-category-input-group") do
-            with_tag("select#post_category") do
-              with_tag("option", count: 3)
+
+          with_tag(".form_field_container_category_post") do
+            with_tag("label", with: {for: "post_category"})
+            with_tag(".form-category-input-group") do
+              with_tag("select#post_category") do
+                with_tag("option", count: 3)
+              end
             end
           end
         end
