@@ -169,6 +169,20 @@ RSpec.describe "Posts", type: :request do
         end
       end
 
+      it "render belongs_to" do
+        is_expected.to have_tag(".form_field_container_user_post") do
+
+          with_tag("label", with: {for: "post_user_id"})
+
+          with_tag(".form-user-input-group") do
+            with_tag("select#post_user_id") do
+              with_tag("option", count: 2)
+            end
+          end
+        end
+
+      end
+
       it "render special addons" do
         is_expected.to have_tag(".form-priority-input-group") do
           with_tag(".input-group-text", text: "priority unit")
