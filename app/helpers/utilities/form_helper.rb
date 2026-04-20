@@ -14,6 +14,11 @@ module Utilities
       form_print_field(form, field)
     end
 
+    def form_print_field(form, field, readonly: nil)
+      Utilities::FormFieldRenderer.new(self, form, field, readonly: readonly).render
+    end
+
+
     ##
     # Metodo per il partial corretto per eseguire il render del campo della form
     #
