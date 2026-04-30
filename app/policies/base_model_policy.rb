@@ -36,6 +36,18 @@ class BaseModelPolicy < ApplicationPolicy
   # @return [Boolean] true se l'attributo è di sola lettura, false altrimenti
   def attribute_is_readonly(_attribute) = false
 
+  ##
+  # Permette di specificare se un attributo deve essere trattato come hidden durante il rendering della form.
+  # Analogamente a attribute_is_readonly è possibile definire la versione specifica per azione:
+  # - attribute_is_hidden_for_create?
+  # - attribute_is_hidden_for_update?
+  # - attribute_is_hidden_for_ACTION_NAME?
+  #
+  # @param attribute [Symbol] nome dell'attributo
+  # @param action_name [String] nome dell'azione
+  # @return [Boolean] true se l'attributo è hidden (deve essere renderizzato come hidden_field), false altrimenti
+  def attribute_is_hidden(_attribute) = false
+
   def permitted_attributes_for_ransack
     record.class.column_names + record.class._ransackers.keys
   end

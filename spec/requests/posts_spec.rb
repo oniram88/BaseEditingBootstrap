@@ -137,21 +137,72 @@ RSpec.describe "Posts", type: :request do
 
       it "render form" do
         is_expected.to have_tag("form[action='#{posts_path}'][method='post']") do
-          with_tag(".form-title-input-group") do
-            with_tag("#post_title[type='text']")
+          with_tag(".form_field_container_title_post") do
+            with_tag("label", with: {for: "post_title"})
+            with_tag(".form-title-input-group") do
+              with_tag("#post_title[type='text']")
+            end
           end
-          with_tag(".form-published_at-input-group") do
-            with_tag("#post_published_at[type='date']")
+
+          with_tag(".form_field_container_published_at_post") do
+            with_tag("label", with: {for: "post_published_at"})
+            with_tag(".form-published_at-input-group") do
+              with_tag("#post_published_at[type='date']")
+            end
           end
-          with_tag(".form-description-input-group") do
-            with_tag("textarea#post_description")
+
+          with_tag(".form_field_container_description_post") do
+            with_tag("label", with: {for: "post_description"})
+            with_tag(".form-description-input-group") do
+              with_tag("textarea#post_description")
+            end
           end
-          with_tag(".form-category-input-group") do
-            with_tag("select#post_category") do
-              with_tag("option", count: 3)
+
+          with_tag(".form_field_container_category_post") do
+            with_tag("label", with: {for: "post_category"})
+            with_tag(".form-category-input-group") do
+              with_tag("select#post_category") do
+                with_tag("option", count: 3)
+              end
             end
           end
         end
+      end
+
+      it "render belongs_to" do
+        is_expected.to have_tag(".form_field_container_user_post") do
+
+          with_tag("label", with: {for: "post_user_id"})
+
+          with_tag(".form-user-input-group") do
+            with_tag("select#post_user_id") do
+              with_tag("option", count: 2)
+            end
+          end
+        end
+
+      end
+
+      context "hidden_field" do
+        before do
+          allow_any_instance_of(PostPolicy).to receive(:attribute_is_hidden).and_return(true)
+        end
+
+        it "render fields as hidden" do
+
+          is_expected.to have_tag("form[action='#{posts_path}'][method='post']") do
+
+            [
+              :category,
+              :description,
+              :published_at,
+              :title
+            ].each do |field|
+              with_tag("input[type='hidden'][name='post[#{field}]']")
+            end
+          end
+        end
+
       end
 
       it "render special addons" do
@@ -192,6 +243,15 @@ RSpec.describe "Posts", type: :request do
 
           end
         end
+
+        it "check real render field as hidden" do
+
+          is_expected.to have_tag("form[action='#{red_posts_path}'][method='post']") do
+            without_tag(".form_field_container_editable_red_post")
+            with_tag("input[type='hidden'][name='red_post[editable]']")
+          end
+        end
+
 
       end
 

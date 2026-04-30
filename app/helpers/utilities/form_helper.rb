@@ -15,6 +15,20 @@ module Utilities
     end
 
     ##
+    # Metodo per il partial corretto per restituire l'oggetto della form con le logiche per
+    # trovare il template e le informazioni necessarie
+    #
+    # @param [Forms::Base] form
+    # @param [Symbol] field
+    # @param [Boolean] readonly -> rende possibile nelle nested form, nel caso arrivi da un field padre che definisce
+    #                               il campo come readonly di non controllare nemmeno la policy(il padre ha priorità su figlio)
+    # @return [BaseEditingBootstrap::Forms::FormFieldRenderer]
+    def form_print_field_object(form, field, readonly: nil)
+      field_renderer_class.new(self, form, field, readonly: readonly)
+    end
+
+
+    ##
     # Metodo per il partial corretto per eseguire il render del campo della form
     #
     # @param [Forms::Base] form
@@ -22,88 +36,8 @@ module Utilities
     # @param [Boolean] readonly -> rende possibile nelle nested form, nel caso arrivi da un field padre che definisce
     #                               il campo come readonly di non controllare nemmeno la policy(il padre ha priorità su figlio)
     # @return [ActiveSupport::SafeBuffer]
-    def form_print_field(form, field, readonly: nil)
-      locals = {form:, field:}
-      if form.object.class.respond_to?(:field_to_form_partial) and (generic_field = form.object.class.field_to_form_partial(field))
-        type = :custom
-      elsif form.object.class.respond_to?(:defined_enums) && form.object.class.defined_enums.key?(field.to_s)
-        type = :enum
-        generic_field = "enum"
-      elsif form.object.class.respond_to?(:reflect_on_association) &&
-            form.object.class.reflect_on_association(field.to_s).is_a?(ActiveRecord::Reflection::BelongsToReflection) &&
-            !form.object.class.reflect_on_association(field.to_s).polymorphic? # non deve essere polymorphic
-        # Abbiamo una relazione belongs_to da gestire
-        reflection = form.object.class.reflect_on_association(field.to_s)
-        type = :belongs_to
-        generic_field = "belongs_to_select"
-        locals[:relation_class] = reflection.klass
-        locals[:foreign_key] = reflection.foreign_key
-      elsif form.object.class.respond_to?(:nested_attributes_options) &&
-            form.object.class.nested_attributes_options.key?(field.to_sym)
-        type = :nested_attributes
-        reflection = form.object.class.reflect_on_association(field.to_s)
-        case reflection
-        when ActiveRecord::Reflection::HasManyReflection
-          locals[:new_object] = reflection.klass.new(reflection.foreign_key => form.object)
-          generic_field = "accept_has_many_nested_field"
-        when ActiveRecord::Reflection::HasOneReflection
-          form.object.send(:"build_#{field}") unless form.object.send(field).present?
-          generic_field = "accept_has_one_nested_field"
-        else
-          raise "Unknown reflection for nested attributes #{field}->#{reflection.class}"
-        end
-      else
-        if form.object.class.respond_to?(:type_for_attribute)
-          type = form.object.class.type_for_attribute(field).type
-
-          # Se non abbiamo ancora il type tentiamo di capire se è di tipo attachment SINGOLO
-          if type.nil? and form.object.respond_to?(:"#{field}_attachment")
-            type = :has_one_attachment
-          end
-        else
-          type = :string
-        end
-
-        case type
-        when :datetime
-          generic_field = "datetime"
-        when :date
-          generic_field = "date"
-        when :decimal
-          locals[:scale] = form.object.class.type_for_attribute(field).scale || 2
-          generic_field = "decimal"
-        when :float
-          locals[:scale] = 2 # usiamo il default dato che non abbiamo questa informazione negli attributes di rails
-          generic_field = "decimal"
-        when :integer
-          generic_field = "integer"
-        when :boolean
-          generic_field = "boolean"
-        when :has_one_attachment
-          generic_field = "has_one_attachment"
-        when :text
-          generic_field = "textarea"
-        else
-          generic_field = "base"
-        end
-      end
-
-      template = find_template_with_fallbacks(
-        form.object,
-        field,
-        "form_field",
-        generic_field,
-        readonly: (readonly.nil? ? readonly_attribute?(field, form.object) : readonly)
-      )
-      bs_logger.debug do
-        <<~TEXT
-          TYPE: #{type}
-          GENERIC_FIELD: #{generic_field}
-          TEMPLATE: #{template.short_identifier}
-          LOCALS:#{locals}
-        TEXT
-      end
-      template.render(self, locals)
+    def form_print_field(...)
+      form_print_field_object(...).render
     end
 
   end

@@ -305,6 +305,11 @@ Al generator per i campi standard basta aggiungere il parametro `--readonly` per
   rails g base_editing_bootstrap:field_override ModelName field1 field2:type --readonly
 ```
 
+### Hidden Fields
+E' possibile renderizzare i campi di un modello in modalità nascosta,
+andando a ridefinire nella policy il metodo  `attribute_is_hidden(attribute_name)`.
+I campi nascosti verranno renderizzati tutti assieme all'inizio della form.
+
 
 ### Translations
 
