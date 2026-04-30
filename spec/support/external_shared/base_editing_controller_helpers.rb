@@ -114,7 +114,7 @@ RSpec.shared_examples "base editing controller" do |factory: nil, only: [], exce
         params = {q: {"foo_eq": "foo"}}
         get url_for_index, params: params
         expect(response).to have_http_status(200)
-        expect(assigns[:search_instance]).to be_an_instance_of(BaseEditingBootstrap::Searches::Base)
+        expect(assigns[:search_instance]).to be_a(BaseEditingBootstrap::Searches::Base)
                                                .and(have_attributes(
                                                       user: user,
                                                       params: ActionController::Parameters.new(params).permit!,
