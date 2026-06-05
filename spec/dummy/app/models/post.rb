@@ -15,6 +15,10 @@ class Post < ApplicationRecord
   }, default: :normal, prefix: true
 
   has_one_attached :primary_image
+
+  has_one_attached :secondary_image
+  validates :secondary_image, content_type: 'image/png' # only allows PNG images
+
   belongs_to :user
 
   delegate :username, to: :user, prefix: true

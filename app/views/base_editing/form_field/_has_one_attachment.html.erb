@@ -1,6 +1,9 @@
 <%# locals: (form:, field:) -%>
 <%
-  is_attached = form.object.send(field).attached?
+  attachment = form.object.send(field)
+  is_attached = attachment.attached?
+  blob = attachment.attachment&.blob
+  is_persisted_blob = blob&.persisted?
   hidden_field_id = dom_id(form.object, "hidden_#{field}")
   preview_image_id = dom_id(form.object, "preview_image_#{field}")
   filename_id = dom_id(form.object, "filename_#{field}")
@@ -13,22 +16,22 @@
                             JAVASCRIPT
 
 %>
-<div class="d-flex">
-  <%= form.hidden_field field, value: form.object.send(field).signed_id, id: hidden_field_id if is_attached %>
+<div class="d-flex <%= form.object.errors.include?(field) ? "is-invalid" : "" %>">
+  <%= form.hidden_field field, value: attachment.signed_id, id: hidden_field_id if is_attached && is_persisted_blob %>
 
   <%= form.file_field field, direct_upload: true %>
 
   <% if is_attached %>
 
-    <%= content_tag :span, form.object.send(field).attachment.blob.filename, class: "input-group-text  flex-grow-1", id: filename_id %>
+    <%= content_tag :span, blob.filename, class: "input-group-text  flex-grow-1", id: filename_id if blob.present? %>
     <%= content_tag :button, icon(:trash),
                     onclick: javascript_clear_event,
                     class: "btn btn-outline-secondary rounded-0" %>
-    <%= link_to icon(:download), form.object.send(field), class: "btn btn-outline-secondary", target: :_blank %>
+    <%= link_to icon(:download), attachment, class: "btn btn-outline-secondary", target: :_blank if is_persisted_blob %>
 
-    <% if form.object.send(field).representable? %>
+    <% if is_persisted_blob && attachment.representable? %>
       <% content_for :form_field_ending, flush: true do %>
-        <%= content_tag :div, image_tag(form.object.send(field).representation(resize_to_limit: [100, 100])), id: preview_image_id %>
+        <%= content_tag :div, image_tag(attachment.representation(resize_to_limit: [100, 100])), id: preview_image_id %>
       <% end %>
     <% end %>
   <% end %>

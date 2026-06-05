@@ -224,7 +224,7 @@ RSpec.describe "Posts", type: :request do
       end
 
       it "render standard form classes" do
-        is_expected.to have_tag(".input-group.mb-1", count: 7)
+        is_expected.to have_tag(".input-group.mb-1", count: 8)
       end
 
       describe "inheritted models" do
@@ -284,6 +284,30 @@ RSpec.describe "Posts", type: :request do
 
         end
       end
+
+      context "with invalid image" do
+        let(:post_obj) { build(:post) }
+        it "render errors" do
+          post posts_path, params: {
+            post: {
+              secondary_image: Rack::Test::UploadedFile.new(
+                ENGINE_ROOT.join("spec/file_fixtures/test_image.jpg"),
+                "image/jpeg"
+              )
+            }
+          }
+
+          expect(response.body).to have_tag("div.form_field_container_secondary_image_post", count: 1) do
+            with_tag(".has-validation") do
+              with_tag(".d-flex.is-invalid")
+              with_tag(".invalid-feedback",seen: assigns(:object).errors.full_messages_for(:secondary_image).first )
+            end
+          end
+
+        end
+
+      end
+
 
     end
 

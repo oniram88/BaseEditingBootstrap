@@ -39,5 +39,8 @@ gem 'rails-controller-testing', '~>1.0'
 gem "better_errors", group: :development
 gem "binding_of_caller", group: :development
 
+## Aggiunto per visualizzare validazioni
+gem 'active_storage_validations'
+
 # Start debugger with binding.b [https://github.com/ruby/debug]
 gem "debug", ">= 1.0.0"
