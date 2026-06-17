@@ -142,6 +142,12 @@ RSpec.describe BaseEditingBootstrap::Forms::Base, :type => :helper do
         with_tag(:label, text: "Label name", with: {class: "form-check-label"})
       end
     end
+    it "con label via block" do
+      expect(builder.check_box(:username) { content_tag(:label,"Label personalizzata",class:"label_custom") }).to have_tag(:div, with: {class: "form-check"}) do
+        with_tag(:input, with: {type: "checkbox", class: "form-check-input"})
+        with_tag(:label, text: "Label personalizzata", with: {class: "label_custom"})
+      end
+    end
     it "con classe custom" do
       expect(builder.check_box(:username, class: "custom_class")).to have_tag(:div, with: {class: "form-check custom_class"})
     end

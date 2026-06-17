@@ -60,6 +60,8 @@ module BaseEditingBootstrap::Forms
       label = options.extract!(:label)[:label] || nil
       if label
         label_tag = label(label, class: "form-check-label")
+      elsif block_given?
+        label_tag = yield
       else
         label_tag = nil
       end
