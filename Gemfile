@@ -29,6 +29,7 @@ gem "image_processing", "~> 1.2"
 
 gem 'simplecov', require: false, group: :test
 gem 'rails-i18n'
+gem 'i18n', "!= 1.15.0"
 gem "generator_spec", '~> 0.10'
 gem 'faker', '~> 3.3'
 gem "i18n-debug", '~> 1.2'
