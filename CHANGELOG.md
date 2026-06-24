@@ -2,6 +2,19 @@
 All notable changes to this project will be documented in this file. See [conventional commits](https://www.conventionalcommits.org/) for commit guidelines.
 
 - - -
+## 1.16.0 - 2026-06-24
+#### Features
+- Aggiunta possibilità di customizzare label in checkbox - (9c96ddf) - Marino Bonetti
+- Add option to hide fields in form by policy - (ec2a103) - Marino Bonetti
+#### Bug Fixes
+- Rimossa versione i18n non valida - (8e52029) - Marino Bonetti
+- Visualizzazione validazione su file upload - (69223c1) - Marino Bonetti
+- Update expectation to use be_a for search instance type - (3cc4acc) - Marino Bonetti
+#### Miscellaneous Chores
+- Fix Broken cogs configs - (da27444) - Marino Bonetti
+
+- - -
+
 ## 1.15.1 - 2026-04-13
 #### Bug Fixes
 - Correzione pattern per decimali - (08847c0) - Marino Bonetti
