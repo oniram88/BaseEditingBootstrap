@@ -17,9 +17,13 @@ module Utilities
     # @return [ActiveSupport::SafeBuffer]
     # @param [Ransack::Helpers::FormBuilder] ransack_form
     def search_form_buttons(ransack_form)
+
+      search_translation = ransack_form.object.klass.human_attribute_name("search_buttons.search", default: I18n.translate(".search"))
+      clear_translation = ransack_form.object.klass.human_attribute_name("search_buttons.clear_search", default: I18n.translate(".clear_search"))
+
       content_for(:search_form_buttons) do
-        ransack_form.submit(I18n.translate('.search'), class: "btn btn-primary") +
-          link_to(I18n.translate('.clear_search'),
+        ransack_form.submit(search_translation, class: "btn btn-primary") +
+          link_to(clear_translation,
                   index_custom_polymorphic_path(ransack_form.object.klass),
                   class: "btn btn-secondary")
       end
