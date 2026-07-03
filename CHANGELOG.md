@@ -2,6 +2,12 @@
 All notable changes to this project will be documented in this file. See [conventional commits](https://www.conventionalcommits.org/) for commit guidelines.
 
 - - -
+## 1.16.1 - 2026-07-03
+#### Bug Fixes
+- Search buttons with full text customizations (#28) - (bfc0a62) - Marino Bonetti
+
+- - -
+
 ## 1.16.0 - 2026-06-24
 #### Features
 - Aggiunta possibilità di customizzare label in checkbox - (9c96ddf) - Marino Bonetti
