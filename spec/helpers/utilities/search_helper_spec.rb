@@ -4,6 +4,57 @@ require 'rails_helper'
 
 RSpec.describe Utilities::SearchHelper, type: :helper do
 
+  describe '#search_form_buttons' do
+    let(:model_klass) { User }
+    let(:search_object) { double(klass: model_klass) }
+    let(:ransack_form) { double(object: search_object) }
+    let(:buttons) do
+      helper.search_form_buttons(ransack_form)
+      view.content_for(:search_form_buttons)
+    end
+
+    before do
+      def helper.index_custom_polymorphic_path(*_args)
+        '/custom/index/path'
+      end
+
+      allow(ransack_form).to receive(:submit) do |label, options|
+        helper.tag.input(type: 'submit', value: label, class: options[:class])
+      end
+    end
+
+    context 'when the object defines specific translations' do
+      let(:model_klass) { Post }
+
+      it 'uses object specific translations when available' do
+        I18n.backend.store_translations(:it, {
+                                          activerecord: {
+                                            attributes: {
+                                              'post/search_buttons': {
+                                                search: 'Cerca posts',
+                                                clear_search: 'Pulisci posts'
+                                              }
+                                            }
+                                          }
+                                        })
+
+        I18n.with_locale(:it) do
+          expect(buttons).to have_tag('input.btn.btn-primary', with: {type: 'submit', value: 'Cerca posts'})
+          expect(buttons).to have_tag('a.btn.btn-secondary', text: 'Pulisci posts', with: {href: '/custom/index/path'})
+        end
+      end
+    end
+
+    context 'when the object does not define specific translations' do
+      it 'falls back to the default translations' do
+        I18n.with_locale(:it) do
+          expect(buttons).to have_tag('input.btn.btn-primary', with: {type: 'submit', value: 'Esegui ricerca'})
+          expect(buttons).to have_tag('a.btn.btn-secondary', text: 'Cancella ricerca', with: {href: '/custom/index/path'})
+        end
+      end
+    end
+  end
+
   describe "#render_cell_field" do
 
     context "post model" do
