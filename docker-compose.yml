@@ -3,6 +3,8 @@ services:
     command: /app/spec/dummy/bin/dev
     build:
       context: .
+#      args:
+#        RUBY_VERSION: "3.2"
     user: ${CMPS_UID_GID}
     volumes:
       - '.:/app'
@@ -13,6 +15,7 @@ services:
       - '~/.ssh:/home/nobody/.ssh'
     environment:
       RAILS_ENV: development
+#      RAILS_VERSION: "8.0.0"
     ports:
       - 3000:3000
 
