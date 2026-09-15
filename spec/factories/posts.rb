@@ -1,7 +1,7 @@
 FactoryBot.define do
   factory :post do
     sequence(:title) { |n| "title_#{n}" }
-    description { "MyString" }
+    description { 'MyString' }
     user
 
     trait :with_invalid_attributes do
@@ -9,23 +9,26 @@ FactoryBot.define do
     end
 
     trait :with_primary_image do
-      primary_image {
-        Rack::Test::UploadedFile.new(
-          ENGINE_ROOT.join("spec/file_fixtures/test_image.png"),
+      after(:build) do |post|
+        post.primary_image.attach(
+          io: StringIO.new(File.binread(ENGINE_ROOT.join('spec/file_fixtures/test_image.png'))),
+          filename: 'test_image.png',
+          content_type: 'image/png'
         )
-      }
+      end
     end
 
     trait :with_text_file do
-      primary_image {
-        Rack::Test::UploadedFile.new(
-          ENGINE_ROOT.join("spec/file_fixtures/example.txt"),
+      after(:build) do |post|
+        post.primary_image.attach(
+          io: StringIO.new(File.binread(ENGINE_ROOT.join('spec/file_fixtures/example.txt'))),
+          filename: 'example.txt',
+          content_type: 'text/plain'
         )
-      }
+      end
     end
 
-    factory :customer_post, class: "Customer::Post"
-    factory :red_post, class: "RedPost"
-
+    factory :customer_post, class: 'Customer::Post'
+    factory :red_post, class: 'RedPost'
   end
 end
