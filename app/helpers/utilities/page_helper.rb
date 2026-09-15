@@ -2,6 +2,14 @@ module Utilities::PageHelper
   include Utilities::IconHelper
 
   ##
+  # Traduzione del titolo INDEX con possibilità di modificare intestazione rispetto a modello
+  # - Il default è il model_name plurale
+  # - Viene cercato la traduzione con la chiave titles.CHIAVE_I18N_MODELLO.index
+  def title_index(base_class)
+    t("titles.#{base_class.model_name.i18n_key}.index", default: base_class.model_name.human(count: 2))
+  end
+
+  ##
   # Traduzione del titolo EDIT con possibilità di modificare intestazione rispetto a modello
   # - Il default è quello di Utilizzare la chiave .edit
   # - Viene cercato la traduzione con la chiave titles.CHIAVE_I18N_MODELLO.edit

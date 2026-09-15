@@ -52,6 +52,10 @@ it:
       messages:
         user:
           updated: Qualcosa è andata storta e non siamo riusciti a salvare il l'utente.
+    models:
+      company:
+        one: Azienda
+        other: Aziende
   errors:
     attributes:
       base:
@@ -78,6 +82,7 @@ it:
     role:
       new: Nuovissimo
       edit: Modifica Nuovissimo
+      index: Titolo dei ruoli
   helpers:
     submit:
       red_post:
