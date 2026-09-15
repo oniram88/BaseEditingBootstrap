@@ -35,6 +35,8 @@ jobs:
             rails-version: '8.1'
           - ruby-version: '3.2'
             rails-version: '8.0'
+          - ruby-version: '3.2'
+            rails-version: '8.1'
     steps:
     - uses: actions/checkout@v5
     - name: Set up Ruby
