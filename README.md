@@ -426,6 +426,11 @@ docker compose run app spec/dummy/bin/setup
 docker compose up
 ```
 
+### Test di tutte le versioni supportate
+```bash
+  ./bin/local_ci_matrix.sh
+```
+
 ## License
 
 The gem is available as open source under the terms of the [MIT License](https://opensource.org/licenses/MIT).
