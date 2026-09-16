@@ -9,22 +9,22 @@ FactoryBot.define do
     end
 
     trait :with_primary_image do
-      after(:build) do |post|
-        post.primary_image.attach(
-          io: StringIO.new(File.binread(ENGINE_ROOT.join('spec/file_fixtures/test_image.png'))),
-          filename: 'test_image.png',
-          content_type: 'image/png'
-        )
+      after(:create) do |post|
+        file_path = ENGINE_ROOT.join('spec/file_fixtures/test_image.png')
+
+        File.open(file_path, 'rb') do |file|
+          post.primary_image.attach(io: file, filename: 'test_image.png', content_type: 'image/png')
+        end
       end
     end
 
     trait :with_text_file do
-      after(:build) do |post|
-        post.primary_image.attach(
-          io: StringIO.new(File.binread(ENGINE_ROOT.join('spec/file_fixtures/example.txt'))),
-          filename: 'example.txt',
-          content_type: 'text/plain'
-        )
+      after(:create) do |post|
+        file_path = ENGINE_ROOT.join('spec/file_fixtures/example.txt')
+
+        File.open(file_path, 'rb') do |file|
+          post.primary_image.attach(io: file, filename: 'example.txt', content_type: 'text/plain')
+        end
       end
     end
 
