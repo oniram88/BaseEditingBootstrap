@@ -8,6 +8,7 @@ COMPOSE=(docker compose --project-directory "$PROJECT_ROOT")
 DRY_RUN=0
 RUBY_FILTER=""
 RAILS_FILTER=""
+TEST_COMMAND="bundle exec rspec"
 
 # Keep this matrix aligned with .github/workflows/ruby.yml.
 RUBY_VERSIONS=(3.1 3.2 3.3 3.4 4.0)
@@ -68,6 +69,7 @@ Opzioni:
   --dry-run             Mostra i comandi docker compose senza eseguirli.
   --ruby 3.3,3.4        Esegue solo le versioni Ruby specificate (CSV).
   --rails 7.2,8.0       Esegue solo le versioni Rails specificate (CSV).
+  --test-command CMD     Sostituisce il comando interno eseguito per i test.
 EOF
 }
 
@@ -91,6 +93,14 @@ parse_args() {
           exit 1
         fi
         RAILS_FILTER="${2:-}"
+        shift
+        ;;
+      --test-command)
+        if [ "$#" -lt 2 ] || [[ "$2" == -* ]]; then
+          echo "--test-command richiede un comando" >&2
+          exit 1
+        fi
+        TEST_COMMAND="${2:-}"
         shift
         ;;
       -h|--help)
@@ -154,7 +164,7 @@ run_tuple() {
   fi
 
   if [ "$step_status" -eq 0 ]; then
-    compose_cmd run --rm --no-deps -e RAILS_ENV=test "$service" bundle exec rspec || step_status=$?
+    compose_cmd run --rm --no-deps -e RAILS_ENV=test "$service" bash -lc "$TEST_COMMAND" || step_status=$?
   fi
 
   cleanup_compose
