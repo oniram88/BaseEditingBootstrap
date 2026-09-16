@@ -26,6 +26,14 @@ The project uses Docker for environment setup and testing.
     docker compose up
     ```
 
+- **Matrix testing OUTSIDE of DOCKER COMPOSER**
+  Quando devi verificare una combinazione specifica di Ruby e Rails, analizza prima `bin/local_ci_matrix.sh` per capire come vengono selezionate le versioni e poi esegui direttamente la matrix dal root del progetto con i parametri richiesti.
+  Esempio:
+  ```bash
+  ./bin/local_ci_matrix.sh --ruby 3.4 --rails 8.1 --keep-docker-cache
+  ```
+  Usa questo flusso per validare la compatibilità della modifica prima di considerarla conclusa.
+
 ## Development Workflow
 - **Naming Conventions**: Follow standard Rails/Ruby naming conventions (snake_case for files and methods, CamelCase for classes).
 - **Git Flow**: Use descriptive commit messages. No specific branching strategy is enforced, but use feature branches.

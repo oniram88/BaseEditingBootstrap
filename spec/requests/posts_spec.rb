@@ -24,6 +24,11 @@ RSpec.describe "Posts", type: :request do
     end
 
     describe "search" do
+      before do
+        Post.delete_all
+        User.where.not(id: user.id).delete_all
+      end
+
       let!(:posts) {
         create(:post, title: "Post 1")
         create(:post, title: "Post 2")
@@ -72,6 +77,11 @@ RSpec.describe "Posts", type: :request do
     end
 
     describe "sorting" do
+      before do
+        Post.delete_all
+        User.where.not(id: user.id).delete_all
+      end
+
       let!(:posts) {
         create(:post, title: "Post 1")
         create(:post, title: "Post 2")
@@ -129,6 +139,10 @@ RSpec.describe "Posts", type: :request do
     end
 
     describe "form" do
+      before do
+        Post.delete_all
+        User.where.not(id: user.id).delete_all
+      end
 
       subject {
         get new_post_path

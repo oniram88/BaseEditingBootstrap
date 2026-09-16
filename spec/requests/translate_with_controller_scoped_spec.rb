@@ -2,6 +2,10 @@ require 'rails_helper'
 
 RSpec.describe "translate_with_controller_scoped", type: :request do
   it_behaves_like "as logged in user" do
+    before do
+      Post.delete_all
+      User.where.not(id: user.id).delete_all
+    end
 
     describe "No translation overrides" do
       subject {

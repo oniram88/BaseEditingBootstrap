@@ -6,6 +6,9 @@ gemspec
 
 rails_version = ENV["RAILS_VERSION"] || "default"
 
+# se la versione rails passata non ha il terzo numero di versione, lo aggiungo per evitare problemi con le dipendenze
+rails_version = rails_version.split(".").tap { |v| v << "0" if v.size < 3 }.join(".")
+
 rails = case rails_version
         when "master"
           {github: "rails/rails"}
