@@ -4,8 +4,8 @@
 
 ### Active tested on:
 
-* rails: 7.x,8.x
-* ruby: 3.x
+* rails: (>=7.1),8.x
+* ruby: >=3.1
 
 ## Installation
 

@@ -13,14 +13,12 @@ KEEP_DOCKER_CACHE=0
 
 # Keep this matrix aligned with .github/workflows/ruby.yml.
 RUBY_VERSIONS=(3.1 3.2 3.3 3.4 4.0)
-RAILS_VERSIONS=(7.0 7.1 7.2 8.0 8.1)
+RAILS_VERSIONS=(7.1 7.2 8.0 8.1)
 
 # Combinations excluded in CI workflow.
 declare -A EXCLUDED_TUPLES=(
   ["3.1|8.0"]=1
   ["3.1|8.1"]=1
-  ["3.2|8.0"]=1
-  ["3.2|8.1"]=1
 )
 
 cleanup_compose() {
