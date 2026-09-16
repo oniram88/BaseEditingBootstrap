@@ -4,7 +4,7 @@ services:
     build:
       context: .
       args:
-        RUBY_VERSION: ${CMPS_RUBY_VERSION}
+        RUBY_VERSION: ${CMPS_RUBY_VERSION:-3.3.5}
     user: ${CMPS_UID_GID}
     volumes:
       - '.:/app'
@@ -15,7 +15,7 @@ services:
       - '~/.ssh:/home/nobody/.ssh'
     environment:
       RAILS_ENV: development
-      RAILS_VERSION: ${CMPS_RAILS_VERSION}
+      RAILS_VERSION: ${CMPS_RAILS_VERSION:-7.2.x}
     ports:
       - 3000:3000
 
