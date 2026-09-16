@@ -2,6 +2,15 @@
 All notable changes to this project will be documented in this file. See [conventional commits](https://www.conventionalcommits.org/) for commit guidelines.
 
 - - -
+## 2.0.0 - 2026-09-16
+#### Features
+- Titolo Custom nella index - (8b7f76c) - Marino Bonetti
+#### Bug Fixes
+- <span style="background-color: #d73a49; color: white; padding: 2px 6px; border-radius: 3px; font-weight: bold; font-size: 0.85em;">BREAKING</span>Resolve compatibility problem with ruby-rails and remove Rails 7.0  - (cee57ee) - Marino Bonetti
+- Correzione versione - (c497766) - Marino Bonetti
+
+- - -
+
 ## 1.16.1 - 2026-07-03
 #### Bug Fixes
 - Search buttons with full text customizations (#28) - (bfc0a62) - Marino Bonetti
