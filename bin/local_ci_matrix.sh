@@ -9,6 +9,7 @@ DRY_RUN=0
 RUBY_FILTER=""
 RAILS_FILTER=""
 TEST_COMMAND="bundle exec rspec"
+KEEP_DOCKER_CACHE=0
 
 # Keep this matrix aligned with .github/workflows/ruby.yml.
 RUBY_VERSIONS=(3.1 3.2 3.3 3.4 4.0)
@@ -23,7 +24,7 @@ declare -A EXCLUDED_TUPLES=(
 )
 
 cleanup_compose() {
-  if [ "$DRY_RUN" -eq 1 ]; then
+  if [ "$DRY_RUN" -eq 1 ] || [ "$KEEP_DOCKER_CACHE" -eq 1 ]; then
     return 0
   fi
 
@@ -70,6 +71,7 @@ Opzioni:
   --ruby 3.3,3.4        Esegue solo le versioni Ruby specificate (CSV).
   --rails 7.2,8.0       Esegue solo le versioni Rails specificate (CSV).
   --test-command CMD     Sostituisce il comando interno eseguito per i test.
+  --keep-docker-cache    Disabilita la pulizia dei volumi Docker a fine run.
 EOF
 }
 
@@ -102,6 +104,9 @@ parse_args() {
         fi
         TEST_COMMAND="${2:-}"
         shift
+        ;;
+      --keep-docker-cache)
+        KEEP_DOCKER_CACHE=1
         ;;
       -h|--help)
         usage
