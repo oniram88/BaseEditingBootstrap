@@ -3,18 +3,24 @@ import NestedForm from "@stimulus-components/rails-nested-form"
 // Connects to data-controller="nested-form"
 export default class extends NestedForm {
 
+  connect() {
+    super.connect()
+    this.check_for_enabling_add_button();
+  }
+
+
   static values = {
     limit: Number,
   }
 
   add(e) {
     super.add(e);
-    this.check_for_enabling_add_button(e);
+    this.check_for_enabling_add_button();
   }
 
   remove(e) {
     super.remove(e);
-    this.check_for_enabling_add_button(e);
+    this.check_for_enabling_add_button();
   }
 
   // Elenco elementi presenti visibili (e quindi non settati per essere cancellati)
@@ -29,7 +35,7 @@ export default class extends NestedForm {
     return count;
   }
 
-  check_for_enabling_add_button(e) {
+  check_for_enabling_add_button() {
     if (this.hasLimitValue) {
       if (this.total_active_elements() >= this.limitValue) {
         // Aggiungiamo classe disable sull'elemento che ha lanciato questo evento
