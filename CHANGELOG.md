@@ -2,6 +2,12 @@
 All notable changes to this project will be documented in this file. See [conventional commits](https://www.conventionalcommits.org/) for commit guidelines.
 
 - - -
+## 2.0.1 - 2026-09-17
+#### Bug Fixes
+- Correzione limitazione numero sub_elements in nested - (7cc9889) - Marino Bonetti
+
+- - -
+
 ## 2.0.0 - 2026-09-16
 #### Features
 - Titolo Custom nella index - (8b7f76c) - Marino Bonetti
