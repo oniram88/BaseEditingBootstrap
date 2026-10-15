@@ -75,11 +75,36 @@ module BaseEditingBootstrap
           double_res = double("result", to_sql: "for debug purposes")
           ransack_double = double("ransack_instance")
           expect(instance).to receive(:ransack_query).and_return(ransack_double)
-          expect(ransack_double).to receive_message_chain(:sorts).and_return([])
+          allow(ransack_double).to receive_message_chain(:sorts).and_return([])
           expect(ransack_double).to receive_message_chain(:sorts=).with(["id"])
           expect(ransack_double).to receive_message_chain(:result).with(distinct: distinct_received).and_return(double_res)
           expect(double_res).to receive(:page).with(page_received)
           query
+        end
+      end
+
+      context "with distinct and a joined sort" do
+        let(:simulated_list) do
+          [
+            create(:post, title: "Post Z", user: create(:user, username: "zzz")),
+            create(:post, title: "Post A", user: create(:user, username: "aaa")),
+          ]
+        end
+        let(:search_params) { {params: {q: {s: "user_username asc"}}} }
+
+        it "adds the joined ordered column to the select list" do
+          expect(query.to_sql).to include('SELECT DISTINCT')
+          expect(query.to_sql).to include('"posts".*')
+          expect(query.to_sql).to include('"users"."username"')
+          expect(query.to_sql).to include('ORDER BY "users"."username" ASC')
+        end
+      end
+
+      context "with a default sort that is not ransortable" do
+        let(:simulated_list) { [create(:user)] }
+
+        it "does not try to resolve its attribute" do
+          expect { query.to_sql }.not_to raise_error
         end
       end
     end

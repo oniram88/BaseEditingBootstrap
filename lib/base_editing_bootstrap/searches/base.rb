@@ -27,12 +27,40 @@ module BaseEditingBootstrap::Searches
     # Risultato della ricerca, fa da pipeline verso ransack
     # Impostando il sort nel caso in cui non sia già stato impostato da ransack
     def results
-      ransack_query
-        .tap { |r| r.sorts = @sorts if r.sorts.empty? }
-        .result(distinct: @distinct)
+      query = ransack_query
+      query.sorts = @sorts if query.sorts.empty?
+
+      relation = query.result(distinct: @distinct)
+      relation = distinct_order_columns(relation, query.sorts) if @distinct && query.sorts.any?
+
+      relation
         .tap { |q| Rails.logger.debug { "[Ransack] params:#{params} - sql: #{q.to_sql}" } }
         .page(params[:page])
     end
+
+    # PostgreSQL richiede che le colonne usate nell'ORDER BY siano nel SELECT quando DISTINCT è attivo.
+    # Aggiungiamo solo le colonne provenienti dalle join, perché la tabella base è già coperta da `table.*`.
+    def distinct_order_columns(relation, sorts)
+      order_columns = sorts.filter_map do |sort|
+        next unless sort.valid?
+
+        attribute = sort.attr
+        next unless attribute.respond_to?(:relation) && attribute.respond_to?(:name)
+
+        table_name = attribute.relation.name
+        next if table_name.nil? || table_name == model_klass.table_name
+
+        "#{relation.connection.quote_table_name(table_name)}.#{relation.connection.quote_column_name(attribute.name)}"
+      end.uniq
+
+      return relation if order_columns.empty?
+
+      relation
+        .unscope(:select)
+        .select("#{relation.connection.quote_table_name(relation.klass.table_name)}.*", *order_columns)
+    end
+
+    private :distinct_order_columns
 
     def ransack_query
       scope
