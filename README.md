@@ -434,7 +434,7 @@ docker compose up
 ### Testare diverse versioni Rails e Ruby
 
 ```bash
-  ./bin/local_ci_matrix.sh --rails 7.1 --ruby 3.1 --keep-docker-cache
+  ./bin/local_ci_matrix.sh --rails 8.1 --ruby 4.0 --keep-docker-cache
 ```
 
 ## License

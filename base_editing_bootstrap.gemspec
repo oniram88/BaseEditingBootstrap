@@ -33,7 +33,7 @@ Gem::Specification.new do |spec|
   # Policy
   spec.add_dependency "pundit", ["~> 2.3", ">= 2.3.1"]
   # Search
-  spec.add_dependency 'ransack', ['~> 4.0', '>= 4.0.0']
+  spec.add_dependency 'ransack', ['>= 4.0.0']
   # Pagination
   spec.add_dependency 'kaminari', ['~> 1.2', '>= 1.2.2']
   spec.add_dependency 'kaminari-i18n', '~> 0.5'
