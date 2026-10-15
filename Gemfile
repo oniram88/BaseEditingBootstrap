@@ -6,6 +6,8 @@ gemspec
 
 rails_version = ENV["RAILS_VERSION"] || "default"
 
+ransack_version = ENV["RANSACK_VERSION"] || nil
+
 # se la versione rails passata non ha il terzo numero di versione, lo aggiungo per evitare problemi con le dipendenze
 rails_version = rails_version.split(".").tap { |v| v << "0" if v.size < 3 }.join(".")
 
@@ -15,10 +17,41 @@ rails = case rails_version
         when "default"
           "~> 7.2.x"
         else
+
+          ##
+          # Le versioni di ransack devono essere maggiori di 4.0.0
+          # teniamo allineate le versioni con le versioni di ransack presenti al momento in cui viene rilasciata la
+          # versione di rails. Lavoriamo solamente con versioni di Rails in linea con la matrix tenendo conto
+          # solo della minor release partendo dalla versione 7.1
+          # volendo possiamo configurare con una variabile d'ambiente la versione di ransack da utilizzare,
+          # in modo che possiamo definire speciali combinazioni di versioni di ransack e rails.
+          #
+          # | Rails | Ransack |
+          # |-------|---------|
+          # | 7.1   | 4.0     |
+          # | 7.2   | 4.0     |
+          # | 8.0   | 5.0     |
+          # | 8.1   | 6.0     |
+
+          unless ransack_version
+            ransack_version = case rails_version
+                              when /^7\.1\./
+                                "4"
+                              when /^7\.2\./
+                                "4"
+                              when /^8\.0\./
+                                "5"
+                              when /^8\.1\./
+                                "6"
+                              else
+                                6
+                              end
+          end
+
           "~> #{rails_version}"
         end
 
-puts "USE RAILS #{rails.inspect}"
+puts "USE RAILS #{rails.inspect} - RANSACK #{ransack_version.inspect}"
 
 gem "rails", rails
 
@@ -42,6 +75,8 @@ gem 'rspec-html-matchers', '~> 0.10' # https://github.com/kucaahbe/rspec-html-ma
 gem 'rails-controller-testing', '~>1.0'
 gem "better_errors", group: :development
 gem "binding_of_caller", group: :development
+
+gem "ransack", "~> #{ransack_version}.0"
 
 ## Aggiunto per visualizzare validazioni
 gem 'active_storage_validations'
