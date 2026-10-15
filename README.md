@@ -431,6 +431,12 @@ docker compose up
   ./bin/local_ci_matrix.sh
 ```
 
+### Testare diverse versioni Rails e Ruby
+
+```bash
+  ./bin/local_ci_matrix.sh --rails 7.1 --ruby 3.1 --keep-docker-cache
+```
+
 ## License
 
 The gem is available as open source under the terms of the [MIT License](https://opensource.org/licenses/MIT).
