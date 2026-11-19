@@ -2,6 +2,12 @@
 All notable changes to this project will be documented in this file. See [conventional commits](https://www.conventionalcommits.org/) for commit guidelines.
 
 - - -
+## 2.1.0 - 2026-11-19
+#### Features
+- Custom nested attributes order by model (#32) - (42f80ad) - Marino Bonetti
+
+- - -
+
 ## 2.0.2 - 2026-10-15
 #### Bug Fixes
 - Aggiorna la dipendenza di ransack per supportare versioni maggiori (#31) - (014d9bd) - Marino Bonetti
