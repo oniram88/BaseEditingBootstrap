@@ -37,4 +37,36 @@ RSpec.describe Post, type: :model do
 
   end
 
+  describe "inheritance of overrides accept_nested_attributes_for_order" do
+
+    it "no overrides" do
+      expect(Post.accept_nested_attributes_for_order(:imports)).to be_nil
+    end
+
+    it "with overrides" do
+      subclass = Class.new(Post)
+      subclass.set_accept_nested_attributes_for_order(:imports, :ui_ordered)
+
+      expect(subclass.accept_nested_attributes_for_order(:imports)).to eq :ui_ordered
+    end
+
+    it "third level override" do
+      third_level_class = Class.new(Post)
+
+      third_level_class.set_accept_nested_attributes_for_order(:imports, :ui_ordered)
+      third_level_class.set_accept_nested_attributes_for_order(:other_imports, :other_ui_ordered)
+
+      fourth_level_class = Class.new(third_level_class)
+      fourth_level_class.set_accept_nested_attributes_for_order(:imports, :new_ui_ordered)
+
+      aggregate_failures do
+        expect(Post.accept_nested_attributes_for_order(:imports)).to be_nil
+        expect(third_level_class.accept_nested_attributes_for_order(:imports)).to eq :ui_ordered
+        expect(fourth_level_class.accept_nested_attributes_for_order(:imports)).to eq :new_ui_ordered
+        expect(fourth_level_class.accept_nested_attributes_for_order(:other_imports)).to eq :other_ui_ordered
+      end
+    end
+
+  end
+
 end

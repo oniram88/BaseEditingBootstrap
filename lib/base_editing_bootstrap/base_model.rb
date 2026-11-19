@@ -12,6 +12,7 @@ module BaseEditingBootstrap
                :ransackable_scopes, to: :@class
 
       class_attribute :_field_to_form_partial
+      class_attribute :_accept_nested_attributes_for_order
 
       ##
       # Label da utilizzare nelle option per quando si genera le select dei belongs to
@@ -62,6 +63,29 @@ module BaseEditingBootstrap
       def field_to_form_partial(field)
         return nil unless self._field_to_form_partial
         self._field_to_form_partial.fetch(field, nil)
+      end
+
+      ##
+      # Questo metodo serve per impostare l'ordinamento da applicare alla relazione has_many durante
+      # la creazione della form nel caso di accept_nested_attributes_for
+      # ES:
+      # has_many :imports do
+      #   def ui_ordered
+      #     order(ui_alias: :asc)
+      #   end
+      # end
+      # accepts_nested_attributes_for :imports
+      # set_accept_nested_attributes_for_order(:imports, :ui_ordered)
+      # La firma del metodo è:
+      # set_accept_nested_attributes_for_order(association_name, order_method_name)
+      def set_accept_nested_attributes_for_order(association_name, order_method_name)
+        self._accept_nested_attributes_for_order ||= {}
+        self._accept_nested_attributes_for_order = self._accept_nested_attributes_for_order.merge(association_name => order_method_name)
+      end
+
+      def accept_nested_attributes_for_order(field)
+        return nil unless self._accept_nested_attributes_for_order
+        self._accept_nested_attributes_for_order.fetch(field, nil)
       end
 
     end
