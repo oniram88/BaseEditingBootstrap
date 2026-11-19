@@ -289,6 +289,10 @@ Note:
   - nel caso di has_one: `XXXXX_attributes => [Array attributi da editare]`
 - Il permitted _destroy vale solamente nel caso in cui si definisca nei nested_attributes che debba essere cancellabile.
 - I campi visualizzati del modello sono presi dalla relativa policy.
+- viene accettato e gestito il parametro :limit in modo che non sia possibile aggiungere più record di quelli definiti 
+  nel modello sia a livello di ActiveRecord che a livello di UI
+- è presente un metodo di classe `set_accept_nested_attributes_for_order` 
+  che permette di definire l'ordine dei record nested attraverso l'uso di uno scope sulla relazione.
 
 Fai riferimento all'implementazione di esempio del dummy `Company->addresses`
 

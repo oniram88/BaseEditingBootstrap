@@ -16,6 +16,11 @@
         limit
       end
   end
+  fields_for_attributes = [field]
+  if(sorted_by = form.object.class.accept_nested_attributes_for_order(field))
+    # devo appendere la relazione con l'ordine degli elementi da renderizzare
+    fields_for_attributes<<form.object.public_send(field).public_send(sorted_by)
+  end
 
 %>
 
@@ -42,7 +47,7 @@
 
   <tbody>
 
-  <%= form.fields_for field do |form_for_sections| %>
+  <%= form.fields_for(*fields_for_attributes) do |form_for_sections| %>
     <%= render "nested_row_form", form: form_for_sections %>
   <% end %>
 

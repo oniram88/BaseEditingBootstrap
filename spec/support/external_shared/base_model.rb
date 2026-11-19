@@ -96,3 +96,15 @@ RSpec.shared_examples "a model with custom field_to_form_partial" do |field, par
   end
 
 end
+
+RSpec.shared_examples "a model with custom accept_nested_attributes_for_order" do |association,order_scope|
+
+  it "when #{association}" do
+    expect(described_class.accept_nested_attributes_for_order(association)).to eq order_scope
+  end
+
+  it "anything else" do
+    expect(described_class.accept_nested_attributes_for_order(anything)).to be_nil
+  end
+
+end
