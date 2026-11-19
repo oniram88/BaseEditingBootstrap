@@ -78,6 +78,11 @@ module BaseEditingBootstrap
       # set_accept_nested_attributes_for_order(:imports, :ui_ordered)
       # La firma del metodo è:
       # set_accept_nested_attributes_for_order(association_name, order_method_name)
+      #
+      #
+      # E' presente anche un helper per i test:
+      #
+      #   it_behaves_like "a model with custom accept_nested_attributes_for_order", :imports, :ui_ordered
       def set_accept_nested_attributes_for_order(association_name, order_method_name)
         self._accept_nested_attributes_for_order ||= {}
         self._accept_nested_attributes_for_order = self._accept_nested_attributes_for_order.merge(association_name => order_method_name)

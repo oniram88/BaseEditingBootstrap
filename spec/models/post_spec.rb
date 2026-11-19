@@ -43,11 +43,21 @@ RSpec.describe Post, type: :model do
       expect(Post.accept_nested_attributes_for_order(:imports)).to be_nil
     end
 
-    it "with overrides" do
-      subclass = Class.new(Post)
-      subclass.set_accept_nested_attributes_for_order(:imports, :ui_ordered)
+    context "with overrides" do
 
-      expect(subclass.accept_nested_attributes_for_order(:imports)).to eq :ui_ordered
+      klass = Class.new(Post).tap do |klass|
+        klass.set_accept_nested_attributes_for_order(:imports, :ui_ordered)
+      end
+
+      let(:subclass) { klass }
+      it "with overrides" do
+        expect(subclass.accept_nested_attributes_for_order(:imports)).to eq :ui_ordered
+      end
+
+      describe klass do
+        # Testiamo anche helper della spec
+        it_behaves_like "a model with custom accept_nested_attributes_for_order", :imports, :ui_ordered
+      end
     end
 
     it "third level override" do
