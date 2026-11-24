@@ -2,6 +2,12 @@
 All notable changes to this project will be documented in this file. See [conventional commits](https://www.conventionalcommits.org/) for commit guidelines.
 
 - - -
+## 2.1.1 - 2026-11-24
+#### Refactoring
+- Spostamento helper in support per convenienza di altre apps (#33) - (dce0042) - Marino Bonetti
+
+- - -
+
 ## 2.1.0 - 2026-11-19
 #### Features
 - Custom nested attributes order by model (#32) - (42f80ad) - Marino Bonetti
